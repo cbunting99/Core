@@ -1,6 +1,6 @@
-BUGLISTGhoul claw ability isn't supposed to be usable if energy is below sixty.
+1. Ghoul claw ability isn't supposed to be usable if energy is below sixty.
 
-Water Elemental Taunting (dk taunt atleast, w/b others ..?)
+2. Cannot taunt players pets.
 
  -- CRITICAL --
 Use blood strike two times with Reaping talent from unholy talent tree,
@@ -10,5 +10,5 @@ http://www.wowhead.com/spell=45529/blood-tap#comments
 See green comment below there.
  -- CRITICAL --
 
-Using Rune Tap with the glyph whilst Dancing Rune Weapon is up, it 
-should heal the party of the death knight.
+4. Using Rune Tap with the glyph whilst Dancing Rune Weapon is up, it 
+   should heal the party of the death knight.
