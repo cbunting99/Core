@@ -55,6 +55,7 @@
 #include "SpellInfo.h"
 #include "Battlefield.h"
 #include "BattlefieldMgr.h"
+#include "PathGenerator.h"
 
 extern pEffect SpellEffects[TOTAL_SPELL_EFFECTS];
 
@@ -1435,10 +1436,19 @@ void Spell::SelectImplicitCasterDestTargets(SpellEffIndex effIndex, SpellImplici
         dist = objSize + (dist - objSize) * (float)rand_norm();
 
     Position pos;
-    if (targetType.GetTarget() == TARGET_DEST_CASTER_FRONT_LEAP)
+    switch (targetType.GetTarget())
+    {	
+    case TARGET_DEST_CASTER_FRONT_LEAP:
+    case TARGET_DEST_CASTER_FRONT_LEFT:
+    case TARGET_DEST_CASTER_BACK_LEFT:
+    case TARGET_DEST_CASTER_BACK_RIGHT:
+    case TARGET_DEST_CASTER_FRONT_RIGHT:
         m_caster->GetFirstCollisionPosition(pos, dist, angle);
-    else
+        break;
+    default:
         m_caster->GetNearPosition(pos, dist, angle);
+        break;
+	}
     m_targets.SetDst(*m_caster);
     m_targets.ModDst(pos);
 }
@@ -2188,11 +2198,7 @@ void Spell::AddUnitTarget(Unit* target, uint32 effectMask, bool checkIfValid /*=
             m_delayMoment = targetInfo.timeDelay;
     }
     else
-	{
-		targetInfo.timeDelay = GetCCDelay(m_spellInfo);
-		if (m_delayMoment == 0 || m_delayMoment > targetInfo.timeDelay)
-			m_delayMoment = targetInfo.timeDelay;
-	}
+        targetInfo.timeDelay = 0LL;
 
     // If target reflect spell back to caster
     if (targetInfo.missCondition == SPELL_MISS_REFLECT)
@@ -3324,7 +3330,7 @@ void Spell::cast(bool skipCheck)
     SendSpellGo();
 
     // Okay, everything is prepared. Now we need to distinguish between immediate and evented delayed spells
-    if (((m_spellInfo->Speed > 0.0f || GetCCDelay(m_spellInfo) > 0) && !m_spellInfo->IsChanneled()) || m_spellInfo->Id == 14157)
+    if ((m_spellInfo->Speed > 0.0f && !m_spellInfo->IsChanneled()) || m_spellInfo->Id == 14157)
     {
         // Remove used for cast item if need (it can be already NULL after TakeReagents call
         // in case delayed spell remove item at cast delay start
@@ -5212,15 +5218,19 @@ SpellCastResult Spell::CheckCast(bool strict)
                     Position pos;
                     target->GetContactPoint(m_caster, pos.m_positionX, pos.m_positionY, pos.m_positionZ);
                     target->GetFirstCollisionPosition(pos, CONTACT_DISTANCE, target->GetRelativeAngle(m_caster));
-
-                    m_preGeneratedPath.SetPathLengthLimit(m_spellInfo->GetMaxRange(true) * 1.5f);
-                    bool result = m_preGeneratedPath.CalculatePath(pos.m_positionX, pos.m_positionY, pos.m_positionZ + target->GetObjectSize());
-                    if (m_preGeneratedPath.GetPathType() & PATHFIND_SHORT)
-                        return SPELL_FAILED_OUT_OF_RANGE;
-                    else if (!result || m_preGeneratedPath.GetPathType() & PATHFIND_NOPATH)
-                        return SPELL_FAILED_NOPATH;
-                }
-                break;
+					
+					if (m_preGeneratedPath.GetPathType() & PATHFIND_DEBUG || target->GetPositionZ() > 9.000000f && m_caster->GetPositionZ() > 9.000000f && m_caster->GetMapId() == 562)
+						m_preGeneratedPath.SetPathLengthLimit(100.0f);
+					else
+						m_preGeneratedPath.SetPathLengthLimit(m_spellInfo->GetMaxRange(true) * 1.75f);
+					
+					bool result = m_preGeneratedPath.CalculatePath(pos.m_positionX, pos.m_positionY, pos.m_positionZ + target->GetObjectSize());
+					if (m_preGeneratedPath.GetPathType() & PATHFIND_SHORT)
+						return SPELL_FAILED_NOPATH;
+					else if (!result || m_preGeneratedPath.GetPathType() & PATHFIND_NOPATH)
+						return SPELL_FAILED_NOPATH;
+				}
+				break;
             }
             case SPELL_EFFECT_SKINNING:
             {
@@ -5637,31 +5647,6 @@ SpellCastResult Spell::CheckPetCast(Unit* target)
             return SPELL_FAILED_NOT_READY;
 
     return CheckCast(true);
-}
-
-uint32 Spell::GetCCDelay(SpellInfo const* _spell)
-{
-    AuraType auraWithCCD[] = {
-        SPELL_AURA_MOD_STUN,
-        SPELL_AURA_MOD_CONFUSE,
-        SPELL_AURA_MOD_FEAR,
-        SPELL_AURA_MOD_POSSESS
-    };
-
-    uint8 CCDArraySize = 6;
-
-    switch(_spell->SpellFamilyName)
-    {
-        case SPELLFAMILY_ROGUE: // Example.
-            if (_spell->Id == 2094) // Blind.
-                return 50;
-            break;
-    }
-
-    for (uint8 i = 0; i < CCDArraySize; ++i)
-        if (_spell->HasAura(auraWithCCD[i]))
-            return 50;
-	return 0;
 }
 
 SpellCastResult Spell::CheckCasterAuras() const

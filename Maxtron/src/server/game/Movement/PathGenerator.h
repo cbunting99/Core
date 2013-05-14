@@ -32,8 +32,8 @@ class Unit;
 // 74*4.0f=296y  number_of_points*interval = max_path_len
 // this is way more than actual evade range
 // I think we can safely cut those down even more
-#define MAX_PATH_LENGTH         74
-#define MAX_POINT_PATH_LENGTH   74
+#define MAX_PATH_LENGTH         64
+#define MAX_POINT_PATH_LENGTH   64
 
 #define SMOOTH_PATH_STEP_SIZE   4.0f
 #define SMOOTH_PATH_SLOP        0.3f
@@ -50,6 +50,7 @@ enum PathType
     PATHFIND_NOPATH         = 0x08,   // no valid path at all or error in generating one
     PATHFIND_NOT_USING_PATH = 0x10,   // used when we are either flying/swiming or on map w/o mmaps
     PATHFIND_SHORT          = 0x20,   // path is longer or equal to its limited path length
+	PATHFIND_DEBUG          = 0x40,   // path is longer or equal to its limited path length
 };
 
 class PathGenerator
@@ -73,6 +74,7 @@ class PathGenerator
 
         PointsArray const& GetPath() const { return _pathPoints; }
         PathType GetPathType() const { return _type; }
+
 
     private:
 
