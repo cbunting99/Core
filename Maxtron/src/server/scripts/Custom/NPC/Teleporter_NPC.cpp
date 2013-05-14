@@ -11,8 +11,9 @@
 														player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Malls", GOSSIP_SENDER_MAIN, 2);
                                                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "PvP Arenas", GOSSIP_SENDER_MAIN, 3);
                                                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Duel Zone", GOSSIP_SENDER_MAIN, 4);
-                                                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "Profession Mall", GOSSIP_SENDER_MAIN, 5);
-                                                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "Transmorgrification Mall", GOSSIP_SENDER_MAIN, 6);
+														player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Northwatch Hold", GOSSIP_SENDER_MAIN, 5);
+                                                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "Profession Mall", GOSSIP_SENDER_MAIN, 6);
+                                                        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "Transmorgrification Mall", GOSSIP_SENDER_MAIN, 7);
                                                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Nevermind", GOSSIP_SENDER_MAIN, 30);
                             player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
                             return true;
@@ -56,13 +57,16 @@
                                                     player->TeleportTo(0, 4300.189941f, -2761.300049f, 16.813999f, 3.643650f);
                             player->PlayerTalkClass->SendCloseGossip();
                             break;
+							case 5: // Northwatch Hold.
+                                                    player->TeleportTo(1, -1922.237305f, -3518.541749f, 28.847794f, 4.566247f);
+                            player->PlayerTalkClass->SendCloseGossip();
  
-                                                        case 5: // prifessions mall
+                                                        case 6: // prifessions mall
                                                         player->TeleportTo(530, -2110.120117f, 7770.859863f, 151.707001f, 3.356310f);
                             player->PlayerTalkClass->SendCloseGossip();
                             break;
  
-                                                        case 6: // mog mall
+                                                        case 7: // mog mall
                                                     player->TeleportTo(1, -2650.709961f, -5021.879883f, 21.182899f, 2.431570f);
                             player->PlayerTalkClass->SendCloseGossip();
                             break;

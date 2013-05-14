@@ -1309,6 +1309,7 @@ void AddBattlegroundScripts()
 	   void AddSC_PVP_Killstreak();
 	   void AddSC_Queue_NPC();
 	   void AddSC_transmog_items();
+	   void AddSC_Item_Teleporter();
 #endif
 
 void AddCustomScripts()
@@ -1333,6 +1334,7 @@ void AddCustomScripts()
 	AddSC_PVP_Killstreak();
 	AddSC_Queue_NPC();
 	AddSC_transmog_items();
+	AddSC_Item_Teleporter();
 
 #endif
 }
