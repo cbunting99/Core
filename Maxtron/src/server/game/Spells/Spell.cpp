@@ -55,7 +55,6 @@
 #include "SpellInfo.h"
 #include "Battlefield.h"
 #include "BattlefieldMgr.h"
-#include "PathGenerator.h"
 
 extern pEffect SpellEffects[TOTAL_SPELL_EFFECTS];
 
@@ -1436,19 +1435,10 @@ void Spell::SelectImplicitCasterDestTargets(SpellEffIndex effIndex, SpellImplici
         dist = objSize + (dist - objSize) * (float)rand_norm();
 
     Position pos;
-    switch (targetType.GetTarget())
-    {	
-    case TARGET_DEST_CASTER_FRONT_LEAP:
-    case TARGET_DEST_CASTER_FRONT_LEFT:
-    case TARGET_DEST_CASTER_BACK_LEFT:
-    case TARGET_DEST_CASTER_BACK_RIGHT:
-    case TARGET_DEST_CASTER_FRONT_RIGHT:
+    if (targetType.GetTarget() == TARGET_DEST_CASTER_FRONT_LEAP)
         m_caster->GetFirstCollisionPosition(pos, dist, angle);
-        break;
-    default:
+    else
         m_caster->GetNearPosition(pos, dist, angle);
-        break;
-	}
     m_targets.SetDst(*m_caster);
     m_targets.ModDst(pos);
 }
@@ -5222,19 +5212,15 @@ SpellCastResult Spell::CheckCast(bool strict)
                     Position pos;
                     target->GetContactPoint(m_caster, pos.m_positionX, pos.m_positionY, pos.m_positionZ);
                     target->GetFirstCollisionPosition(pos, CONTACT_DISTANCE, target->GetRelativeAngle(m_caster));
-					
-					if (m_preGeneratedPath.GetPathType() & PATHFIND_DEBUG || target->GetPositionZ() > 9.000000f && m_caster->GetPositionZ() > 9.000000f && m_caster->GetMapId() == 562)
-						m_preGeneratedPath.SetPathLengthLimit(100.0f);
-					else
-						m_preGeneratedPath.SetPathLengthLimit(m_spellInfo->GetMaxRange(true) * 1.75f);
-					
-					bool result = m_preGeneratedPath.CalculatePath(pos.m_positionX, pos.m_positionY, pos.m_positionZ + target->GetObjectSize());
-					if (m_preGeneratedPath.GetPathType() & PATHFIND_SHORT)
-						return SPELL_FAILED_NOPATH;
-					else if (!result || m_preGeneratedPath.GetPathType() & PATHFIND_NOPATH)
-						return SPELL_FAILED_NOPATH;
-				}
-				break;
+
+                    m_preGeneratedPath.SetPathLengthLimit(m_spellInfo->GetMaxRange(true) * 1.5f);
+                    bool result = m_preGeneratedPath.CalculatePath(pos.m_positionX, pos.m_positionY, pos.m_positionZ + target->GetObjectSize());
+                    if (m_preGeneratedPath.GetPathType() & PATHFIND_SHORT)
+                        return SPELL_FAILED_OUT_OF_RANGE;
+                    else if (!result || m_preGeneratedPath.GetPathType() & PATHFIND_NOPATH)
+                        return SPELL_FAILED_NOPATH;
+                }
+                break;
             }
             case SPELL_EFFECT_SKINNING:
             {

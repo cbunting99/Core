@@ -25,7 +25,6 @@
 #include "ScriptMgr.h"
 #include "SpellScript.h"
 #include "SpellAuraEffects.h"
-#include "PathGenerator.h"
 
 enum WarriorSpells
 {
