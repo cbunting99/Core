@@ -16,7 +16,7 @@ set(scripts_STAT_SRCS
   Custom/NPC/Professions_NPC.cpp
   Custom/NPC/Teleporter_NPC.cpp
   Custom/NPC/Top_Arena_NPC.cpp
-Custom/Item/Item_Teleporter.cpp
+  Custom/Item/Item_Teleporter.cpp
   Custom/anti_hk_farm.cpp
   Custom/commands.cpp
   Custom/UtilityCmd.cpp
