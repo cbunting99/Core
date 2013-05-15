@@ -1,12 +1,12 @@
 
-class transmog_items : public CreatureScript
+class Item_Requester_NPC : public CreatureScript
 {
 public:
-	transmog_items() : CreatureScript("transmog_items") {}
+	Item_Requester_NPC() : CreatureScript("Item_Requester_NPC") {}
 
 	bool OnGossipHello(Player* player, Creature* creature)
 	{
-		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_INTERACT_1, "Type in an itemID", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1, "", 0, true);
+		player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_INTERACT_1, "Type an item id here.", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+1, "", 0, true);
 		player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "What's this?", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
 		player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 		return true;
@@ -17,7 +17,7 @@ public:
 		player->PlayerTalkClass->ClearMenus();
 		if (action == GOSSIP_ACTION_INFO_DEF+2)
 		{
-			creature->MonsterWhisper("I'm a NPC that you can request item with Transmorgrification Token. You can request item by entering desired items id to the box, you can find the id from our armory on website.", player->GetGUID());
+			creature->MonsterWhisper("I'm a NPC that you can request item with Transmorgrification Token. You can request item by entering id of the item you would like to have to the box, you can find the id from our armory on website.", player->GetGUID());
 		    player->PlayerTalkClass->SendCloseGossip();
 		}
 
@@ -144,7 +144,7 @@ public:
 	}
 	};
 
-void AddSC_transmog_items()
+void AddSC_Item_Requester_NPC()
 {
-    new transmog_items();
+    new Item_Requester_NPC();
 }

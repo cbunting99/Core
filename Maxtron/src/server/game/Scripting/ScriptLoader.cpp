@@ -1307,9 +1307,7 @@ void AddBattlegroundScripts()
 	   void AddSC_Zone_Scripts();
 	   void AddSC_fast_arena_start();
 	   void AddSC_PVP_Killstreak();
-	   void AddSC_Queue_NPC();
-	   void AddSC_transmog_items();
-	   void AddSC_Item_Teleporter();
+	   void AddSC_Item_Requester_NPC();
 	   void AddSC_New_Dawning_Mage();
 	   void AddSC_New_Dawning_Recruiter();
 #endif
@@ -1334,9 +1332,7 @@ void AddCustomScripts()
 	AddSC_Zone_Scripts();
 	AddSC_fast_arena_start();
 	AddSC_PVP_Killstreak();
-	AddSC_Queue_NPC();
-	AddSC_transmog_items();
-	AddSC_Item_Teleporter();
+	AddSC_AddSC_Item_Requester_NPC();
 	AddSC_New_Dawning_Mage();
 	AddSC_New_Dawning_Recruiter();
 

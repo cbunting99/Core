@@ -10,13 +10,12 @@
 
 set(scripts_STAT_SRCS
   ${scripts_STAT_SRCS}
+  Custom/NPC/Item_Requester_NPC.cpp
   Custom/NPC/Beastmaster_NPC.cpp
-  Custom/NPC/Queue_NPC.cpp
   Custom/NPC/Exchanger_NPC.cpp
   Custom/NPC/Professions_NPC.cpp
   Custom/NPC/Teleporter_NPC.cpp
   Custom/NPC/Top_Arena_NPC.cpp
-  Custom/Item/Item_Teleporter.cpp
   Custom/Custom/New_Dawning_Mage.cpp
   Custom/Custom/New_Dawning_Recruiter.cpp
   Custom/anti_hk_farm.cpp
@@ -31,7 +30,6 @@ set(scripts_STAT_SRCS
   Custom/Zone_Scripts.cpp
   Custom/ArenaFastStart.cpp
   Custom/Killstreak.cpp
-  Custom/transmog_items.cpp
 )
 
 message("  -> Prepared: Custom")
