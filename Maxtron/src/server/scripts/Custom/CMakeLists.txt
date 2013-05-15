@@ -17,6 +17,8 @@ set(scripts_STAT_SRCS
   Custom/NPC/Teleporter_NPC.cpp
   Custom/NPC/Top_Arena_NPC.cpp
   Custom/Item/Item_Teleporter.cpp
+  Custom/Custom/New_Dawning_Mage.cpp
+  Custom/Custom/New_Dawning_Recruiter.cpp
   Custom/anti_hk_farm.cpp
   Custom/commands.cpp
   Custom/UtilityCmd.cpp

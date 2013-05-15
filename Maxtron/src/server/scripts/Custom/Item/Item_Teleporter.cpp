@@ -1,13 +1,14 @@
-#include "SrciptPCH.h"
+#include "ScriptPCH.h"
 
 class Item_Teleporter : public ItemScript
 {
-	public Item_Teleporter() : ItemScript ("Item_Teleporter") { }
+public:
+		Item_Teleporter() : ItemScript ("Item_Teleporter") { }
 
 	bool onUse(Player* player, Item* item, SpellCastTargets const& /*targets*/)
 	{
-		player->ADD_GOSSIP_ITEM( 2, "test menu 1", GOSSIP_SENDER_MAIN, 1);
-		player->ADD_GOSSIP_ITEM( 2, "test menu 2", GOSSIP_SENDER_MAIN, 2);
+		player->ADD_GOSSIP_ITEM(2, "test menu 1", GOSSIP_SENDER_MAIN, 1);
+		player->ADD_GOSSIP_ITEM(2, "test menu 2", GOSSIP_SENDER_MAIN, 2);
 		player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE,item->GetGUID());
 		return true;
 	}
@@ -27,7 +28,7 @@ class Item_Teleporter : public ItemScript
 	}
 };
 
-void AddSC_Item_Teleporter();
+void AddSC_Item_Teleporter()
 {
-	new Item_Teleporter();
+	new Item_Teleporter;
 }

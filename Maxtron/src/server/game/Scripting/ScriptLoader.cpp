@@ -1310,6 +1310,8 @@ void AddBattlegroundScripts()
 	   void AddSC_Queue_NPC();
 	   void AddSC_transmog_items();
 	   void AddSC_Item_Teleporter();
+	   void AddSC_New_Dawning_Mage();
+	   void AddSC_New_Dawning_Recruiter();
 #endif
 
 void AddCustomScripts()
@@ -1335,6 +1337,8 @@ void AddCustomScripts()
 	AddSC_Queue_NPC();
 	AddSC_transmog_items();
 	AddSC_Item_Teleporter();
+	AddSC_New_Dawning_Mage();
+	AddSC_New_Dawning_Recruiter();
 
 #endif
 }
