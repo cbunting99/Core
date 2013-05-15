@@ -1310,6 +1310,7 @@ void AddBattlegroundScripts()
 	   void AddSC_Item_Requester_NPC();
 	   void AddSC_New_Dawning_Mage();
 	   void AddSC_New_Dawning_Recruiter();
+	   void AddSC_Arena_Scripts();
 #endif
 
 void AddCustomScripts()
@@ -1332,9 +1333,10 @@ void AddCustomScripts()
 	AddSC_Zone_Scripts();
 	AddSC_fast_arena_start();
 	AddSC_PVP_Killstreak();
-	AddSC_AddSC_Item_Requester_NPC();
+	AddSC_Item_Requester_NPC();
 	AddSC_New_Dawning_Mage();
 	AddSC_New_Dawning_Recruiter();
+	AddSC_Arena_Scripts();
 
 #endif
 }

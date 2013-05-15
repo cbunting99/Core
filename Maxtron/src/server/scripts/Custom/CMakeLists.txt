@@ -27,7 +27,8 @@ set(scripts_STAT_SRCS
   Custom/Worldchat.cpp
   Custom/Transmogrification.cpp
   Custom/Transmogrification.h
-  Custom/Zone_Scripts.cpp
+  Custom/PlayerScripts/Zone_Scripts.cpp
+  Custom/PlayerScripts/Arena_Scripts.cpp
   Custom/ArenaFastStart.cpp
   Custom/Killstreak.cpp
 )

@@ -3678,6 +3678,13 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->manaCost = 0;
                 spellInfo->manaPerSecond = 0;
                 break;
+			case 49158:
+			case 51325:
+			case 51326:
+			case 51327:
+			case 51328:
+				spellInfo->AttributesEx4 |= SPELL_ATTR4_IGNORE_RESISTANCES;
+				break;
             case 24314: // Threatening Gaze
                 spellInfo->AuraInterruptFlags |= AURA_INTERRUPT_FLAG_CAST | AURA_INTERRUPT_FLAG_MOVE | AURA_INTERRUPT_FLAG_JUMP;
             default:
