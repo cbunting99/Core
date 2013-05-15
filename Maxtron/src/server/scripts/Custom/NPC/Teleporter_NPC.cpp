@@ -7,14 +7,14 @@
      
                     bool OnGossipHello(Player * player, Creature * creature)
                     {
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Global Mall", GOSSIP_SENDER_MAIN, 1);                                
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Malls", GOSSIP_SENDER_MAIN, 2);
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "PvP Arenas", GOSSIP_SENDER_MAIN, 3);
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Duel Zone", GOSSIP_SENDER_MAIN, 4);
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Northwatch Hold", GOSSIP_SENDER_MAIN, 5);
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "Profession Mall", GOSSIP_SENDER_MAIN, 6);
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "Transmorgrification Mall", GOSSIP_SENDER_MAIN, 7);
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Nevermind", GOSSIP_SENDER_MAIN, 30);
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface/ICONS/INV_Misc_Coin_01:30|t Global Mall", GOSSIP_SENDER_MAIN, 1);                                
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface/ICONS/INV_Misc_Coin_03:30|t Malls", GOSSIP_SENDER_MAIN, 2);
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_7:30|t PvP Arenas", GOSSIP_SENDER_MAIN, 3);
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_3v3_5:30|t Duel Zone", GOSSIP_SENDER_MAIN, 4);
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Northwatch Hold", GOSSIP_SENDER_MAIN, 5);
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Misc_Gear_01:30|t Profession Mall", GOSSIP_SENDER_MAIN, 6);
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Chest_Plate13:30|t Transmorgrification Mall", GOSSIP_SENDER_MAIN, 7);
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Nevermind", GOSSIP_SENDER_MAIN, 30);
 						player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 						return true;
 					}
@@ -33,24 +33,24 @@
 						case 2: // Malls
 							if (player->GetTeam() == HORDE)
 							{
-								player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Orgrimmar", GOSSIP_SENDER_MAIN, 11);
-								player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Undercity", GOSSIP_SENDER_MAIN, 12);
-								player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Back", GOSSIP_SENDER_MAIN, 20);
+								player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface/ICONS/INV_Misc_Coin_05:30|t Orgrimmar", GOSSIP_SENDER_MAIN, 11);
+								player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface/ICONS/INV_Misc_Coin_05:30|t Undercity", GOSSIP_SENDER_MAIN, 12);
+								player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Back", GOSSIP_SENDER_MAIN, 20);
 								player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 							}
 							else
 							{
-								player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Stormwind", GOSSIP_SENDER_MAIN, 13);
-								player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Ironforge", GOSSIP_SENDER_MAIN, 14);
-								player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Back", GOSSIP_SENDER_MAIN, 20);
+								player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface/ICONS/INV_Misc_Coin_05:30|t Stormwind", GOSSIP_SENDER_MAIN, 13);
+								player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface/ICONS/INV_Misc_Coin_05:30|t Ironforge", GOSSIP_SENDER_MAIN, 14);
+								player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Back", GOSSIP_SENDER_MAIN, 20);
 								player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 							}
 							break;
 						
 						case 3: // PvP Arenas
-							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Gurubashi Arena", GOSSIP_SENDER_MAIN, 15);
-							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Dire Maul Arena", GOSSIP_SENDER_MAIN, 16);
-							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Back", GOSSIP_SENDER_MAIN, 20);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_3:30|t Gurubashi Arena", GOSSIP_SENDER_MAIN, 15);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_3:30|t Dire Maul Arena", GOSSIP_SENDER_MAIN, 16);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Back", GOSSIP_SENDER_MAIN, 20);
 							player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 							break;
 						
@@ -104,13 +104,14 @@
 							break;
 						
 						case 20: // bk
-							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Global Mall", GOSSIP_SENDER_MAIN, 1);
-							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "Malls", GOSSIP_SENDER_MAIN, 2);
-							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "PvP Arenas", GOSSIP_SENDER_MAIN, 3);
-							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "Duel Zone", GOSSIP_SENDER_MAIN, 4);
-							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "Profession Mall", GOSSIP_SENDER_MAIN, 5);
-							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "Transmorgrification Mall", GOSSIP_SENDER_MAIN, 6);
-							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Nevermind", GOSSIP_SENDER_MAIN, 30);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface/ICONS/INV_Misc_Coin_01:30|t Global Mall", GOSSIP_SENDER_MAIN, 1);                                
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface/ICONS/INV_Misc_Coin_03:30|t Malls", GOSSIP_SENDER_MAIN, 2);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_7:30|t PvP Arenas", GOSSIP_SENDER_MAIN, 3);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_3v3_5:30|t Duel Zone", GOSSIP_SENDER_MAIN, 4);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Northwatch Hold", GOSSIP_SENDER_MAIN, 5);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Misc_Gear_01:30|t Profession Mall", GOSSIP_SENDER_MAIN, 6);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Chest_Plate13:30|t Transmorgrification Mall", GOSSIP_SENDER_MAIN, 7);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Nevermind", GOSSIP_SENDER_MAIN, 30);
 							player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 							break;
 						

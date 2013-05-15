@@ -44,10 +44,10 @@ enum CharterItemIDs
 
 enum CharterCosts
 {
-    GUILD_CHARTER_COST                            = 1000,
-    ARENA_TEAM_CHARTER_2v2_COST                   = 800000,
-    ARENA_TEAM_CHARTER_3v3_COST                   = 1200000,
-    ARENA_TEAM_CHARTER_5v5_COST                   = 2000000
+    GUILD_CHARTER_COST                            = 0,
+    ARENA_TEAM_CHARTER_2v2_COST                   = 0,
+    ARENA_TEAM_CHARTER_3v3_COST                   = 0,
+    ARENA_TEAM_CHARTER_5v5_COST                   = 0
 };
 
 void WorldSession::HandlePetitionBuyOpcode(WorldPacket& recvData)
@@ -829,7 +829,7 @@ void WorldSession::HandleTurnInPetitionOpcode(WorldPacket& recvData)
     if (type == GUILD_CHARTER_TYPE)
         requiredSignatures = sWorld->getIntConfig(CONFIG_MIN_PETITION_SIGNS);
     else
-        requiredSignatures = type-1;
+        requiredSignatures = 0;
 
     // Notify player if signatures are missing
     if (signatures < requiredSignatures)
