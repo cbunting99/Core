@@ -49,9 +49,9 @@ void WorldSession::HandleDuelAcceptedOpcode(WorldPacket& recvPacket)
     player->duel->startTimer = now;
     plTarget->duel->startTimer = now;
 
-	uint32 phases[33] = {748, 1315416, 1315418, 1315420, 1315422, 1315424, 1315426, 1315428, 1315430, 1315432, 1315434, 1315436, 1315438, 1315440, 1315442, 1315444, 1315446, 1315448, 1315450, 1315452, 1315454, 1315456, 1315458, 1315460, 1315462, 1315464, 1315466, 1315468, 1315470, 1315472, 1315474, 1315476, 1315478};
-    player->SetPhaseMask(phases[urand(0, 33)], true);
-	plTarget->SetPhaseMask(player->GetPhaseMask(), true);
+	// uint32 phases[33] = {748, 1315416, 1315418, 1315420, 1315422, 1315424, 1315426, 1315428, 1315430, 1315432, 1315434, 1315436, 1315438, 1315440, 1315442, 1315444, 1315446, 1315448, 1315450, 1315452, 1315454, 1315456, 1315458, 1315460, 1315462, 1315464, 1315466, 1315468, 1315470, 1315472, 1315474, 1315476, 1315478};
+    // player->SetPhaseMask(phases[urand(0, 33)], true);
+	// plTarget->SetPhaseMask(player->GetPhaseMask(), true);
 
     player->SendDuelCountdown(3000);
     plTarget->SendDuelCountdown(3000);
@@ -75,8 +75,8 @@ void WorldSession::HandleDuelCancelledOpcode(WorldPacket& recvPacket)
             GetPlayer()->duel->opponent->CombatStopWithPets(true);
 
         GetPlayer()->CastSpell(GetPlayer(), 7267, true);    // beg
-		GetPlayer()->SetPhaseMask(1, true);
-		GetPlayer()->duel->opponent->SetPhaseMask(1, true);
+		// GetPlayer()->SetPhaseMask(1, true);
+		// GetPlayer()->duel->opponent->SetPhaseMask(1, true);
         GetPlayer()->DuelComplete(DUEL_WON);
         return;
     }

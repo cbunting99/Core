@@ -65,7 +65,7 @@
 							break;
 						
 						case 6: // prifessions mall
-							player->TeleportTo(530, -2110.120117f, 7770.859863f, 151.707001f, 3.356310f);
+							player->TeleportTo(0, -219.182281f, 1638.179443f, 79.765350f, 1.288978f);
 							player->PlayerTalkClass->SendCloseGossip();
 							break;
 						
