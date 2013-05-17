@@ -2986,9 +2986,6 @@ void SpellMgr::LoadDbcDataCorrections()
 				spellInfo->EffectRadiusIndex[1] = EFFECT_RADIUS_10_YARDS;
 				spellInfo->speed = 100;
 				break;
-			case 49575: // Death Grip
-				spellInfo->EffectMiscValueB[0] = 1;
-				break;
             case 30541: // Blaze (needs conditions entry)
                 spellInfo->EffectImplicitTargetA[0] = TARGET_UNIT_TARGET_ENEMY;
                 spellInfo->EffectImplicitTargetB[0] = 0;

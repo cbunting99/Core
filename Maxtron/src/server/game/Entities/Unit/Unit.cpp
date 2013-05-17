@@ -14152,7 +14152,7 @@ void Unit::ProcDamageAndSpellFor(bool isVictim, Unit* target, uint32 procFlag, u
         if (useCharges && !i->aura->GetCharges())
             continue;
 		
-		if(Id == 56817 && procSpell != NULL && procSpell->Id != 56815)
+		if(procSpell->Id == 56817 && procSpell != NULL && procSpell->Id != 56815)
 			continue;
 
         bool takeCharges = false;
