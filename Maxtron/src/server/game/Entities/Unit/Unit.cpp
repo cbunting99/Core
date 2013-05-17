@@ -14151,9 +14151,6 @@ void Unit::ProcDamageAndSpellFor(bool isVictim, Unit* target, uint32 procFlag, u
         // no more charges to use, prevent proc
         if (useCharges && !i->aura->GetCharges())
             continue;
-		
-		if(procSpell->Id == 56817 && procSpell != NULL && procSpell->Id != 56815)
-			continue;
 
         bool takeCharges = false;
         SpellInfo const* spellInfo = i->aura->GetSpellInfo();
