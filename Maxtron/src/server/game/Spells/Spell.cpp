@@ -5655,18 +5655,88 @@ SpellCastResult Spell::CheckPetCast(Unit* target)
 
 uint32 Spell::GetCCDelay(SpellInfo const* _spell)
 {
+	AuraType auraWithCCD[] = {
+		SPELL_AURA_MOD_CONFUSE, // Polymorph & Hex.
+		SPELL_AURA_MOD_FEAR, // Psychic Scream & Warlock Fear(s).
+		SPELL_AURA_MOD_ROOT // Earthgrab, Frost Nova & (All Roots).
+	};
+	uint8 CCDArraySize = 6;
+	
+	const uint32 CCDELAY = 50;
+	
 	switch(_spell->SpellFamilyName)
 	{
 	case SPELLFAMILY_HUNTER:
-		if (_spell->Id == 1543) // Flare.
-			return 50;
+		if (_spell->Id == 19184) // Entrapment Rank 1.
+			return 0;
 		break;
+		if (_spell->Id == 19387) // Entrapment Rank 2.
+			return 0;
+		break;
+		if (_spell->Id == 19388) // Entrapment Rank 3.
+			return 0;
+		break;
+		if (_spell->Id == 1543) // Flare.
+			return 100;
+		break;
+
+	case SPELLFAMILY_WARRIOR:
+		if (_spell->Mechanic == MECHANIC_STUN)
+			return CCDELAY;
+	    break;
+
+	case SPELLFAMILY_PRIEST:
+		if (_spell->Mechanic == MECHANIC_STUN)
+			return CCDELAY;
+	    break;
+	    if (_spell->Mechanic == MECHANIC_CHARM)
+			return CCDELAY;
+	    break;
+
+	case SPELLFAMILY_DEATHKNIGHT:
+		if (_spell->Mechanic == MECHANIC_STUN)
+			return CCDELAY;
+	    break;
+
+	case SPELLFAMILY_SHAMAN:
+		if (_spell->Mechanic == MECHANIC_STUN)
+			return CCDELAY;
+	    break;
+
+	case SPELLFAMILY_WARLOCK:
+		if (_spell->Mechanic == MECHANIC_STUN)
+			return CCDELAY;
+	    break;
+
+	case SPELLFAMILY_DRUID:
+		if (_spell->Mechanic == MECHANIC_STUN)
+			return CCDELAY;
+	    break;
 	
+	case SPELLFAMILY_PALADIN:
+		if (_spell->Mechanic == MECHANIC_STUN)
+			return CCDELAY;
+		break;
+
 	case SPELLFAMILY_ROGUE:
+		if (_spell->Mechanic == MECHANIC_STUN)
+			return CCDELAY;
+		break;
 		if (_spell->Id == 2094) // Blind.
-			return 50;
+			return CCDELAY;
+		break;
+
+	case SPELLFAMILY_MAGE:
+		if (_spell->Mechanic == MECHANIC_STUN)
+			return CCDELAY;
 		break;
 	}
+	
+	for (uint8 i = 0; i < CCDArraySize; ++i)
+		if (_spell->HasAura(auraWithCCD[i]))
+			return CCDELAY;
+
+	
 	return 0;
 }
 
