@@ -24,7 +24,5 @@ A lot of custom features.
     - Skip Queue(s).
   - Transmorgrification.
   - Killstreak (Work in progress).
-  - Anti Hoborable kill farming system.
 
-
- TL:DR, 25+ custom scripts, way too many modifications& & spell fixes.
+ TL:DR, 25+ custom scripts, way too many modifications & spell fixes.
