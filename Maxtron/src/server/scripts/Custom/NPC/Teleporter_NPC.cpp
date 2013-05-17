@@ -11,7 +11,7 @@
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface/ICONS/INV_Misc_Coin_03:30|t Malls", GOSSIP_SENDER_MAIN, 2);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_7:30|t PvP Arenas", GOSSIP_SENDER_MAIN, 3);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_3v3_5:30|t Duel Zone", GOSSIP_SENDER_MAIN, 4);
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Northwatch Hold", GOSSIP_SENDER_MAIN, 5);
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Questing Zone", GOSSIP_SENDER_MAIN, 5);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Misc_Gear_01:30|t Profession Mall", GOSSIP_SENDER_MAIN, 6);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Chest_Plate13:30|t Transmorgrification Mall", GOSSIP_SENDER_MAIN, 7);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Nevermind", GOSSIP_SENDER_MAIN, 30);
@@ -59,9 +59,12 @@
 							player->PlayerTalkClass->SendCloseGossip();
 							break;
 						
-						case 5: // Northwatch Hold.
-							player->TeleportTo(1, -1922.237305f, -3518.541749f, 28.847794f, 4.566247f);
-							player->PlayerTalkClass->SendCloseGossip();
+						case 5: // Questing Zone.
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_3:30|t Northwatch Hold", GOSSIP_SENDER_MAIN, 17);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_3:30|t Supreme", GOSSIP_SENDER_MAIN, 18);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_3:30|t Mulgore", GOSSIP_SENDER_MAIN, 19);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Back", GOSSIP_SENDER_MAIN, 20);
+							player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 							break;
 						
 						case 6: // prifessions mall
@@ -102,13 +105,25 @@
 							player->TeleportTo(1, -3761.399658f, 1133.067749f, 132.084564f, 4.719074f);
 							player->PlayerTalkClass->SendCloseGossip();
 							break;
+						case 17: // northwatch hold
+							player->TeleportTo(1, -1998.12f, -3680.54f, 21.1346f, 2.45298f);
+							player->PlayerTalkClass->SendCloseGossip();
+							break;
+						case 18: // supreme
+							player->TeleportTo(0, -1852.07f, -4251.95f, 2.76502f, 1.08637f);
+							player->PlayerTalkClass->SendCloseGossip();
+							break;
+						case 19: // mulgore
+							player->TeleportTo(1, -2203.916992f, -699.970459f, -10.450468f, 0.375297f);
+							player->PlayerTalkClass->SendCloseGossip();
+							break;
 						
 						case 20: // bk
 							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface/ICONS/INV_Misc_Coin_01:30|t Global Mall", GOSSIP_SENDER_MAIN, 1);                                
 							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface/ICONS/INV_Misc_Coin_03:30|t Malls", GOSSIP_SENDER_MAIN, 2);
 							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_7:30|t PvP Arenas", GOSSIP_SENDER_MAIN, 3);
 							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_3v3_5:30|t Duel Zone", GOSSIP_SENDER_MAIN, 4);
-							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Northwatch Hold", GOSSIP_SENDER_MAIN, 5);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Questing Zone", GOSSIP_SENDER_MAIN, 5);
 							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Misc_Gear_01:30|t Profession Mall", GOSSIP_SENDER_MAIN, 6);
 							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Chest_Plate13:30|t Transmorgrification Mall", GOSSIP_SENDER_MAIN, 7);
 							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Nevermind", GOSSIP_SENDER_MAIN, 30);
