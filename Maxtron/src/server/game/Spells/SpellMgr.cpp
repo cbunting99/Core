@@ -3187,6 +3187,7 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->Stances = 1 << (FORM_TREE - 1);
                 break;
 			case 49575: // Deathgrip
+			case 58867: // Spirit wolf Leap.
 				spellInfo->EffectMiscValueB[0] = 70;
 				break;
             case 51466: // Elemental Oath (Rank 1)
