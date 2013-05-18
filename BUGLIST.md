@@ -2,8 +2,6 @@
 
 2. Cannot taunt players pets.
 
-3. Glyph of Flame Shock, doesn't work at all.
-
  -- CRITICAL --
 Use blood strike two times with Reaping talent from unholy talent tree,
 Both runes became death runes. Now use blood tap while they are still on cooldown.
