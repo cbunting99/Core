@@ -1197,6 +1197,7 @@ void Battleground::AddPlayer(Player* player)
 				pet->SetPower(POWER_HAPPINESS, pet->GetMaxPower(POWER_HAPPINESS));
 				pet->m_CreatureSpellCooldowns.clear();
 				pet->RemoveAura(55711);
+			}
         }
     }
     else
