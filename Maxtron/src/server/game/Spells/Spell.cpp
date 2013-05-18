@@ -5049,9 +5049,9 @@ SpellCastResult Spell::CheckCast(bool strict)
 		case 57:
 		case 58:
 		case 59:
+		case 60:
 			return SPELL_FAILED_DONT_REPORT;
 			break;
-		case 60:
 		case 61:
 		case 62:
 		case 63:
@@ -5130,9 +5130,9 @@ SpellCastResult Spell::CheckCast(bool strict)
 		case 27:
 		case 28:
 		case 29:
-		case 30:
 			return SPELL_FAILED_DONT_REPORT;
 			break;
+		case 30:
 		case 31:
 		case 32:
 		case 33:
