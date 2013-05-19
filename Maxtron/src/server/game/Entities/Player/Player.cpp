@@ -1580,12 +1580,12 @@ void Player::Update(uint32 p_time)
     }
 
     m_achievementMgr->UpdateTimedAchievements(p_time);
-
-	    // Fix Sum Of Enrage and trigger_spell Wrecking Crew (Enrage too)
+	
+	// Enrage and Wrecking Crew shouldn't stack together.
     if (HasAura(14204) && HasAura(57522))
         ToPlayer()->RemoveAura(57522);
-      
-    //Remove Mount When Used Dispersion (ShadowForm + Dispersion Mount Exploit)
+
+	// Fix dispersion invisiblity glitch.
     if (HasAura(47585) && HasAuraType(SPELL_AURA_MOUNTED))
         ToPlayer()->RemoveAurasByType(SPELL_AURA_MOUNTED);
        
