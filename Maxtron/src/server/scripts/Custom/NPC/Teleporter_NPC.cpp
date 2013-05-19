@@ -11,6 +11,7 @@
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, "|TInterface/ICONS/INV_Misc_Coin_03:30|t Malls", GOSSIP_SENDER_MAIN, 2);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_7:30|t PvP Arenas", GOSSIP_SENDER_MAIN, 3);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_3v3_5:30|t Duel Zone", GOSSIP_SENDER_MAIN, 4);
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_3v3_5:30|t World Boss", GOSSIP_SENDER_MAIN, 134);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Questing Zone", GOSSIP_SENDER_MAIN, 5);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Misc_Gear_01:30|t Profession Mall", GOSSIP_SENDER_MAIN, 6);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Chest_Plate13:30|t Transmorgrification Mall", GOSSIP_SENDER_MAIN, 7);
@@ -27,6 +28,11 @@
 						{
 						case 1: // Global Mall
 							player->TeleportTo(530, -2981.270020f, 779.124023f, -8.054820f, 2.530470f);
+							player->PlayerTalkClass->SendCloseGossip();
+							break;
+
+						case 134: // World Boss
+							player->TeleportTo(0, -7627.41f, -708.915f, 183.457f, 4.95638f);
 							player->PlayerTalkClass->SendCloseGossip();
 							break;
 						

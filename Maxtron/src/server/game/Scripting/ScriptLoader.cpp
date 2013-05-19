@@ -1311,6 +1311,7 @@ void AddBattlegroundScripts()
 	   void AddSC_New_Dawning_Mage();
 	   void AddSC_New_Dawning_Recruiter();
 	   void AddSC_Arena_Scripts();
+	   void AddSC_Mall_Guide_NPC();
 #endif
 
 void AddCustomScripts()
@@ -1337,6 +1338,7 @@ void AddCustomScripts()
 	AddSC_New_Dawning_Mage();
 	AddSC_New_Dawning_Recruiter();
 	AddSC_Arena_Scripts();
+	AddSC_Mall_Guide_NPC();
 
 #endif
 }

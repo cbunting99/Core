@@ -14,6 +14,7 @@ set(scripts_STAT_SRCS
   Custom/NPC/Beastmaster_NPC.cpp
   Custom/NPC/Exchanger_NPC.cpp
   Custom/NPC/Professions_NPC.cpp
+  Custom/NPC/Mall_Guide_NPC.cpp
   Custom/NPC/Teleporter_NPC.cpp
   Custom/NPC/Top_Arena_NPC.cpp
   Custom/Custom/New_Dawning_Mage.cpp
