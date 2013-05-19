@@ -16457,8 +16457,6 @@ void Unit::KnockbackFrom(float x, float y, float speedXY, float speedZ)
     }
     else
     {
-		if (player->HasAura(46924)) // Thunderstorm or such knockbacks shouldn't knockback a enemy that has bladestorm aura.
-			return;
 
         float vcos, vsin;
         GetSinCos(x, y, vsin, vcos);

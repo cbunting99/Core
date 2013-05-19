@@ -5936,6 +5936,8 @@ uint32 Spell::GetCCDelay(SpellInfo const* _spell)
 	case SPELLFAMILY_ROGUE:
 		if (_spell->Mechanic == MECHANIC_STUN)
 			return CCDELAY;
+		if (_spell->Mechanic == MECHANIC_SAPPED)
+			return CCDELAY;
 		break;
 		if (_spell->Id == 2094) // Blind.
 			return CCDELAY;

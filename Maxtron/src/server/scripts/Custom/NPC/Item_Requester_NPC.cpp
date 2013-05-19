@@ -113,21 +113,12 @@ public:
 						return false;
 					}
 					
-					if (!player->HasItemCount(32572, 1, false))
+					if (item_proto->Quality > 3)
 					{
-						creature->MonsterWhisper("I'm sorry, you don't have any Transmogrification Tokens.", player->GetGUID());
-						player->PlayerTalkClass->SendCloseGossip();
-						return false;
+							player->AddItem(itemId, 1);
+							player->PlayerTalkClass->SendCloseGossip();
+							return true;
 					}
-					else
-					
-					{
-						player->DestroyItemCount(32572, 1, true);
-						player->AddItem(itemId, 1);
-						player->PlayerTalkClass->SendCloseGossip();
-						return true;
-					}
-					
 					else
 					{
 						player->AddItem(itemId, 1);
