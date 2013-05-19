@@ -39,7 +39,7 @@
 							break;
 
 							case 3:
-							player->TeleportTo(530, -3069.394287f, 744.839661f, -9.947959f, 3.3711818f);
+							player->TeleportTo(530, -3004.956496f, 831.831604f, -9.979859f,  0.165748f);
 							player->PlayerTalkClass->SendCloseGossip();
 							break;
 
@@ -79,7 +79,7 @@
 							break;
 
 							case 11:
-							player->TeleportTo(530, -3069.394287f, 744.839661f, -9.947959f, 3.711818f);
+							player->TeleportTo(530, -3049.460693f, 745.850708f, -9.665066f, 4.766610f);
 							player->PlayerTalkClass->SendCloseGossip();
 							break;
 
