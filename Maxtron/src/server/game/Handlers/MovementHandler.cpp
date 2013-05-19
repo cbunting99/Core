@@ -397,10 +397,10 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvData)
             case 572: underMapValueZ = 28.0f; break; // Lordearon
             case 571: underMapValueZ = -400.0f; break; // Northrend
 
-            default: underMapValueZ = -500.0f; break;
+            default: underMapValueZ = -250.0f; break;
         }
 
-        if (movementInfo.pos.GetPositionZ() < -500.0f)
+        if (movementInfo.pos.GetPositionZ() < underMapValueZ)
         {
             if (!(plrMover->GetBattleground() && plrMover->GetBattleground()->HandlePlayerUnderMap(_player)))
             {
