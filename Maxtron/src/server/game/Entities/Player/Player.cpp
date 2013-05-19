@@ -23395,12 +23395,6 @@ void Player::RemoveItemDependentAurasAndCasts(Item* pItem)
             ++itr;
             continue;
         }
-		
-		if (HasAura(46924)) // Changing weapons while bladestorm shouldn't remove the aura.
-		{
-			++itr;
-			continue;
-		}
 
         // no alt item, remove aura, restart check
         RemoveOwnedAura(itr);
