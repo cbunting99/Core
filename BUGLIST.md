@@ -19,3 +19,4 @@ See green comment below there.
    (Related to sanctuary zone(s)).
 8. Rogue: When you cast Cheapshot, Garrote, Rupture, Expose Armor, Kidneyshot the poison from Main Hand should be applied.
 9. Cobalt frag bomb (belt also), removes a charge of the effects due to the damage which is incorrect.
+10. Intervene aura range is not 10yds. See commits possible fix. (Might be fixed.)
