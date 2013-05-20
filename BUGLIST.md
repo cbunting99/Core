@@ -1,6 +1,6 @@
 1. Channeled spells haste issues.
 
-2. Cannot taunt players pets.
+2. Cannot taunt players pets (Water Elemental, Mirror Image, etc (not ghouls, hunter pets, etc)).
 
  -- CRITICAL --
 Use blood strike two times with Reaping talent from unholy talent tree,
@@ -12,4 +12,6 @@ See green comment below there.
 
 4. Using Rune Tap with the glyph whilst Dancing Rune Weapon is up, it 
    should heal the party of the death knight.
-Rune Tap shouldn't damage the enemy either.
+   Rune Tap shouldn't damage the enemy either.
+5. Mind Amplification Dish (engineering), doesn't work at all.
+6. Explosion of Living Bomb shoudn't break Dragon's Breath.
