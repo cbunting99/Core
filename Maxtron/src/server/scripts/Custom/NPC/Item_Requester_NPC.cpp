@@ -1,4 +1,3 @@
-
 class Item_Requester_NPC : public CreatureScript
 {
 public:
@@ -85,6 +84,24 @@ public:
 					}
 
 					if (item_proto->ItemId == 18970)
+					{
+						player->PlayerTalkClass->SendCloseGossip();
+						return false;
+					}
+					// GM OUTFIT
+					if (item_proto->ItemId == 2586)
+					{
+						player->PlayerTalkClass->SendCloseGossip();
+						return false;
+					}
+					// GM OUTFIT
+					if (item_proto->ItemId == 11508)
+					{
+						player->PlayerTalkClass->SendCloseGossip();
+						return false;
+					}
+					// GM OUTFIT
+					if (item_proto->ItemId == 12064)
 					{
 						player->PlayerTalkClass->SendCloseGossip();
 						return false;
