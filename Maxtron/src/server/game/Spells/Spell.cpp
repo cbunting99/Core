@@ -5011,6 +5011,20 @@ SpellCastResult Spell::CheckCast(bool strict)
 				}
 			}
 
+	// Arcane Torrent. (Energy)
+			if (m_spellInfo->Id == 25046) || (m_spellInfo->Id == 28730) || (m_spellInfo->Id == 50613) || (m_spellInfo->Id == 69179)
+			{
+				if (Unit* victim = m_caster->getVictim())
+				{
+					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
+					{
+						victim->RemvoveAura(1784);
+						victim->RemvoveAura(5215)
+						return SPELL_CAST_OK;
+					}
+				}
+			}
+
 	// Lichborne.
 	if (m_spellInfo->Id == 49039)
 	{
