@@ -1584,10 +1584,6 @@ void Player::Update(uint32 p_time)
 	// Enrage and Wrecking Crew shouldn't stack together.
     if (HasAura(14204) && HasAura(57522))
         ToPlayer()->RemoveAura(57522);
-
-	// Fix dispersion invisiblity glitch.
-    if (HasAura(47585) && HasAuraType(SPELL_AURA_MOUNTED))
-        ToPlayer()->RemoveAurasByType(SPELL_AURA_MOUNTED);
        
     if (HasUnitState(UNIT_STATE_MELEE_ATTACKING) && !HasUnitState(UNIT_STATE_CASTING))
     {
