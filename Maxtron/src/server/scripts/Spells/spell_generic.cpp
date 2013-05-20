@@ -794,52 +794,6 @@ class spell_creature_permanent_feign_death : public SpellScriptLoader
         }
 };
 
-enum PvPTrinketTriggeredSpells
-{
-    SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER         = 72752,
-    SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER_WOTF    = 72757,
-};
-
-class spell_pvp_trinket_wotf_shared_cd : public SpellScriptLoader
-{
-    public:
-        spell_pvp_trinket_wotf_shared_cd() : SpellScriptLoader("spell_pvp_trinket_wotf_shared_cd") {}
-
-        class spell_pvp_trinket_wotf_shared_cd_SpellScript : public SpellScript
-        {
-            PrepareSpellScript(spell_pvp_trinket_wotf_shared_cd_SpellScript);
-
-            bool Load()
-            {
-                return GetCaster()->GetTypeId() == TYPEID_PLAYER;
-            }
-
-            bool Validate(SpellInfo const* /*spellEntry*/)
-            {
-                if (!sSpellMgr->GetSpellInfo(SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER) || !sSpellMgr->GetSpellInfo(SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER_WOTF))
-                    return false;
-                return true;
-            }
-
-            void HandleScript()
-            {
-                // This is only needed because spells cast from spell_linked_spell are triggered by default
-                // Spell::SendSpellCooldown() skips all spells with TRIGGERED_IGNORE_SPELL_AND_CATEGORY_CD
-                GetCaster()->ToPlayer()->AddSpellAndCategoryCooldowns(GetSpellInfo(), GetCastItem() ? GetCastItem()->GetEntry() : 0, GetSpell());
-            }
-
-            void Register()
-            {
-                AfterCast += SpellCastFn(spell_pvp_trinket_wotf_shared_cd_SpellScript::HandleScript);
-            }
-        };
-
-        SpellScript* GetSpellScript() const
-        {
-            return new spell_pvp_trinket_wotf_shared_cd_SpellScript();
-        }
-};
-
 enum AnimalBloodPoolSpell
 {
     SPELL_ANIMAL_BLOOD      = 46221,
@@ -3401,6 +3355,60 @@ class spell_gen_gift_of_naaru : public SpellScriptLoader
         }
 };
 
+enum PvPTrinketTriggeredSpells
+{
+    SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER = 72752,
+    SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER_WOTF = 72757,
+};
+
+class spell_pvp_trinket_wotf_shared_cd : public SpellScriptLoader
+{
+    public:
+        spell_pvp_trinket_wotf_shared_cd() : SpellScriptLoader("spell_pvp_trinket_wotf_shared_cd") {}
+
+        class spell_pvp_trinket_wotf_shared_cd_SpellScript : public SpellScript
+        {
+            PrepareSpellScript(spell_pvp_trinket_wotf_shared_cd_SpellScript);
+
+            bool Load()
+            {
+                return GetCaster()->GetTypeId() == TYPEID_PLAYER;
+            }
+
+            bool Validate(SpellInfo const* /*spellEntry*/)
+            {
+                if (!sSpellMgr->GetSpellInfo(SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER) || !sSpellMgr->GetSpellInfo(SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER_WOTF))
+                    return false;
+                return true;
+            }
+
+            void HandleScript(SpellEffIndex /*effIndex*/)
+            {
+                Player* caster = GetCaster()->ToPlayer();
+                SpellInfo const* spellInfo = GetSpellInfo();
+                caster->AddSpellCooldown(spellInfo->Id, 0, time(NULL) + sSpellMgr->GetSpellInfo(SPELL_WILL_OF_THE_FORSAKEN_COOLDOWN_TRIGGER)->GetRecoveryTime() / IN_MILLISECONDS);
+                WorldPacket data(SMSG_SPELL_COOLDOWN, 8+1+4);
+                data << uint64(caster->GetGUID());
+                data << uint8(0);
+                data << uint32(spellInfo->Id);
+                data << uint32(0);
+                caster->GetSession()->SendPacket(&data);
+            }
+
+        void Register()
+        {
+            OnEffectHit += SpellEffectFn(spell_pvp_trinket_wotf_shared_cd_SpellScript::HandleScript, EFFECT_0, SPELL_EFFECT_DUMMY);
+        }
+    };
+
+    SpellScript* GetSpellScript() const
+    {
+        return new spell_pvp_trinket_wotf_shared_cd_SpellScript();
+    }
+};
+
+
+
 enum Replenishment
 {
     SPELL_REPLENISHMENT             = 57669,
@@ -3578,7 +3586,6 @@ void AddSC_generic_spell_scripts()
     new spell_gen_pet_summoned();
     new spell_gen_remove_flight_auras();
     new spell_creature_permanent_feign_death();
-    new spell_pvp_trinket_wotf_shared_cd();
     new spell_gen_animal_blood();
     new spell_gen_divine_storm_cd_reset();
     new spell_gen_parachute_ic();
@@ -3639,6 +3646,7 @@ void AddSC_generic_spell_scripts()
     new spell_gen_upper_deck_create_foam_sword();
     new spell_gen_bonked();
     new spell_gen_gift_of_naaru();
+    new spell_pvp_trinket_wotf_shared_cd();
     new spell_gen_replenishment();
     new spell_gen_aura_service_uniform();
     new spell_gen_orc_disguise();
