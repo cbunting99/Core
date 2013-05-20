@@ -12,3 +12,4 @@ See green comment below there.
 
 4. Using Rune Tap with the glyph whilst Dancing Rune Weapon is up, it 
    should heal the party of the death knight.
+Rune Tap shouldn't damage the enemy either.
