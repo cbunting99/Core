@@ -4974,10 +4974,43 @@ SpellCastResult Spell::CheckCast(bool strict)
         if (!m_caster->ToPlayer()->InBattleground())
             return SPELL_FAILED_ONLY_BATTLEGROUNDS;
 	
+	//TODO: fix style :3
+	// Speed.
+	if (m_spellInfo->Id == 23451)
+		if (Unit* victim = m_caster->getVictim())
+		{
+			if (victim->HasAura(1784) || (victim->HasAura(5215)) // Stealth & Prowl.
+			{
+				return SPELL_CAST_OK;
+			}
+		}
+		
+		// Regeneration.
+		if (m_spellInfo->Id == 23493)
+		{
+			if (Unit* victim = m_caster->getVictim())
+			{
+				if (victim->HasAura(1784) || (victim->HasAura(5215)) // Stealth & Prowl.
+				{
+					return SPELL_CAST_OK;
+				}
+			}
+			
+			// Berserk.
+			if (m_spellInfo->Id == 23505)
+			{
+				if (Unit* victim = m_caster->getVictim())
+				{
+					if (victim->HasAura(1784) || (victim->HasAura(5215)) // Stealth & Prowl.
+					{
+						return SPELL_CAST_OK;
+					}
+				}
+
 	// Lichborne.
 	if (m_spellInfo->Id == 49039)
 	{
-		if (m_caster->HasAura(51724))
+		if (m_caster->HasAura(51724)) // Sap.
 		{
 			return SPELL_CAST_OK;
 		}
