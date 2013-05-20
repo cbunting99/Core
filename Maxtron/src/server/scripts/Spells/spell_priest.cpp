@@ -416,12 +416,11 @@ class spell_pri_penance : public SpellScriptLoader
 
             SpellCastResult CheckCast()
             {
-				Player* caster = GetCaster()->ToPlayer();
+                Player* caster = GetCaster()->ToPlayer();
                 if (Unit* target = GetExplTargetUnit())
-					if (Player* target = GetExplTargetUnit()->ToPlayer())
-						if (caster->GetTeam() != target->GetTeam() && !caster->IsValidAttackTarget(target))
-							return SPELL_FAILED_BAD_TARGETS;
-				return SPELL_CAST_OK;
+                    if (!caster->IsFriendlyTo(target) && !caster->IsValidAttackTarget(target))
+                        return SPELL_FAILED_BAD_TARGETS;
+                return SPELL_CAST_OK;
             }
 
             void Register()
@@ -493,10 +492,10 @@ class spell_pri_power_word_shield : public SpellScriptLoader
                     return;
 
                 if (AuraEffect* talentAurEff = target->GetAuraEffectOfRankedSpell(SPELL_PRIEST_REFLECTIVE_SHIELD_R1, EFFECT_0))
-				{
-					int32 bp = CalculatePct(absorbAmount, talentAurEff->GetAmount());
-					target->CastCustomSpell(dmgInfo.GetAttacker(), SPELL_PRIEST_REFLECTIVE_SHIELD_TRIGGERED, &bp, NULL, NULL, true, NULL, aurEff);
-				}
+                {
+                    int32 bp = CalculatePct(absorbAmount, talentAurEff->GetAmount());
+                    target->CastCustomSpell(dmgInfo.GetAttacker(), SPELL_PRIEST_REFLECTIVE_SHIELD_TRIGGERED, &bp, NULL, NULL, true, NULL, aurEff);
+                }
             }
 
             void Register()
