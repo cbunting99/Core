@@ -5928,7 +5928,7 @@ uint32 Spell::GetCCDelay(SpellInfo const* _spell)
 	};
 	uint8 CCDArraySize = 6;
 	
-	const uint32 CCDELAY = 50;
+	const uint32 CCDELAY = 126;
 	
 	switch(_spell->SpellFamilyName)
 	{
@@ -5943,7 +5943,7 @@ uint32 Spell::GetCCDelay(SpellInfo const* _spell)
 			return 0;
 		break;
 		if (_spell->Id == 1543) // Flare.
-			return 100;
+			return CCDELAY;
 		break;
 
 	case SPELLFAMILY_WARRIOR:
