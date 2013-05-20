@@ -4977,35 +4977,39 @@ SpellCastResult Spell::CheckCast(bool strict)
 	//TODO: fix style :3
 	// Speed.
 	if (m_spellInfo->Id == 23451)
+	{
 		if (Unit* victim = m_caster->getVictim())
 		{
-			if (victim->HasAura(1784) || (victim->HasAura(5215)) // Stealth & Prowl.
+			if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
 			{
 				return SPELL_CAST_OK;
 			}
 		}
+	}
 		
 		// Regeneration.
 		if (m_spellInfo->Id == 23493)
 		{
 			if (Unit* victim = m_caster->getVictim())
 			{
-				if (victim->HasAura(1784) || (victim->HasAura(5215)) // Stealth & Prowl.
+				if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
 				{
 					return SPELL_CAST_OK;
 				}
 			}
+		}
 			
 			// Berserk.
 			if (m_spellInfo->Id == 23505)
 			{
 				if (Unit* victim = m_caster->getVictim())
 				{
-					if (victim->HasAura(1784) || (victim->HasAura(5215)) // Stealth & Prowl.
+					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
 					{
 						return SPELL_CAST_OK;
 					}
 				}
+			}
 
 	// Lichborne.
 	if (m_spellInfo->Id == 49039)
