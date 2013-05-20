@@ -190,13 +190,13 @@ DiminishingGroup GetDiminishingReturnsGroupForSpell(SpellInfo const* spellproto,
                 return DIMINISHING_FEAR;
             break;
         }
-		case SPELLFAMILY_SHAMAN:
-			{
-				// Storm, Earth and Fire - Earthgrab
-				if (spellproto->SpellFamilyFlags[2] & 0x4000)
-					return DIMINISHING_LIMITONLY;
-				break;
-			}
+        case SPELLFAMILY_SHAMAN:
+            {
+                // Storm, Earth and Fire - Earthgrab
+                if (spellproto->SpellFamilyFlags[2] & 0x4000)
+                    return DIMINISHING_LIMITONLY;
+                break;
+            }
         case SPELLFAMILY_DEATHKNIGHT:
         {
             // Hungering Cold (no flags)
@@ -2981,10 +2981,11 @@ void SpellMgr::LoadDbcDataCorrections()
             case 30657: // Quake
                 spellInfo->EffectTriggerSpell[0] = 30571;
                 break;
-			case 1543:  // Flare
-				spellInfo->EffectRadiusIndex[0] = EFFECT_RADIUS_10_YARDS;
-				spellInfo->EffectRadiusIndex[1] = EFFECT_RADIUS_10_YARDS;
-				break;
+            case 1543: // Flare
+            case 3411: // Intervene.
+                spellInfo->EffectRadiusIndex[0] = EFFECT_RADIUS_10_YARDS;
+                spellInfo->EffectRadiusIndex[1] = EFFECT_RADIUS_10_YARDS;
+                break;
             case 30541: // Blaze (needs conditions entry)
                 spellInfo->EffectImplicitTargetA[0] = TARGET_UNIT_TARGET_ENEMY;
                 spellInfo->EffectImplicitTargetB[0] = 0;
@@ -3009,8 +3010,8 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->EffectTriggerSpell[0] = 36325; // They Must Burn Bomb Drop (DND)
                 break;
             case 49838: // Stop Time
-			case 5171:  // Slice and Dice
-			case 6774:
+            case 5171:  // Slice and Dice
+            case 6774:
                 spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_INITIAL_AGGRO;
                 break;
             case 61407: // Energize Cores
@@ -3039,7 +3040,7 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->EffectImplicitTargetA[0] = TARGET_UNIT_CASTER_AREA_PARTY;
                 spellInfo->EffectRadiusIndex[0] = EFFECT_RADIUS_10_YARDS_2;
                 break;
-				case 24259: // Spell Lock silence
+                case 24259: // Spell Lock silence
             spellInfo->speed = 80;
             break;
             case 44978: // Wild Magic
@@ -3105,11 +3106,11 @@ void SpellMgr::LoadDbcDataCorrections()
             case 54098: // Poison Bolt Volly - Faerlina (H)
                 spellInfo->MaxAffectedTargets = 10;
                 break;
-			case 49224: // Magic Suppression
-			case 49610:
-			case 49611:
-				spellInfo->procCharges = 0;
-				break;
+            case 49224: // Magic Suppression
+            case 49610:
+            case 49611:
+                spellInfo->procCharges = 0;
+                break;
             case 50312: // Unholy Frenzy
                 spellInfo->MaxAffectedTargets = 15;
                 break;
@@ -3160,7 +3161,7 @@ void SpellMgr::LoadDbcDataCorrections()
             case 29809: // Desecration Arm - 36 instead of 37 - typo? :/
                 spellInfo->EffectRadiusIndex[0] = EFFECT_RADIUS_7_YARDS;
                 break;
-				 case 18754: // Improved succubus - problems with apply if target is pet
+                 case 18754: // Improved succubus - problems with apply if target is pet
                                     spellInfo->EffectApplyAuraName[0] = SPELL_AURA_ADD_FLAT_MODIFIER; // it's affects duration of seduction, let's minimize affection
                                     spellInfo->EffectBasePoints[0] = -1.5*IN_MILLISECONDS*0.22; // reduce cast time of seduction by 22%
                                     spellInfo->EffectImplicitTargetA[0] = TARGET_UNIT_CASTER;
@@ -3186,10 +3187,10 @@ void SpellMgr::LoadDbcDataCorrections()
             case 48422:
                 spellInfo->Stances = 1 << (FORM_TREE - 1);
                 break;
-			case 49575: // Deathgrip
-			case 58867: // Spirit wolf Leap.
-				spellInfo->EffectMiscValueB[0] = 70;
-				break;
+            case 49575: // Deathgrip
+            case 58867: // Spirit wolf Leap.
+                spellInfo->EffectMiscValueB[0] = 70;
+                break;
             case 51466: // Elemental Oath (Rank 1)
             case 51470: // Elemental Oath (Rank 2)
                 spellInfo->Effect[EFFECT_1] = SPELL_EFFECT_APPLY_AURA;
@@ -3246,9 +3247,9 @@ void SpellMgr::LoadDbcDataCorrections()
             case 63675: // Improved Devouring Plague
                 spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_DONE_BONUS;
                 break;
-			case 33110: // Prayer of Mending (Heal) can trigger Inspiration
-				spellInfo->AttributesEx2 |= SPELL_ATTR2_TRIGGERED_CAN_TRIGGER_PROC;
-				break;
+            case 33110: // Prayer of Mending (Heal) can trigger Inspiration
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_TRIGGERED_CAN_TRIGGER_PROC;
+                break;
             case 8145: // Tremor Totem (instant pulse)
             case 6474: // Earthbind Totem (instant pulse)
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
@@ -3338,7 +3339,7 @@ void SpellMgr::LoadDbcDataCorrections()
             case 34471: // The Beast Within
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_USABLE_WHILE_CONFUSED | SPELL_ATTR5_USABLE_WHILE_FEARED | SPELL_ATTR5_USABLE_WHILE_STUNNED;
                 break;
-			case 49039: // Lichborne
+            case 49039: // Lichborne
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_USABLE_WHILE_CONFUSED | SPELL_ATTR5_USABLE_WHILE_FEARED | SPELL_ATTR5_USABLE_WHILE_STUNNED;
                 break;
             // ULDUAR SPELLS
@@ -3687,13 +3688,13 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->manaCost = 0;
                 spellInfo->manaPerSecond = 0;
                 break;
-			case 49158:
-			case 51325:
-			case 51326:
-			case 51327:
-			case 51328:
-				spellInfo->AttributesEx4 |= SPELL_ATTR4_IGNORE_RESISTANCES;
-				break;
+            case 49158:
+            case 51325:
+            case 51326:
+            case 51327:
+            case 51328:
+                spellInfo->AttributesEx4 |= SPELL_ATTR4_IGNORE_RESISTANCES;
+                break;
             case 24314: // Threatening Gaze
                 spellInfo->AuraInterruptFlags |= AURA_INTERRUPT_FLAG_CAST | AURA_INTERRUPT_FLAG_MOVE | AURA_INTERRUPT_FLAG_JUMP;
             default:

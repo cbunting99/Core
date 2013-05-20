@@ -1667,6 +1667,9 @@ void AuraEffect::HandleAuraModShapeshift(AuraApplication const* aurApp, uint8 mo
         }
 
         // remove other shapeshift before applying a new one
+        if (target->HasAura(51713))
+            return;
+        else
         target->RemoveAurasByType(SPELL_AURA_MOD_SHAPESHIFT, 0, GetBase());
 
         // stop handling the effect if it was removed by linked event
