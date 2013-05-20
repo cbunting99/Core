@@ -1,4 +1,4 @@
-1. Ghoul claw ability isn't supposed to be usable if energy is below sixty.
+1. Channeled spells haste issues.
 
 2. Cannot taunt players pets.
 
