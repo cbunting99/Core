@@ -33,18 +33,18 @@ public:
 			break;
 		
 		case SEC_TICKET_GM:
-			//snprintf(message, 1024, "|cffADFF2F[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tGM][%s]: %s|r", player->GetName().c_str(), msg);
-			//sWorld->SendGlobalText(message, NULL);
+			snprintf(message, 1024, "|cffADFF2F[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tGM][%s]: %s|r", player->GetName().c_str(), msg);
+		    sWorld->SendGlobalText(message, NULL);
 			break;
 		
 		case SEC_EVENT_GM:
-			//snprintf(message, 1024, "|cffADFF2F[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tEM][%s]: %s|r", player->GetName().c_str(), msg);
-			//sWorld->SendGlobalText(message, NULL);
+			snprintf(message, 1024, "|cffADFF2F[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tEM][%s]: %s|r", player->GetName().c_str(), msg);
+			sWorld->SendGlobalText(message, NULL);
 			break;
 		
 		case SEC_GAMEMASTER:
-			//snprintf(message, 1024, "|cffADFF2F[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tGamemaster][%s]: %s|r", player->GetName().c_str(), msg);
-			//sWorld->SendGlobalText(message, NULL);
+			snprintf(message, 1024, "|cffADFF2F[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tGamemaster][%s]: %s|r", player->GetName().c_str(), msg);
+			sWorld->SendGlobalText(message, NULL);
 			break;
 		
 		case SEC_HEAD_GM:
