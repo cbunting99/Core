@@ -21,3 +21,5 @@ See green comment below there.
 9. Cobalt frag bomb (belt also), removes a charge of the effects due to the damage which is incorrect.
 10. Intervene aura range is not 10yds. See commits possible fix. (Might be fixed.)
 11. Texture issues with fear (and charge/intercept?), causing the caster to fall underground.
+12. Rupture damage a little high/bugged? Need more research.
+13. Mutilate damage way too low.
