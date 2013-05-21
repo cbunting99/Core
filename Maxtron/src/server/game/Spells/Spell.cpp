@@ -5013,53 +5013,102 @@ SpellCastResult Spell::CheckCast(bool strict)
 
 	// Arcane Torrent. (Energy)
 			if (m_spellInfo->Id == 25046)
-			{
 				if (Unit* victim = m_caster->getVictim())
-				{
 					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
 					{
 						victim->RemoveAura(1784);
 						victim->RemoveAura(5215);
 						return SPELL_CAST_OK;
 					}
-				}
-			}
+
+					// CCDELAY custom fix.
+			if (m_spellInfo->Id == 51514) // Hex.
+				if (Unit* victim = m_caster->getVictim())
+					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
+					{
+						victim->RemoveAura(1784);
+						victim->RemoveAura(5215);
+						return SPELL_CAST_OK;
+					}
+
+			if (m_spellInfo->Id == 10890) // Psychic Scream.
+				if (Unit* victim = m_caster->getVictim())
+					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
+					{
+						victim->RemoveAura(1784);
+						victim->RemoveAura(5215);
+						return SPELL_CAST_OK;
+					}
+
+			if (m_spellInfo->Id == 64044) // Psychic Horror.
+				if (Unit* victim = m_caster->getVictim())
+					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
+					{
+						victim->RemoveAura(1784);
+						victim->RemoveAura(5215);
+						return SPELL_CAST_OK;
+					}
+			if (m_spellInfo->Id == 1833) // Cheap Shot.
+				if (Unit* victim = m_caster->getVictim())
+					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
+					{
+						victim->RemoveAura(1784);
+						victim->RemoveAura(5215);
+						return SPELL_CAST_OK;
+					}
+
+			if (m_spellInfo->Id == 8643) // Kidney Shot.
+				if (Unit* victim = m_caster->getVictim())
+					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
+					{
+						victim->RemoveAura(1784);
+						victim->RemoveAura(5215);
+						return SPELL_CAST_OK;
+					}
+
+			if (m_spellInfo->Id == 2094) // Blind.
+				if (Unit* victim = m_caster->getVictim())
+					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
+					{
+						victim->RemoveAura(1784);
+						victim->RemoveAura(5215);
+						return SPELL_CAST_OK;
+					}
+			if (m_spellInfo->Id == 44572) // Deep Freeze.
+				if (Unit* victim = m_caster->getVictim())
+					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
+					{
+						victim->RemoveAura(1784);
+						victim->RemoveAura(5215);
+						return SPELL_CAST_OK;
+					}
+					//CCDELAY custom fix end.
+
 		if (m_spellInfo->Id == 28730)
-			{
 				if (Unit* victim = m_caster->getVictim())
-				{
 					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
 					{
 						victim->RemoveAura(1784);
 						victim->RemoveAura(5215);
 						return SPELL_CAST_OK;
 					}
-				}
-			}
+
 	if (m_spellInfo->Id == 50613)
-			{
 				if (Unit* victim = m_caster->getVictim())
-				{
 					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
 					{
 						victim->RemoveAura(1784);
 						victim->RemoveAura(5215);
 						return SPELL_CAST_OK;
-					}
-				}
 			}
 if (m_spellInfo->Id == 69179)
-			{
 				if (Unit* victim = m_caster->getVictim())
-				{
 					if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
 					{
 						victim->RemoveAura(1784);
 						victim->RemoveAura(5215);
 						return SPELL_CAST_OK;
 					}
-				}
-			}
 
 
 	// Lichborne.
@@ -6015,6 +6064,9 @@ uint32 Spell::GetCCDelay(SpellInfo const* _spell)
 		if (_spell->Mechanic == MECHANIC_STUN)
 			return CCDELAY;
 	    break;
+		if (_spell->Dispel == DISPEL_STEALTH) // Stealth Effects.
+			return CCDELAY;
+		break;
 	
 	case SPELLFAMILY_PALADIN:
 		if (_spell->Mechanic == MECHANIC_STUN)
@@ -6028,6 +6080,9 @@ uint32 Spell::GetCCDelay(SpellInfo const* _spell)
 			return CCDELAY;
 		break;
 		if (_spell->Id == 2094) // Blind.
+			return CCDELAY;
+		break;
+		if (_spell->Dispel == DISPEL_STEALTH) // Stealth Effects.
 			return CCDELAY;
 		break;
 
