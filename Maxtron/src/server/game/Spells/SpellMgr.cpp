@@ -3257,9 +3257,6 @@ void SpellMgr::LoadDbcDataCorrections()
 			case 15473: // Shadowform damage reduction.
                 spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN;
                 break;
-			case 53007: // Penance test fix.
-				spellInfo->AttributesEx5 |= SPELL_ATTR5_HASTE_AFFECT_DURATION;        
-				break;
             case 8145: // Tremor Totem (instant pulse)
             case 6474: // Earthbind Totem (instant pulse)
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
