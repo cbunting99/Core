@@ -17,9 +17,5 @@ See green comment below there.
 6. Explosion of Living Bomb shoudn't break Dragon's Breath.
 7. Shadowstep and Blink remove combat.
    (Related to sanctuary zone(s)).
-8. Rogue: When you cast Cheapshot, Garrote, Rupture, Expose Armor, Kidneyshot the poison from Main Hand should be applied.
-    (Incorrect)?
 9. Cobalt frag bomb (belt also), removes a charge of the effects due to the damage which is incorrect.
 11. Texture issues with fear (and charge/intercept?), causing the caster to fall underground.
-12. Rupture damage a little high/bugged? Need more research.
-13. Mutilate damage way too low.
