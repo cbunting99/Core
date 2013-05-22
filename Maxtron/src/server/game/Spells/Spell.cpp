@@ -5019,6 +5019,15 @@ SpellCastResult Spell::CheckCast(bool strict)
 			return SPELL_CAST_OK;
 		}
 	}
+
+	// Healing in shadowform.
+	if (m_spellInfo->GetSchoolMask())
+	{
+		if (m_spellInfo->SchoolMask == 2)
+		{
+			m_caster->RemoveAura(15473);
+		}
+	}
 	
 	// Ghoul Claw.
 	if (m_spellInfo->Id == 47468)
