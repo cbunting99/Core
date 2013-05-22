@@ -5,7 +5,7 @@ class Arena_Scripts : public PlayerScript
 public:
 	Arena_Scripts() : PlayerScript("Arena_Scripts") {  }
 	
-	void OnEnterZone(Player* player, uint32 zone, uint32 area)
+	void OnUpdateZone(Player* player, uint32 zone, uint32 area)
 	{
 		float x = player->GetPositionX();
 		float y = player->GetPositionY();
