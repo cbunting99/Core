@@ -3257,6 +3257,7 @@ void SpellMgr::LoadDbcDataCorrections()
 			case 15473: // Shadowform damage reduction.
                 spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN;
 				spellInfo->AttributesEx4 |= SPELL_ATTR4_UNK19;
+				spellInfo->AttributesEx2 |= SPELL_ATTR2_UNK1;
 				//spellInfo->AttributesEx4 |= SPELL_ATTR4_UNK21;
 				spellInfo->Attributes |= SPELL_ATTR1_UNAUTOCASTABLE_BY_PET;
 				//spellInfo->Attributes |= SPELL_ATTR0_DISABLED_WHILE_ACTIVE;
