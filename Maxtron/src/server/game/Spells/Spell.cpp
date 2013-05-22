@@ -5020,6 +5020,15 @@ SpellCastResult Spell::CheckCast(bool strict)
 		}
 	}
 
+	// Fade.
+	if (m_spellInfo->Id == 586)
+	{
+		if (m_caster->HasAura(15473)) // Shadowform.
+		{
+			m_caster->RemoveMovementImpairingAuras();
+		}
+	}
+
 	// Healing in shadowform.
 	if (m_spellInfo->GetSchoolMask())
 	{
@@ -5039,6 +5048,24 @@ SpellCastResult Spell::CheckCast(bool strict)
 		{
 			return SPELL_CAST_OK;
 		}
+			else
+		{
+			if (m_spellInfo->Id == 48168) // Inner Fire.
+		{
+			return SPELL_CAST_OK;
+		}
+		else
+			{
+			if (m_spellInfo->Id == 988) // Dispell Magic.
+		{
+			return SPELL_CAST_OK;
+		}
+		else
+			{
+			if (m_spellInfo->Id == 32375) // Mass Dispel.
+		{
+			return SPELL_CAST_OK;
+		}
 		else
 		{
 		if (m_spellInfo->SchoolMask == 2)
@@ -5046,7 +5073,10 @@ SpellCastResult Spell::CheckCast(bool strict)
 			m_caster->RemoveAura(15473);
 		}
 		}
+			}
+			}
 	}
+		}
 		}
 	}
 	
