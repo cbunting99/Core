@@ -5023,9 +5023,30 @@ SpellCastResult Spell::CheckCast(bool strict)
 	// Healing in shadowform.
 	if (m_spellInfo->GetSchoolMask())
 	{
+		if (m_spellInfo->Id == 48066) // Power Word: Shield.
+		{
+			return SPELL_CAST_OK;
+		}
+		else
+		{
+			if (m_spellInfo->Id == 552) // Abolish Disease.
+		{
+			return SPELL_CAST_OK;
+		}
+		else
+		{
+			if (m_spellInfo->Id == 528) // Cure Disease.
+		{
+			return SPELL_CAST_OK;
+		}
+		else
+		{
 		if (m_spellInfo->SchoolMask == 2)
 		{
 			m_caster->RemoveAura(15473);
+		}
+		}
+	}
 		}
 	}
 	
