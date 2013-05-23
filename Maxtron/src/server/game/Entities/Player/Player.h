@@ -2261,7 +2261,7 @@ public:
         void RestoreBaseRune(uint8 index);
         void ConvertRune(uint8 index, RuneType newType);
         void ResyncRunes(uint8 count);
-        void AddRunePower(uint8 mask);
+        void AddRunePower(uint8 index);
         void InitRunes();
 
         void SendRespondInspectAchievements(Player* player) const;
