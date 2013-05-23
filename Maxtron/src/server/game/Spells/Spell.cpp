@@ -5018,6 +5018,7 @@ SpellCastResult Spell::CheckCast(bool strict)
         }
     }
 
+	/*
     // Fade
     if (m_spellInfo->Id == 586)
     {
@@ -5077,6 +5078,7 @@ SpellCastResult Spell::CheckCast(bool strict)
             }
         }
     }
+	*/
 
     // Ghoul Claw.
     if (m_spellInfo->Id == 47468)
