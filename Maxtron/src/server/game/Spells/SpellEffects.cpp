@@ -5705,62 +5705,28 @@ void Spell::EffectActivateRune(SpellEffIndex effIndex)
     if (m_caster->GetTypeId() != TYPEID_PLAYER)
         return;
 
-    Player* player = m_caster->ToPlayer();
+    Player * player = m_caster->ToPlayer();
 
     if (player->getClass() != CLASS_DEATH_KNIGHT)
         return;
 
     // needed later
-    m_runesState = m_caster->ToPlayer()->GetRunesState();
+    m_runesState = player->GetRunesState();
 
-    uint32 count = damage;
-    if (count == 0) count = 1;
-    for (uint32 j = 0; j < MAX_RUNES && count > 0; ++j)
-    {
-        if (player->GetRuneCooldown(j) && player->GetCurrentRune(j) == RuneType(m_spellInfo->Effects[effIndex].MiscValue))
-        {
-            if (m_spellInfo->Id == 45529)
-                if (player->GetBaseRune(j) != RuneType(m_spellInfo->Effects[effIndex].MiscValueB))
-                    continue;
-            player->SetRuneCooldown(j, 0);
-            --count;
-        }
-    }
+	std::list< std::pair<uint32, uint8> > list;
+	for (uint32 i = 0; i < MAX_RUNES; ++i)
+	if (player->GetCurrentRune(i) == RuneType(0))
+	list.push_back(std::make_pair<uint32, uint8>(player->GetRuneCooldown(i), i));
+	list.sort();
 
-    // Blood Tap
-    if (m_spellInfo->Id == 45529 && count > 0)
-    {
-        for (uint32 l = 0; l < MAX_RUNES && count > 0; ++l)
-        {
-            // Check if both runes are on cd as that is the only time when this needs to come into effect
-            if ((player->GetRuneCooldown(l) && player->GetCurrentRune(l) == RuneType(m_spellInfo->Effects[effIndex].MiscValueB)) && (player->GetRuneCooldown(l+1) && player->GetCurrentRune(l+1) == RuneType(m_spellInfo->Effects[effIndex].MiscValueB)))
-            {
-                // Should always update the rune with the lowest cd
-                if (player->GetRuneCooldown(l) >= player->GetRuneCooldown(l+1))
-                    l++;
-                player->SetRuneCooldown(l, 0);
-                --count;
-                // is needed to push through to the client that the rune is active
-                player->ResyncRunes(MAX_RUNES);
-            }
-            else
-                break;
-        }
-    }
+	uint32 count = (damage == 0) ? 1 : damage;
+	 for (std::list< std::pair<uint32, uint8> >::const_iterator itr = list.begin(); (itr != list.end()) && (count > 0); ++itr, --count)
+	 //player->SetRuneCooldown(itr->second, 0);
+	 player->SetRuneCooldown(1, 0);
 
-    // Empower rune weapon
-    if (m_spellInfo->Id == 47568)
-    {
-        // Need to do this just once
-        if (effIndex != 0)
-            return;
-
-        for (uint32 i = 0; i < MAX_RUNES; ++i)
-        {
-            if (player->GetRuneCooldown(i) && (player->GetCurrentRune(i) == RUNE_FROST ||  player->GetCurrentRune(i) == RUNE_DEATH))
-                player->SetRuneCooldown(i, 0);
-        }
-    }
+	// Send rune state diff
+	uint8 runesState = player->GetRunesState() & ~m_runesState;
+	player->AddRunePower(runesState); 
 }
 
 void Spell::EffectCreateTamedPet(SpellEffIndex effIndex)

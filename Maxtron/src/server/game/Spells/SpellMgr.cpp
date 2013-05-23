@@ -3090,6 +3090,9 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->MaxAffectedTargets = 4;
                 break;
             case 42005: // Bloodboil
+		    case 45529: // Blood Tap
+			spellInfo->EffectMiscValue[0] = 0;
+				break;
             case 38296: // Spitfire Totem
             case 37676: // Insidious Whisper
             case 46008: // Negative Energy
