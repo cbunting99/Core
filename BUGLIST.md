@@ -1,4 +1,4 @@
-1. Channeled spells haste issues.
+
 
 2. Cannot taunt players pets (Water Elemental, Mirror Image, etc (not ghouls, hunter pets, etc)).
 
