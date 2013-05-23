@@ -49,8 +49,8 @@ void WorldSession::HandleDuelAcceptedOpcode(WorldPacket& recvPacket)
     player->duel->startTimer = now;
     plTarget->duel->startTimer = now;
 
-    player->SetPhaseMask(2), true);
-	plTarget->SetPhaseMask(2), true);
+    player->SetPhaseMask(2, true);
+	plTarget->SetPhaseMask(2, true);
 
     player->SendDuelCountdown(3000);
     plTarget->SendDuelCountdown(3000);
