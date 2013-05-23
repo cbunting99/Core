@@ -3389,7 +3389,10 @@ void Spell::handle_immediate()
             // Apply duration mod
             if (Player* modOwner = m_caster->GetSpellModOwner())
                 modOwner->ApplySpellMod(m_spellInfo->Id, SPELLMOD_DURATION, duration);
-            // Apply haste mods
+            // Haxfix for Penance haste
+			if (!sSpellMgr->GetSpellInfo(53007))
+                   return;
+			// Apply haste mods
             if (m_spellInfo->AttributesEx5 & SPELL_ATTR5_HASTE_AFFECT_DURATION)
                 m_caster->ModSpellCastTime(m_spellInfo, duration, this);
 

@@ -29,10 +29,10 @@ enum SkillSpells
 	SPELL_WANDS = 5009
 };
 
-class weapon_skills : public PlayerScript
+class Weapon_Skills : public PlayerScript
 {
     public:
-		weapon_skills() : PlayerScript("weapon_skills") { }
+		Weapon_Skills() : PlayerScript("Weapon_Skills") { }
 
 		void OnLogin(Player * player)
 		{
@@ -182,7 +182,7 @@ class weapon_skills : public PlayerScript
 };        
 
 
-void AddSC_Weapon_Skill()
+void AddSC_Weapon_Skills()
 {
-	new Weapon_Skill;
+	new Weapon_Skills();
 }

@@ -30,6 +30,8 @@ set(scripts_STAT_SRCS
   Custom/Transmogrification.h
   Custom/PlayerScripts/Zone_Scripts.cpp
   Custom/PlayerScripts/Arena_Scripts.cpp
+  Custom/PlayerScripts/New_Character.cpp
+  Custom/PlayerScripts/Weapon_Skills.cpp
   Custom/ArenaFastStart.cpp
   Custom/Killstreak.cpp
 )

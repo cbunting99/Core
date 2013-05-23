@@ -1,7 +1,7 @@
-class new_character : public PlayerScript
+class New_Character : public PlayerScript
 {
 public:
-	new_character() : PlayerScript("new_character") {}
+	New_Character() : PlayerScript("New_Character") {}
 
 	void OnLogin(Player* player)
 	{
