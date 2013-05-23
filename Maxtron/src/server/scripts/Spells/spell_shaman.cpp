@@ -664,6 +664,7 @@ class spell_sha_lava_lash : public SpellScriptLoader
                         // Damage is increased by 25% if your off-hand weapon is enchanted with Flametongue.
                         if (caster->GetAuraEffect(SPELL_AURA_DUMMY, SPELLFAMILY_SHAMAN, 0x200000, 0, 0))
                             AddPct(hitDamage, damage);
+                        AddPct(hitDamage, 25);
                         SetHitDamage(hitDamage);
                     }
                 }
