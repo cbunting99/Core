@@ -3255,7 +3255,16 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_TRIGGERED_CAN_TRIGGER_PROC;
                 break;
 			case 15473: // Shadowform damage reduction.
-                spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN;
+                spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN; //np
+				spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_SHAPESHIFT; //???
+				spellInfo->AttributesEx4 |= SPELL_ATTR4_UNK19; //np
+				spellInfo->AttributesEx4 |= SPELL_ATTR4_UNK21; //np
+				spellInfo->AttributesEx2 |= SPELL_ATTR2_UNK1; //np
+				spellInfo->Attributes |= SPELL_ATTR0_NOT_SHAPESHIFT;
+				spellInfo->Attributes |= SPELL_ATTR0_DONT_AFFECT_SHEATH_STATE;
+				spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_MOUNTED;
+				spellInfo->Attributes |= SPELL_ATTR0_DISABLED_WHILE_ACTIVE;
+				spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_SITTING;
 				break;
             case 8145: // Tremor Totem (instant pulse)
             case 6474: // Earthbind Totem (instant pulse)
