@@ -49,9 +49,6 @@ void WorldSession::HandleDuelAcceptedOpcode(WorldPacket& recvPacket)
     player->duel->startTimer = now;
     plTarget->duel->startTimer = now;
 
-    player->SetPhaseMask(2, true);
-	plTarget->SetPhaseMask(2, true);
-
     player->SendDuelCountdown(3000);
     plTarget->SendDuelCountdown(3000);
 }
@@ -74,8 +71,6 @@ void WorldSession::HandleDuelCancelledOpcode(WorldPacket& recvPacket)
             GetPlayer()->duel->opponent->CombatStopWithPets(true);
 
         GetPlayer()->CastSpell(GetPlayer(), 7267, true);    // beg
-		GetPlayer()->SetPhaseMask(1, true);
-		GetPlayer()->duel->opponent->SetPhaseMask(1, true);
         GetPlayer()->DuelComplete(DUEL_WON);
         return;
     }

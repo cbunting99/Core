@@ -28,52 +28,52 @@ public:
 			break;
 	
 		case SEC_MODERATOR:
-			snprintf(message, 1024, "|cffADFF2F[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tModerator][%s]: %s|r", player->GetName().c_str(), msg);
+			snprintf(message, 1024, "|cffADFF2F[World][Moderator][%s]: %s|r", player->GetName().c_str(), msg);
 			sWorld->SendGlobalText(message, NULL);
 			break;
 		
 		case SEC_TICKET_GM:
-			snprintf(message, 1024, "|cffADFF2F[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tGM][%s]: %s|r", player->GetName().c_str(), msg);
+			snprintf(message, 1024, "|cffADFF2F[World][GM][%s]: %s|r", player->GetName().c_str(), msg);
 		    sWorld->SendGlobalText(message, NULL);
 			break;
 		
 		case SEC_EVENT_GM:
-			snprintf(message, 1024, "|cffADFF2F[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tEM][%s]: %s|r", player->GetName().c_str(), msg);
+			snprintf(message, 1024, "|cffADFF2F[World][EM][%s]: %s|r", player->GetName().c_str(), msg);
 			sWorld->SendGlobalText(message, NULL);
 			break;
 		
 		case SEC_GAMEMASTER:
-			snprintf(message, 1024, "|cffADFF2F[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tGamemaster][%s]: %s|r", player->GetName().c_str(), msg);
+			snprintf(message, 1024, "|cffADFF2F[World][Gamemaster][%s]: %s|r", player->GetName().c_str(), msg);
 			sWorld->SendGlobalText(message, NULL);
 			break;
 		
 		case SEC_HEAD_GM:
-			snprintf(message, 1024, "|cffADFF2F[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tHead GM][%s]: %s|r", player->GetName().c_str(), msg);
+			snprintf(message, 1024, "|cffADFF2F[World][Head GM][%s]: %s|r", player->GetName().c_str(), msg);
 			sWorld->SendGlobalText(message, NULL);
 			break;
 		
 		case SEC_DEVELOPER:
-			snprintf(message, 1024, "|cff8B8B83[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tDeveloper][%s]: %s|r", player->GetName().c_str(), msg);
+			snprintf(message, 1024, "|cff8B8B83[World][Developer][%s]: %s|r", player->GetName().c_str(), msg);
 			sWorld->SendGlobalText(message, NULL);
 			break;
 		
 		case SEC_HEAD_DEVELOPER:
-			snprintf(message, 1024, "|cff8B8B83[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tHead Dev][%s]: %s|r", player->GetName().c_str(), msg);
+			snprintf(message, 1024, "|cff8B8B83[World][Head Dev][%s]: %s|r", player->GetName().c_str(), msg);
 			sWorld->SendGlobalText(message, NULL);
 			break;
 		
 		case SEC_ADMINISTRATOR:
-			snprintf(message, 1024, "|cffFF4500[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tAdministrator][%s]: %s|r", player->GetName().c_str(), msg);
+			snprintf(message, 1024, "|cffFF4500[World][Administrator][%s]: %s|r", player->GetName().c_str(), msg);
 			sWorld->SendGlobalText(message, NULL);
 			break;
 
 		case SEC_OWNER:
-			snprintf(message, 1024, "|cffFF4500[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tOwner][%s]: %s|r", player->GetName().c_str(), msg);
+			snprintf(message, 1024, "|cffFF4500[World][Owner][%s]: %s|r", player->GetName().c_str(), msg);
 			sWorld->SendGlobalText(message, NULL);
 			break;
 		
 		case SEC_CONSOLE:
-			snprintf(message, 1024, "|cffFF4500[World][|Tinterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:22:0:-1\124|tConsole][%s]: %s|r", player->GetName().c_str(), msg);
+			snprintf(message, 1024, "|cffFF4500[World][Console][%s]: %s|r", player->GetName().c_str(), msg);
 			sWorld->SendGlobalText(message, NULL);
 			break;
 		}
