@@ -3267,22 +3267,6 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->Attributes |= SPELL_ATTR0_DISABLED_WHILE_ACTIVE;
                 spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_SITTING;
                 break;
-            case 7384: // Overpower
-                spellInfo->EffectApplyAuraName[0] = SPELL_EFFECT_NORMALIZED_WEAPON_DMG;
-                spellInfo->EffectApplyAuraName[0] = SPELL_EFFECT_APPLY_AURA;
-                spellInfo->Attributes |= SPELL_ATTR0_IMPOSSIBLE_DODGE_PARRY_BLOCK;
-                spellInfo->Attributes |= SPELL_ATTR0_ABILITY;
-                spellInfo->Attributes |= SPELL_ATTR0_NOT_SHAPESHIFT;
-                spellInfo->Attributes |= SPELL_ATTR0_DONT_AFFECT_SHEATH_STATE;
-                spellInfo->Attributes |= SPELL_ATTR1_MELEE_COMBAT_START;
-                spellInfo->Attributes |= SPELL_ATTR1_REQ_COMBO_POINTS1;
-                spellInfo->Attributes |= SPELL_ATTR1_UNK27;
-                spellInfo->Attributes |= SPELL_ATTR1_DONT_DISPLAY_IN_AURA_BAR;
-                spellInfo->Attributes |= SPELL_ATTR1_ENABLE_AT_DODGE;
-                spellInfo->AttributesEx3 |= SPELL_ATTR3_MAIN_HAND;
-                spellInfo->AttributesEx4 |= SPELL_ATTR4_TRIGGER_ACTIVATE;
-                spellInfo->AttributesEx6 |= SPELL_ATTR6_CAN_TARGET_POSSESSED_FRIENDS;
-                break;
             case 8145: // Tremor Totem (instant pulse)
             case 6474: // Earthbind Totem (instant pulse)
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
