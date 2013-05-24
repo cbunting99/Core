@@ -1,5 +1,4 @@
 
-
 2. Cannot taunt players pets (Water Elemental, Mirror Image, etc (not ghouls, hunter pets, etc)).
 
  -- CRITICAL --
@@ -18,4 +17,5 @@ See green comment below there.
 7. Shadowstep and Blink remove combat.
    (Related to sanctuary zone(s)).
 9. Cobalt frag bomb (belt also), removes a charge of the effects due to the damage which is incorrect.
-11. Texture issues with fear (and charge/intercept?), causing the caster to fall underground.
+11. Texture issues with fear (and charge/intercept?), causing the caster to fall underground and die.
+    (Fixed by adding teleport on fall).
