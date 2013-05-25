@@ -5018,68 +5018,6 @@ SpellCastResult Spell::CheckCast(bool strict)
         }
     }
 
-	/*
-    // Fade
-    if (m_spellInfo->Id == 586)
-    {
-        if (m_caster->HasAura(15473)) // Shadowform.
-        {
-            m_caster->RemoveMovementImpairingAuras();
-        }
-    }
-
-    // Shadowform
-    if (m_spellInfo->GetSchoolMask())
-    {
-        if (m_spellInfo->Id == 48066) // Power Word: Shield
-        {
-            return SPELL_CAST_OK;
-        }
-        else
-        {
-            if (m_spellInfo->Id == 552) // Abolish Disease
-            {
-                return SPELL_CAST_OK;
-            }
-            else
-            {
-                if (m_spellInfo->Id == 528) // Cure Disease
-                {
-                    return SPELL_CAST_OK;
-                }
-                else
-                {
-                    if (m_spellInfo->Id == 48168) // Inner Fire
-                    {
-                        return SPELL_CAST_OK;
-                    }
-                    else
-                    {
-                        if (m_spellInfo->Id == 988) // Dispell Magic
-                        {
-                            return SPELL_CAST_OK;
-                        }
-                        else
-                        {
-                            if (m_spellInfo->Id == 32375) // Mass Dispel
-                            {
-                                return SPELL_CAST_OK;
-                            }
-                            else
-                            {
-                                if (m_spellInfo->SchoolMask == 2)
-                                {
-                                    m_caster->RemoveAura(15473);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-	*/
-
     // Ghoul Claw.
     if (m_spellInfo->Id == 47468)
         if (Unit* victim = m_caster->getVictim())
@@ -5317,6 +5255,18 @@ SpellCastResult Spell::CheckCast(bool strict)
                         else
                         {
                             return SPELL_FAILED_BAD_TARGETS;
+                        }
+                    }
+
+					if (m_spellInfo->Id == 7266)
+                    {
+                        if (m_caster->GetZoneId() == 3520)
+                        {
+                            return SPELL_FAILED_DONT_REPORT;
+                        }
+                        else
+                        {
+                            return SPELL_CAST_OK;
                         }
                     }
 

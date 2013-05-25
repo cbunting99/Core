@@ -15,6 +15,7 @@
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Questing Zone", GOSSIP_SENDER_MAIN, 5);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Misc_Gear_01:30|t Profession Mall", GOSSIP_SENDER_MAIN, 6);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Chest_Plate13:30|t Transmorgrification Mall", GOSSIP_SENDER_MAIN, 7);
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/Achievement_Dungeon_Icecrown_IcecrownEntrance:30|t Icecrown Citadel", GOSSIP_SENDER_MAIN, 8);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Nevermind", GOSSIP_SENDER_MAIN, 30);
 						player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 						return true;
@@ -82,6 +83,11 @@
 							player->TeleportTo(1, -2650.709961f, -5021.879883f, 21.182899f, 2.431570f);
 							player->PlayerTalkClass->SendCloseGossip();
 							break;
+
+						case 8: // ICC
+							player->TeleportTo(571, 5873.82f, 2110.98f, 636.011f, 3.5523f);
+							player->PlayerTalkClass->SendCloseGossip();
+							break;
 						
 						case 11: // org
 							player->TeleportTo(1, 1462.180054f, -4419.850098f, 25.463112f, 0.109132f);
@@ -132,6 +138,7 @@
 							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Questing Zone", GOSSIP_SENDER_MAIN, 5);
 							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Misc_Gear_01:30|t Profession Mall", GOSSIP_SENDER_MAIN, 6);
 							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Chest_Plate13:30|t Transmorgrification Mall", GOSSIP_SENDER_MAIN, 7);
+							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/Achievement_Dungeon_Icecrown_IcecrownEntrance:30|t Icecrown Citadel", GOSSIP_SENDER_MAIN, 8);
 							player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Nevermind", GOSSIP_SENDER_MAIN, 30);
 							player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 							break;
