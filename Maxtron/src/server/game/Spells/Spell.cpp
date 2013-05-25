@@ -5947,7 +5947,7 @@ uint32 Spell::GetCCDelay(SpellInfo const* _spell)
 
     case SPELLFAMILY_WARRIOR:
         if (_spell->Mechanic == MECHANIC_STUN)
-            return CCDELAY;
+            return 63;
         break;
 
     case SPELLFAMILY_PRIEST:
