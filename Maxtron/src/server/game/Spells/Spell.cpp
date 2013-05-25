@@ -5018,6 +5018,12 @@ SpellCastResult Spell::CheckCast(bool strict)
         }
     }
 
+    // Raise Dead
+    if (m_spellInfo->Id == 46584)
+    {
+        return SPELL_CAST_OK;
+    }
+
     // Ghoul Claw.
     if (m_spellInfo->Id == 47468)
         if (Unit* victim = m_caster->getVictim())
@@ -5258,7 +5264,7 @@ SpellCastResult Spell::CheckCast(bool strict)
                         }
                     }
 
-					if (m_spellInfo->Id == 7266)
+                    if (m_spellInfo->Id == 7266)
                     {
                         if (m_caster->GetZoneId() == 3520)
                         {
