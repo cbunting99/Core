@@ -5,48 +5,6 @@ class Zone_Scripts : public PlayerScript
 {
 public: Zone_Scripts() : PlayerScript("Zone_Scripts") { }
 		
-		void OnDuelRequest(Player* player, Player* plTarget)
-		{
-			if (player->GetZoneId() == 2037)
-			{
-				if ( player->getPowerType() == POWER_MANA )
-				{
-					player->SetPower(POWER_MANA, player->GetMaxPower(POWER_MANA));
-				}
-				player->SetHealth(player->GetMaxHealth());
-				player->RemoveArenaSpellCooldowns();
-				player->RemoveAura(57723);
-				player->RemoveAura(57724);
-				player->RemoveAura(25771);
-				player->RemoveAura(41425);
-				player->RemoveAura(61987);
-				player->RemoveAura(57723);
-				player->RemoveAura(57724);
-				player->RemoveAura(25771);
-				player->RemoveAura(41425);
-				player->RemoveAura(61987);
-			}
-			if (plTarget->GetZoneId() == 2037)
-			{
-				if ( plTarget->getPowerType() == POWER_MANA )
-				{
-					plTarget->SetPower(POWER_MANA, plTarget->GetMaxPower(POWER_MANA));
-				}
-				plTarget->SetHealth(plTarget->GetMaxHealth());
-				plTarget->RemoveArenaSpellCooldowns();
-				plTarget->RemoveAura(57723);
-				plTarget->RemoveAura(57724);
-				plTarget->RemoveAura(25771);
-				plTarget->RemoveAura(41425);
-				plTarget->RemoveAura(61987);
-				plTarget->RemoveAura(57723);
-				plTarget->RemoveAura(57724);
-				plTarget->RemoveAura(25771);
-				plTarget->RemoveAura(41425);
-				plTarget->RemoveAura(61987);
-			}
-		}
-
 		void OnDuelStart(Player* player, Player* plTarget)
 		{
 			if (player->GetZoneId() == 2037)
