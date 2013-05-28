@@ -1,0 +1,1 @@
+UPDATE `spell_bonus_data` SET `direct_bonus`=-1, `dot_bonus`=-1, `ap_bonus`=0.35, `ap_dot_bonus`=-1, `comments`='Custom - Death Knight - Death Coil Heal' WHERE `entry`=47633 LIMIT 1;

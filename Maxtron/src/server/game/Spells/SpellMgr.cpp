@@ -3352,6 +3352,8 @@ void SpellMgr::LoadDbcDataCorrections()
             case 71838: // Drain Life - Bryntroll Normal
             case 71839: // Drain Life - Bryntroll Heroic
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_CANT_CRIT;
+                spellInfo->Attributes |= SPELL_ATTR0_DONT_AFFECT_SHEATH_STATE;
+                spellInfo->Attributes |= SPELL_ATTR0_NOT_SHAPESHIFT;
                 break;
             case 34471: // The Beast Within
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_USABLE_WHILE_CONFUSED | SPELL_ATTR5_USABLE_WHILE_FEARED | SPELL_ATTR5_USABLE_WHILE_STUNNED;
