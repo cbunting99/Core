@@ -98,7 +98,7 @@ public:
             break;
         
         case 9: // event zone
-            player->TeleportTo(1, -11837.623047f, -4737.544434f, 6.458508f, 5.134445f);
+            player->TeleportTo(1, -11841.861328f, -4757.439941f, 6.225769f, 0.398504f);
             player->PlayerTalkClass->SendCloseGossip();
             break;
         
