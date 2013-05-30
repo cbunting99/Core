@@ -6336,7 +6336,7 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
                              }
                          }
                      }
-				}
+                }
 
                 if (triggered_spell_id && beaconTarget)
                 {
@@ -7177,7 +7177,7 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
         else // copy 50% melee damage
         if (pPet && pPet->getVictim() && damage && !procSpell)
         {
-			    pPet->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+                pPet->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                 pPet->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                 CalcDamageInfo damageInfo;
                 CalculateMeleeDamage(pPet->getVictim(), 0, &damageInfo, BASE_ATTACK);
@@ -9412,7 +9412,7 @@ void Unit::SetMinion(Minion *minion, bool apply)
         // Ghoul pets have energy instead of mana (is anywhere better place for this code?)
         if (minion->IsPetGhoul())
             minion->setPowerType(POWER_ENERGY);
-		    minion->SetPower(POWER_ENERGY,100);
+            minion->SetPower(POWER_ENERGY,100);
 
         if (GetTypeId() == TYPEID_PLAYER)
         {
@@ -10227,8 +10227,8 @@ uint32 Unit::SpellDamageBonusDone(Unit* victim, SpellInfo const* spellProto, uin
                                     }
                             }
         }
-		// Death Coil (Dancing Rune Weapon).
-			if (spellProto || !(spellProto->SpellFamilyName == SPELLFAMILY_DEATHKNIGHT && spellProto->SpellFamilyFlags[0] == 0x80002000))
+        // Death Coil (Dancing Rune Weapon).
+            if (spellProto || !(spellProto->SpellFamilyName == SPELLFAMILY_DEATHKNIGHT && spellProto->SpellFamilyFlags[0] == 0x80002000))
         {
             Unit* pPet = NULL;
             for (Unit::ControlList::const_iterator itr = m_Controlled.begin(); itr != m_Controlled.end(); ++itr) //Find Rune Weapon
@@ -11676,12 +11676,12 @@ void Unit::Dismount()
         }
         else
             player->ResummonPetTemporaryUnSummonedIfAny();
-		Pet* plPet = player->GetPet();
-		if (plPet != NULL)
-		{
-			plPet->SetPower(plPet->getPowerType(), plPet->GetMaxPower(plPet->getPowerType()));
-		}
-	}
+        Pet* plPet = player->GetPet();
+        if (plPet != NULL)
+        {
+            plPet->SetPower(plPet->getPowerType(), plPet->GetMaxPower(plPet->getPowerType()));
+        }
+    }
 }
 
 bool Unit::isServiceProvider() const
@@ -16298,9 +16298,18 @@ void Unit::ApplyResilience(Unit const* victim, float* crit, int32* damage, bool 
                 *crit -= target->GetMeleeCritChanceReduction();
             if (source && damage)
             {
-                if (isCrit)
-                    *damage -= target->GetMeleeCritDamageReduction(*damage);
-                *damage -= target->GetMeleeDamageReduction(*damage);
+                if (source->getClass() == CLASS_WARRIOR)
+                {
+                    if (isCrit)
+                        *damage -= target->GetMeleeWarriorCritDamageReduction(*damage);
+                    *damage -= target->GetMeleeWarriorDamageReduction(*damage);
+                }
+                else
+                {
+                    if (isCrit)
+                        *damage -= target->GetMeleeCritDamageReduction(*damage);
+                    *damage -= target->GetMeleeDamageReduction(*damage);
+                }
             }
             break;
         case CR_CRIT_TAKEN_RANGED:

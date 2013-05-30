@@ -331,26 +331,30 @@ void AnticheatMgr::BuildReport(Player* player,uint8 reportType)
 
     if (m_Players[key].GetTotalReports() > sWorld->getIntConfig(CONFIG_ANTICHEAT_REPORTS_INGAME_NOTIFICATION))
     {
-        // display warning at the center of the screen, hacky way?
         std::string str = "";
-		if (sWorld->getBoolConfig(CONFIG_BAN_PLAYER)) //Make anticheat active.
-		{
-			if (m_Players[key].GetAverage() > 0.5f)
-			{
-				char message[1024];
-				str = "Hacker: " + std::string(player->GetName());
-                sWorld->BanCharacter(player->GetName(), "1d", str, "Warden");
-				snprintf(message, 1024, "|cffFF4500[Warden] Character: %s has been locked for 1 day by Warden.|r", player->GetName().c_str());
-				sWorld->SendGlobalText(message, NULL);
-			}
-		}
-		else
-		{
-        str = "|cFFFFFC00[AC]|cFF00FFFF[|cFF60FF00" + std::string(player->GetName()) + "|cFF00FFFF] Possible cheater!";
-        WorldPacket data(SMSG_NOTIFICATION, (str.size()+1));
-        data << str;
-        sWorld->SendGlobalGMMessage(&data);
-		}
+        if (sWorld->getBoolConfig(CONFIG_BAN_PLAYER))
+        {
+            if (m_Players[key].GetAverage() > 0.5f)
+            {
+                if (player->GetSession()->GetSecurity() >= SEC_MODERATOR)
+                    return;
+                else
+                {
+                    char message[1024];
+                    str = "Hacker: " + std::string(player->GetName());
+                    sWorld->BanCharacter(player->GetName(), "1d", str, "Warden");
+                    snprintf(message, 1024, "|cffFF4500[Warden] Character: %s has been locked for 1 day by Warden.|r", player->GetName().c_str());
+                    sWorld->SendGlobalText(message, NULL);
+                }
+            }
+        }
+        else
+        {
+            str = "|cFFFFFC00[AC]|cFF00FFFF[|cFF60FF00" + std::string(player->GetName()) + "|cFF00FFFF] Possible cheater!";
+            WorldPacket data(SMSG_NOTIFICATION, (str.size()+1));
+            data << str;
+            sWorld->SendGlobalGMMessage(&data);
+        }
     }
 }
 
