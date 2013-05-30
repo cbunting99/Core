@@ -3282,9 +3282,7 @@ void Spell::EffectWeaponDmg(SpellEffIndex effIndex)
                 }
 
                 if (found)
-                    totalDamagePercentMod *= 1.80f;          // 120% if poisoned, totalDamagePercentMod *= 1.20f;
-				else
-					totalDamagePercentMod *= 1.80f;
+                    totalDamagePercentMod *= 1.20f;
             }
             break;
         }
