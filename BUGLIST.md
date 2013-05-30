@@ -13,7 +13,3 @@ See green comment below there.
    Rune Tap shouldn't damage the enemy either.
 5. Mind Amplification Dish (engineering), doesn't work at all.
 6. Explosion of Living Bomb shoudn't break Dragon's Breath.
-7. Shadowstep and Blink remove combat.
-   (Related to sanctuary zone(s)).
-11. Texture issues with fear (and charge/intercept?), causing the caster to fall underground and die.
-    (Fixed by adding teleport on fall).
