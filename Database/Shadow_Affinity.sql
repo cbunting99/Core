@@ -1,0 +1,2 @@
+DELETE FROM `spell_script_names` WHERE  `spell_id`=64103 AND `ScriptName`='spell_pri_shadow_affinity';
+INSERT INTO `spell_script_names` (`spell_id`, `ScriptName`) VALUES (64103, 'spell_pri_shadow_affinity');

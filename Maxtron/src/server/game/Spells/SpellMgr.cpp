@@ -3206,9 +3206,6 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->EffectApplyAuraName[EFFECT_1] = SPELL_AURA_MOD_INCREASE_ENERGY_PERCENT;
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
                 break;
-            case 64843: // Divine Hymn
-                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
-                break;
             case 19465: // Improved Stings (Rank 2)
                 spellInfo->EffectImplicitTargetA[EFFECT_2] = TARGET_UNIT_CASTER;
                 break;
@@ -3251,10 +3248,27 @@ void SpellMgr::LoadDbcDataCorrections()
             case 63675: // Improved Devouring Plague
                 spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_DONE_BONUS;
                 break;
+                /* Custom Begin */
+            case 8172:  // Cleansing Totem
+            case 32182: // Heroism
+            case 2825:  // Bloodlust
+            case 19185: // Entrapment
+            case 64803: // Entrapment
+            case 64804: // Entrapment
+            case 19388: // Entrapment
+            case 19387: // Entrapment
+            case 19184: // Entrapment
+            case 64843: // Divine Hymn
+            case 64844: // Divine Hymn
+            case 55362: // Living Bomb
+            case 44461: // Living Bomb 
+            case 55361: // Living Bomb
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                break;
             case 33110: // Prayer of Mending (Heal) can trigger Inspiration
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_TRIGGERED_CAN_TRIGGER_PROC;
                 break;
-            case 15473: // Shadowform
+            case 15473: // Shadowform, fixes damage reduction issue.
                 spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN;
                 spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE;
                 spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_SHAPESHIFT;
@@ -3267,7 +3281,11 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->Attributes |= SPELL_ATTR0_DISABLED_WHILE_ACTIVE;
                 spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_SITTING;
                 break;
+                /* Custom Stop */
             case 8145: // Tremor Totem (instant pulse)
+                spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                break;
             case 6474: // Earthbind Totem (instant pulse)
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
                 break;
