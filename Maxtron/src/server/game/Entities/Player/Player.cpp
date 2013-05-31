@@ -1583,8 +1583,8 @@ void Player::Update(uint32 p_time)
     }
 
     m_achievementMgr->UpdateTimedAchievements(p_time);
-	
-	// Enrage and Wrecking Crew shouldn't stack together.
+    
+    // Enrage and Wrecking Crew shouldn't stack together.
     if (HasAura(14204) && HasAura(57522))
         ToPlayer()->RemoveAura(57522);
        
@@ -23398,6 +23398,12 @@ void Player::RemoveItemDependentAurasAndCasts(Item* pItem)
 
         // skip if not item dependent or have alternative item
         if (HasItemFitToSpellRequirements(spellInfo, pItem))
+        {
+            ++itr;
+            continue;
+        }
+
+        if (HasAura(46924)) // Shouldn't remove bladestorm when switching weapons
         {
             ++itr;
             continue;

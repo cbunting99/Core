@@ -16474,6 +16474,9 @@ void Unit::KnockbackFrom(float x, float y, float speedXY, float speedZ)
     else
     {
 
+        if (player->HasAura(46924)) // Warrior shouldn't be knocked back if has bladestorm aura
+            return;
+
         float vcos, vsin;
         GetSinCos(x, y, vsin, vcos);
 
