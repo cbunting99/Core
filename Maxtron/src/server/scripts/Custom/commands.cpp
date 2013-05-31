@@ -40,32 +40,32 @@ class commands : public CommandScript
             {
 
         Player* me = handler->GetSession()->GetPlayer();
-        me->SetAtLoginFlag(AT_LOGIN_CHANGE_FACTION);
-        handler->PSendSysMessage("Relog to change faction of your character.");
+		me->SetAtLoginFlag(AT_LOGIN_CHANGE_FACTION);
+		handler->PSendSysMessage("Relog to change faction of your character.");
         return true;
             }
-            static bool HandleChangeRaceCommand(ChatHandler * handler, const char * args)
+			static bool HandleChangeRaceCommand(ChatHandler * handler, const char * args)
             {
 
         Player* me = handler->GetSession()->GetPlayer();
-        me->SetAtLoginFlag(AT_LOGIN_CHANGE_RACE);
-        handler->PSendSysMessage("Relog to change race of your character.");
+		me->SetAtLoginFlag(AT_LOGIN_CHANGE_RACE);
+		handler->PSendSysMessage("Relog to change race of your character.");
         return true;
             }
-            static bool HandleCustomizeCommand(ChatHandler * handler, const char * args)
+			static bool HandleCustomizeCommand(ChatHandler * handler, const char * args)
             {
             
         Player* me = handler->GetSession()->GetPlayer();
-        me->SetAtLoginFlag(AT_LOGIN_CUSTOMIZE);
-        handler->PSendSysMessage("Relog to customize your character.");
+		me->SetAtLoginFlag(AT_LOGIN_CUSTOMIZE);
+		handler->PSendSysMessage("Relog to customize your character.");
         return true;
             }
                          static bool HandleMallCommand(ChatHandler * handler, const char * args)
             {
             
         Player* me = handler->GetSession()->GetPlayer();
-        me->TeleportTo(1,  -8409.883789f, 2095.069580f, 145.070374f, 5.108553f); // edit location to your needs.
-        handler->PSendSysMessage("Successfully teleported.");
+		me->TeleportTo(1,  -8409.883789f, 2095.069580f, 145.070374f, 5.108553f); // edit location to your needs.
+		handler->PSendSysMessage("Successfully teleported.");
         return true;
             }
 static bool HandleTeleportCommand(ChatHandler * handler, const char * args)
@@ -104,9 +104,9 @@ static bool HandleTeleportCommand(ChatHandler * handler, const char * args)
         else
             me->SaveRecallPosition();
         me->TeleportTo(tele->mapId, tele->position_x, tele->position_y, tele->position_z, tele->orientation);
-        handler->PSendSysMessage("Successfully teleported.");
+		handler->PSendSysMessage("Successfully teleported.");
         return true;
-        }
+		}
      
     };
      

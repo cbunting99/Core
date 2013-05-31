@@ -67,16 +67,16 @@ void WorldSession::HandleDuelCancelledOpcode(WorldPacket& recvPacket)
     if (GetPlayer()->duel->startTime != 0)
     {
         GetPlayer()->CombatStopWithPets(true);
-        GetPlayer()->AttackStop();
-        GetPlayer()->CastStop();
-        GetPlayer()->RemoveAurasByType(SPELL_AURA_PERIODIC_DAMAGE);
+		GetPlayer()->AttackStop();
+		GetPlayer()->CastStop();
+		GetPlayer()->RemoveAurasByType(SPELL_AURA_PERIODIC_DAMAGE);
         if (GetPlayer()->duel->opponent)
-        {
+		{
             GetPlayer()->duel->opponent->CombatStopWithPets(true);
-            GetPlayer()->duel->opponent->AttackStop();
-            GetPlayer()->duel->opponent->CastStop();
-            GetPlayer()->duel->opponent->RemoveAurasByType(SPELL_AURA_PERIODIC_DAMAGE);
-        }
+			GetPlayer()->duel->opponent->AttackStop();
+			GetPlayer()->duel->opponent->CastStop();
+			GetPlayer()->duel->opponent->RemoveAurasByType(SPELL_AURA_PERIODIC_DAMAGE);
+		}
 
         GetPlayer()->CastSpell(GetPlayer(), 7267, true);    // beg
         GetPlayer()->DuelComplete(DUEL_WON);

@@ -155,7 +155,7 @@ class instance_icecrown_citadel : public InstanceMapScript
                 ColdflameJetsState = NOT_STARTED;
                 BloodQuickeningState = NOT_STARTED;
                 BloodQuickeningMinutes = 0;
-                // Gunship event
+				// Gunship event
                 FirstSquadState = 0;
                 SecondSquadState = 0;
                 SpireSquadState = 0;
@@ -167,7 +167,7 @@ class instance_icecrown_citadel : public InstanceMapScript
                 MuradinBronzebeardNotVisualGUID = 0;
                 GbBattleMageGUID = 0;
                 isPrepared = false;
-                SindragosasWardGUID = 0;    
+                SindragosasWardGUID = 0;	
             }
 
             void FillInitialWorldStates(WorldPacket& data)
@@ -183,7 +183,7 @@ class instance_icecrown_citadel : public InstanceMapScript
             {
                 if (!TeamInInstance)
                     TeamInInstance = player->GetTeam();
-                    PrepareGunshipEvent(player); // Spawn Gunship Event
+					PrepareGunshipEvent(player); // Spawn Gunship Event
             }
 
             void OnCreatureCreate(Creature* creature)
@@ -326,8 +326,8 @@ class instance_icecrown_citadel : public InstanceMapScript
                         break;
                     case NPC_SINDRAGOSAS_WARD:
                         SindragosasWardGUID = creature->GetGUID();
-                        break;    
-                    case NPC_GB_SKYBREAKER:
+						break;	
+					case NPC_GB_SKYBREAKER:
                         SkybreakerBossGUID = creature->GetGUID();
                         break;
                     case NPC_GB_ORGRIMS_HAMMER:
@@ -620,7 +620,7 @@ class instance_icecrown_citadel : public InstanceMapScript
                     case NPC_GB_SKYBREAKER_SORCERERS:
                     case NPC_GB_KORKRON_BATTLE_MAGE:
                         GbBattleMageGUID = go->GetGUID();
-                        break;                        
+                        break;						
                     default:
                         break;
                 }
@@ -744,7 +744,7 @@ class instance_icecrown_citadel : public InstanceMapScript
                         return ArthasPlatformGUID;
                     case DATA_TERENAS_MENETHIL:
                         return TerenasMenethilGUID;
-                        //Gunship: To merge all
+						//Gunship: To merge all
                     case DATA_SKYBREAKER_BOSS:
                         return SkybreakerBossGUID;
                     case DATA_ORGRIMMAR_HAMMER_BOSS:
@@ -1597,7 +1597,7 @@ class instance_icecrown_citadel : public InstanceMapScript
             bool IsOozeDanceEligible;
             bool IsNauseaEligible;
             bool IsOrbWhispererEligible;
-            bool isPrepared;
+			bool isPrepared;
             // Gunship: Variables
             // Here we must add states and these things first squad with real events ls
             uint32 FirstSquadState;

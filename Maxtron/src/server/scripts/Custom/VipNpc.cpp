@@ -9,12 +9,12 @@
             {
                                        if (pPlayer->GetSession()->GetSecurity() >= SEC_PREMIUM)
                     {
-                                        pPlayer->ADD_GOSSIP_ITEM(6, "VIP VENDOR", GOSSIP_SENDER_MAIN, GOSSIP_OPTION_VENDOR);
+										pPlayer->ADD_GOSSIP_ITEM(6, "VIP VENDOR", GOSSIP_SENDER_MAIN, GOSSIP_OPTION_VENDOR);
                                         }
                                         else
                                         { 
-                                         pPlayer->ADD_GOSSIP_ITEM(6, "Bye", GOSSIP_SENDER_MAIN,1);
-                                        }
+										 pPlayer->ADD_GOSSIP_ITEM(6, "Bye", GOSSIP_SENDER_MAIN,1);
+										}
                     pPlayer->PlayerTalkClass->SendGossipMenu(9452, pCreature->GetGUID());
                     return true;
                                     }
@@ -29,7 +29,7 @@
                                 break;
                                 case 1:
                                 m_creature->MonsterWhisper("Why are you here?  You are not a VIP!", player -> GetGUID());
-                                player->TeleportTo(530,-2044.427246f, 6654.854492f, 50.339191f, 0.520328f);//Change me!
+								player->TeleportTo(530,-2044.427246f, 6654.854492f, 50.339191f, 0.520328f);//Change me!
                                 player->CLOSE_GOSSIP_MENU();
                                 break;
                         }

@@ -507,7 +507,7 @@ inline void Battleground::_ProcessJoin(uint32 diff)
     {
         m_Events |= BG_STARTING_EVENT_4;
 
-        DespawnCrystals();
+		DespawnCrystals();
 
         StartingEventOpenDoors();
 
@@ -1179,25 +1179,25 @@ void Battleground::AddPlayer(Player* player)
         {
             player->CastSpell(player, SPELL_ARENA_PREPARATION, true);
             player->ResetAllPowers();
-            player->RemoveAura(61987);
-            player->RemoveAura(25771);
+			player->RemoveAura(61987);
+			player->RemoveAura(25771);
 
-            Powers powerType = player->getPowerType();
-            player->SetPower(powerType, player->GetMaxPower(powerType));
+			Powers powerType = player->getPowerType();
+			player->SetPower(powerType, player->GetMaxPower(powerType));
 
-            if (player->getClass() == CLASS_HUNTER)
-                player->CastSpell(player, 883, true);
-            Pet* pet = player->GetPet();
-            if (pet != NULL)
-            {
-                if (pet->isDead())
-                    pet->setDeathState(ALIVE);
-                pet->SetHealth(pet->GetMaxHealth());
-                pet->SetPower(POWER_MANA, pet->GetMaxPower(POWER_MANA));
-                pet->SetPower(POWER_HAPPINESS, pet->GetMaxPower(POWER_HAPPINESS));
-                pet->m_CreatureSpellCooldowns.clear();
-                pet->RemoveAura(55711);
-            }
+			if (player->getClass() == CLASS_HUNTER)
+				player->CastSpell(player, 883, true);
+			Pet* pet = player->GetPet();
+			if (pet != NULL)
+			{
+				if (pet->isDead())
+					pet->setDeathState(ALIVE);
+				pet->SetHealth(pet->GetMaxHealth());
+				pet->SetPower(POWER_MANA, pet->GetMaxPower(POWER_MANA));
+				pet->SetPower(POWER_HAPPINESS, pet->GetMaxPower(POWER_HAPPINESS));
+				pet->m_CreatureSpellCooldowns.clear();
+				pet->RemoveAura(55711);
+			}
         }
     }
     else
@@ -1957,51 +1957,51 @@ void Battleground::RewardXPAtKill(Player* killer, Player* victim)
 
 uint8 Battleground::ClickFastStart(Player *player, GameObject *go)
 {
-    if (!isArena())
-        return 0;
-    
-    std::set<uint64>::iterator pIt = m_playersWantsFastStart.find(player->GetGUID());
-    if (pIt != m_playersWantsFastStart.end() || GetStartDelayTime() < BG_START_DELAY_15S)
-        return m_playersWantsFastStart.size();
-    
-    m_playersWantsFastStart.insert(player->GetGUID());
-    
-    std::set<GameObject*>::iterator goIt = m_crystals.find(go);
-    if (goIt == m_crystals.end())
-        m_crystals.insert(go);
-    
-    uint8 playersNeeded = 0;
-    switch(GetArenaType())
-    {
-    case ARENA_TYPE_2v2:
-        playersNeeded = 2;
-        break;
-    case ARENA_TYPE_3v3:
-        playersNeeded = 4;
-        break;
-    case ARENA_TYPE_5v5:
-        playersNeeded = 6;
-        break;
-    }
-    if (m_playersWantsFastStart.size() == playersNeeded)
-    {
-        DespawnCrystals();
-        SetStartDelayTime(BG_START_DELAY_15S);
-    }
-    return m_playersWantsFastStart.size();
+	if (!isArena())
+		return 0;
+	
+	std::set<uint64>::iterator pIt = m_playersWantsFastStart.find(player->GetGUID());
+	if (pIt != m_playersWantsFastStart.end() || GetStartDelayTime() < BG_START_DELAY_15S)
+		return m_playersWantsFastStart.size();
+	
+	m_playersWantsFastStart.insert(player->GetGUID());
+	
+	std::set<GameObject*>::iterator goIt = m_crystals.find(go);
+	if (goIt == m_crystals.end())
+		m_crystals.insert(go);
+	
+	uint8 playersNeeded = 0;
+	switch(GetArenaType())
+	{
+	case ARENA_TYPE_2v2:
+		playersNeeded = 2;
+		break;
+	case ARENA_TYPE_3v3:
+		playersNeeded = 4;
+		break;
+	case ARENA_TYPE_5v5:
+		playersNeeded = 6;
+		break;
+	}
+	if (m_playersWantsFastStart.size() == playersNeeded)
+	{
+		DespawnCrystals();
+		SetStartDelayTime(BG_START_DELAY_15S);
+	}
+	return m_playersWantsFastStart.size();
 }
 
 void Battleground::DespawnCrystals()
 {
-    if (m_crystals.empty())
-        return;
-    
-    for (std::set<GameObject*>::iterator itr = m_crystals.begin(); itr != m_crystals.end(); ++itr)
-    {
-        GameObject *go = *itr;
-        go->Delete();
-        m_crystals.erase(itr);
-    }
+	if (m_crystals.empty())
+		return;
+	
+	for (std::set<GameObject*>::iterator itr = m_crystals.begin(); itr != m_crystals.end(); ++itr)
+	{
+		GameObject *go = *itr;
+		go->Delete();
+		m_crystals.erase(itr);
+	}
 }
 
 uint32 Battleground::GetTeamScore(uint32 teamId) const

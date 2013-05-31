@@ -227,7 +227,7 @@ bool Pet::LoadPetFromDB(Player* owner, uint32 petEntry, uint32 petnumber, bool c
             SetMaxPower(POWER_HAPPINESS, GetCreatePowers(POWER_HAPPINESS));
             SetPower(POWER_HAPPINESS, fields[12].GetUInt32());
             setPowerType(POWER_FOCUS);
-            SetPower(POWER_FOCUS,100);
+			SetPower(POWER_FOCUS,100);
             break;
         default:
             if (!IsPetGhoul())
@@ -596,14 +596,14 @@ void Pet::Update(uint32 diff)
                             if (!m_regenTimer) ++m_regenTimer;
                             if (m_regenTimer > PET_FOCUS_REGEN_INTERVAL)
                                 m_regenTimer = PET_FOCUS_REGEN_INTERVAL;
-                            break;
-                        case POWER_ENERGY:
+							break;
+						case POWER_ENERGY:
                             Regenerate(POWER_ENERGY);
                             m_regenTimer += PET_FOCUS_REGEN_INTERVAL - diff;
                             if (!m_regenTimer) ++m_regenTimer;
                             if (m_regenTimer > PET_FOCUS_REGEN_INTERVAL)
                                 m_regenTimer = PET_FOCUS_REGEN_INTERVAL;
-                            break;
+							break;
                         default:
                             m_regenTimer = 0;
                             break;
@@ -645,7 +645,7 @@ void Creature::Regenerate(Powers power)
         case POWER_FOCUS:
         {
             // Focus ticks up by 24 points every four seconds for hunter pets, Source: WoWWiki.
-            // Value changed to 1 points every second.
+			// Value changed to 1 points every second.
             addvalue = 1 * sWorld->getRate(RATE_POWER_FOCUS);
             break;
         }
@@ -1033,24 +1033,24 @@ bool Guardian::InitStatsForLevel(uint8 petlevel)
                     break;
                 }
                 case 27829: // Ebon Gargoyle
-                    {
-                        if (!pInfo)
-                        {
-                            SetCreateMana(28 + 10*petlevel);
-                            SetCreateHealth(28 + 30*petlevel);
-                        }
-                        if(Player *owner = m_owner->ToPlayer()) // get 100% of owning player's haste
-                        {
-                            float bonus = owner->GetRatingBonusValue(CR_HASTE_MELEE);
-                            bonus += owner->GetTotalAuraModifier(SPELL_AURA_MOD_MELEE_HASTE) +
-                                owner->GetTotalAuraModifier(SPELL_AURA_MOD_MELEE_RANGED_HASTE);
-                            ApplyCastTimePercentMod(bonus, true);
-                        }
-                        SetBonusDamage(int32(GetOwner()->GetTotalAttackPowerValue(BASE_ATTACK) * 0.5f));
-                        SetBaseWeaponDamage(BASE_ATTACK, MINDAMAGE, float(petlevel - (petlevel / 4)));
-                        SetBaseWeaponDamage(BASE_ATTACK, MAXDAMAGE, float(petlevel + (petlevel / 4)));
-                        break;
-                    }
+					{
+						if (!pInfo)
+						{
+							SetCreateMana(28 + 10*petlevel);
+							SetCreateHealth(28 + 30*petlevel);
+						}
+						if(Player *owner = m_owner->ToPlayer()) // get 100% of owning player's haste
+						{
+							float bonus = owner->GetRatingBonusValue(CR_HASTE_MELEE);
+							bonus += owner->GetTotalAuraModifier(SPELL_AURA_MOD_MELEE_HASTE) +
+								owner->GetTotalAuraModifier(SPELL_AURA_MOD_MELEE_RANGED_HASTE);
+							ApplyCastTimePercentMod(bonus, true);
+						}
+						SetBonusDamage(int32(GetOwner()->GetTotalAttackPowerValue(BASE_ATTACK) * 0.5f));
+						SetBaseWeaponDamage(BASE_ATTACK, MINDAMAGE, float(petlevel - (petlevel / 4)));
+						SetBaseWeaponDamage(BASE_ATTACK, MAXDAMAGE, float(petlevel + (petlevel / 4)));
+						break;
+					}
                 case 28017: // Bloodworms
                 {
                     SetCreateHealth(4 * petlevel);

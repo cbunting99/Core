@@ -154,7 +154,7 @@ void CreatureAI::EnterEvadeMode()
             float angle = me->GetFollowAngle();
             if (owner->GetTypeId() == TYPEID_PLAYER)
                 angle = -angle;
-            me->GetMotionMaster()->MoveFollow(owner, PET_FOLLOW_DIST, angle, MOTION_SLOT_ACTIVE);
+			me->GetMotionMaster()->MoveFollow(owner, PET_FOLLOW_DIST, angle, MOTION_SLOT_ACTIVE);
         }
         else
         {

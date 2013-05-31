@@ -37,15 +37,15 @@ public:
         {
         case 1: // Global Mall
             player->TeleportTo(530, -2981.270020f, 779.124023f, -8.054820f, 2.530470f);
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             player->PlayerTalkClass->SendCloseGossip();
             break;
         
         case 134: // World Boss
             player->TeleportTo(0, -7627.41f, -708.915f, 183.457f, 4.95638f);
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             player->PlayerTalkClass->SendCloseGossip();
             break;
         
@@ -64,8 +64,8 @@ public:
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Back", GOSSIP_SENDER_MAIN, 20);
                 player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
             }
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 3: // PvP Arenas
@@ -73,15 +73,15 @@ public:
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_3:30|t Dire Maul Arena", GOSSIP_SENDER_MAIN, 16);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Back", GOSSIP_SENDER_MAIN, 20);
             player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 4: // duelzone
             player->TeleportTo(0, 4300.189941f, -2761.300049f, 16.813999f, 3.643650f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 5: // Questing Zone.
@@ -90,99 +90,99 @@ public:
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_3:30|t Mulgore", GOSSIP_SENDER_MAIN, 19);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Back", GOSSIP_SENDER_MAIN, 20);
             player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 6: // prifessions mall
             player->TeleportTo(0, -219.182281f, 1638.179443f, 79.765350f, 1.288978f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 7: // mog mall
             player->TeleportTo(1, -2650.709961f, -5021.879883f, 21.182899f, 2.431570f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 8: // ICC
             player->TeleportTo(571, 5873.82f, 2110.98f, 636.011f, 3.5523f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 9: // event zone
             player->TeleportTo(1, -11841.861328f, -4757.439941f, 6.225769f, 0.398504f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 11: // org
             player->TeleportTo(1, 1462.180054f, -4419.850098f, 25.463112f, 0.109132f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 12: // undercity
             player->TeleportTo(0, 1745.290039f, 239.115997f, 61.920300f, 6.248010f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 13: // stormwind
             player->TeleportTo(0, -8847.259766f, 606.219971f, 92.426201f, 0.757473f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 14: // ironforge
             player->TeleportTo(0, -4936.500000f, -937.025024f, 503.040985f, 5.440750f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 15: // guru
             player->TeleportTo(0, -13245.921875f, 193.394821f, 31.008369f, 1.096788f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 16: // dire maul
             player->TeleportTo(1, -3761.399658f, 1133.067749f, 132.084564f, 4.719074f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 17: // northwatch hold
             player->TeleportTo(1, -1998.12f, -3680.54f, 21.1346f, 2.45298f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 18: // supreme
             player->TeleportTo(0, -1852.07f, -4251.95f, 2.76502f, 1.08637f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 19: // mulgore
             player->TeleportTo(1, -2203.916992f, -699.970459f, -10.450468f, 0.375297f);
             player->PlayerTalkClass->SendCloseGossip();
-            player->Dismount();
-            player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
         case 20: // bk

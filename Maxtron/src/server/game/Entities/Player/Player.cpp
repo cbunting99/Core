@@ -1583,8 +1583,8 @@ void Player::Update(uint32 p_time)
     }
 
     m_achievementMgr->UpdateTimedAchievements(p_time);
-    
-    // Enrage and Wrecking Crew shouldn't stack together.
+	
+	// Enrage and Wrecking Crew shouldn't stack together.
     if (HasAura(14204) && HasAura(57522))
         ToPlayer()->RemoveAura(57522);
        

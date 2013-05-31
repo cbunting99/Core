@@ -4677,11 +4677,11 @@ void AuraEffect::HandleAuraDummy(AuraApplication const* aurApp, uint8 mode, bool
                         if (Unit* spellTarget = ObjectAccessor::GetUnit(*target, target->ToPlayer()->GetComboTarget()))
                             target->CastSpell(spellTarget, 51699, true);
                    break;
-                case 53601: // Sacred Shield
-                    // reset both swing timers just to be sure
-                    caster->resetAttackTimer(BASE_ATTACK);
-                    caster->resetAttackTimer(OFF_ATTACK);
-                    break;
+				case 53601: // Sacred Shield
+					// reset both swing timers just to be sure
+					caster->resetAttackTimer(BASE_ATTACK);
+					caster->resetAttackTimer(OFF_ATTACK);
+					break;
                 case 71563:
                     if (Aura* newAura = target->AddAura(71564, target))
                         newAura->SetStackAmount(newAura->GetSpellInfo()->StackAmount);
@@ -5941,15 +5941,15 @@ void AuraEffect::HandlePeriodicDamageAurasTick(Unit* target, Unit* caster) const
     if (damage)
         procVictim |= PROC_FLAG_TAKEN_DAMAGE;
 
-    if (damage > 0)
-    {
-        if (target->HasAura(65220) || target->HasAura(32233) || target->HasAura(63623) || target->HasAura(62137)) // Fix Avoidance on pets.
-        {
-            if (GetCaster()->GetTypeId() == TYPEID_UNIT)
-                damage = int32(float(damage) / 100 * 10);
-            resist -= damage;
-        }
-    }
+	if (damage > 0)
+	{
+		if (target->HasAura(65220) || target->HasAura(32233) || target->HasAura(63623) || target->HasAura(62137)) // Fix Avoidance on pets.
+		{
+			if (GetCaster()->GetTypeId() == TYPEID_UNIT)
+				damage = int32(float(damage) / 100 * 10);
+			resist -= damage;
+		}
+	}
 
     int32 overkill = damage - target->GetHealth();
     if (overkill < 0)

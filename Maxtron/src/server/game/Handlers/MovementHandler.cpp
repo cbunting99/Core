@@ -279,9 +279,6 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvData)
         return;
     }
 
-    if (mover->IsSitState() && movementInfo.GetMovementFlags() & (MOVEMENTFLAG_MASK_MOVING | MOVEMENTFLAG_MASK_TURNING))
-        mover->SetStandState(UNIT_STAND_STATE_STAND);
-
     /* handle special cases */
     if (movementInfo.flags & MOVEMENTFLAG_ONTRANSPORT)
     {
@@ -394,8 +391,8 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvData)
     {
         plrMover->UpdateFallInformationIfNeed(movementInfo, opcode);
 
-        float underMapValueZ; 
-        switch (plrMover->GetMapId())    
+        float underMapValueZ;	
+       switch (plrMover->GetMapId())	
         {
             case 617: underMapValueZ = 3.0f; break; // Dalaran Sewers
             case 618: underMapValueZ = 28.0f; break; // Ring of Valor
@@ -403,6 +400,7 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvData)
             case 559: underMapValueZ = -18.0f; break; // Nagrand arena
             case 572: underMapValueZ = 28.0f; break; // Lordearon
             case 571: underMapValueZ = -400.0f; break; // Northrend
+
             default: underMapValueZ = -250.0f; break;
         }
 
@@ -415,17 +413,17 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvData)
                 /// @todo discard movement packets after the player is rooted
                 if (plrMover->isAlive())
                 {
-                    switch (plrMover->GetMapId())    
-                    {
-                    case 617: plrMover->TeleportTo(617, 1299.082642f, 791.133240f, 7.849668f, 3.078675f); break;
-                    case 618: plrMover->KillPlayer(); break;
-                    case 562: plrMover->KillPlayer(); break;
-                    case 559: plrMover->TeleportTo(559, 4058.135010f, 2919.751709f, 14.595716f, 5.145205f); break;
-                    case 572: plrMover->TeleportTo(572, 1286.432373f, 1667.153687f, 40.484043f, 1.728855f); break;
-                    default:
-                        plrMover->KillPlayer();
-                        break;
-                    }
+					switch (plrMover->GetMapId())	
+					{
+					case 617: plrMover->TeleportTo(617, 1299.082642f, 791.133240f, 7.849668f, 3.078675f); break; // Dalaran Sewers -- DONE
+					case 618: plrMover->KillPlayer(); break; // Ring of Valor
+					case 562: plrMover->KillPlayer(); break; // Blade Edge Arena
+					case 559: plrMover->TeleportTo(559, 4058.135010f, 2919.751709f, 14.595716f, 5.145205f); break; // Nagrand arena -- DONE
+					case 572: plrMover->TeleportTo(572, 1286.432373f, 1667.153687f, 40.484043f, 1.728855f); break; // Lordearon -- DONE
+					default:
+						plrMover->KillPlayer();
+						break;
+					}
                 }
             }
         }

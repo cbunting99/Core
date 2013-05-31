@@ -3062,8 +3062,8 @@ void Spell::EffectSummonPet(SpellEffIndex effIndex)
     // if pet requested type already exist
     if (OldSummon)
     {
-        OldSummon->RemoveArenaAuras();
-        OldSummon->m_CreatureSpellCooldowns.clear();
+		OldSummon->RemoveArenaAuras();
+		OldSummon->m_CreatureSpellCooldowns.clear();
         OldSummon->SetHealth(OldSummon->GetMaxHealth());
         if (petentry == 0 || OldSummon->GetEntry() == petentry)
         {

@@ -5,25 +5,25 @@
 class vip_access : public ItemScript
 {
 public:
-    vip_access() : ItemScript ("vip_access") {}
+	vip_access() : ItemScript ("vip_access") {}
 
-    bool OnUse(Player* player, Item* item, SpellCastTargets const& targets)
-    {
-        QueryResult account = CharacterDatabase.PQuery("SELECT * FROM characters WHERE guid = '%u'", player->GetGUID());
-        Field * accID = account->Fetch();
+	bool OnUse(Player* player, Item* item, SpellCastTargets const& targets)
+	{
+		QueryResult account = CharacterDatabase.PQuery("SELECT * FROM characters WHERE guid = '%u'", player->GetGUID());
+		Field * accID = account->Fetch();
 
-        LoginDatabase.PExecute("REPLACE INTO account_access (id, gmlevel, RealmID) VALUES ('%u', '%u', -1)", accID[1].GetInt32(), 1);
-        player->CastSpell(player, 47292, true);
-        player->AddAura(42365, player);
-        ChatHandler(player->GetSession()).PSendSysMessage("Your account has been upgraded to V.I.P! Please relog your account.");
+		LoginDatabase.PExecute("REPLACE INTO account_access (id, gmlevel, RealmID) VALUES ('%u', '%u', -1)", accID[1].GetInt32(), 1);
+		player->CastSpell(player, 47292, true);
+		player->AddAura(42365, player);
+		ChatHandler(player->GetSession()).PSendSysMessage("Your account has been upgraded to V.I.P! Please relog your account.");
 
-        return true;
-    }
+		return true;
+	}
 };
 
 void AddSC_vip_access_script()
 {
-    new vip_access;
+	new vip_access;
 }
 
 /* SQL for the actual item, may want to change entry ID, description and name?
