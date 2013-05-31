@@ -417,7 +417,7 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvData)
 					{
 					case 617: plrMover->TeleportTo(617, 1299.082642f, 791.133240f, 7.849668f, 3.078675f); break; // Dalaran Sewers -- DONE
 					case 618: plrMover->KillPlayer(); break; // Ring of Valor
-					case 562: plrMover->KillPlayer(); break; // Blade Edge Arena
+					case 562: plrMover->TeleportTo(562, 6239.943848f, 259.640778f,  3.449286f,  2.449863f); break; // Blade Edge Arena
 					case 559: plrMover->TeleportTo(559, 4058.135010f, 2919.751709f, 14.595716f, 5.145205f); break; // Nagrand arena -- DONE
 					case 572: plrMover->TeleportTo(572, 1286.432373f, 1667.153687f, 40.484043f, 1.728855f); break; // Lordearon -- DONE
 					default:
