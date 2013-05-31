@@ -1576,6 +1576,14 @@ SpellCastResult SpellInfo::CheckTarget(Unit const* caster, WorldObject const* ta
             return SPELL_FAILED_BAD_TARGETS;
     }
 
+    if ((Effects[0].TargetA.GetTarget() == TARGET_SRC_CASTER) && (Effects[0].TargetB.GetTarget() == TARGET_UNIT_SRC_AREA_ENEMY))
+        if (!caster->IsWithinLOSInMap(target))
+            return SPELL_FAILED_BAD_TARGETS;
+
+    if (Effects[0].TargetA.GetTarget() == TARGET_UNIT_CONE_ENEMY_104)
+        if (!caster->IsWithinLOSInMap(target))
+            return SPELL_FAILED_LINE_OF_SIGHT;
+
     // check GM mode and GM invisibility - only for player casts (npc casts are controlled by AI) and negative spells
     if (unitTarget != caster && (caster->IsControlledByPlayer() || !IsPositive()) && unitTarget->GetTypeId() == TYPEID_PLAYER)
     {
@@ -1715,8 +1723,8 @@ bool SpellInfo::CheckTargetCreatureType(Unit const* target) const
         else
             return true;
     }
-	if (target->GetUInt32Value(UNIT_CREATED_BY_SPELL) == 8177)
-		return true;
+    if (target->GetUInt32Value(UNIT_CREATED_BY_SPELL) == 8177)
+        return true;
 
     uint32 creatureType = target->GetCreatureTypeMask();
     return !TargetCreatureType || !creatureType || (creatureType & TargetCreatureType);
@@ -2081,10 +2089,10 @@ uint32 SpellInfo::CalcCastTime(Unit* caster, Spell* spell) const
     if (caster)
         caster->ModSpellCastTime(this, castTime, spell);
 
-	if (castTime > 10 && caster && caster->GetTypeId() == TYPEID_PLAYER)
-		if (Battleground *bg = caster->ToPlayer()->GetBattleground())
-			if (bg->isArena() && bg->GetStartDelayTime() > 5000)
-				return 0;
+    if (castTime > 10 && caster && caster->GetTypeId() == TYPEID_PLAYER)
+        if (Battleground *bg = caster->ToPlayer()->GetBattleground())
+            if (bg->isArena() && bg->GetStartDelayTime() > 5000)
+                return 0;
 
     if (Attributes & SPELL_ATTR0_REQ_AMMO && (!IsAutoRepeatRangedSpell()))
         castTime += 500;
