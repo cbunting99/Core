@@ -34,7 +34,6 @@ set(scripts_STAT_SRCS
   Custom/PlayerScripts/Weapon_Skills.cpp
   Custom/ArenaFastStart.cpp
   Custom/Killstreak.cpp
-  Custom/NPC/Spectator_NPC.cpp
 )
 
 message("  -> Prepared: Custom")

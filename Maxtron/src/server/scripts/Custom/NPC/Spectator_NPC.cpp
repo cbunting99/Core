@@ -21,7 +21,7 @@ class Spectator_Commands : public CommandScript
             Player* player = handler->GetSession()->GetPlayer();
             if (target == player || target_guid == player->GetGUID())
             {
-                handler->PSendSysMessage("CanÂ´t Spectate self.");
+                handler->PSendSysMessage("Can´t Spectate self.");
                 handler->SetSentErrorMessage(true);
                 return false;
             }
@@ -350,16 +350,16 @@ class Spectator_NPC : public CreatureScript
             std::string sClass = "";
             switch (id)
             {
-                case CLASS_WARRIOR:         sClass = "Warrior ";        break;
-                case CLASS_PALADIN:         sClass = "Paladin ";        break;
+                case CLASS_WARRIOR:         sClass = "Warrior ";      break;
+                case CLASS_PALADIN:         sClass = "Paladin ";         break;
                 case CLASS_HUNTER:          sClass = "Hunter ";         break;
-                case CLASS_ROGUE:           sClass = "Rogue ";          break;
-                case CLASS_PRIEST:          sClass = "Priest ";         break;
-                case CLASS_DEATH_KNIGHT:    sClass = "Death Knight ";   break;
-                case CLASS_SHAMAN:          sClass = "Shaman ";         break;
-                case CLASS_MAGE:            sClass = "Mage ";           break;
-                case CLASS_WARLOCK:         sClass = "Warlock ";        break;
-                case CLASS_DRUID:           sClass = "Druid ";          break;
+                case CLASS_ROGUE:           sClass = "Rogue ";        break;
+                case CLASS_PRIEST:          sClass = "Priest ";       break;
+                case CLASS_DEATH_KNIGHT:    sClass = "Death Knight ";          break;
+                case CLASS_SHAMAN:          sClass = "Shaman ";        break;
+                case CLASS_MAGE:            sClass = "Mage ";         break;
+                case CLASS_WARLOCK:         sClass = "Warlock ";      break;
+                case CLASS_DRUID:           sClass = "Druid ";        break;
             }
             return sClass;
         }
