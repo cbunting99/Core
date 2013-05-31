@@ -43,7 +43,7 @@ enum PriestSpells
     SPELL_PRIEST_SHADOW_WORD_DEATH                  = 32409,
     SPELL_PRIEST_T9_HEALING_2P                      = 67201,
     SPELL_PRIEST_VAMPIRIC_TOUCH_DISPEL              = 64085,
-    SPELL_PRIEST_SHADOW_AFFINITY_REGEN              = 64103,
+	SPELL_PRIEST_SHADOW_AFFINITY_REGEN              = 64103,
 };
 
 enum PriestSpellIcons
@@ -678,23 +678,23 @@ class spell_pri_shadow_affinity : public SpellScriptLoader
             void HandleDispel(DispelInfo* dispelInfo)
             {
                 if (Unit* caster = GetCaster())
-                {
+				{
                     if (caster->HasAura(15320)) // Rank 3 Shadow Affinity Talent
                     {
-                        int64 baseregen = (GetCreateMana() * 15) / 100; // 15%
-                        caster->CastCustomSpell(caster, SPELL_PRIEST_SHADOW_AFFINITY_REGEN, &baseregen, NULL, NULL, true, NULL);
+					    int32 baseregen = (caster->GetCreateMana() * 15) / 100; // 15%
+                        caster->CastCustomSpell(caster, SPELL_PRIEST_SHADOW_AFFINITY_REGEN, &baseregen, NULL, NULL, true, NULL, NULL);
                     }
-                    else if (caster->HasAura(15318)) // Rank 2 Shadow Affinity Talent
+                    if (caster->HasAura(15318)) // Rank 2 Shadow Affinity Talent
                     {
-                        int64 baseregen = (GetCreateMana() * 10) / 100; // 10 %
-                        caster->CastCustomSpell(caster, SPELL_PRIEST_SHADOW_AFFINITY_REGEN, &baseregen, NULL, NULL, true, NULL);
+					    int32 baseregen = (caster->GetCreateMana() * 10) / 100; // 10 %
+                        caster->CastCustomSpell(caster, SPELL_PRIEST_SHADOW_AFFINITY_REGEN, &baseregen, NULL, NULL, true, NULL, NULL);
                     }
-                    else if (caster->HasAura(15272)) // Rank 1 Shadow Affinity Talent
+                    if (caster->HasAura(15272)) // Rank 1 Shadow Affinity Talent
                     {
-                        int64 baseregen = (GetCreateMana() * 5) / 100; // 5%
-                        caster->CastCustomSpell(caster, SPELL_PRIEST_SHADOW_AFFINITY_REGEN, &baseregen, NULL, NULL, true, NULL);
+					    int32 baseregen = (caster->GetCreateMana() * 5) / 100; // 5%
+                        caster->CastCustomSpell(caster, SPELL_PRIEST_SHADOW_AFFINITY_REGEN, &baseregen, NULL, NULL, true, NULL, NULL);
                     }
-                }
+				}
             }
 
             void Register()
@@ -725,5 +725,5 @@ void AddSC_priest_spell_scripts()
     new spell_pri_renew();
     new spell_pri_shadow_word_death();
     new spell_pri_vampiric_touch();
-    new spell_pri_shadow_affinity();
+	new spell_pri_shadow_affinity();
 }
