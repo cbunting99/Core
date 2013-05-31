@@ -152,15 +152,15 @@ enum TimeConstants
     SEC_PLAYER         = 0,
     SEC_PREMIUM        = 1,
     SEC_MODERATOR      = 2,
-	SEC_TICKET_GM      = 3,
-	SEC_EVENT_GM       = 4,
-	SEC_GAMEMASTER     = 5,
+    SEC_TICKET_GM      = 3,
+    SEC_EVENT_GM       = 4,
+    SEC_GAMEMASTER     = 5,
     SEC_HEAD_GM        = 6,
     SEC_DEVELOPER      = 7,
     SEC_HEAD_DEVELOPER = 8,
     SEC_ADMINISTRATOR  = 9,
-	SEC_OWNER          = 10,
-	SEC_CONSOLE        = 11
+    SEC_OWNER          = 10,
+    SEC_CONSOLE        = 11
 };
 
 enum LocaleConstant

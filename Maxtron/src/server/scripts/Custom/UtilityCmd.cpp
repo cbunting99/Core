@@ -19,10 +19,10 @@ public:
         static ChatCommand utilityCommandTable[] =
         {
             { "changerace",             SEC_PLAYER,  false, &HandleChangeRaceCommand,           "", NULL },
-			{ "changefaction",			SEC_PLAYER,  false, &HandleChangeFactionCommand,		"", NULL },
-			{ "maxskills",			    SEC_PLAYER,  false, &HandleMaxSkillsCommand,	    	"", NULL },
-			{ "customize",			    SEC_PLAYER,  false, &HandleCustomizeCommand,	       	"", NULL },
-			{ "mmr",			        SEC_PLAYER,  false, &HandleMMRCommand,      	       	"", NULL },
+            { "changefaction",            SEC_PLAYER,  false, &HandleChangeFactionCommand,        "", NULL },
+            { "maxskills",                SEC_PLAYER,  false, &HandleMaxSkillsCommand,            "", NULL },
+            { "customize",                SEC_PLAYER,  false, &HandleCustomizeCommand,               "", NULL },
+            { "mmr",                    SEC_PLAYER,  false, &HandleMMRCommand,                     "", NULL },
             { NULL,             0,                   false, NULL,                               "", NULL }
         };
         static ChatCommand commandTable[] =
@@ -37,8 +37,8 @@ public:
     {
 
         Player* me = handler->GetSession()->GetPlayer();
-		me->SetAtLoginFlag(AT_LOGIN_CHANGE_RACE);
-		handler->PSendSysMessage("Relog to change race of your character.");
+        me->SetAtLoginFlag(AT_LOGIN_CHANGE_RACE);
+        handler->PSendSysMessage("Relog to change race of your character.");
         return true;
     }
 
@@ -46,8 +46,8 @@ public:
     {
 
         Player* me = handler->GetSession()->GetPlayer();
-		me->SetAtLoginFlag(AT_LOGIN_CHANGE_FACTION);
-		handler->PSendSysMessage("Relog to change faction of your character.");
+        me->SetAtLoginFlag(AT_LOGIN_CHANGE_FACTION);
+        handler->PSendSysMessage("Relog to change faction of your character.");
         return true;
     }
 
@@ -55,35 +55,19 @@ public:
     {
 
         Player* me = handler->GetSession()->GetPlayer();
-		me->UpdateSkillsForLevel();
-		handler->PSendSysMessage("Your weapon skills are now maximized.");
+        me->UpdateSkillsForLevel();
+        handler->PSendSysMessage("Your weapon skills are now maximized.");
         return true;
     }
 
-	static bool HandleCustomizeCommand(ChatHandler* handler, const char* args)
+    static bool HandleCustomizeCommand(ChatHandler* handler, const char* args)
     {
 
         Player* me = handler->GetSession()->GetPlayer();
-		me->SetAtLoginFlag(AT_LOGIN_CUSTOMIZE);
-		handler->PSendSysMessage("Relog to customize your character.");
+        me->SetAtLoginFlag(AT_LOGIN_CUSTOMIZE);
+        handler->PSendSysMessage("Relog to customize your character.");
         return true;
     }
-
-	 static bool HandleMMRCommand(ChatHandler* handler, const char* args)
-     {
-        Player* player = handler->GetSession()->GetPlayer();
-
-        // 2s MMR check
-        uint16 mmr;
-        {
-			if(ArenaTeam *getmmr = sArenaTeamMgr->GetArenaTeamById(player->GetArenaTeamId(0)))
-			     mmr = getmmr->GetMember(player->GetGUID())->MatchMakerRating;
-		      else if (mmr < 1000)
-			     mmr = 1500;
-        }
-	    handler->PSendSysMessage("Your 2s Mmr is: %u.", mmr);
-		return true;
-      }
 };
 
 void AddSC_utility_commandscript()

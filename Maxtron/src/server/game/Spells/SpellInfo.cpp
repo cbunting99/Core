@@ -1715,8 +1715,8 @@ bool SpellInfo::CheckTargetCreatureType(Unit const* target) const
         else
             return true;
     }
-	if (target->GetUInt32Value(UNIT_CREATED_BY_SPELL) == 8177)
-		return true;
+    if (target->GetUInt32Value(UNIT_CREATED_BY_SPELL) == 8177)
+        return true;
 
     uint32 creatureType = target->GetCreatureTypeMask();
     return !TargetCreatureType || !creatureType || (creatureType & TargetCreatureType);
@@ -2081,10 +2081,10 @@ uint32 SpellInfo::CalcCastTime(Unit* caster, Spell* spell) const
     if (caster)
         caster->ModSpellCastTime(this, castTime, spell);
 
-	if (castTime > 10 && caster && caster->GetTypeId() == TYPEID_PLAYER)
-		if (Battleground *bg = caster->ToPlayer()->GetBattleground())
-			if (bg->isArena() && bg->GetStartDelayTime() > 5000)
-				return 0;
+    if (castTime > 10 && caster && caster->GetTypeId() == TYPEID_PLAYER)
+        if (Battleground *bg = caster->ToPlayer()->GetBattleground())
+            if (bg->isArena() && bg->GetStartDelayTime() > 5000)
+                return 0;
 
     if (Attributes & SPELL_ATTR0_REQ_AMMO && (!IsAutoRepeatRangedSpell()))
         castTime += 500;

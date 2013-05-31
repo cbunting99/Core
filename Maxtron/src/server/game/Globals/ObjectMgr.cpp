@@ -3026,7 +3026,7 @@ void ObjectMgr::PlayerCreateInfoAddItemHelper(uint32 race_, uint32 class_, uint3
     {
         if (count < -1)
             sLog->outError(LOG_FILTER_SQL, "Invalid count %i specified on item %u be removed from original player create info (use -1)!", count, itemId);
-	}
+    }
 }
 
 void ObjectMgr::LoadPlayerInfo()

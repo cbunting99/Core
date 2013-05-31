@@ -16,10 +16,10 @@ class FastArenaCrystal : public GameObjectScript
         {
             if (Battleground *bg = player->GetBattleground())
                 if (bg->isArena())
-				{
-				    go->MonsterWhisper("You requested faster start, wait for others to click the crystal too.", player->GetGUID());
-				    return true;
-				}
+                {
+                    go->MonsterWhisper("You requested faster start, wait for others to click the crystal too.", player->GetGUID());
+                    return true;
+                }
                     
 
             return false;

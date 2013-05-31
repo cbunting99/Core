@@ -670,7 +670,7 @@ void Transport::Update(uint32 p_diff)
             Relocate(m_curr->second.x, m_curr->second.y, m_curr->second.z, GetAngle(m_next->second.x, m_next->second.y) + float(M_PI));
             UpdatePassengerPositions(); // COME BACK MARKER
             // This forces the server to update positions in transportation for players -- gunship
-            UpdatePlayerPositions();      	
+            UpdatePlayerPositions();          
         }
 
         sScriptMgr->OnRelocate(this, m_curr->first, m_curr->second.mapid, m_curr->second.x, m_curr->second.y, m_curr->second.z);
@@ -789,7 +789,7 @@ uint32 Transport::AddNPCPassenger(uint32 tguid, uint32 entry, float x, float y, 
     }
     else
         currenttguid = std::max(tguid, currenttguid);
-	creature->setActive(true);	
+    creature->setActive(true);    
     creature->SetGUIDTransport(tguid);
     sScriptMgr->OnAddCreaturePassenger(this, creature);
     return tguid;
@@ -842,7 +842,7 @@ void Transport::UpdatePosition(MovementInfo* mi)
 
     Relocate(transport_x, transport_y, transport_z, transport_o);
     UpdatePassengerPositions();
-	UpdatePlayerPositions();
+    UpdatePlayerPositions();
 }
 
 void Transport::UpdatePassengerPositions()

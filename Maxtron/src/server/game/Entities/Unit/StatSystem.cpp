@@ -1310,10 +1310,10 @@ void Guardian::UpdateAttackPowerAndDamage(bool ranged)
             bonusAP = owner->GetTotalAttackPowerValue(BASE_ATTACK) * 0.22f;
             SetBonusDamage(int32(owner->GetTotalAttackPowerValue(BASE_ATTACK) * 0.1287f));
         }
-		else if(GetEntry() == ENTRY_RUNIC_WEAPON)
-		{
-			bonusAP = owner->GetTotalAttackPowerValue(BASE_ATTACK);
-		}
+        else if(GetEntry() == ENTRY_RUNIC_WEAPON)
+        {
+            bonusAP = owner->GetTotalAttackPowerValue(BASE_ATTACK);
+        }
         else if (IsSpiritWolf()) //wolf benefit from shaman's attack power
         {
             float dmg_multiplier = 0.31f;

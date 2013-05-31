@@ -304,9 +304,9 @@ enum CreaturesIds
     NPC_WORLD_TRIGGER                           = 22515,
     NPC_WORLD_TRIGGER_INFINITE_AOI              = 36171,
     NPC_SPIRIT_BOMB                             = 39189,
-    NPC_FROSTMOURNE_TRIGGER                     = 38584,	
+    NPC_FROSTMOURNE_TRIGGER                     = 38584,    
 
-	// Gunship: Ids of NPCs
+    // Gunship: Ids of NPCs
     NPC_GB_SKYBREAKER                           = 37540,
     NPC_GB_ORGRIMS_HAMMER                       = 37215,
     NPC_GB_HIGH_OVERLORD_SAURFANG               = 36939,

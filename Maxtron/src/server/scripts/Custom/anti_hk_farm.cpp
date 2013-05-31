@@ -9,27 +9,27 @@ void OnPVPKill(Player * killer, Player * killed)
 {
   if (killer->GetGUID() == killed->GetGUID())
   {
-		return;
-	}
-	if (killer->GetSession()->GetRemoteAddress() == killed->GetSession()->GetRemoteAddress() || killed->GetMaxHealth() < 10000)
-	{
-		uint32 Warning = 1;
-		std::string Acc;
-		std::string Char = killer->GetName();
-		std::string str = "";
-		str = "" + std::string(killer->GetName()) + ", might be a honorable kill farmer.";
-		WorldPacket data(SMSG_NOTIFICATION, (str.size()+1));
-		data << str;
-		sWorld->SendGlobalGMMessage(&data); 
-	}
-	else
-	{
-		return;
-		}
-	}
+        return;
+    }
+    if (killer->GetSession()->GetRemoteAddress() == killed->GetSession()->GetRemoteAddress() || killed->GetMaxHealth() < 10000)
+    {
+        uint32 Warning = 1;
+        std::string Acc;
+        std::string Char = killer->GetName();
+        std::string str = "";
+        str = "" + std::string(killer->GetName()) + ", might be a honorable kill farmer.";
+        WorldPacket data(SMSG_NOTIFICATION, (str.size()+1));
+        data << str;
+        sWorld->SendGlobalGMMessage(&data); 
+    }
+    else
+    {
+        return;
+        }
+    }
 
-	
-	
+    
+    
 
 
     };

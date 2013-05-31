@@ -748,7 +748,7 @@ void WorldSession::SendListInventory(uint64 vendorGuid, uint32 vendorEntry)
         return;
     }
 
-	SetCurrentVendor(vendorEntry);
+    SetCurrentVendor(vendorEntry);
 
     uint8 itemCount = items->GetItemCount();
     uint8 count = 0;
