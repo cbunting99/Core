@@ -199,7 +199,7 @@ class Spectator_Commands : public CommandScript
                 return false;
             }
 
-            if (target && (target->HasAura(32728) || target->HasAura(32727)))
+            if (target->HasAura(32728) || target->HasAura(32727))
             {
                 handler->PSendSysMessage("Arena hasn't started yet.");
                 handler->SetSentErrorMessage(true);
