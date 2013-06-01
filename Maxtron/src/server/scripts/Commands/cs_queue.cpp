@@ -36,7 +36,7 @@ public:
         }
         else
         {
-            return true;
+            handler->PSendSysMessage("You must be in arena team.");
         }
         return true;
     }
@@ -50,7 +50,7 @@ public:
         }
         else
         {
-            return true;
+            handler->PSendSysMessage("You must be in arena team.");
         }
         return true;
     }
@@ -64,7 +64,7 @@ public:
         }
         else
         {
-            return true;
+            handler->PSendSysMessage("You must be in arena team.");
         }
         return true;
     }
