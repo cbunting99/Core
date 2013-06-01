@@ -24,6 +24,7 @@
 #include "MoveSplineInit.h"
 #include "MoveSpline.h"
 #include "Player.h"
+#include "MotionMaster.h"
 
 //----- Point Movement Generator
 template<class T>
@@ -32,7 +33,7 @@ void PointMovementGenerator<T>::DoInitialize(T* unit)
     if (!unit->IsStopped())
         unit->StopMoving();
 
-    unit->AddUnitState(UNIT_STATE_ROAMING|UNIT_STATE_ROAMING_MOVE);
+    unit->AddUnitState(UNIT_STATE_ROAMING | UNIT_STATE_ROAMING_MOVE);
 
     if (id == EVENT_CHARGE_PREPATH)
         return;
@@ -67,6 +68,13 @@ bool PointMovementGenerator<T>::DoUpdate(T* unit, uint32 /*diff*/)
             init.SetVelocity(speed);
         init.Launch();
     }
+	else if (id == EVENT_CHARGE_PREPATH && !unit->movespline->Finalized())
+	{
+	    i_recalculateSpeed = false;
+	    Movement::MoveSplineInit init(unit);
+	    init.SetVelocity(SPEED_CHARGE);
+		init.Launch();
+	}
 
     return !unit->movespline->Finalized();
 }
@@ -87,7 +95,7 @@ void PointMovementGenerator<T>::DoReset(T* unit)
     if (!unit->IsStopped())
         unit->StopMoving();
 
-    unit->AddUnitState(UNIT_STATE_ROAMING|UNIT_STATE_ROAMING_MOVE);
+    unit->AddUnitState(UNIT_STATE_ROAMING | UNIT_STATE_ROAMING_MOVE);
 }
 
 template<class T>

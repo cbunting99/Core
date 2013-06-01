@@ -76,8 +76,8 @@ enum RotateDirection
     ROTATE_DIRECTION_RIGHT
 };
 
-// assume it is 25 yard per 0.6 second
-#define SPEED_CHARGE    42.0f
+// assume it is 25 yard per 0.8 second
+#define SPEED_CHARGE    32.0f
 
 class MotionMaster //: private std::stack<MovementGenerator *>
 {
@@ -153,8 +153,8 @@ class MotionMaster //: private std::stack<MovementGenerator *>
         void MoveChase(Unit* target, float dist = 0.0f, float angle = 0.0f);
         void MoveConfused();
         void MoveFleeing(Unit* enemy, uint32 time = 0);
-        void MovePoint(uint32 id, const Position &pos)
-            { MovePoint(id, pos.m_positionX, pos.m_positionY, pos.m_positionZ); }
+        void MovePoint(uint32 id, Position const& pos, bool generatePath = true)
+            { MovePoint(id, pos.m_positionX, pos.m_positionY, pos.m_positionZ, generatePath); }
         void MovePoint(uint32 id, float x, float y, float z, bool generatePath = true);
 
         // These two movement types should only be used with creatures having landing/takeoff animations
