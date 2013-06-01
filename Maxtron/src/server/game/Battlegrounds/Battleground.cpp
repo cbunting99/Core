@@ -915,6 +915,12 @@ void Battleground::EndBattleground(uint32 winner)
                 UpdatePlayerScore(player, SCORE_BONUS_HONOR, GetBonusHonorFromKill(loser_kills));
         }
 
+		if (isArena())
+		{
+			player->SetGMVisible(true);
+			player->SetGameMaster(false);
+		}
+
         player->ResetAllPowers();
         player->CombatStopWithPets(true);
 
@@ -1075,6 +1081,8 @@ void Battleground::RemovePlayerAtLeave(uint64 guid, bool Transport, bool SendPac
         player->SetBattlegroundId(0, BATTLEGROUND_TYPE_NONE);  // We're not in BG.
         // reset destination bg team
         player->SetBGTeam(0);
+		player->SetGMVisible(true);
+		player->SetGameMaster(false);
 
         if (Transport)
             player->TeleportToBGEntryPoint();
@@ -1290,14 +1298,24 @@ void Battleground::EventPlayerLoggedOut(Player* player)
     m_Players[guid].OfflineRemoveTime = sWorld->GetGameTime() + MAX_OFFLINE_TIME;
     if (GetStatus() == STATUS_IN_PROGRESS)
     {
-        // drop flag and handle other cleanups
-        RemovePlayer(player, guid, GetPlayerTeam(guid));
-
-        // 1 player is logging out, if it is the last, then end arena!
-        if (isArena())
-            if (GetAlivePlayersCountByTeam(player->GetBGTeam()) <= 1 && GetPlayersCountByTeam(GetOtherTeam(player->GetBGTeam())))
-                EndBattleground(GetOtherTeam(player->GetBGTeam()));
-    }
+        if (!player->isSpectator())
+		{
+			// drop flag and handle other cleanups
+			RemovePlayer(player, guid, GetPlayerTeam(guid));
+			
+			// 1 player is logging out, if it is the last, then end arena!
+			if (isArena())
+				if (GetAlivePlayersCountByTeam(player->GetTeam()) <= 1 && GetPlayersCountByTeam(GetOtherTeam(player->GetTeam())))
+					EndBattleground(GetOtherTeam(player->GetTeam()));
+		}
+	}
+	if (!player->isSpectator())
+		player->LeaveBattleground();
+	else
+	{
+		player->TeleportToBGEntryPoint();
+		RemoveSpectator(player->GetGUID());
+	}
 }
 
 // This method should be called only once ... it adds pointer to queue
@@ -1962,17 +1980,17 @@ uint8 Battleground::ClickFastStart(Player *player, GameObject *go)
 {
 	if (!isArena())
 		return 0;
-	
+
 	std::set<uint64>::iterator pIt = m_playersWantsFastStart.find(player->GetGUID());
-	if (pIt != m_playersWantsFastStart.end() || GetStartDelayTime() < BG_START_DELAY_15S)
+	if (pIt != m_playersWantsFastStart.end() || GetStartDelayTime() < BG_START_DELAY_15S || player->isSpectator())
 		return m_playersWantsFastStart.size();
-	
+
 	m_playersWantsFastStart.insert(player->GetGUID());
-	
+
 	std::set<GameObject*>::iterator goIt = m_crystals.find(go);
 	if (goIt == m_crystals.end())
 		m_crystals.insert(go);
-	
+
 	uint8 playersNeeded = 0;
 	switch(GetArenaType())
 	{
@@ -1998,13 +2016,22 @@ void Battleground::DespawnCrystals()
 {
 	if (m_crystals.empty())
 		return;
-	
+
 	for (std::set<GameObject*>::iterator itr = m_crystals.begin(); itr != m_crystals.end(); ++itr)
 	{
 		GameObject *go = *itr;
 		go->Delete();
 		m_crystals.erase(itr);
 	}
+}
+
+void Battleground::SendSpectateAddonsMsg(SpectatorAddonMsg msg)
+{
+	if (!HaveSpectators())
+		return;
+
+	for (SpectatorList::iterator itr = m_Spectators.begin(); itr != m_Spectators.end(); ++itr)
+		msg.SendPacket(*itr);
 }
 
 uint32 Battleground::GetTeamScore(uint32 teamId) const
