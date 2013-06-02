@@ -33,6 +33,9 @@ set(scripts_STAT_SRCS
   Custom/PlayerScripts/New_Character.cpp
   Custom/PlayerScripts/Weapon_Skills.cpp
   Custom/ArenaFastStart.cpp
+  Custom/TransmogDisplayVendorConf.h
+
+  Custom/TransmogDisplayVendor.cpp
   Custom/Killstreak.cpp
   Custom/NPC/Spectator_NPC.cpp
 )

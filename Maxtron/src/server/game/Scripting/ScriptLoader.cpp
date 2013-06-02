@@ -1317,6 +1317,8 @@ void AddBattlegroundScripts()
        void AddSC_Arena_Scripts();
        void AddSC_Mall_Guide_NPC();
 	   void AddSC_Spectator_NPC();
+	   void AddSC_NPC_TransmogDisplayVendor();
+
 #endif
 
 void AddCustomScripts()
@@ -1345,6 +1347,7 @@ void AddCustomScripts()
     AddSC_Arena_Scripts();
     AddSC_Mall_Guide_NPC();
 	AddSC_Spectator_NPC();
+	AddSC_NPC_TransmogDisplayVendor();
 
 #endif
 }
