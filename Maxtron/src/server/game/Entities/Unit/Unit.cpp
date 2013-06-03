@@ -7638,7 +7638,7 @@ bool Unit::HandleAuraProc(Unit* victim, uint32 damage, Aura* triggeredByAura, Sp
             // Blood of the North
             // Reaping
             // Death Rune Mastery
-            if (dummySpell->SpellIconID == 3041 || dummySpell->SpellIconID == 22 || dummySpell->SpellIconID == 2622)
+            if (dummySpell->SpellIconID == 3041 || (dummySpell->SpellIconID == 22 && dummySpell->Id != 62459) || dummySpell->SpellIconID == 2622)
             {
                 *handled = true;
                 // Convert recently used Blood Rune to Death Rune
@@ -16377,6 +16377,12 @@ void Unit::ApplyResilience(Unit const* victim, float* crit, int32* damage, bool 
                     if (isCrit)
                         *damage -= target->GetMeleeWarriorCritDamageReduction(*damage);
                     *damage -= target->GetMeleeWarriorDamageReduction(*damage);
+                }
+                if (source->getClass() == CLASS_PALADIN)
+                {
+                    if (isCrit)
+                        *damage -= target->GetMeleePaladinCritDamageReduction(*damage);
+                    *damage -= target->GetMeleePaladinDamageReduction(*damage);
                 }
                 else
                 {

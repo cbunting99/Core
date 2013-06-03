@@ -19,7 +19,6 @@ public:
         }
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_7:30|t PvP Arenas.", GOSSIP_SENDER_MAIN, 3);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_3v3_5:30|t Duel Zone", GOSSIP_SENDER_MAIN, 4);
-        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_3v3_5:30|t World Boss", GOSSIP_SENDER_MAIN, 134);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Event Zone.", GOSSIP_SENDER_MAIN, 9);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Quests_Completed_08:30|t Questing Zone.", GOSSIP_SENDER_MAIN, 5);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Misc_Gear_01:30|t Profession Mall.", GOSSIP_SENDER_MAIN, 6);
@@ -37,13 +36,6 @@ public:
         {
         case 1: // Global Mall
             player->TeleportTo(530, -2981.270020f, 779.124023f, -8.054820f, 2.530470f);
-			player->Dismount();
-			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
-            player->PlayerTalkClass->SendCloseGossip();
-            break;
-        
-        case 134: // World Boss
-            player->TeleportTo(0, -7627.41f, -708.915f, 183.457f, 4.95638f);
 			player->Dismount();
 			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             player->PlayerTalkClass->SendCloseGossip();
@@ -85,7 +77,6 @@ public:
             break;
         
         case 5: // Questing Zone.
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_3:30|t Northwatch Hold", GOSSIP_SENDER_MAIN, 17);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_3:30|t Supreme", GOSSIP_SENDER_MAIN, 18);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_3:30|t Mulgore", GOSSIP_SENDER_MAIN, 19);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Back", GOSSIP_SENDER_MAIN, 20);
@@ -110,13 +101,6 @@ public:
         
         case 8: // ICC
             player->TeleportTo(571, 5873.82f, 2110.98f, 636.011f, 3.5523f);
-            player->PlayerTalkClass->SendCloseGossip();
-			player->Dismount();
-			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
-            break;
-        
-        case 9: // event zone
-            player->TeleportTo(1, -11841.861328f, -4757.439941f, 6.225769f, 0.398504f);
             player->PlayerTalkClass->SendCloseGossip();
 			player->Dismount();
 			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
@@ -164,13 +148,6 @@ public:
 			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
         
-        case 17: // northwatch hold
-            player->TeleportTo(1, -1998.12f, -3680.54f, 21.1346f, 2.45298f);
-            player->PlayerTalkClass->SendCloseGossip();
-			player->Dismount();
-			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
-            break;
-        
         case 18: // supreme
             player->TeleportTo(0, -1852.07f, -4251.95f, 2.76502f, 1.08637f);
             player->PlayerTalkClass->SendCloseGossip();
@@ -198,7 +175,6 @@ public:
             }
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_7:30|t PvP Arenas.", GOSSIP_SENDER_MAIN, 3);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_3v3_5:30|t Duel Zone", GOSSIP_SENDER_MAIN, 4);
-            player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_3v3_5:30|t World Boss", GOSSIP_SENDER_MAIN, 134);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Event Zone.", GOSSIP_SENDER_MAIN, 9);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Quests_Completed_08:30|t Questing Zone.", GOSSIP_SENDER_MAIN, 5);
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Misc_Gear_01:30|t Profession Mall.", GOSSIP_SENDER_MAIN, 6);
