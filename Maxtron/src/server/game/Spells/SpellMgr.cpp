@@ -3265,6 +3265,10 @@ void SpellMgr::LoadDbcDataCorrections()
             case 55361: // Living Bomb
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
                 break;
+			case 32728: // Arena Preparation
+				spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_POWER_COST_SCHOOL_PCT;
+				spellInfo->Attributes |= SPELL_ATTR0_CANT_CANCEL;
+				break;
             case 33110: // Prayer of Mending (Heal) can trigger Inspiration
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_TRIGGERED_CAN_TRIGGER_PROC;
                 break;

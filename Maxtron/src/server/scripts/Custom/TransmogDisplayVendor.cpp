@@ -85,10 +85,9 @@ const char * getSlotName(uint8 slot)
     case EQUIPMENT_SLOT_WRISTS    : return "Wrists";
     case EQUIPMENT_SLOT_HANDS     : return "Hands";
     case EQUIPMENT_SLOT_BACK      : return "Back";
-    case EQUIPMENT_SLOT_MAINHAND  : return "Main hand";
-    case EQUIPMENT_SLOT_OFFHAND   : return "Off hand";
+    case EQUIPMENT_SLOT_MAINHAND  : return "Main-hand";
+    case EQUIPMENT_SLOT_OFFHAND   : return "Off-hand";
     case EQUIPMENT_SLOT_RANGED    : return "Ranged";
-    case EQUIPMENT_SLOT_TABARD    : return "Tabard";
     default: return NULL;
     }
 }
@@ -97,15 +96,15 @@ const char* getQualityName(uint32 quality)
 {
     switch(quality)
     {
-    case ITEM_QUALITY_POOR: return "|CFF9d9d9d[Poor]";
-    case ITEM_QUALITY_NORMAL: return "|CFFffffff[Common]";
-    case ITEM_QUALITY_UNCOMMON: return "|CFF1eff00[Uncommon]";
-    case ITEM_QUALITY_RARE: return "|CFF0070dd[Rare]";
-    case ITEM_QUALITY_EPIC: return "|CFFa335ee[Epic]";
-    case ITEM_QUALITY_LEGENDARY: return "|CFFff8000[Legendary]";
-    case ITEM_QUALITY_ARTIFACT: return "|CFFe6cc80[Artifact]";
-    case ITEM_QUALITY_HEIRLOOM: return "|CFFe5cc80[Heirloom]";
-    default: return "[Unknown]";
+    case ITEM_QUALITY_POOR: return "|CFF9d9d9dPoor.";
+    case ITEM_QUALITY_NORMAL: return "|CFFffffffCommon.";
+    case ITEM_QUALITY_UNCOMMON: return "|CFF1eff00Uncommon.";
+    case ITEM_QUALITY_RARE: return "|CFF0070ddRare.";
+    case ITEM_QUALITY_EPIC: return "|CFFa335eeEpic.";
+    case ITEM_QUALITY_LEGENDARY: return "|CFFff8000Legendary.";
+    case ITEM_QUALITY_ARTIFACT: return "|CFFe6cc80Artifact.";
+    case ITEM_QUALITY_HEIRLOOM: return "|CFFe5cc80Heirloom.";
+    default: return NULL;
     }
 }
 
@@ -255,7 +254,6 @@ void TransmogDisplayVendorMgr::HandleTransmogrify(Player* player, Creature* crea
         player->DestroyItemCount(TransmogDisplayVendorMgr::TokenEntry, TransmogDisplayVendorMgr::TokenAmount, true);
 
     TransmogDisplayVendorMgr::SetFakeEntry(item, itemEntry);
-    player->PlayDirectSound(3337);
     session->SendAreaTriggerMessage("%s transmogrified", slotname);
 }
 
@@ -272,9 +270,9 @@ public:
         {
             // if (player->GetItemByPos(INVENTORY_SLOT_BAG_0, slot))
             if (const char* slotName = getSlotName(slot))
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, slotName, SENDER_SELECT_VENDOR, slot);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_1, slotName, SENDER_SELECT_VENDOR, slot);
         }
-        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TRAINER, "Remove transmogrifications", SENDER_REMOVE_MENU, 0);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "Remove transmogrifications!", SENDER_REMOVE_MENU, 0);
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
         return true;
     }
@@ -314,7 +312,7 @@ public:
                         std::ostringstream ss;
                         ss << getQualityName(it->first);
                         if (count)
-                            ss << " [" << count << "]";
+							ss << " #" << count << ".";
                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_VENDOR, ss.str().c_str(), it->first, count*MAX_VENDOR_ITEMS);
                     }
                 }
@@ -328,7 +326,7 @@ public:
                 }
                 selDataStruct temp = {action, 0, 0}; // slot, offset, quality
                 selData[player->GetGUIDLow()] = temp;
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Back..", SENDER_BACK, 0);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Back!", SENDER_BACK, 0);
                 player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             } break;
         case SENDER_BACK: // Back
@@ -349,7 +347,6 @@ public:
                 if (removed)
                 {
                     session->SendAreaTriggerMessage("Transmogrifications removed from equipped items");
-                    player->PlayDirectSound(3337);
                 }
                 else
                     session->SendNotification("You have no transmogrified items equipped");
@@ -364,7 +361,6 @@ public:
                     {
                         if (slotname)
                             session->SendAreaTriggerMessage("%s transmogrification removed", slotname);
-                        player->PlayDirectSound(3337);
                     }
                     else if (slotname)
                         session->SendNotification("No transmogrification on %s slot", slotname);
@@ -384,8 +380,8 @@ public:
                     ss << "Remove transmogrification from " << slotname << "?";
                     player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_INTERACT_1, (std::string)"Remove from "+slotname, SENDER_REMOVE_ONE, slot, ss.str().c_str(), 0, false);
                 }
-                player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_INTERACT_1, "Remove all transmogrifications", SENDER_REMOVE_ALL, 0, "Are you sure you want to remove all transmogrifications?", 0, false);
-                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Back..", SENDER_BACK, 0);
+                player->ADD_GOSSIP_ITEM_EXTENDED(GOSSIP_ICON_INTERACT_1, "Remove all transmogrifications!", SENDER_REMOVE_ALL, 0, "You serious?", 0, false);
+                player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Back!", SENDER_BACK, 0);
                 player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, creature->GetGUID());
             } break;
         default: // Show items you can use

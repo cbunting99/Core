@@ -4987,12 +4987,14 @@ SpellCastResult Spell::CheckCast(bool strict)
         if (!m_caster->ToPlayer()->InBattleground())
             return SPELL_FAILED_ONLY_BATTLEGROUNDS;
 
+    /* Custom Begin */
+
     // Speed
     if (m_spellInfo->Id == 23451)
     {
         if (Unit* victim = m_caster->getVictim())
         {
-            if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
+            if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl
             {
                 return SPELL_CAST_OK;
             }
@@ -5004,7 +5006,7 @@ SpellCastResult Spell::CheckCast(bool strict)
     {
         if (Unit* victim = m_caster->getVictim())
         {
-            if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
+            if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl
             {
                 return SPELL_CAST_OK;
             }
@@ -5016,7 +5018,19 @@ SpellCastResult Spell::CheckCast(bool strict)
     {
         if (Unit* victim = m_caster->getVictim())
         {
-            if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl.
+            if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl
+            {
+                return SPELL_CAST_OK;
+            }
+        }
+    }
+
+    // Shadow Sight
+    if (m_spellInfo->Id == 34709)
+    {
+        if (Unit* victim = m_caster->getVictim())
+        {
+            if (victim->HasAura(1784) || (victim->HasAura(5215))) // Stealth & Prowl
             {
                 return SPELL_CAST_OK;
             }
@@ -5026,16 +5040,36 @@ SpellCastResult Spell::CheckCast(bool strict)
     // Lichborne
     if (m_spellInfo->Id == 49039)
     {
-        if (m_caster->HasAura(51724)) // Sap.
+        if (m_caster->HasAura(51724)) // Sap
         {
             return SPELL_CAST_OK;
         }
     }
 
-    // Raise Dead
-    if (m_spellInfo->Id == 46584)
+    // Stormhammer
+    if (m_spellInfo->Id == 56448)
     {
-        return SPELL_CAST_OK;
+        if (m_caster->GetZoneId() == 67)
+        {
+            return SPELL_CAST_OK;
+        }
+        else
+        {
+            return SPELL_FAILED_BAD_TARGETS;
+        }
+    }
+
+    // Request a duel
+    if (m_spellInfo->Id == 7266)
+    {
+        if (m_caster->GetZoneId() == 3520)
+        {
+            return SPELL_FAILED_DONT_REPORT;
+        }
+        else
+        {
+            return SPELL_CAST_OK;
+        }
     }
 
     // Ghoul Claw.
@@ -5265,30 +5299,8 @@ SpellCastResult Spell::CheckCast(bool strict)
                             break;
                         }
                     }
-                    
-                    if (m_spellInfo->Id == 56448)
-                    {
-                        if (m_caster->GetZoneId() == 67)
-                        {
-                            return SPELL_CAST_OK;
-                        }
-                        else
-                        {
-                            return SPELL_FAILED_BAD_TARGETS;
-                        }
-                    }
 
-                    if (m_spellInfo->Id == 7266)
-                    {
-                        if (m_caster->GetZoneId() == 3520)
-                        {
-                            return SPELL_FAILED_DONT_REPORT;
-                        }
-                        else
-                        {
-                            return SPELL_CAST_OK;
-                        }
-                    }
+                    /* Custom End */
 
     // do not allow spells to be cast in arenas
     // - with greater than 10 min CD without SPELL_ATTR4_USABLE_IN_ARENA flag
