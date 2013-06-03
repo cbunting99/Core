@@ -3260,14 +3260,11 @@ void SpellMgr::LoadDbcDataCorrections()
             case 19184: // Entrapment
             case 64843: // Divine Hymn
             case 64844: // Divine Hymn
+            case 55362: // Living Bomb
             case 44461: // Living Bomb 
             case 55361: // Living Bomb
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
                 break;
-			case 55362:
-				spellInfo->AttributesEx4 |= SPELL_ATTR4_DAMAGE_DOESNT_BREAK_AURAS;
-				spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
-				break;
 			case 32728: // Arena Preparation
 				spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_POWER_COST_SCHOOL_PCT;
 				spellInfo->Attributes |= SPELL_ATTR0_CANT_CANCEL;
