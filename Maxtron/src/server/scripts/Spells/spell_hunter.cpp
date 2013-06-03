@@ -365,11 +365,11 @@ class spell_hun_masters_call : public SpellScriptLoader
                 {
                     if (Pet* pet = player->GetPet())
                     {
-                        // hack fix for master's call being usable with a dead pet
                         if (pet->isDead())
-                            return SPELL_FAILED_NO_PET;
-                        float x, y, z;
-                        pet->GetPosition(x, y, z);
+                            return SPELL_FAILED_DONT_REPORT;
+                        if (pet->HasFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_STUNNED))
+                            return SPELL_FAILED_STUNNED;
+                        float x, y, z;pet->GetPosition(x, y, z);
                         if (player->IsWithinLOS(x, y, z))
                             return SPELL_CAST_OK;
                     }
@@ -385,9 +385,6 @@ class spell_hun_masters_call : public SpellScriptLoader
                     TriggerCastFlags castMask = TriggerCastFlags(TRIGGERED_FULL_MASK & ~TRIGGERED_IGNORE_CASTER_AURASTATE);
                     target->CastSpell(target, GetEffectValue(), castMask);
                     target->CastSpell(target, HUNTER_SPELL_MASTERS_CALL_TRIGGERED, castMask);
-                    // there is a possibility that this effect should access effect 0 (dummy) target, but i dubt that
-                    // it's more likely that on on retail it's possible to call target selector based on dbc values
-                    // anyways, we're using GetExplTargetUnit() here and it's ok
                     if (Unit* ally = GetExplTargetUnit())
                     {
                         target->CastSpell(ally, GetEffectValue(), castMask);
