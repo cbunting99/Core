@@ -105,6 +105,12 @@ public:
 			player->Dismount();
 			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
             break;
+		case 9: // event zone
+            player->TeleportTo(1, -11841.861328f, -4757.439941f, 6.225769f, 0.398504f);
+            player->PlayerTalkClass->SendCloseGossip();
+			player->Dismount();
+			player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+            break;
         
         case 11: // org
             player->TeleportTo(1, 1462.180054f, -4419.850098f, 25.463112f, 0.109132f);
