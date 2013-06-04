@@ -4817,7 +4817,7 @@ SpellCastResult Spell::CheckCast(bool strict)
 
     if (Player *tmpPlayer = m_caster->ToPlayer())
         if (tmpPlayer->isSpectator())
-            return SPELL_FAILED_SPELL_UNAVAILABLE;
+            return SPELL_FAILED_DONT_REPORT;
 
     // only check at first call, Stealth auras are already removed at second call
     // for now, ignore triggered spells
@@ -6018,16 +6018,6 @@ uint32 Spell::GetCCDelay(SpellInfo const* _spell)
         if (_spell->Id == 2094) // Blind.
             return CCDELAY;
         break;
-        if (_spell->Id == 1784) // Stealth.
-            return CCDELAY;
-        break;
-        if (_spell->Id == 26889) // Vanish.
-            return CCDELAY;
-        break;
-        if (_spell->Id == 36554) // Shadowstep.
-            return CCDELAY;
-        break;
-
 
     case SPELLFAMILY_MAGE:
         if (_spell->Mechanic == MECHANIC_STUN)
@@ -6038,8 +6028,6 @@ uint32 Spell::GetCCDelay(SpellInfo const* _spell)
     for (uint8 i = 0; i < CCDArraySize; ++i)
         if (_spell->HasAura(auraWithCCD[i]))
             return CCDELAY;
-
-    
     return 0;
 }
 

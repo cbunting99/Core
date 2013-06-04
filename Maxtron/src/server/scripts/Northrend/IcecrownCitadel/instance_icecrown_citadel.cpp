@@ -776,7 +776,10 @@ class instance_icecrown_citadel : public InstanceMapScript
                 switch (type)
                 {
                     case DATA_LADY_DEATHWHISPER:
-                        //SetBossState(DATA_GUNSHIP_EVENT, state);    // TEMP HACK UNTIL GUNSHIP SCRIPTED
+                        /*
+                        SetBossState(DATA_GUNSHIP_EVENT, state);
+                        // Gunship disabled until fully scripted.
+                        */
                         if (state == DONE)
                         {
                             if (GameObject* elevator = instance->GetGameObject(LadyDeathwisperElevatorGUID))
@@ -1147,15 +1150,20 @@ class instance_icecrown_citadel : public InstanceMapScript
                     case DATA_BLOOD_PRINCE_COUNCIL:
                     case DATA_ROTFACE:
                     case DATA_FESTERGUT:
+                        return true;
+                        /*
                         if (GetBossState(DATA_DEATHBRINGER_SAURFANG) != DONE)
                             return false;
+                            */
                         // no break
                     case DATA_DEATHBRINGER_SAURFANG:
                         if (GetBossState(DATA_GUNSHIP_EVENT) != DONE)
                             return false;
                         // no break
                     case DATA_GUNSHIP_EVENT:
+                        /*
                         if (GetBossState(DATA_LADY_DEATHWHISPER) != DONE)
+                        */
                             return false;
                         // no break
                     case DATA_LADY_DEATHWHISPER:
