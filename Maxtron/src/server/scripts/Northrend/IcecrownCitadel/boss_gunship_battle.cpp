@@ -1047,8 +1047,10 @@ class npc_muradin_gunship : public CreatureScript
                             if (Creature* pSaurfang = ObjectAccessor::GetCreature(*me, _instance->GetData64(DATA_HIGH_OVERLORD_SAURFANG_NOT_VISUAL)))
                             {
                                 pSaurfang->AI()->Talk(SAY_HIGH_OVERLORD_SAURFANG_NOT_VISUAL);
+								/*
                                 pSaurfang->SetReactState(REACT_PASSIVE);
                                 pSaurfang->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
+								*/
                             }
                             break;
                         case EVENT_INTRO_ALLIANCE_8:
@@ -1385,9 +1387,10 @@ class npc_korkron_axethrower_rifleman : public CreatureScript
                 if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
 
-                //me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE); // Dodato
                 me->AI()->AttackStart(SelectRandomPlayerInTheMaps(me->GetMap()));
-				me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);	
+				/*
+				me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
+				*/
 
                 if (!UpdateVictim())
                     return;
@@ -1500,7 +1503,9 @@ class npc_sergeant : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_WALK_MOBS:
+							/*
                             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
+							*/
                             me->SetReactState(REACT_AGGRESSIVE);
                             switch (me->GetEntry())
                             {
@@ -1588,7 +1593,9 @@ class npc_marine_or_reaver : public CreatureScript
             {
                 ScriptedAI::Reset();
                 desperated = false;
+				/*
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
+				*/
                 me->SetReactState(REACT_PASSIVE);
                 events.ScheduleEvent(EVENT_WALK_MOBS, 1500);
                 me->RemoveAurasDueToSpell(SPELL_EXPERIENCED);
@@ -1636,7 +1643,9 @@ class npc_marine_or_reaver : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_WALK_MOBS:
+							/*
                             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
+							*/
                             me->SetReactState(REACT_AGGRESSIVE);
                             switch (me->GetEntry())
                             {
@@ -1767,11 +1776,11 @@ class npc_gunship_mage : public CreatureScript
 
             void UpdateAI(uint32 diff)
             {
-			
-			    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
-				
-                if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != IN_PROGRESS)
-                    return;
+				/*
+				me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
+				*/
+				if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != IN_PROGRESS)
+					return;
 
 				me->SetReactState(REACT_DEFENSIVE); // Dodato
 
@@ -2463,7 +2472,7 @@ class npc_gunship_portal : public CreatureScript
                 me->RemoveFromWorld();
             }
 
-            void UpdateAI( const uint32 diff)
+            void UpdateAI(uint32 diff)
             {
 
              events.Update(diff);
@@ -3174,7 +3183,7 @@ class spell_remove_rocket_pack : public SpellScriptLoader
  
                 int32 itemId = GetEffectValue();
                 uint32 itemCount = hitPlr->GetItemCount(itemId, false); // Should be 1, but just in case.
-                hitPlr->DestroyItemCount(itemId, -itemCount, true, false);
+                hitPlr->DestroyItemCount(itemId, itemCount, true, false);
             }
  
             void Register()

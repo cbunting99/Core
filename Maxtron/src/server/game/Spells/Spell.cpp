@@ -5046,6 +5046,15 @@ SpellCastResult Spell::CheckCast(bool strict)
         }
     }
 
+	// Disable Mounts in mall
+    if (m_spellInfo->Mechanic == MECHANIC_MOUNT)
+    {
+        if (m_caster->GetAreaId() == 3738)
+        {
+            return SPELL_FAILED_NOT_HERE;
+        }
+    }
+
     // Stormhammer
     if (m_spellInfo->Id == 56448)
     {

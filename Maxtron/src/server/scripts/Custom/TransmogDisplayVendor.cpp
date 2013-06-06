@@ -88,6 +88,7 @@ const char * getSlotName(uint8 slot)
     case EQUIPMENT_SLOT_MAINHAND  : return "Main-hand";
     case EQUIPMENT_SLOT_OFFHAND   : return "Off-hand";
     case EQUIPMENT_SLOT_RANGED    : return "Ranged";
+    case EQUIPMENT_SLOT_TABARD    : return "Tabard";
     default: return NULL;
     }
 }
@@ -141,6 +142,12 @@ uint32 getCorrectInvType(uint32 inventorytype)
 
 bool CanTransmogrify(const ItemTemplate* proto)
 {
+    if (proto->ItemId == 2586) // Gamemaster's Robe.
+        return false;
+    if (proto->ItemId == 11508) // Gamemaster's Slippers.
+        return false;
+    if (proto->ItemId == 12064) // Gamemaster Hood.
+        return false;
     if (proto->Class == ITEM_CLASS_WEAPON && proto->SubClass == ITEM_SUBCLASS_WEAPON_FISHING_POLE)
         return false;
     /* What if reload config?

@@ -7,6 +7,21 @@ public:
 	
 	void OnUpdateZone(Player* player, uint32 zone, uint32 area)
 	{
+		if (area == 3738)
+		{
+			if (player->IsFlying() || player->IsFalling())
+			{
+				player->AddAura(79404, player);
+				{
+					if (player->IsMounted())
+					{
+						player->Dismount();
+						player->RemoveAurasByType(SPELL_AURA_MOUNTED);
+					}
+				}
+			}
+		}
+
 		float x = player->GetPositionX();
 		float y = player->GetPositionY();
 		float z = player->GetPositionZ();
