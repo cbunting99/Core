@@ -39,21 +39,6 @@ set(scripts_STAT_SRCS
   Custom/Killstreak.cpp
   Custom/NPC/Spectator_NPC.cpp
 
-  Custom/Item/Blood_Elf_Female_Token.cpp
-  Custom/Item/Blood_Elf_Male_Token.cpp
-  Custom/Item/Draenai_Female_Token.cpp
-  Custom/Item/Dwarf_Male_Token.cpp
-  Custom/Item/Gnome_Female_Token.cpp
-  Custom/Item/Gnome_Male_Token.cpp
-  Custom/Item/Goblin_Female_Token.cpp
-  Custom/Item/Goblin_Male_Token.cpp
-  Custom/Item/Human_Female_Token.cpp
-  Custom/Item/Human_Male_Token.cpp
-  Custom/Item/Night_Elf_Male_Token.cpp
-  Custom/Item/Orc_Female_Token.cpp
-  Custom/Item/Tauren_Female_Token.cpp
-  Custom/Item/Tauren_Male_Token.cpp
-  Custom/Item/Troll_Male_Token.cpp
 )
 
 message("  -> Prepared: Custom")

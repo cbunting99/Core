@@ -291,14 +291,20 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
                 return;
             }
 
-            // If player is a Gamemaster and doesn't accept whisper, we auto-whitelist every player that the Gamemaster is talking to
-            // We also do that if a player is under the required level for whispers.
-            if (receiver->getLevel() < sWorld->getIntConfig(CONFIG_CHAT_WHISPER_LEVEL_REQ) || 
-                (HasPermission(RBAC_PERM_CAN_FILTER_WHISPERS) && !sender->isAcceptWhispers() && !sender->IsInWhisperWhiteList(receiver->GetGUID())))
-                sender->AddWhisperWhiteList(receiver->GetGUID());
+			if (sender->GetSession()->GetSecurity() == SEC_PREMIUM)
+			{
+				if (!receiver->isAcceptWhispers() && receiver->isGameMaster())
+					SendPlayerNotFoundNotice(to);
+					return;
+			}
 
-            GetPlayer()->Whisper(msg, lang, receiver->GetGUID());
-        } break;
+			if (receiver->getLevel() < sWorld->getIntConfig(CONFIG_CHAT_WHISPER_LEVEL_REQ) || 
+				(HasPermission(RBAC_PERM_CAN_FILTER_WHISPERS) && !sender->isAcceptWhispers() && !sender->IsInWhisperWhiteList(receiver->GetGUID())))
+				sender->AddWhisperWhiteList(receiver->GetGUID());
+			GetPlayer()->Whisper(msg, lang, receiver->GetGUID());
+		}
+		break;
+
         case CHAT_MSG_PARTY:
         case CHAT_MSG_PARTY_LEADER:
         {

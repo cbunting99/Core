@@ -1321,22 +1321,6 @@ void AddBattlegroundScripts()
 	   void AddSC_Spectator_NPC();
 	   void AddSC_NPC_TransmogDisplayVendor();
 
-	   void AddSC_Blood_Elf_Female_Token();
-	   void AddSC_Blood_Elf_Male_Token();
-	   void AddSC_Draenai_Female_Token();
-	   void AddSC_Dwarf_Male_Token();
-	   void AddSC_Gnome_Female_Token();
-	   void AddSC_Gnome_Male_Token();
-	   void AddSC_Goblin_Female_Token();
-	   void AddSC_Goblin_Male_Token();
-	   void AddSC_Human_Female_Token();
-	   void AddSC_Human_Male_Token();
-	   void AddSC_Night_Elf_Male_Token();
-	   void AddSC_Orc_Female_Token();
-	   void AddSC_Tauren_Female_Token();
-	   void AddSC_Tauren_Male_Token();
-	   void AddSC_Troll_Male_Token();
-
 #endif
 
 void AddCustomScripts()
@@ -1366,21 +1350,6 @@ void AddCustomScripts()
     AddSC_Mall_Guide_NPC();
 	AddSC_Spectator_NPC();
 	AddSC_NPC_TransmogDisplayVendor();
-
-	AddSC_Blood_Elf_Female_Token();
-	AddSC_Blood_Elf_Male_Token();
-	AddSC_Draenai_Female_Token();
-	AddSC_Dwarf_Male_Token();
-	AddSC_Gnome_Female_Token();
-	AddSC_Gnome_Male_Token();
-	AddSC_Goblin_Female_Token();
-	AddSC_Goblin_Male_Token();
-	AddSC_Human_Female_Token();
-	AddSC_Night_Elf_Male_Token();
-	AddSC_Orc_Female_Token();
-	AddSC_Tauren_Female_Token();
-	AddSC_Tauren_Male_Token();
-	AddSC_Troll_Male_Token();
 
 #endif
 }

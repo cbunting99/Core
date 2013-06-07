@@ -530,6 +530,8 @@ inline void Battleground::_ProcessJoin(uint32 diff)
                     player->GetSession()->SendPacket(&status);
 
                     player->SetPhaseMask(1, true);
+					if (Pet* pet = player->GetPet())
+						pet->SetPhaseMask(1, true);
                     player->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PREPARATION);
 					player->RemoveAura(32728);
                     player->ResetAllPowers();
@@ -1190,6 +1192,9 @@ void Battleground::AddPlayer(Player* player)
             player->SetPhaseMask(team == ALLIANCE ? 1 : 2, true);
             player->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PREPARATION);
 			player->AddAura(32728, player);
+
+			if (Pet* pet = player->GetPet())
+				pet->SetPhaseMask(team == ALLIANCE ? 1 : 2, true);
 
             player->ResetAllPowers();
 			player->RemoveAura(61987);
