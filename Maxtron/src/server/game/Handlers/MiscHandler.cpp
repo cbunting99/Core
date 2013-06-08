@@ -99,6 +99,29 @@ void WorldSession::HandleGossipSelectOptionOpcode(WorldPacket& recvData)
 
     if (_player->PlayerTalkClass->IsGossipOptionCoded(gossipListId))
         recvData >> code;
+		
+	if (IS_PLAYER_GUID(guid))
+    {
+        if(_player->GetGUID() == guid && _player->PlayerTalkClass->GetGossipMenu().GetMenuId() == menuId)
+        {
+            if(code.empty())
+                sScriptMgr->OnGossipSelect(_player, menuId, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId));
+            else
+                sScriptMgr->OnGossipSelectCode(_player, menuId, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId), code.c_str());
+        }
+        return;
+    }
+    else if(IS_ITEM_GUID(guid))
+    {
+        if(Item* item = _player->GetItemByGuid(guid))
+        {
+            if(code.empty())
+                sScriptMgr->OnGossipSelect(_player, item, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId));
+            else
+                sScriptMgr->OnGossipSelectCode(_player, item, _player->PlayerTalkClass->GetGossipOptionSender(gossipListId), _player->PlayerTalkClass->GetGossipOptionAction(gossipListId), code.c_str());
+        }
+        return;
+    }
 
     Creature* unit = NULL;
     GameObject* go = NULL;
