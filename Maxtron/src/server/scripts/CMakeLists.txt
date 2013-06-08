@@ -27,10 +27,16 @@ set(scripts_STAT_SRCS
   ../game/AI/ScriptedAI/ScriptedEscortAI.cpp
   ../game/AI/ScriptedAI/ScriptedCreature.cpp
   ../game/AI/ScriptedAI/ScriptedFollowerAI.cpp
+  ./Custom/Arena_Crystal.cpp
+  ./Custom/Killstreak.cpp
+  ./Custom/Transmogrification.cpp
+  ./Custom/Transmogrification.h
+  ./Custom/NPC/Beastmaster_NPC.cpp
+  ./Custom/NPC/Professions_NPC.cpp
+  ./Custom/NPC/Spectator_NPC.cpp
 )
 
 if(SCRIPTS)
-  include(Custom/CMakeLists.txt)
   include(World/CMakeLists.txt)
   include(OutdoorPvP/CMakeLists.txt)
   include(EasternKingdoms/CMakeLists.txt)

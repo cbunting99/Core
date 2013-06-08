@@ -1,12 +1,12 @@
 #include "ScriptPCH.h"
  
-class PVP_Killstreak : public PlayerScript
+class Killstreak : public PlayerScript
 {
-        public:
-        PVP_Killstreak() : PlayerScript("PVP_Killstreak"){}
+public:
+    Killstreak() : PlayerScript("Killstreak"){}
 };
  
-void AddSC_PVP_Killstreak()
+void AddSC_Killstreak()
 {
-    new PVP_Killstreak();
+    new Killstreak();
 }

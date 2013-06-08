@@ -1296,60 +1296,24 @@ void AddBattlegroundScripts()
 }
 
 #ifdef SCRIPTS
-/* This is where custom scripts' loading functions should be declared. */
-       void AddSC_anti_hk_farm();
-       void AddSC_vip_access_script();
-       void AddSC_VIP_NPC();
-       void AddSC_Vendor_NPC();
-       void AddSC_utility_commandscript();
-       void AddSC_commands();
-       void AddSC_Top_Arena_NPC();
-       void AddSC_Teleporter_NPC();
-       void AddSC_Professions_NPC();
-       void AddSC_Exchanger_NPC();
-       void AddSC_Beastmaster_NPC();
-       void AddSC_World_Chat();
-       void AddSC_NPC_Transmogrify();
-       void AddSC_Zone_Scripts();
-       void AddSC_fast_arena_start();
-       void AddSC_PVP_Killstreak();
-       void AddSC_Item_Requester_NPC();
-       void AddSC_New_Dawning_Mage();
-       void AddSC_New_Dawning_Recruiter();
-       void AddSC_Arena_Scripts();
-       void AddSC_Mall_Guide_NPC();
-	   void AddSC_Spectator_NPC();
-	   void AddSC_NPC_TransmogDisplayVendor();
+void AddSC_Arena_Crystal();
+void AddSC_Killstreak();
+void AddSC_Transmorgrification_NPC();
+void AddSC_Professions_NPC();
+void AddSC_Beastmaster_NPC();
+void AddSC_Spectator_NPC();
 
 #endif
 
 void AddCustomScripts()
 {
 #ifdef SCRIPTS
-    /* This is where custom scripts should be added. */
-    AddSC_anti_hk_farm();
-    AddSC_vip_access_script();
-    AddSC_VIP_NPC();
-    AddSC_Vendor_NPC();
-    AddSC_utility_commandscript();
-    AddSC_commands();
-    AddSC_Top_Arena_NPC();
-    AddSC_Teleporter_NPC();
-    AddSC_Professions_NPC();
-    AddSC_Exchanger_NPC();
-    AddSC_Beastmaster_NPC();
-    AddSC_World_Chat();
-    AddSC_NPC_Transmogrify();
-    AddSC_Zone_Scripts();
-    AddSC_fast_arena_start();
-    AddSC_PVP_Killstreak();
-    AddSC_Item_Requester_NPC();
-    AddSC_New_Dawning_Mage();
-    AddSC_New_Dawning_Recruiter();
-    AddSC_Arena_Scripts();
-    AddSC_Mall_Guide_NPC();
+	AddSC_Arena_Crystal();
+	AddSC_Killstreak();
+	AddSC_Transmorgrification_NPC();
+	AddSC_Professions_NPC();
+	AddSC_Beastmaster_NPC();
 	AddSC_Spectator_NPC();
-	AddSC_NPC_TransmogDisplayVendor();
 
 #endif
 }
