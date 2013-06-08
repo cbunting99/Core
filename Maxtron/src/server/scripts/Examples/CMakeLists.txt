@@ -16,6 +16,7 @@ set(scripts_STAT_SRCS
   Examples/example_creature.cpp
   Examples/example_spell.cpp
   Examples/example_commandscript.cpp
+  Examples/example_item_gossip_script.cpp
 )
 
 message("  -> Prepared: Examples")
