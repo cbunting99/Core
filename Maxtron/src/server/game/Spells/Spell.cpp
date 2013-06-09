@@ -5088,6 +5088,19 @@ SpellCastResult Spell::CheckCast(bool strict)
         }
     }
 
+    // Goblin Rocket Pack.
+    if (m_spellInfo->Id == 68645)
+    {
+        if (m_caster->GetZoneId() == 4812)
+        {
+            return SPELL_CAST_OK;
+        }
+        else
+        {
+            return SPELL_FAILED_NOT_HERE;
+        }
+    }
+
     // Request a duel
     if (m_spellInfo->Id == 7266)
     {

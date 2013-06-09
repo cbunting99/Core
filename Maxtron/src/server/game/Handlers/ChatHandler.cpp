@@ -291,13 +291,6 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket& recvData)
                 return;
             }
 
-			if (sender->GetSession()->GetSecurity() == SEC_PREMIUM)
-			{
-				if (!receiver->isAcceptWhispers() && receiver->isGameMaster())
-					SendPlayerNotFoundNotice(to);
-					return;
-			}
-
 			if (receiver->getLevel() < sWorld->getIntConfig(CONFIG_CHAT_WHISPER_LEVEL_REQ) || 
 				(HasPermission(RBAC_PERM_CAN_FILTER_WHISPERS) && !sender->isAcceptWhispers() && !sender->IsInWhisperWhiteList(receiver->GetGUID())))
 				sender->AddWhisperWhiteList(receiver->GetGUID());
