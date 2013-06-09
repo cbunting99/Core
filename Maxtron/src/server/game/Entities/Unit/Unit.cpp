@@ -428,7 +428,7 @@ void Unit::UpdateSplineMovement(uint32 t_diff)
             pos.m_orientation = loc.orientation;
 
             if (TransportBase* transport = GetDirectTransport())
-                transport->CalculatePassengerPosition(loc.x, loc.y, loc.z, loc.orientation);
+                transport->CalculatePassengerPosition(loc.x, loc.y, loc.z, &loc.orientation);
         }
 
         if (HasUnitState(UNIT_STATE_CANNOT_TURN))
@@ -7540,7 +7540,7 @@ bool Unit::HandleAuraProc(Unit* victim, uint32 damage, Aura* triggeredByAura, Sp
         case SPELLFAMILY_PALADIN:
         {
             // Infusion of Light
-            if (dummySpell->SpellIconID == 3021)
+            if (procSpell && dummySpell->SpellIconID == 3021)
             {
                 // Flash of Light HoT on Flash of Light when Sacred Shield active
                 if (procSpell->SpellFamilyFlags[0] & 0x40000000 && procSpell->SpellIconID == 242)
@@ -7571,6 +7571,8 @@ bool Unit::HandleAuraProc(Unit* victim, uint32 damage, Aura* triggeredByAura, Sp
             // Glyph of Divinity
             else if (dummySpell->Id == 54939)
             {
+                if (!procSpell)
+                    return false;
                 *handled = true;
                 // Check if we are the target and prevent mana gain
                 if (victim && triggeredByAura->GetCasterGUID() == victim->GetGUID())
@@ -7835,6 +7837,7 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
                         Aura* charge = GetAura(50241);
                         if (charge && charge->ModStackAmount(-1, AURA_REMOVE_BY_ENEMY_SPELL))
                             RemoveAurasDueToSpell(50240);
+                        break;
                     }
                 }
                 break;
@@ -10563,6 +10566,7 @@ bool Unit::isSpellCrit(Unit* victim, SpellInfo const* spellProto, SpellSchoolMas
                 default:
                     return false;
             }
+            break;
         case SPELL_DAMAGE_CLASS_MAGIC:
         {
             if (schoolMask & SPELL_SCHOOL_MASK_NORMAL)
@@ -10709,6 +10713,7 @@ bool Unit::isSpellCrit(Unit* victim, SpellInfo const* spellProto, SpellSchoolMas
                     break;
                 }
             }
+        /// Intentional fallback. Calculate critical strike chance for both Ranged and Melee spells
         case SPELL_DAMAGE_CLASS_RANGED:
         {
             if (victim)
@@ -12557,7 +12562,7 @@ void Unit::setDeathState(DeathState s)
         SetPower(getPowerType(), 0);
 
         // players in instance don't have ZoneScript, but they have InstanceScript
-        if (ZoneScript* zoneScript = GetZoneScript() ? GetZoneScript() : (ZoneScript*)GetInstanceScript())
+        if (ZoneScript* zoneScript = GetZoneScript() ? GetZoneScript() : GetInstanceScript())
             zoneScript->OnUnitDeath(this);
     }
     else if (s == JUST_RESPAWNED)
@@ -16966,12 +16971,9 @@ bool Unit::HandleSpellClick(Unit* clicker, int8 seatId)
         result = true;
     }
 
-    if (result)
-    {
-        Creature* creature = ToCreature();
-        if (creature && creature->IsAIEnabled)
-            creature->AI()->OnSpellClick(clicker);
-    }
+    Creature* creature = ToCreature();
+    if (creature && creature->IsAIEnabled)
+        creature->AI()->OnSpellClick(clicker, result);
 
     return result;
 }
@@ -16984,29 +16986,23 @@ void Unit::EnterVehicle(Unit* base, int8 seatId)
 void Unit::_EnterVehicle(Vehicle* vehicle, int8 seatId, AuraApplication const* aurApp)
 {
     // Must be called only from aura handler
+    ASSERT(aurApp);
+
     if (!isAlive() || GetVehicleKit() == vehicle || vehicle->GetBase()->IsOnVehicle(this))
         return;
 
     if (m_vehicle)
     {
-        if (m_vehicle == vehicle)
-        {
-            if (seatId >= 0 && seatId != GetTransSeat())
-            {
-                TC_LOG_DEBUG(LOG_FILTER_VEHICLES, "EnterVehicle: %u leave vehicle %u seat %d and enter %d.", GetEntry(), m_vehicle->GetBase()->GetEntry(), GetTransSeat(), seatId);
-                ChangeSeat(seatId);
-            }
-
-            return;
-        }
-        else
+        if (m_vehicle != vehicle)
         {
             TC_LOG_DEBUG(LOG_FILTER_VEHICLES, "EnterVehicle: %u exit %u and enter %u.", GetEntry(), m_vehicle->GetBase()->GetEntry(), vehicle->GetBase()->GetEntry());
             ExitVehicle();
         }
+        else if (seatId >= 0 && seatId == GetTransSeat())
+            return;
     }
 
-    if (aurApp && aurApp->GetRemoveMode())
+    if (aurApp->GetRemoveMode())
         return;
 
     if (Player* player = ToPlayer())
@@ -17036,16 +17032,22 @@ void Unit::ChangeSeat(int8 seatId, bool next)
     if (seat == m_vehicle->Seats.end() || seat->second.Passenger)
         return;
 
-    // Todo: the functions below could be consolidated and refactored to take
-    // SeatMap::const_iterator as parameter, to save redundant map lookups.
-    m_vehicle->RemovePassenger(this);
+    AuraEffect* rideVehicleEffect = NULL;
+    AuraEffectList const& vehicleAuras = m_vehicle->GetBase()->GetAuraEffectsByType(SPELL_AURA_CONTROL_VEHICLE);
+    for (AuraEffectList::const_iterator itr = vehicleAuras.begin(); itr != vehicleAuras.end(); ++itr)
+    {
+        if ((*itr)->GetCasterGUID() != GetGUID())
+            continue;
 
-    // Set m_vehicle to NULL before adding passenger as adding new passengers is handled asynchronously
-    // and someone may call ExitVehicle again before passenger is added to new seat
-    Vehicle* veh = m_vehicle;
-    m_vehicle = NULL;
-    if (!veh->AddPassenger(this, seatId))
-        ASSERT(false);
+        // Make sure there is only one ride vehicle aura on target cast by the unit changing seat
+        ASSERT(!rideVehicleEffect);
+        rideVehicleEffect = *itr;
+    }
+
+    // Unit riding a vehicle must always have control vehicle aura on target
+    ASSERT(rideVehicleEffect);
+
+    rideVehicleEffect->ChangeAmount(seat->first + 1);
 }
 
 void Unit::ExitVehicle(Position const* /*exitPosition*/)
@@ -17075,17 +17077,14 @@ void Unit::_ExitVehicle(Position const* exitPosition)
     if (!m_vehicle)
         return;
 
-    m_vehicle->RemovePassenger(this);
+    // This should be done before dismiss, because there may be some aura removal
+    Vehicle* vehicle = m_vehicle->RemovePassenger(this);
 
     Player* player = ToPlayer();
 
     // If the player is on mounted duel and exits the mount, he should immediatly lose the duel
     if (player && player->duel && player->duel->isMounted)
         player->DuelComplete(DUEL_FLED);
-
-    // This should be done before dismiss, because there may be some aura removal
-    Vehicle* vehicle = m_vehicle;
-    m_vehicle = NULL;
 
     SetControlled(false, UNIT_STATE_ROOT);      // SMSG_MOVE_FORCE_UNROOT, ~MOVEMENTFLAG_ROOT
 
@@ -17188,6 +17187,11 @@ void Unit::BuildMovementPacket(ByteBuffer *data) const
     // 0x04000000
     if (GetUnitMovementFlags() & MOVEMENTFLAG_SPLINE_ELEVATION)
         *data << (float)m_movementInfo.splineElevation;
+}
+
+bool Unit::IsFalling() const
+{
+    return m_movementInfo.HasMovementFlag(MOVEMENTFLAG_FALLING | MOVEMENTFLAG_FALLING_FAR) || movespline->isFalling();
 }
 
 void Unit::SetCanFly(bool apply)

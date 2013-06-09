@@ -49,6 +49,7 @@ void AddSC_SmartSCripts();
 void AddSC_anticheat_commandscript();
 void AddSC_account_commandscript();
 void AddSC_achievement_commandscript();
+void AddSC_arena_commandscript();
 void AddSC_ban_commandscript();
 void AddSC_bf_commandscript();
 void AddSC_cast_commandscript();
@@ -448,6 +449,7 @@ void AddSC_ulduar_teleporter();
 void AddSC_boss_mimiron();
 void AddSC_boss_hodir();
 void AddSC_boss_freya();
+void AddSC_boss_yogg_saron();
 void AddSC_boss_algalon_the_observer();
 void AddSC_instance_ulduar();
 void AddSC_boss_keleseth();              //Utgarde Keep
@@ -686,6 +688,7 @@ void AddCommandScripts()
     AddSC_anticheat_commandscript();
     AddSC_account_commandscript();
     AddSC_achievement_commandscript();
+    AddSC_arena_commandscript();
     AddSC_ban_commandscript();
     AddSC_bf_commandscript();
     AddSC_cast_commandscript();
@@ -1191,6 +1194,7 @@ void AddNorthrendScripts()
     AddSC_boss_mimiron();
     AddSC_boss_hodir();
     AddSC_boss_freya();
+    AddSC_boss_yogg_saron();
     AddSC_boss_algalon_the_observer();
     AddSC_instance_ulduar();
     AddSC_boss_keleseth();              //Utgarde Keep
