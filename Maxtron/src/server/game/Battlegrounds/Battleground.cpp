@@ -529,11 +529,7 @@ inline void Battleground::_ProcessJoin(uint32 diff)
                     sBattlegroundMgr->BuildBattlegroundStatusPacket(&status, this, queueSlot, STATUS_IN_PROGRESS, 0, GetStartTime(), GetArenaType(), player->GetBGTeam());
                     player->GetSession()->SendPacket(&status);
 
-                    player->SetPhaseMask(1, true);
-					if (Pet* pet = player->GetPet())
-						pet->SetPhaseMask(1, true);
-                    player->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PREPARATION);
-					player->RemoveAura(32728);
+                    player->RemoveAurasDueToSpell(SPELL_ARENA_PREPARATION);
                     player->ResetAllPowers();
                     if (!player->isGameMaster())
                     {
@@ -1189,12 +1185,8 @@ void Battleground::AddPlayer(Player* player)
 
         if (GetStatus() == STATUS_WAIT_JOIN)                 // not started yet
         {
-            player->SetPhaseMask(team == ALLIANCE ? 1 : 2, true);
-            player->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_PREPARATION);
-			player->AddAura(32728, player);
-
-			if (Pet* pet = player->GetPet())
-				pet->SetPhaseMask(team == ALLIANCE ? 1 : 2, true);
+            player->CastSpell(player, SPELL_ARENA_PREPARATION, true);
+            player->ResetAllPowers();
 
             player->ResetAllPowers();
 			player->RemoveAura(61987);
