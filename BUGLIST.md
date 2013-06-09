@@ -17,3 +17,4 @@ See green comment below there.
 
 https://github.com/TrinityCore/TrinityCore/commit/3a697d4c9f5e9f2fa9c3b08c8e103d90472a871a
 https://github.com/TrinityCore/TrinityCore/commit/3a955f5141dff9ce07a22d47a9bc58018b126f62
+https://github.com/TrinityCore/TrinityCore/commit/368e3c17a1b2ade2e4fc8e3e38c78678a4e1d927
