@@ -73,7 +73,7 @@ std::string SpectatorAddonMsg::GetMsgData()
 
     if (!isFilledIn(SPECTATOR_PREFIX_PLAYER))
     {
-        sLog->outInfo(LOG_FILTER_BATTLEGROUND, "SPECTATOR ADDON: player is not filled in.");
+        TC_LOG_INFO(LOG_FILTER_BATTLEGROUND, "SPECTATOR ADDON: player is not filled in.");
         return addonData;
     }
 

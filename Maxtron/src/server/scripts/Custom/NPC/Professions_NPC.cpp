@@ -75,7 +75,7 @@
      
                             if (!SkillInfo)
                             {
-                            sLog->outError(LOG_FILTER_SERVER_LOADING, "Profession NPC: received non-valid skill ID (LearnAllRecipesInProfession)");
+                            TC_LOG_ERROR(LOG_FILTER_SERVER_LOADING, "Profession NPC: received non-valid skill ID (LearnAllRecipesInProfession)");
                             }      
      
                             LearnSkillRecipesHelper(pPlayer, SkillInfo->id);

@@ -422,12 +422,12 @@ public:
                     }
                     player->CLOSE_GOSSIP_MENU();
 
-                    sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: Sent SMSG_LIST_INVENTORY");
+                    TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: Sent SMSG_LIST_INVENTORY");
 
                     Creature* vendor = player->GetNPCIfCanInteractWith(creature->GetGUID(), UNIT_NPC_FLAG_VENDOR);
                     if (!vendor)
                     {
-                        sLog->outDebug(LOG_FILTER_NETWORKIO, "WORLD: SendListInventory - Unit (GUID: %u) not found or you can not interact with him.", creature->GetGUIDLow());
+                        TC_LOG_DEBUG(LOG_FILTER_NETWORKIO, "WORLD: SendListInventory - Unit (GUID: %u) not found or you can not interact with him.", creature->GetGUIDLow());
                         player->SendSellError(SELL_ERR_CANT_FIND_VENDOR, NULL, 0, 0);
                         return true;
                     }
@@ -511,7 +511,7 @@ public:
                 }
                 else
                 {
-                    sLog->outError(LOG_FILTER_SQL, "Item entry (Entry: %u, itemGUID: %u, playerGUID: %u) does not exist, deleting.", fakeEntry, itemGUID, playerGUID);
+                    TC_LOG_ERROR(LOG_FILTER_SQL, "Item entry (Entry: %u, itemGUID: %u, playerGUID: %u) does not exist, deleting.", fakeEntry, itemGUID, playerGUID);
                     TransmogDisplayVendorMgr::DeleteFakeFromDB(itemGUID);
                 }
             } while (result->NextRow());
@@ -547,7 +547,7 @@ public:
 
     void OnStartup()
     {
-        sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Creating a list of usable transmogrification entries...");
+        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Creating a list of usable transmogrification entries...");
         optionMap.clear();
         std::set<uint32> displays;
         ItemTemplateContainer const* its = sObjectMgr->GetItemTemplateStore();
@@ -566,11 +566,11 @@ public:
                     displays.insert(itr->second.DisplayInfoID);
                 }
                 else
-                    sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Too many items for transmogrification: Class: %u SubClass: %u InventoryType: %u Quality: %u", itr->second.Class, itr->second.SubClass, getCorrectInvType(itr->second.InventoryType), itr->second.Quality);
+                    TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Too many items for transmogrification: Class: %u SubClass: %u InventoryType: %u Quality: %u", itr->second.Class, itr->second.SubClass, getCorrectInvType(itr->second.InventoryType), itr->second.Quality);
             }
         }
 #if !TRANSMOGRIFICATION_ALREADY_INSTALLED
-        sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Deleting non-existing transmogrification entries...");
+        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Deleting non-existing transmogrification entries...");
         CharacterDatabase.Execute("DELETE FROM custom_transmogrification WHERE NOT EXISTS (SELECT 1 FROM item_instance WHERE item_instance.guid = custom_transmogrification.GUID)");
 #endif
     }

@@ -19,7 +19,7 @@ public:
         }
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_2v2_7:30|t PvP Arenas.", GOSSIP_SENDER_MAIN, 3);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/Achievement_Arena_3v3_5:30|t Duel Zone", GOSSIP_SENDER_MAIN, 4);
-        //player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Event Zone.", GOSSIP_SENDER_MAIN, 9);
+        player->ADD_GOSSIP_ITEM(GOSSIP_ICON_BATTLE, "|TInterface/ICONS/INV_MISC_FILM_01:30|t Event Zone.", GOSSIP_SENDER_MAIN, 9);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Misc_Gear_01:30|t Profession Mall.", GOSSIP_SENDER_MAIN, 6);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/INV_Chest_Plate13:30|t Transmorgrification Mall.", GOSSIP_SENDER_MAIN, 7);
         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_TABARD, "|TInterface/ICONS/Achievement_Dungeon_Icecrown_IcecrownEntrance:30|t Icecrown Citadel.", GOSSIP_SENDER_MAIN, 8);
