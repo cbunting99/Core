@@ -186,6 +186,8 @@ void AnticheatMgr::SpeedHackDetection(Player* player,MovementInfo movementInfo)
     // 369 == DEEPRUN TRAM
     if (m_Players[key].GetLastMovementInfo().HasMovementFlag(MOVEMENTFLAG_ONTRANSPORT) && player->GetMapId() == 369)
         return;
+    if (player->IsOnVehicle(player))
+        return;
 
     uint32 distance2D = (uint32)movementInfo.pos.GetExactDist2d(&m_Players[key].GetLastMovementInfo().pos);
     uint8 moveType = 0;
