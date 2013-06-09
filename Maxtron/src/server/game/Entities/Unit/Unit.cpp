@@ -16376,90 +16376,165 @@ void Unit::ApplyResilience(Unit const* victim, float* crit, int32* damage, bool 
                 if (source->getClass() == CLASS_WARRIOR)
                 {
                     if (isCrit)
-                        *damage -= target->GetMeleeWarriorCritDamageReduction(*damage);
-                    *damage -= target->GetMeleeWarriorDamageReduction(*damage);
-					break;
+                        *damage -= target->GetMeleeCritDamageReduction(*damage);
+                    *damage -= target->GetMeleeDamageReduction(*damage);
+                    break;
                 }
                 if (source->getClass() == CLASS_PALADIN)
                 {
                     if (isCrit)
-                        *damage -= target->GetMeleePaladinCritDamageReduction(*damage);
-                    *damage -= target->GetMeleePaladinDamageReduction(*damage);
-					break;
+                        *damage -= target->GetMeleeCritDamageReduction(*damage);
+                    *damage -= target->GetMeleeDamageReduction(*damage);
+                    break;
                 }
-				if (source->getClass() == CLASS_HUNTER)
+                if (source->getClass() == CLASS_HUNTER)
                 {
                     if (isCrit)
-                        *damage -= target->GetMeleeHunterCritDamageReduction(*damage);
-                    *damage -= target->GetMeleeHunterDamageReduction(*damage);
-					break;
+                        *damage -= target->GetMeleeCritDamageReduction(*damage);
+                    *damage -= target->GetMeleeDamageReduction(*damage);
+                    break;
                 }
-				if (source->getClass() == CLASS_ROGUE)
+                if (source->getClass() == CLASS_ROGUE)
                 {
                     if (isCrit)
-                        *damage -= target->GetMeleeRogueCritDamageReduction(*damage);
-                    *damage -= target->GetMeleeRogueDamageReduction(*damage);
-					break;
+                        *damage -= target->GetMeleeCritDamageReduction(*damage);
+                    *damage -= target->GetMeleeDamageReduction(*damage);
+                    break;
                 }
-				if (source->getClass() == CLASS_PRIEST)
+                if (source->getClass() == CLASS_PRIEST)
                 {
                     if (isCrit)
-                        *damage -= target->GetMeleePriestCritDamageReduction(*damage);
-                    *damage -= target->GetMeleePriestDamageReduction(*damage);
-					break;
+                        *damage -= target->GetMeleeCritDamageReduction(*damage);
+                    *damage -= target->GetMeleeDamageReduction(*damage);
+                    break;
                 }
-				if (source->getClass() == CLASS_DEATH_KNIGHT)
+                if (source->getClass() == CLASS_DEATH_KNIGHT)
                 {
                     if (isCrit)
-                        *damage -= target->GetMeleeDeathKnightCritDamageReduction(*damage);
-                    *damage -= target->GetMeleeDeathKnightDamageReduction(*damage);
-					break;
+                        *damage -= target->GetMeleeCritDamageReduction(*damage);
+                    *damage -= target->GetMeleeDamageReduction(*damage);
+                    break;
                 }
-				if (source->getClass() == CLASS_SHAMAN)
+                if (source->getClass() == CLASS_SHAMAN)
                 {
                     if (isCrit)
-                        *damage -= target->GetMeleeShamanCritDamageReduction(*damage);
-                    *damage -= target->GetMeleeShamanDamageReduction(*damage);
-					break;
+                        *damage -= target->GetMeleeCritDamageReduction(*damage);
+                    *damage -= target->GetMeleeDamageReduction(*damage);
+                    break;
                 }
-				if (source->getClass() == CLASS_MAGE)
+                if (source->getClass() == CLASS_MAGE)
                 {
                     if (isCrit)
-                        *damage -= target->GetMeleeMageCritDamageReduction(*damage);
-                    *damage -= target->GetMeleeMageDamageReduction(*damage);
-					break;
+                        *damage -= target->GetMeleeCritDamageReduction(*damage);
+                    *damage -= target->GetMeleeDamageReduction(*damage);
+                    break;
                 }
-				if (source->getClass() == CLASS_WARLOCK)
+                if (source->getClass() == CLASS_WARLOCK)
                 {
                     if (isCrit)
-                        *damage -= target->GetMeleeWarlockCritDamageReduction(*damage);
-                    *damage -= target->GetMeleeWarlockDamageReduction(*damage);
-					break;
+                        *damage -= target->GetMeleeCritDamageReduction(*damage);
+                    *damage -= target->GetMeleeDamageReduction(*damage);
+                    break;
                 }
-				if (source->getClass() == CLASS_DRUID)
+                if (source->getClass() == CLASS_DRUID)
                 {
                     if (isCrit)
-                        *damage -= target->GetMeleeDruidCritDamageReduction(*damage);
-                    *damage -= target->GetMeleeDruidDamageReduction(*damage);
-					break;
+                        *damage -= target->GetMeleeCritDamageReduction(*damage);
+                    *damage -= target->GetMeleeDamageReduction(*damage);
+                    break;
                 }
                 else
                 {
                     if (isCrit)
                         *damage -= target->GetMeleeCritDamageReduction(*damage);
                     *damage -= target->GetMeleeDamageReduction(*damage);
-					break;
+                    break;
                 }
             }
+            break;
         case CR_CRIT_TAKEN_RANGED:
             // Crit chance reduction works against nonpets
             if (crit)
                 *crit -= target->GetRangedCritChanceReduction();
             if (source && damage)
             {
-                if (isCrit)
-                    *damage -= target->GetRangedCritDamageReduction(*damage);
-                *damage -= target->GetRangedDamageReduction(*damage);
+                if (source->getClass() == CLASS_WARRIOR)
+                {
+                    if (isCrit)
+                        *damage -= target->GetRangedCritDamageReduction(*damage);
+                    *damage -= target->GetRangedDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_PALADIN)
+                {
+                    if (isCrit)
+                        *damage -= target->GetRangedCritDamageReduction(*damage);
+                    *damage -= target->GetRangedDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_HUNTER)
+                {
+                    if (isCrit)
+                        *damage -= target->GetRangedCritDamageReduction(*damage);
+                    *damage -= target->GetRangedDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_ROGUE)
+                {
+                    if (isCrit)
+                        *damage -= target->GetRangedCritDamageReduction(*damage);
+                    *damage -= target->GetRangedDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_PRIEST)
+                {
+                    if (isCrit)
+                        *damage -= target->GetRangedCritDamageReduction(*damage);
+                    *damage -= target->GetRangedDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_DEATH_KNIGHT)
+                {
+                    if (isCrit)
+                        *damage -= target->GetRangedCritDamageReduction(*damage);
+                    *damage -= target->GetRangedDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_SHAMAN)
+                {
+                    if (isCrit)
+                        *damage -= target->GetRangedCritDamageReduction(*damage);
+                    *damage -= target->GetRangedDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_MAGE)
+                {
+                    if (isCrit)
+                        *damage -= target->GetRangedCritDamageReduction(*damage);
+                    *damage -= target->GetRangedDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_WARLOCK)
+                {
+                    if (isCrit)
+                        *damage -= target->GetRangedCritDamageReduction(*damage);
+                    *damage -= target->GetRangedDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_DRUID)
+                {
+                    if (isCrit)
+                        *damage -= target->GetRangedCritDamageReduction(*damage);
+                    *damage -= target->GetRangedDamageReduction(*damage);
+                    break;
+                }
+                else
+                {
+                    if (isCrit)
+                        *damage -= target->GetRangedCritDamageReduction(*damage);
+                    *damage -= target->GetRangedDamageReduction(*damage);
+                    break;
+                }
             }
             break;
         case CR_CRIT_TAKEN_SPELL:
@@ -16468,9 +16543,83 @@ void Unit::ApplyResilience(Unit const* victim, float* crit, int32* damage, bool 
                 *crit -= target->GetSpellCritChanceReduction();
             if (source && damage)
             {
-                if (isCrit)
-                    *damage -= target->GetSpellCritDamageReduction(*damage);
-                *damage -= target->GetSpellDamageReduction(*damage);
+                if (source->getClass() == CLASS_WARRIOR)
+                {
+                    if (isCrit)
+                        *damage -= target->GetSpellCritDamageReduction(*damage);
+                    *damage -= target->GetSpellDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_PALADIN)
+                {
+                    if (isCrit)
+                        *damage -= target->GetSpellCritDamageReduction(*damage);
+                    *damage -= target->GetSpellDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_HUNTER)
+                {
+                    if (isCrit)
+                        *damage -= target->GetSpellCritDamageReduction(*damage);
+                    *damage -= target->GetSpellDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_ROGUE)
+                {
+                    if (isCrit)
+                        *damage -= target->GetSpellCritDamageReduction(*damage);
+                    *damage -= target->GetSpellDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_PRIEST)
+                {
+                    if (isCrit)
+                        *damage -= target->GetSpellCritDamageReduction(*damage);
+                    *damage -= target->GetSpellDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_DEATH_KNIGHT)
+                {
+                    if (isCrit)
+                        *damage -= target->GetSpellCritDamageReduction(*damage);
+                    *damage -= target->GetSpellDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_SHAMAN)
+                {
+                    if (isCrit)
+                        *damage -= target->GetSpellCritDamageReduction(*damage);
+                    *damage -= target->GetSpellDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_MAGE)
+                {
+                    if (isCrit)
+                        *damage -= target->GetSpellCritDamageReduction(*damage);
+                    *damage -= target->GetSpellDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_WARLOCK)
+                {
+                    if (isCrit)
+                        *damage -= target->GetSpellCritDamageReduction(*damage);
+                    *damage -= target->GetSpellDamageReduction(*damage);
+                    break;
+                }
+                if (source->getClass() == CLASS_DRUID)
+                {
+                    if (isCrit)
+                        *damage -= target->GetSpellCritDamageReduction(*damage);
+                    *damage -= target->GetSpellDamageReduction(*damage);
+                    break;
+                }
+                else
+                {
+                    if (isCrit)
+                        *damage -= target->GetSpellCritDamageReduction(*damage);
+                    *damage -= target->GetSpellDamageReduction(*damage);
+                    break;
+                }
             }
             break;
         default:
