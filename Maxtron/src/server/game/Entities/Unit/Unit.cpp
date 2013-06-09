@@ -16451,7 +16451,6 @@ void Unit::ApplyResilience(Unit const* victim, float* crit, int32* damage, bool 
                     break;
                 }
             }
-            break;
         case CR_CRIT_TAKEN_RANGED:
             // Crit chance reduction works against nonpets
             if (crit)
@@ -16536,7 +16535,6 @@ void Unit::ApplyResilience(Unit const* victim, float* crit, int32* damage, bool 
                     break;
                 }
             }
-            break;
         case CR_CRIT_TAKEN_SPELL:
             // Crit chance reduction works against nonpets
             if (crit)
@@ -16621,7 +16619,6 @@ void Unit::ApplyResilience(Unit const* victim, float* crit, int32* damage, bool 
                     break;
                 }
             }
-            break;
         default:
             break;
     }
