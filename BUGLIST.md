@@ -13,3 +13,6 @@ See green comment below there.
    Rune Tap shouldn't damage the enemy either.
 5. Mind Amplification Dish (engineering), doesn't work at all.
 6. Explosion of Living Bomb shoudn't break Dragon's Breath.
+7. 
+
+https://github.com/TrinityCore/TrinityCore/commit/3a697d4c9f5e9f2fa9c3b08c8e103d90472a871a
