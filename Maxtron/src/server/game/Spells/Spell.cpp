@@ -5088,6 +5088,25 @@ SpellCastResult Spell::CheckCast(bool strict)
         }
     }
 
+    /*
+    // Mocking Blow.
+    if (m_spellInfo->Id == 694)
+    {
+        if (Unit* victim = m_caster->getVictim())
+        {
+            if (m_caster->IsWithinMeleeRange(victim, 5))
+            {
+                if (victim->GetTypeId() == TYPEID_PLAYER)
+                    return SPELL_FAILED_BAD_TARGETS;
+                else
+                    return SPELL_CAST_OK;
+            }
+            else
+                return SPELL_FAILED_OUT_OF_RANGE;
+        }
+    }
+    */
+
     // Goblin Rocket Pack.
     if (m_spellInfo->Id == 68645)
     {
