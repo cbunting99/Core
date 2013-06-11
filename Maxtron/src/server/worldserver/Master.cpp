@@ -124,9 +124,6 @@ int Master::Run()
     BigNumber seed1;
     seed1.SetRand(16 * 8);
 
-    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "%s (worldserver-daemon)", _FULLVERSION);
-    TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "<Ctrl-C> to stop.\n");
-
     TC_LOG_INFO(LOG_FILTER_WORLDSERVER, " ______                       __");
     TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "/\\__  _\\       __          __/\\ \\__");
     TC_LOG_INFO(LOG_FILTER_WORLDSERVER, "\\/_/\\ \\/ _ __ /\\_\\    ___ /\\_\\ \\, _\\  __  __");
@@ -459,15 +456,9 @@ void Master::_StopDB()
     MySQL::Library_End();
 }
 
-/// Clear 'online' status for all accounts with characters in this realm
 void Master::ClearOnlineAccounts()
 {
-    // Reset online status for all accounts with characters on the current realm
-    LoginDatabase.DirectPExecute("UPDATE account SET online = 0 WHERE online > 0 AND id IN (SELECT acctid FROM realmcharacters WHERE realmid = %d)", realmID);
-
-    // Reset online status for all characters
-    CharacterDatabase.DirectExecute("UPDATE characters SET online = 0 WHERE online <> 0");
-
-    // Battleground instance ids reset at server restart
+    LoginDatabase.DirectPExecute("UPDATE account SET online = 0");
+    CharacterDatabase.DirectExecute("UPDATE characters SET online = 0");
     CharacterDatabase.DirectExecute("UPDATE character_battleground_data SET instanceId = 0");
 }
