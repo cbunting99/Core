@@ -21,7 +21,7 @@ public:
 			switch (player->getFaction())
 			{
 		case ALLIANCE:
-			snprintf(message, 1024, "|cffff9900[MG]|cff0000EE[Alliance]|cffffff00[[%s]: %s", player->GetName().c_str(), msg);
+			snprintf(message, 1024, "|cffff9900[MG]|cff0000EE[Alliance]|cffffff00[%s]: %s", player->GetName().c_str(), msg);
 			sWorld->SendGlobalText(message, NULL);
 			break;
 		case HORDE:
