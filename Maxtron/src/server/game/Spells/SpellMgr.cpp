@@ -3249,30 +3249,32 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_DONE_BONUS;
                 break;
                 /* Custom Begin */
-            case 8172:  // Cleansing Totem
-            case 32182: // Heroism
-            case 2825:  // Bloodlust
-            case 19185: // Entrapment
-            case 64803: // Entrapment
-            case 64804: // Entrapment
-            case 19388: // Entrapment
-            case 19387: // Entrapment
-            case 19184: // Entrapment
-            case 64843: // Divine Hymn
-            case 64844: // Divine Hymn
-            case 55362: // Living Bomb
-            case 44461: // Living Bomb 
-            case 55361: // Living Bomb
+            case 32182: // Heroism.
+            case 2825:  // Bloodlust.
+            case 19185: // Entrapment.
+            case 64803: // Entrapment.
+            case 64804: // Entrapment.
+            case 19388: // Entrapment.
+            case 19387: // Entrapment.
+            case 19184: // Entrapment.
+            case 64843: // Divine Hymn.
+            case 64844: // Divine Hymn.
+            case 55362: // Living Bomb Explosion.
+            case 44461: // Living Bomb Explosion.
+            case 55361: // Living Bomb Explosion.
+			case 57330: // Horn of Winter.
+			case 57623: // Horn of Winter.
+			case 47436: // Battle Shout.
+			case 47440: // Commanding Shout.
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
                 break;
-			case 32728: // Arena Preparation
-				spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_POWER_COST_SCHOOL_PCT;
-				spellInfo->Attributes |= SPELL_ATTR0_CANT_CANCEL;
-				break;
-            case 33110: // Prayer of Mending (Heal) can trigger Inspiration
+            case 33110: // Prayer of Mending.
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_TRIGGERED_CAN_TRIGGER_PROC;
                 break;
-            case 15473: // Shadowform, fixes damage reduction issue.
+			case 52212: // Death Knight: Death and Decay trigger spell
+				spellInfo->AttributesEx6 |= SPELL_ATTR6_CAN_TARGET_INVISIBLE;
+				break;
+            case 15473: // Shadowform.
                 spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN;
                 spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE;
                 spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_SHAPESHIFT;
@@ -3286,13 +3288,15 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_SITTING;
                 break;
                 /* Custom Stop */
-            case 8145: // Tremor Totem (instant pulse)
+            case 8145: // Tremor Totem.
+            case 8172: // Cleansing Totem.
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
                 break;
-            case 6474: // Earthbind Totem (instant pulse)
+            case 6474: // Earthbind Totem.
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
                 break;
+			/* Custom End */
             case 52109: // Flametongue Totem rank 1 (Aura)
             case 52110: // Flametongue Totem rank 2 (Aura)
             case 52111: // Flametongue Totem rank 3 (Aura)

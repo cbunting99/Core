@@ -1927,6 +1927,7 @@ void WorldSession::HandleCharFactionOrRaceChange(WorldPacket& recvData)
                         guild->DeleteMember(MAKE_NEW_GUID(lowGuid, 0, HIGHGUID_PLAYER));
             }
 
+			/*
             if (!HasPermission(RBAC_PERM_TWO_SIDE_ADD_FRIEND))
             {
                 // Delete Friend List
@@ -1942,6 +1943,7 @@ void WorldSession::HandleCharFactionOrRaceChange(WorldPacket& recvData)
 
             // Leave Arena Teams
             Player::LeaveAllArenaTeams(guid);
+			*/
 
             // Reset homebind and position
             stmt = CharacterDatabase.GetPreparedStatement(CHAR_DEL_PLAYER_HOMEBIND);
