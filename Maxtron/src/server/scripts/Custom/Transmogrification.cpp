@@ -511,8 +511,13 @@ public:
                 }
                 else
                 {
+<<<<<<< HEAD
                     sLog->outError(LOG_FILTER_SQL, "Item entry (Entry: %u, itemGUID: %u, playerGUID: %u) does not exist, deleting.", fakeEntry, itemGUID, playerGUID);
                     TransmogDisplayVendorMgr::DeleteFakeFromDB(itemGUID);
+=======
+                    TC_LOG_ERROR(LOG_FILTER_SQL, "Item entry (Entry: %u, itemGUID: %u, playerGUID: %u) does not exist, deleting.", fakeEntry, itemGUID, playerGUID);
+                    Transmogrification::DeleteFakeFromDB(itemGUID);
+>>>>>>> master
                 }
             } while (result->NextRow());
 
@@ -547,6 +552,7 @@ public:
 
     void OnStartup()
     {
+<<<<<<< HEAD
         sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Creating a list of usable transmogrification entries...");
         optionMap.clear();
         std::set<uint32> displays;
@@ -571,6 +577,9 @@ public:
         }
 #if !TRANSMOGRIFICATION_ALREADY_INSTALLED
         sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Deleting non-existing transmogrification entries...");
+=======
+        TC_LOG_INFO(LOG_FILTER_SERVER_LOADING, "Deleting non-existing transmogrification entries...");
+>>>>>>> master
         CharacterDatabase.Execute("DELETE FROM custom_transmogrification WHERE NOT EXISTS (SELECT 1 FROM item_instance WHERE item_instance.guid = custom_transmogrification.GUID)");
 #endif
     }
