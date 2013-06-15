@@ -3040,9 +3040,9 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->EffectImplicitTargetA[0] = TARGET_UNIT_CASTER_AREA_PARTY;
                 spellInfo->EffectRadiusIndex[0] = EFFECT_RADIUS_10_YARDS_2;
                 break;
-                case 24259: // Spell Lock silence
-            spellInfo->speed = 80;
-            break;
+            case 24259: // Spell Lock.
+                spellInfo->speed = 80;
+                break;
             case 44978: // Wild Magic
             case 45001:
             case 45002:
