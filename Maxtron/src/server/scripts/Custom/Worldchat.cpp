@@ -18,21 +18,19 @@ public:
 		switch(player->GetSession()->GetSecurity())
 		{
 		case SEC_PLAYER:
-			switch (player->getFaction())
-			{
-		case ALLIANCE:
-			snprintf(message, 1024, "|cffff9900[MG]|cff0000EE[Alliance]|cffffff00[%s]: %s", player->GetName().c_str(), msg);
-			sWorld->SendGlobalText(message, NULL);
-			break;
-		case HORDE:
-			snprintf(message, 1024, "|cffff9900[MG]|cffCC1100[Horde]|cffffff00[%s]: %s", player->GetName().c_str(), msg);
-			sWorld->SendGlobalText(message, NULL);
-			break;
-		default:
-			snprintf(message, 1024, "|cffff9900[MG]|cffffff00[NULL][%s]: %s", player->GetName().c_str(), msg);
-			sWorld->SendGlobalText(message, NULL);
-			break;
-			}
+
+			if (player->GetTeam() == ALLIANCE)
+                {
+                    snprintf(message, 1024, "|cffff9900[MG]|cff0000EE[Alliance]|cffffff00[%s]: %s", player->GetName().c_str(), msg);
+					sWorld->SendGlobalText(message, NULL);
+                }
+ 
+                if (player->GetTeam() == HORDE)
+                {
+                    snprintf(message, 1024, "|cffff9900[MG]|cffCC1100[Horde]|cffffff00[%s]: %s", player->GetName().c_str(), msg);
+					sWorld->SendGlobalText(message, NULL);
+                }
+                break;
 
 		case SEC_PREMIUM:
 			snprintf(message, 1024, "|cffff9900[MG]|cff00ccff[Premium][%s]: %s", player->GetName().c_str(), msg);
