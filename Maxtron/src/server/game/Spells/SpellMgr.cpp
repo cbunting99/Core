@@ -2944,11 +2944,13 @@ void SpellMgr::LoadDbcDataCorrections()
             {
                 case SPELL_EFFECT_CHARGE:
                 case SPELL_EFFECT_CHARGE_DEST:
+                    if (!spellInfo->speed && !spellInfo->SpellFamilyName)
+                        spellInfo->speed = SPEED_CHARGE;
+                    break;
                 case SPELL_EFFECT_JUMP:
                 case SPELL_EFFECT_JUMP_DEST:
                 case SPELL_EFFECT_LEAP_BACK:
-                    if (!spellInfo->speed && !spellInfo->SpellFamilyName)
-                        spellInfo->speed = SPEED_CHARGE;
+                    spellInfo->EffectMiscValueB[0] = 50;
                     break;
             }
         }
@@ -3039,9 +3041,6 @@ void SpellMgr::LoadDbcDataCorrections()
                 // Target entry seems to be wrong for this spell :/
                 spellInfo->EffectImplicitTargetA[0] = TARGET_UNIT_CASTER_AREA_PARTY;
                 spellInfo->EffectRadiusIndex[0] = EFFECT_RADIUS_10_YARDS_2;
-                break;
-            case 24259: // Spell Lock.
-                spellInfo->speed = 80;
                 break;
             case 44978: // Wild Magic
             case 45001:
@@ -3187,10 +3186,6 @@ void SpellMgr::LoadDbcDataCorrections()
             case 48422:
                 spellInfo->Stances = 1 << (FORM_TREE - 1);
                 break;
-            case 49575: // Deathgrip
-            case 58867: // Spirit wolf Leap.
-                spellInfo->EffectMiscValueB[0] = 70;
-                break;
             case 51466: // Elemental Oath (Rank 1)
             case 51470: // Elemental Oath (Rank 2)
                 spellInfo->Effect[EFFECT_1] = SPELL_EFFECT_APPLY_AURA;
@@ -3262,18 +3257,37 @@ void SpellMgr::LoadDbcDataCorrections()
             case 55362: // Living Bomb Explosion.
             case 44461: // Living Bomb Explosion.
             case 55361: // Living Bomb Explosion.
-			case 57330: // Horn of Winter.
-			case 57623: // Horn of Winter.
-			case 47436: // Battle Shout.
-			case 47440: // Commanding Shout.
-                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+            case 57330: // Horn of Winter.
+            case 57623: // Horn of Winter.
+            case 47436: // Battle Shout.
+            case 47440: // Commanding Shout.
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS; // Need to clean this part.
                 break;
             case 33110: // Prayer of Mending.
+                spellInfo->AttributesEx3 |= SPELL_ATTR3_DONT_DISPLAY_RANGE;
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_TRIGGERED_CAN_TRIGGER_PROC;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                spellInfo->AttributesEx |= SPELL_ATTR1_NO_THREAT;
+                spellInfo->Attributes |= SPELL_ATTR0_DONT_AFFECT_SHEATH_STATE;
+                spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_SITTING;
                 break;
-			case 52212: // Death Knight: Death and Decay trigger spell
-				spellInfo->AttributesEx6 |= SPELL_ATTR6_CAN_TARGET_INVISIBLE;
-				break;
+            case 52212: // Death and Decay.
+                spellInfo->AttributesEx6 |= SPELL_ATTR6_CAN_TARGET_INVISIBLE;
+                spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
+                spellInfo->AttributesEx3 |= SPELL_ATTR3_UNK25;
+                spellInfo->AttributesEx3 |= SPELL_ATTR3_DONT_DISPLAY_RANGE;
+                spellInfo->AttributesEx |= SPELL_ATTR1_CANT_BE_REDIRECTED;
+                spellInfo->AttributesEx |= SPELL_ATTR1_CANT_BE_REFLECTED;
+                spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_DEAD;
+                spellInfo->Attributes |= SPELL_ATTR0_NEGATIVE_1;
+                break;
+            case 24259: // Spell Lock.
+                spellInfo->AttributesEx3 |= SPELL_ATTR3_IGNORE_HIT_RESULT;
+                spellInfo->AttributesEx |= SPELL_ATTR1_CANT_BE_REDIRECTED;
+                spellInfo->AttributesEx |= SPELL_ATTR1_CANT_BE_REFLECTED;
+                spellInfo->Attributes |= SPELL_ATTR0_DONT_AFFECT_SHEATH_STATE;
+                spellInfo->speed = 80;
+                break;
             case 15473: // Shadowform.
                 spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN;
                 spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE;
@@ -3287,7 +3301,6 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->Attributes |= SPELL_ATTR0_DISABLED_WHILE_ACTIVE;
                 spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_SITTING;
                 break;
-                /* Custom Stop */
             case 8145: // Tremor Totem.
             case 8172: // Cleansing Totem.
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
@@ -3296,7 +3309,7 @@ void SpellMgr::LoadDbcDataCorrections()
             case 6474: // Earthbind Totem.
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
                 break;
-			/* Custom End */
+            /* Custom End */
             case 52109: // Flametongue Totem rank 1 (Aura)
             case 52110: // Flametongue Totem rank 2 (Aura)
             case 52111: // Flametongue Totem rank 3 (Aura)
