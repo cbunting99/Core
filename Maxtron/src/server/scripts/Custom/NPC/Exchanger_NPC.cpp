@@ -17,9 +17,11 @@ public:
     {
             player->ADD_GOSSIP_ITEM( 7, "100 BoJ -> 10000 Honor Pts."                     , GOSSIP_SENDER_MAIN, 1); 
             player->ADD_GOSSIP_ITEM( 5, "100 BoJ -> 100 Arena Pts."                     , GOSSIP_SENDER_MAIN, 2); 
-            player->ADD_GOSSIP_ITEM( 8, "100 Arena Pts. -> 10000 Honor Pts."			, GOSSIP_SENDER_MAIN, 3);
-			player->ADD_GOSSIP_ITEM( 8, "60000 Honor Pts. -> 1 S8 BG Token."			, GOSSIP_SENDER_MAIN, 4);
 			player->ADD_GOSSIP_ITEM( 8, "25 BoJ -> 1 Maxtron Champion's Seal."			, GOSSIP_SENDER_MAIN, 5);
+			player->ADD_GOSSIP_ITEM( 8, "100 Arena Pts. -> 10000 Honor Pts."			, GOSSIP_SENDER_MAIN, 3);
+			player->ADD_GOSSIP_ITEM( 8, "100 Arena Pts. -> 100 BoJ."			, GOSSIP_SENDER_MAIN, 7);
+			player->ADD_GOSSIP_ITEM( 8, "60000 Honor Pts. -> 1 S8 BG Token."			, GOSSIP_SENDER_MAIN, 4);
+			player->ADD_GOSSIP_ITEM( 8, "25000 Honor Pts. -> 100 Arena Pts."			, GOSSIP_SENDER_MAIN, 6);
         }
 
         player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, _creature->GetGUID());         
@@ -32,8 +34,38 @@ public:
         {
             player->PlayerTalkClass->ClearMenus();
             switch(uiAction)
-            {          
-               
+            {
+				case 6: 
+                if (player->GetHonorPoints () >= 25000)
+                {
+                    player->CLOSE_GOSSIP_MENU();
+                    player->ModifyArenaPoints(+100);
+                    player->ModifyHonorPoints(-25000);
+                    _creature->MonsterWhisper("You exchanged succesfully!", player->GetGUID());
+                }
+                else
+                {
+                    player->CLOSE_GOSSIP_MENU();
+                    _creature->MonsterWhisper("Don't even try it!", player->GetGUID());
+                    return false;
+                }
+                break;
+
+               case 7: 
+                if (player->GetArenaPoints () >= 100)
+                {
+                    player->CLOSE_GOSSIP_MENU();
+                    player->ModifyArenaPoints(-100);
+                    player->AddItem(37829,100);
+                    _creature->MonsterWhisper("You exchanged succesfully!", player->GetGUID());
+                }
+                else
+                {
+                    player->CLOSE_GOSSIP_MENU();
+                    _creature->MonsterWhisper("Don't even try it!", player->GetGUID());
+                    return false;
+                }
+                break;
                
 
             case 1: 

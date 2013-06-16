@@ -338,7 +338,7 @@ void AnticheatMgr::BuildReport(Player* player,uint8 reportType)
             {
                 if (player->GetSession()->GetSecurity() >= SEC_MODERATOR)
                     return;
-				if (player->IsOnVehicle(player))
+                if (player->IsOnVehicle(player) || (player->IsFalling()) || (player->isCharmed()) || (player->IsPolymorphed()) || (player->isFeared()))
                     return;
                 else
                 {
