@@ -32,7 +32,6 @@
 template<class T>
 void ConfusedMovementGenerator<T>::DoInitialize(T* unit)
 {
-    unit->StopMoving();
     float const wander_distance = 4;
     float x = unit->GetPositionX();
     float y = unit->GetPositionY();
@@ -79,6 +78,9 @@ void ConfusedMovementGenerator<T>::DoInitialize(T* unit)
         i_waypoints[idx][1] = wanderY;
         i_waypoints[idx][2] = z;
     }
+	
+    if (!unit->IsAlive() || unit->IsStopped())
+        return;
 
     unit->StopMoving();
     unit->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_CONFUSED);
@@ -88,8 +90,8 @@ void ConfusedMovementGenerator<T>::DoInitialize(T* unit)
 template<>
 void ConfusedMovementGenerator<Creature>::_InitSpecific(Creature* creature, bool &is_water_ok, bool &is_land_ok)
 {
-    is_water_ok = creature->canSwim();
-    is_land_ok  = creature->canWalk();
+    is_water_ok = creature->CanSwim();
+    is_land_ok  = creature->CanWalk();
 }
 
 template<>
@@ -104,7 +106,12 @@ void ConfusedMovementGenerator<T>::DoReset(T* unit)
 {
     i_nextMove = 1;
     i_nextMoveTime.Reset(0);
+
+    if (!unit->IsAlive() || unit->IsStopped())
+        return;
+
     unit->StopMoving();
+    unit->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_CONFUSED);
     unit->AddUnitState(UNIT_STATE_CONFUSED | UNIT_STATE_CONFUSED_MOVE);
 }
 
@@ -118,6 +125,7 @@ bool ConfusedMovementGenerator<T>::DoUpdate(T* unit, uint32 diff)
     {
         // currently moving, update location
         unit->AddUnitState(UNIT_STATE_CONFUSED_MOVE);
+	    unit->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_CONFUSED);
 
         if (unit->movespline->Finalized())
         {
@@ -133,6 +141,7 @@ bool ConfusedMovementGenerator<T>::DoUpdate(T* unit, uint32 diff)
         {
             // start moving
             unit->AddUnitState(UNIT_STATE_CONFUSED_MOVE);
+	        unit->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_CONFUSED);
 
             ASSERT(i_nextMove <= MAX_CONF_WAYPOINTS);
             float x = i_waypoints[i_nextMove][0];
@@ -162,8 +171,8 @@ void ConfusedMovementGenerator<Creature>::DoFinalize(Creature* unit)
     unit->StopMoving();
     unit->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_CONFUSED);
     unit->ClearUnitState(UNIT_STATE_CONFUSED | UNIT_STATE_CONFUSED_MOVE);
-    if (unit->getVictim())
-        unit->SetTarget(unit->getVictim()->GetGUID());
+    if (unit->GetVictim())
+        unit->SetTarget(unit->GetVictim()->GetGUID());
 }
 
 template void ConfusedMovementGenerator<Player>::DoInitialize(Player* player);
