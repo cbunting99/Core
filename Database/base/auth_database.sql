@@ -1,14 +1,14 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               5.5.30-MariaDB-log - mariadb.org binary distribution
+-- Server version:               5.5.31-MariaDB-log - mariadb.org binary distribution
 -- Server OS:                    Win64
--- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2013-05-14 17:11:50
+-- HeidiSQL Version:             8.0.0.4396
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
-/*!40014 SET FOREIGN_KEY_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping database structure for auth
 CREATE DATABASE IF NOT EXISTS `auth` /*!40100 DEFAULT CHARACTER SET utf8 */;
@@ -78,14 +78,14 @@ CREATE TABLE IF NOT EXISTS `account_banned` (
 
 -- Dumping structure for table auth.autobroadcast
 CREATE TABLE IF NOT EXISTS `autobroadcast` (
-  `realmid` int(10) NOT NULL,
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `weight` tinyint(3) DEFAULT '1',
+  `realmid` int(11) NOT NULL DEFAULT '-1',
+  `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
+  `weight` tinyint(3) unsigned DEFAULT '1',
   `text` longtext NOT NULL,
   PRIMARY KEY (`id`,`realmid`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Dumping data for table auth.autobroadcast: 0 rows
+-- Dumping data for table auth.autobroadcast: ~0 rows (approximately)
 /*!40000 ALTER TABLE `autobroadcast` DISABLE KEYS */;
 /*!40000 ALTER TABLE `autobroadcast` ENABLE KEYS */;
 
@@ -226,7 +226,7 @@ CREATE TABLE IF NOT EXISTS `rbac_group_roles` (
   CONSTRAINT `fk__rbac_group_roles__rbac_groups` FOREIGN KEY (`groupId`) REFERENCES `rbac_groups` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Group Role relation';
 
--- Dumping data for table auth.rbac_group_roles: ~91 rows (approximately)
+-- Dumping data for table auth.rbac_group_roles: ~93 rows (approximately)
 /*!40000 ALTER TABLE `rbac_group_roles` DISABLE KEYS */;
 INSERT INTO `rbac_group_roles` (`groupId`, `roleId`) VALUES
 	(1, 1),
@@ -290,6 +290,7 @@ INSERT INTO `rbac_group_roles` (`groupId`, `roleId`) VALUES
 	(3, 36),
 	(3, 37),
 	(3, 38),
+	(3, 39),
 	(4, 4),
 	(4, 8),
 	(4, 9),
@@ -319,7 +320,8 @@ INSERT INTO `rbac_group_roles` (`groupId`, `roleId`) VALUES
 	(4, 35),
 	(4, 36),
 	(4, 37),
-	(4, 38);
+	(4, 38),
+	(4, 39);
 /*!40000 ALTER TABLE `rbac_group_roles` ENABLE KEYS */;
 
 
@@ -330,7 +332,7 @@ CREATE TABLE IF NOT EXISTS `rbac_permissions` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Permission List';
 
--- Dumping data for table auth.rbac_permissions: ~46 rows (approximately)
+-- Dumping data for table auth.rbac_permissions: ~47 rows (approximately)
 /*!40000 ALTER TABLE `rbac_permissions` DISABLE KEYS */;
 INSERT INTO `rbac_permissions` (`id`, `name`) VALUES
 	(1, 'Instant logout'),
@@ -378,7 +380,8 @@ INSERT INTO `rbac_permissions` (`id`, `name`) VALUES
 	(44, 'Receive global GM messages/texts'),
 	(45, 'Join channels without announce'),
 	(46, 'Change channel settings without being channel moderator'),
-	(47, 'Enables lower security than target check');
+	(47, 'Enables lower security than target check'),
+	(48, 'Enable IP, Last Login and EMail output in pinfo');
 /*!40000 ALTER TABLE `rbac_permissions` ENABLE KEYS */;
 
 
@@ -389,7 +392,7 @@ CREATE TABLE IF NOT EXISTS `rbac_roles` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Roles List';
 
--- Dumping data for table auth.rbac_roles: ~38 rows (approximately)
+-- Dumping data for table auth.rbac_roles: ~39 rows (approximately)
 /*!40000 ALTER TABLE `rbac_roles` DISABLE KEYS */;
 INSERT INTO `rbac_roles` (`id`, `name`) VALUES
 	(1, 'Player Commands'),
@@ -429,7 +432,8 @@ INSERT INTO `rbac_roles` (`id`, `name`) VALUES
 	(35, 'See two side who list'),
 	(36, 'Add friends of other faction'),
 	(37, 'See all security levels with who command'),
-	(38, 'Allows to add a gm to friend list');
+	(38, 'Allows to add a gm to friend list'),
+	(39, 'Enable IP, Last Login and EMail output in pinfo');
 /*!40000 ALTER TABLE `rbac_roles` ENABLE KEYS */;
 
 
@@ -443,7 +447,7 @@ CREATE TABLE IF NOT EXISTS `rbac_role_permissions` (
   CONSTRAINT `fk__role_permissions__rbac_permissions` FOREIGN KEY (`permissionId`) REFERENCES `rbac_permissions` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Role Permission relation';
 
--- Dumping data for table auth.rbac_role_permissions: ~46 rows (approximately)
+-- Dumping data for table auth.rbac_role_permissions: ~47 rows (approximately)
 /*!40000 ALTER TABLE `rbac_role_permissions` DISABLE KEYS */;
 INSERT INTO `rbac_role_permissions` (`roleId`, `permissionId`) VALUES
 	(1, 7),
@@ -491,7 +495,8 @@ INSERT INTO `rbac_role_permissions` (`roleId`, `permissionId`) VALUES
 	(35, 28),
 	(36, 29),
 	(37, 35),
-	(38, 40);
+	(38, 40),
+	(39, 48);
 /*!40000 ALTER TABLE `rbac_role_permissions` ENABLE KEYS */;
 
 
@@ -572,5 +577,6 @@ CREATE TABLE IF NOT EXISTS `uptime` (
 -- Dumping data for table auth.uptime: ~0 rows (approximately)
 /*!40000 ALTER TABLE `uptime` DISABLE KEYS */;
 /*!40000 ALTER TABLE `uptime` ENABLE KEYS */;
-/*!40014 SET FOREIGN_KEY_CHECKS=1 */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

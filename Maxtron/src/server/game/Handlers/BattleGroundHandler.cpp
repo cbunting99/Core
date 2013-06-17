@@ -216,7 +216,7 @@ void WorldSession::HandleBattlemasterJoinOpcode(WorldPacket& recvData)
 
         for (GroupReference* itr = grp->GetFirstMember(); itr != NULL; itr = itr->next())
         {
-            Player* member = itr->getSource();
+            Player* member = itr->GetSource();
             if (!member)
                 continue;   // this should never happen
 
@@ -441,7 +441,7 @@ void WorldSession::HandleBattleFieldPortOpcode(WorldPacket &recvData)
             _player->SetBattlegroundEntryPoint();
 
         // resurrect the player
-        if (!_player->isAlive())
+        if (!_player->IsAlive())
         {
             _player->ResurrectPlayer(1.0f);
             _player->SpawnCorpseBones();
@@ -511,7 +511,7 @@ void WorldSession::HandleBattlefieldLeaveOpcode(WorldPacket& recvData)
     recvData.read_skip<uint16>();                          // unk3
 
     // not allow leave battleground in combat
-    if (_player->isInCombat())
+    if (_player->IsInCombat())
         if (Battleground* bg = _player->GetBattleground())
             if (bg->GetStatus() != STATUS_WAIT_LEAVE)
                 return;
@@ -712,7 +712,7 @@ void WorldSession::HandleBattlemasterJoinArena(WorldPacket& recvData)
 
         for (GroupReference* itr = grp->GetFirstMember(); itr != NULL; itr = itr->next())
         {
-            Player* member = itr->getSource();
+            Player* member = itr->GetSource();
             if (!member)
                 continue;
 

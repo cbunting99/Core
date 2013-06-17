@@ -26,7 +26,7 @@ SpectatorAddonMsg::SpectatorAddonMsg()
 
     player    = "";
     target    = "";
-    isAlive   = false;
+    IsAlive   = false;
     pClass    = CLASS_WARRIOR;
     maxHP     = 0;
     maxPower  = 0;
@@ -99,7 +99,7 @@ std::string SpectatorAddonMsg::GetMsgData()
                 case SPECTATOR_PREFIX_STATUS:
                 {
                     char buffer[20];
-                    sprintf(buffer, "STA=%d;", isAlive);
+                    sprintf(buffer, "STA=%d;", IsAlive);
                     msg += buffer;
                     break;
                 }

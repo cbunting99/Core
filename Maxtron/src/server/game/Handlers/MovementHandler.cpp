@@ -331,9 +331,7 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvData)
                 if (!foundNewTransport)
                 {
                     plrMover->m_transport = NULL;
-                    movementInfo.t_pos.Relocate(0.0f, 0.0f, 0.0f, 0.0f);
-                    movementInfo.t_time = 0;
-                    movementInfo.t_seat = -1;
+                    movementInfo.ClearTransport();
                 }
             }
         }
@@ -409,7 +407,7 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvData)
                 // NOTE: this is actually called many times while falling
                 // even after the player has been teleported away
                 /// @todo discard movement packets after the player is rooted
-                if (plrMover->isAlive())
+                if (plrMover->IsAlive())
                 {
                     switch (plrMover->GetMapId())    
                     {
@@ -426,10 +424,10 @@ void WorldSession::HandleMovementOpcodes(WorldPacket& recvData)
                         plrMover->TeleportTo(572, 1286.432373f, 1667.153687f, 40.484043f, 1.728855f);
                         break;
                     default:
-                        if (plrMover->isAlive())
+                        if (plrMover->IsAlive())
                         {
                             plrMover->EnvironmentalDamage(DAMAGE_FALL_TO_VOID, GetPlayer()->GetMaxHealth());
-                            if (!plrMover->isAlive())
+                            if (!plrMover->IsAlive())
                                 plrMover->KillPlayer();
                         }
                         break;
@@ -618,7 +616,7 @@ void WorldSession::HandleMoveWaterWalkAck(WorldPacket& recvData)
 
 void WorldSession::HandleSummonResponseOpcode(WorldPacket& recvData)
 {
-    if (!_player->isAlive() || _player->isInCombat())
+    if (!_player->IsAlive() || _player->IsInCombat())
         return;
 
     uint64 summoner_guid;

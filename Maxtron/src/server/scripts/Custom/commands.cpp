@@ -81,7 +81,7 @@ static bool HandleTeleportCommand(ChatHandler * handler, const char * args)
             handler->SetSentErrorMessage(true);
             return false;
         }
-        if (me->isInCombat())
+        if (me->IsInCombat())
         {
             handler->PSendSysMessage("You are in combat.");
             handler->SetSentErrorMessage(true);
