@@ -29,7 +29,7 @@ class TargetedMovementGeneratorBase
 {
     public:
         TargetedMovementGeneratorBase(Unit* target) { i_target.link(target, this); }
-        void stopFollowing() { }
+        void StopFollowing() { }
     protected:
         FollowerReference i_target;
 };
@@ -83,7 +83,7 @@ class ChaseMovementGenerator : public TargetedMovementGeneratorMedium<T, ChaseMo
         static void _clearUnitStateMove(T* u) { u->ClearUnitState(UNIT_STATE_CHASE_MOVE); }
         static void _addUnitStateMove(T* u)  { u->AddUnitState(UNIT_STATE_CHASE_MOVE); }
         bool EnableWalking() const { return false;}
-        bool _lostTarget(T* u) const { return u->getVictim() != this->GetTarget(); }
+        bool _lostTarget(T* u) const { return u->GetVictim() != this->GetTarget(); }
         void _reachTarget(T*);
 };
 

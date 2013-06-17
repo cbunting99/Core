@@ -1310,7 +1310,7 @@ class Unit : public WorldObject
         void RemoveAllAttackers();
         AttackerSet const& getAttackers() const { return m_attackers; }
         bool isAttackingPlayer() const;
-        Unit* getVictim() const { return m_attacking; }
+        Unit* GetVictim() const { return m_attacking; }
 
         void CombatStop(bool includingCast = false);
         void CombatStopWithPets(bool includingCast = false);
@@ -1326,11 +1326,11 @@ class Unit : public WorldObject
 
         uint32 HasUnitTypeMask(uint32 mask) const { return mask & m_unitTypeMask; }
         void AddUnitTypeMask(uint32 mask) { m_unitTypeMask |= mask; }
-        bool isSummon() const   { return m_unitTypeMask & UNIT_MASK_SUMMON; }
-        bool isGuardian() const { return m_unitTypeMask & UNIT_MASK_GUARDIAN; }
-        bool isPet() const      { return m_unitTypeMask & UNIT_MASK_PET; }
+        bool IsSummon() const   { return m_unitTypeMask & UNIT_MASK_SUMMON; }
+        bool IsGuardian() const { return m_unitTypeMask & UNIT_MASK_GUARDIAN; }
+        bool IsPet() const      { return m_unitTypeMask & UNIT_MASK_PET; }
         bool isHunterPet() const{ return m_unitTypeMask & UNIT_MASK_HUNTER_PET; }
-        bool isTotem() const    { return m_unitTypeMask & UNIT_MASK_TOTEM; }
+        bool IsTotem() const    { return m_unitTypeMask & UNIT_MASK_TOTEM; }
         bool IsVehicle() const  { return m_unitTypeMask & UNIT_MASK_VEHICLE; }
 
         uint8 getLevel() const { return uint8(GetUInt32Value(UNIT_FIELD_LEVEL)); }
@@ -1390,7 +1390,7 @@ class Unit : public WorldObject
         // faction template id
         uint32 getFaction() const { return GetUInt32Value(UNIT_FIELD_FACTIONTEMPLATE); }
         void setFaction(uint32 faction) { SetUInt32Value(UNIT_FIELD_FACTIONTEMPLATE, faction); }
-        FactionTemplateEntry const* getFactionTemplateEntry() const;
+        FactionTemplateEntry const* GetFactionTemplateEntry() const;
 
         ReputationRank GetReactionTo(Unit const* target) const;
         ReputationRank static GetFactionReactionTo(FactionTemplateEntry const* factionTemplateEntry, Unit const* target);
@@ -1508,7 +1508,7 @@ class Unit : public WorldObject
 
         bool isInFlight()  const { return HasUnitState(UNIT_STATE_IN_FLIGHT); }
 
-        bool isInCombat()  const { return HasFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IN_COMBAT); }
+        bool IsInCombat()  const { return HasFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_IN_COMBAT); }
         void CombatStart(Unit* target, bool initialAggro = true);
         void SetInCombatState(bool PvP, Unit* enemy = NULL);
         void SetInCombatWith(Unit* enemy);
@@ -1622,7 +1622,7 @@ class Unit : public WorldObject
 
         void BuildHeartBeatMsg(WorldPacket* data) const;
 
-        bool isAlive() const { return (m_deathState == ALIVE); }
+        bool IsAlive() const { return (m_deathState == ALIVE); }
         bool isDying() const { return (m_deathState == JUST_DIED); }
         bool isDead() const { return (m_deathState == DEAD || m_deathState == CORPSE); }
         DeathState getDeathState() const { return m_deathState; }
@@ -1645,7 +1645,7 @@ class Unit : public WorldObject
         bool IsControlledByPlayer() const { return m_ControlledByPlayer; }
         uint64 GetCharmerOrOwnerGUID() const;
         uint64 GetCharmerOrOwnerOrOwnGUID() const;
-        bool isCharmedOwnedByPlayerOrPlayer() const { return IS_PLAYER_GUID(GetCharmerOrOwnerOrOwnGUID()); }
+        bool IsCharmedOwnedByPlayerOrPlayer() const { return IS_PLAYER_GUID(GetCharmerOrOwnerOrOwnGUID()); }
 
         Player* GetSpellModOwner() const;
 
@@ -1672,7 +1672,7 @@ class Unit : public WorldObject
         Unit* GetFirstControlled() const;
         void RemoveAllControlled();
 
-        bool isCharmed() const { return GetCharmerGUID() != 0; }
+        bool IsCharmed() const { return GetCharmerGUID() != 0; }
         bool isPossessed() const { return HasUnitState(UNIT_STATE_POSSESSED); }
         bool isPossessedByPlayer() const;
         bool isPossessing() const;
@@ -1922,7 +1922,7 @@ class Unit : public WorldObject
         void UpdateInterruptMask();
 
         uint32 GetDisplayId() const { return GetUInt32Value(UNIT_FIELD_DISPLAYID); }
-        void SetDisplayId(uint32 modelId);
+        virtual void SetDisplayId(uint32 modelId);
         uint32 GetNativeDisplayId() const { return GetUInt32Value(UNIT_FIELD_NATIVEDISPLAYID); }
         void RestoreDisplayId();
         void SetNativeDisplayId(uint32 modelId) { SetUInt32Value(UNIT_FIELD_NATIVEDISPLAYID, modelId); }
@@ -2125,14 +2125,14 @@ class Unit : public WorldObject
         virtual bool isBeingLoaded() const { return false;}
         bool IsDuringRemoveFromWorld() const {return m_duringRemoveFromWorld;}
 
-        Pet* ToPet() { if (isPet()) return reinterpret_cast<Pet*>(this); else return NULL; }
-        Pet const* ToPet() const { if (isPet()) return reinterpret_cast<Pet const*>(this); else return NULL; }
+        Pet* ToPet() { if (IsPet()) return reinterpret_cast<Pet*>(this); else return NULL; }
+        Pet const* ToPet() const { if (IsPet()) return reinterpret_cast<Pet const*>(this); else return NULL; }
 
-        Totem* ToTotem() { if (isTotem()) return reinterpret_cast<Totem*>(this); else return NULL; }
-        Totem const* ToTotem() const { if (isTotem()) return reinterpret_cast<Totem const*>(this); else return NULL; }
+        Totem* ToTotem() { if (IsTotem()) return reinterpret_cast<Totem*>(this); else return NULL; }
+        Totem const* ToTotem() const { if (IsTotem()) return reinterpret_cast<Totem const*>(this); else return NULL; }
 
-        TempSummon* ToTempSummon() { if (isSummon()) return reinterpret_cast<TempSummon*>(this); else return NULL; }
-        TempSummon const* ToTempSummon() const { if (isSummon()) return reinterpret_cast<TempSummon const*>(this); else return NULL; }
+        TempSummon* ToTempSummon() { if (IsSummon()) return reinterpret_cast<TempSummon*>(this); else return NULL; }
+        TempSummon const* ToTempSummon() const { if (IsSummon()) return reinterpret_cast<TempSummon const*>(this); else return NULL; }
 
         void SetTarget(uint64 guid);
 
@@ -2149,6 +2149,8 @@ class Unit : public WorldObject
 
     protected:
         explicit Unit (bool isWorldObject);
+
+        void BuildValuesUpdate(uint8 updatetype, ByteBuffer* data, Player* target) const;
 
         UnitAI* i_AI, *i_disabledAI;
 

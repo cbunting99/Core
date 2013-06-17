@@ -257,7 +257,7 @@ public:
 
         for (GroupReference* itr = grp->GetFirstMember(); itr != NULL; itr = itr->next())
         {
-            Player* player = itr->getSource();
+            Player* player = itr->GetSource();
 
             if (!player || !player->GetSession())
                 continue;
@@ -311,7 +311,7 @@ public:
             return false;
         }
 
-        if (me->isInCombat())
+        if (me->IsInCombat())
         {
             handler->SendSysMessage(LANG_YOU_IN_COMBAT);
             handler->SetSentErrorMessage(true);

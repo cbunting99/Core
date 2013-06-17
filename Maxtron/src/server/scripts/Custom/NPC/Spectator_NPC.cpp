@@ -58,7 +58,7 @@ class Spectator_Commands : public CommandScript
                 return false;
             }
 
-            if (player->isInCombat())
+            if (player->IsInCombat())
             {
                 handler->PSendSysMessage("You are in combat.");
                 handler->SetSentErrorMessage(true);
@@ -288,7 +288,7 @@ class Spectator_Commands : public CommandScript
                     msg.SetPlayer(pName);
                     if (tName != "")
                         msg.SetTarget(tName);
-                    msg.SetStatus(tmpPlayer->isAlive());
+                    msg.SetStatus(tmpPlayer->IsAlive());
                     msg.SetClass(tmpPlayer->getClass());
                     msg.SetCurrentHP(tmpPlayer->GetHealth());
                     msg.SetMaxHP(tmpPlayer->GetMaxHealth());

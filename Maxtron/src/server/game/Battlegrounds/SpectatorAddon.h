@@ -40,7 +40,7 @@ class SpectatorAddonMsg {
         SpectatorAddonMsg();
 
         void SetPlayer(std::string _player)     { player    = _player;  EnableFlag(SPECTATOR_PREFIX_PLAYER); }
-        void SetStatus(bool _isAlive)           { isAlive   = _isAlive; EnableFlag(SPECTATOR_PREFIX_STATUS); }
+        void SetStatus(bool _IsAlive)           { IsAlive   = _IsAlive; EnableFlag(SPECTATOR_PREFIX_STATUS); }
         void SetClass(uint8 _class)             { pClass    = _class;   EnableFlag(SPECTATOR_PREFIX_CLASS); }
         void SetTarget(std::string _target)     { target    = _target;  EnableFlag(SPECTATOR_PREFIX_TARGET); }
         void SetTeam(uint32 _team)              { team      = _team;    EnableFlag(SPECTATOR_PREFIX_TEAM); }
@@ -66,7 +66,7 @@ class SpectatorAddonMsg {
 
         void EnableFlag(uint8 prefix) { prefixFlags[prefix] = true; }
         std::string player;
-        bool isAlive;
+        bool IsAlive;
         std::string target;
         uint8 pClass;
 

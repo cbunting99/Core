@@ -1,14 +1,14 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Server version:               5.5.30-MariaDB-log - mariadb.org binary distribution
+-- Server version:               5.5.31-MariaDB-log - mariadb.org binary distribution
 -- Server OS:                    Win64
--- HeidiSQL version:             7.0.0.4053
--- Date/time:                    2013-05-14 17:13:21
+-- HeidiSQL Version:             8.0.0.4396
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
-/*!40014 SET FOREIGN_KEY_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- Dumping database structure for characters
 CREATE DATABASE IF NOT EXISTS `characters` /*!40100 DEFAULT CHARACTER SET utf8 */;
@@ -887,6 +887,39 @@ CREATE TABLE IF NOT EXISTS `creature_respawn` (
 /*!40000 ALTER TABLE `creature_respawn` ENABLE KEYS */;
 
 
+-- Dumping structure for table characters.custom_transmogrification
+CREATE TABLE IF NOT EXISTS `custom_transmogrification` (
+  `GUID` int(10) unsigned NOT NULL COMMENT 'Item guidLow',
+  `FakeEntry` int(10) unsigned NOT NULL COMMENT 'Item entry',
+  `Owner` int(10) unsigned NOT NULL COMMENT 'Player guidLow',
+  PRIMARY KEY (`GUID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='version 4.0';
+
+-- Dumping data for table characters.custom_transmogrification: ~0 rows (approximately)
+/*!40000 ALTER TABLE `custom_transmogrification` DISABLE KEYS */;
+/*!40000 ALTER TABLE `custom_transmogrification` ENABLE KEYS */;
+
+
+-- Dumping structure for table characters.daily_players_reports
+CREATE TABLE IF NOT EXISTS `daily_players_reports` (
+  `guid` int(10) unsigned NOT NULL DEFAULT '0',
+  `creation_time` int(10) unsigned NOT NULL DEFAULT '0',
+  `average` float NOT NULL DEFAULT '0',
+  `total_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `speed_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `fly_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `jump_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `waterwalk_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `teleportplane_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `climb_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`guid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table characters.daily_players_reports: ~0 rows (approximately)
+/*!40000 ALTER TABLE `daily_players_reports` DISABLE KEYS */;
+/*!40000 ALTER TABLE `daily_players_reports` ENABLE KEYS */;
+
+
 -- Dumping structure for table characters.gameobject_respawn
 CREATE TABLE IF NOT EXISTS `gameobject_respawn` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
@@ -1474,6 +1507,26 @@ CREATE TABLE IF NOT EXISTS `pet_spell_cooldown` (
 /*!40000 ALTER TABLE `pet_spell_cooldown` ENABLE KEYS */;
 
 
+-- Dumping structure for table characters.players_reports_status
+CREATE TABLE IF NOT EXISTS `players_reports_status` (
+  `guid` int(10) unsigned NOT NULL DEFAULT '0',
+  `creation_time` int(10) unsigned NOT NULL DEFAULT '0',
+  `average` float NOT NULL DEFAULT '0',
+  `total_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `speed_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `fly_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `jump_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `waterwalk_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `teleportplane_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  `climb_reports` bigint(20) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`guid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- Dumping data for table characters.players_reports_status: ~0 rows (approximately)
+/*!40000 ALTER TABLE `players_reports_status` DISABLE KEYS */;
+/*!40000 ALTER TABLE `players_reports_status` ENABLE KEYS */;
+
+
 -- Dumping structure for table characters.pool_quest_save
 CREATE TABLE IF NOT EXISTS `pool_quest_save` (
   `pool_id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1525,5 +1578,6 @@ INSERT INTO `worldstates` (`entry`, `value`, `comment`) VALUES
 	(20003, 0, 'NextBGRandomDailyResetTime'),
 	(20004, 0, 'cleaning_flags');
 /*!40000 ALTER TABLE `worldstates` ENABLE KEYS */;
-/*!40014 SET FOREIGN_KEY_CHECKS=1 */;
+/*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
+/*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
