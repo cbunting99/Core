@@ -172,16 +172,16 @@ public:
             player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Feet.", GOSSIP_SENDER_MAIN, 11);
 			if (player->HasSkill(SKILL_ENGINEERING) && player->GetSkillValue(SKILL_ENGINEERING) == 450)
                     {
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "----------", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Belt.", GOSSIP_SENDER_MAIN, 14);
 			}
 
             if (player->HasSkill(SKILL_ENCHANTING) && player->GetSkillValue(SKILL_ENCHANTING) == 450)
 			{
-				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
+				player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "----------", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Rings.", GOSSIP_SENDER_MAIN, 12);
 			}
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "----------", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Eternal Belt Buckle.", GOSSIP_SENDER_MAIN, 308);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Titanium Weapon Chain.", GOSSIP_SENDER_MAIN, 309);
             player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
@@ -285,7 +285,7 @@ public:
 					if (player->HasSkill(SKILL_ENGINEERING) && player->GetSkillValue(SKILL_ENGINEERING) == 450)
                     { 
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Mind Amplification Dish.", GOSSIP_SENDER_MAIN, 301);
-					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
+					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "----------", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
 					}
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Arcanum of Blissful Mending", GOSSIP_SENDER_MAIN, 124);
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Arcanum of Burning Mysteries", GOSSIP_SENDER_MAIN, 125);
@@ -323,7 +323,7 @@ public:
                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Master's Inscription of the Crag", GOSSIP_SENDER_MAIN, 137);
                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Master's Inscription of the Pinnacle", GOSSIP_SENDER_MAIN, 138);
                         player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Master's Inscription of the Storm", GOSSIP_SENDER_MAIN, 139);
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "----------", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
                     }
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Greater Inscription of the Axe", GOSSIP_SENDER_MAIN, 140);
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Greater Inscription of the Crag", GOSSIP_SENDER_MAIN, 141);
@@ -343,13 +343,13 @@ public:
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Darkglow Embroidery", GOSSIP_SENDER_MAIN, 149);
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Lightweave Embroidery", GOSSIP_SENDER_MAIN, 150);
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Swordguard Embroidery", GOSSIP_SENDER_MAIN, 151);
-					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
+					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "----------", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
 					}
 					if (player->HasSkill(SKILL_ENGINEERING) && player->GetSkillValue(SKILL_ENGINEERING) == 450)
                     { 
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Springy Arachnoweave", GOSSIP_SENDER_MAIN, 147);
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Flexweave Underlay", GOSSIP_SENDER_MAIN, 299);
-					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
+					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "----------", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
 					}
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Shadow Armor", GOSSIP_SENDER_MAIN, 148);     
                     player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Wisdom", GOSSIP_SENDER_MAIN, 152);
@@ -380,7 +380,7 @@ public:
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Fur Lining - Attack power", GOSSIP_SENDER_MAIN, 175);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Fur Lining - Stamina", GOSSIP_SENDER_MAIN, 176);
 						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Fur Lining - Spellpower", GOSSIP_SENDER_MAIN, 177);
-						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
+						player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "----------", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
 					}
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Major Stamina", GOSSIP_SENDER_MAIN, 163);
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Superior Spell Power", GOSSIP_SENDER_MAIN, 164);
@@ -400,7 +400,7 @@ public:
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Reticulated Armor Webbing.", GOSSIP_SENDER_MAIN, 201);
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Hyperspeed Accelerators.", GOSSIP_SENDER_MAIN, 200);
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Hand-Mounted Pyro Rocket.", GOSSIP_SENDER_MAIN, 199);
-					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
+					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "----------", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
 					}
 
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Exceptional Spellpower", GOSSIP_SENDER_MAIN, 298);
@@ -430,7 +430,7 @@ public:
 					if (player->HasSkill(SKILL_ENGINEERING) && player->GetSkillValue(SKILL_ENGINEERING) == 450)
                     { 
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Nitro Boots", GOSSIP_SENDER_MAIN, 198);
-					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
+					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "----------", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
 					}
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Greater Assult", GOSSIP_SENDER_MAIN, 191);
 					player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Tuskars Vitliaty", GOSSIP_SENDER_MAIN, 192);
@@ -1675,7 +1675,7 @@ public:
 			{
                 player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Rings.", GOSSIP_SENDER_MAIN, 12);
 			}
-			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
+			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "----------", GOSSIP_SENDER_MAIN, 300); // Empty menu, divider.
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Eternal Belt Buckle.", GOSSIP_SENDER_MAIN, 308);
 			player->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Titanium Weapon Chain.", GOSSIP_SENDER_MAIN, 309);
             player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
