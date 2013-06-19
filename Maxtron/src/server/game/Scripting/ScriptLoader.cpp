@@ -1308,18 +1308,22 @@ void AddSC_Transmorgrification_NPC();
 void AddSC_Professions_NPC();
 void AddSC_Beastmaster_NPC();
 void AddSC_Spectator_NPC();
+void AddSC_Enchanter_NPC();
+void AddSC_Trainer_NPC();
 
 #endif
 
 void AddCustomScripts()
 {
 #ifdef SCRIPTS
-	AddSC_Arena_Crystal();
-	AddSC_Killstreak();
-	AddSC_Transmorgrification_NPC();
-	AddSC_Professions_NPC();
-	AddSC_Beastmaster_NPC();
-	AddSC_Spectator_NPC();
+    AddSC_Arena_Crystal();
+    AddSC_Killstreak();
+    AddSC_Transmorgrification_NPC();
+    AddSC_Professions_NPC();
+    AddSC_Beastmaster_NPC();
+    AddSC_Spectator_NPC();
+    AddSC_Enchanter_NPC();
+    AddSC_Trainer_NPC();
 
 #endif
 }

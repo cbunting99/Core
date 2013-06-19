@@ -34,6 +34,8 @@ set(scripts_STAT_SRCS
   ./Custom/NPC/Beastmaster_NPC.cpp
   ./Custom/NPC/Professions_NPC.cpp
   ./Custom/NPC/Spectator_NPC.cpp
+  ./Custom/NPC/Enchanter_NPC.cpp
+  ./Custom/NPC/Trainer_NPC.cpp
 )
 
 if(SCRIPTS)

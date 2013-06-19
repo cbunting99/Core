@@ -146,18 +146,21 @@
                                     switch (uiAction)
                                     {
                                             case 196:
-                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "|TInterface\\icons\\trade_alchemy:30|t Alchemy.", GOSSIP_SENDER_MAIN, 1);
-                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "|TInterface\\icons\\INV_Ingot_05:30|t Blacksmithing.", GOSSIP_SENDER_MAIN, 2);
-                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "|TInterface\\icons\\INV_Misc_LeatherScrap_02:30|t Leatherworking.", GOSSIP_SENDER_MAIN, 3);
-                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "|TInterface\\icons\\INV_Fabric_Felcloth_Ebon:30|t Tailoring.", GOSSIP_SENDER_MAIN, 4);
-                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "|TInterface\\icons\\inv_misc_wrench_01:30|t Engineering.", GOSSIP_SENDER_MAIN, 5);
-                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "|TInterface\\icons\\trade_engraving:30|t Enchanting.", GOSSIP_SENDER_MAIN, 6);
-                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "|TInterface\\icons\\inv_misc_gem_01:30|t Jewelcrafting.", GOSSIP_SENDER_MAIN, 7);
-                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "|TInterface\\icons\\INV_Scroll_08:30|t Inscription.", GOSSIP_SENDER_MAIN, 8);
-                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "|TInterface\\icons\\INV_Misc_Herb_07:30|t Herbalism.", GOSSIP_SENDER_MAIN, 9);
-                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "|TInterface\\icons\\inv_misc_pelt_wolf_01:30|t Skinning.", GOSSIP_SENDER_MAIN, 10);
-                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "|TInterface\\icons\\trade_mining:30|t Mining.", GOSSIP_SENDER_MAIN, 11);
-                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "|TInterface/ICONS/Thrown_1H_Harpoon_D_01Blue:30|t Nevermind!", GOSSIP_SENDER_MAIN, 12);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Alchemy.", GOSSIP_SENDER_MAIN, 1);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Blacksmithing.", GOSSIP_SENDER_MAIN, 2);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Leatherworking.", GOSSIP_SENDER_MAIN, 3);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Tailoring.", GOSSIP_SENDER_MAIN, 4);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Engineering.", GOSSIP_SENDER_MAIN, 5);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Enchanting.", GOSSIP_SENDER_MAIN, 6);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Jewelcrafting.", GOSSIP_SENDER_MAIN, 7);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Inscription.", GOSSIP_SENDER_MAIN, 8);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Herbalism.", GOSSIP_SENDER_MAIN, 9);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Skinning.", GOSSIP_SENDER_MAIN, 10);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Mining.", GOSSIP_SENDER_MAIN, 11);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Fishing.", GOSSIP_SENDER_MAIN, 12);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "First Aid.", GOSSIP_SENDER_MAIN, 13);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_INTERACT_2, "Cooking.", GOSSIP_SENDER_MAIN, 14);
+                                                    pPlayer->ADD_GOSSIP_ITEM(GOSSIP_ICON_TALK, "Nevermind!", GOSSIP_SENDER_MAIN, 15);
                                                     pPlayer->PlayerTalkClass->SendGossipMenu(1, _creature->GetGUID());
                                                     break;
                                             case 1:
@@ -271,7 +274,31 @@
                                                                                             CompleteLearnProfession(pPlayer, _creature, SKILL_MINING);
                                                                                             pPlayer->PlayerTalkClass->SendCloseGossip();
                                                                                             break;
-                                                                                    case 12:
+																							case 12:
+                                                                                            if(pPlayer->HasSkill(SKILL_FISHING))
+                                                                                            {
+                                                                                                    pPlayer->PlayerTalkClass->SendCloseGossip();
+                                                                                                    break;
+                                                                                            }
+                                                                                           
+                                                                                            CompleteLearnProfession(pPlayer, _creature, SKILL_FISHING);
+                                                                                            pPlayer->PlayerTalkClass->SendCloseGossip();
+                                                                                            break;
+																							case 13:
+                                                                                            CompleteLearnProfession(pPlayer, _creature, SKILL_FIRST_AID);
+                                                                                            pPlayer->PlayerTalkClass->SendCloseGossip();
+                                                                                            break;
+																							case 14:
+                                                                                            if(pPlayer->HasSkill(SKILL_COOKING))
+                                                                                            {
+                                                                                                    pPlayer->PlayerTalkClass->SendCloseGossip();
+                                                                                                    break;
+                                                                                            }
+                                                                                           
+                                                                                            CompleteLearnProfession(pPlayer, _creature, SKILL_COOKING);
+                                                                                            pPlayer->PlayerTalkClass->SendCloseGossip();
+                                                                                            break;
+                                                                                    case 15:
                                                                                             pPlayer->PlayerTalkClass->SendCloseGossip();
                                                                                             break;
                                     }

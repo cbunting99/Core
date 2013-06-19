@@ -3288,6 +3288,16 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->Attributes |= SPELL_ATTR0_DONT_AFFECT_SHEATH_STATE;
                 spellInfo->speed = 80;
                 break;
+            case 68645: // Goblin Rocket Pack.
+                spellInfo->AttributesEx6 |= SPELL_ATTR6_DONT_DISPLAY_COOLDOWN;
+                spellInfo->AttributesEx5 |= SPELL_ATTR5_UNK21;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                spellInfo->AttributesEx |= SPELL_ATTR1_DONT_DISPLAY_IN_AURA_BAR;
+                spellInfo->Attributes |= SPELL_ATTR0_HIDE_IN_COMBAT_LOG;
+                spellInfo->Attributes |= SPELL_ATTR0_UNAFFECTED_BY_INVULNERABILITY;
+                spellInfo->EffectRadiusIndex[0] = EFFECT_RADIUS_200_YARDS;
+                spellInfo->rangeIndex = 13;
+                break;
             case 15473: // Shadowform.
                 spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN;
                 spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_DONE;
