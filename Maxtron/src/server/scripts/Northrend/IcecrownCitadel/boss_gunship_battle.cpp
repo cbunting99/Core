@@ -472,7 +472,7 @@ void TeleportPlayers(Map* map, uint64 TeamInInstance)
             {
                 if (Player* pPlayer = itr->GetSource())
                 {
-                    if (!pPlayer->IsAlive() && !pPlayer->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_GHOST))
+                    if (pPlayer->isDead() && !pPlayer->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_GHOST))
                         pPlayer->ResurrectPlayer(1.0f);
 
                     if(TeamInInstance == ALLIANCE)
@@ -571,25 +571,25 @@ void RestartEvent(Transport* t1, Transport* t2, Map* instance, uint64 TeamInInst
 
                         if (instance->ToInstanceMap()->GetMaxPlayers() == 10)
                         {
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, -3.170555f, 28.30652f, 35.21082f, 1.66527f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, -12.0928f, 27.65942f, 34.58557f, 1.66527f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, 14.92804f, 26.18018f, 36.47803f, 1.66527f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, 24.70331f, 25.36584f, 36.97845f, 1.66527f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_ROCKETEER, -11.44849f, -25.71838f, 34.64343f, 1.49248f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_ROCKETEER, 12.30336f, -25.69653f, 36.32373f, 1.49248f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, -3.170555f, 28.30652f, 34.21082f, 1.66527f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, -12.0928f, 27.65942f, 33.58557f, 1.66527f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, 14.92804f, 26.18018f, 35.47803f, 1.66527f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, 24.70331f, 25.36584f, 35.97845f, 1.66527f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_ROCKETEER, -11.44849f, -25.71838f, 33.64343f, 1.49248f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_ROCKETEER, 12.30336f, -25.69653f, 35.32373f, 1.49248f);
                         }                        
                         else
                         {
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, -3.170555f, 28.30652f, 35.21082f, 1.66527f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, -12.0928f, 27.65942f, 34.58557f, 1.66527f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, 14.92804f, 26.18018f, 36.47803f, 1.66527f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, 24.70331f, 25.36584f, 36.97845f, 1.66527f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, 19.92804f, 27.18018f, 37.47803f, 1.66527f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, -7.70331f, 28.36584f, 34.88557f, 1.66527f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_ROCKETEER, -11.44849f, -25.71838f, 35.64343f, 1.49248f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_ROCKETEER, 12.30336f, -25.69653f, 36.32373f, 1.49248f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_ROCKETEER, -3.44849f, -25.71838f, 37.21082f, 1.49248f);
-							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_ROCKETEER, 3.30336f, -25.69653f, 36.32373f, 1.49248f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, -3.170555f, 28.30652f, 34.21082f, 1.66527f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, -12.0928f, 27.65942f, 33.58557f, 1.66527f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, 14.92804f, 26.18018f, 35.47803f, 1.66527f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, 24.70331f, 25.36584f, 35.97845f, 1.66527f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, 19.92804f, 27.18018f, 35.47803f, 1.66527f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_AXETHROWER, -7.70331f, 28.36584f, 33.88557f, 1.66527f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_ROCKETEER, -11.44849f, -25.71838f, 33.64343f, 1.49248f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_ROCKETEER, 12.30336f, -25.69653f, 35.32373f, 1.49248f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_ROCKETEER, -3.44849f, -25.71838f, 34.21082f, 1.49248f);
+							th->AddNPCPassengerInInstance(NPC_GB_KORKRON_ROCKETEER, 3.30336f, -25.69653f, 35.32373f, 1.49248f);
                         }
                     }
 
@@ -673,21 +673,21 @@ void RestartEvent(Transport* t1, Transport* t2, Map* instance, uint64 TeamInInst
 
                         if(instance->ToInstanceMap()->GetMaxPlayers() == 10)
                         {
-							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -5.15231f, -22.9462f, 23.659f, 4.72416f);
-							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -14.9806f, -22.9462f, 23.659f, 4.72416f);
-							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -21.7406f, -22.9462f, 23.659f, 4.72416f);
-							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -28.0876f, -22.9462f, 23.659f, 4.72416f);
+							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -5.15231f, -22.9462f, 21.659f, 4.72416f);
+							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -14.9806f, -22.9462f, 21.659f, 4.72416f);
+							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -21.7406f, -22.9462f, 21.659f, 4.72416f);
+							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -28.0876f, -22.9462f, 21.659f, 4.72416f);
 							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -8.61003f, 15.483f, 20.4158f, 4.69854f);
 							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -27.9583f, 14.8875f, 20.4428f, 4.77865f);
                         }
                         else
                         {
-							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, 0.15231f, -22.9462f, 23.659f, 4.72416f);
-							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -5.15231f, -22.9462f, 23.659f, 4.72416f);
-							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -14.9806f, -22.9462f, 23.659f, 4.72416f);
-							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -21.7406f, -22.9462f, 23.659f, 4.72416f);
-							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -28.0876f, -22.9462f, 23.659f, 4.72416f);
-							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -33.0876f, -22.9462f, 23.659f, 4.72416f);
+							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, 0.15231f, -22.9462f, 21.659f, 4.72416f);
+							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -5.15231f, -22.9462f, 21.659f, 4.72416f);
+							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -14.9806f, -22.9462f, 21.659f, 4.72416f);
+							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -21.7406f, -22.9462f, 21.659f, 4.72416f);
+							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -28.0876f, -22.9462f, 21.659f, 4.72416f);
+							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -33.0876f, -22.9462f, 21.659f, 4.72416f);
 							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -8.61003f, 15.483f, 20.4158f, 4.69854f);
 							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -27.9583f, 14.8875f, 20.4428f, 4.77865f);
 							t->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -15.61003f, 15.483f, 20.4158f, 4.69854f);
@@ -783,7 +783,7 @@ class npc_muradin_gunship : public CreatureScript
             {
                 if ((!player->GetGroup() || !player->GetGroup()->IsLeader(player->GetGUID())) && !player->IsGameMaster())
                 {
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "I'm not the raid leader...", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
+                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "My companions are all accounted for, Muradin. Let's go!", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
                     player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
                     return true;
                 }
@@ -824,7 +824,7 @@ class npc_muradin_gunship : public CreatureScript
             {
                 if (_instance->GetBossState(DATA_GUNSHIP_EVENT) == IN_PROGRESS)
                     return;
-                me->SetReactState(REACT_AGGRESSIVE);
+                me->SetReactState(REACT_PASSIVE);
                 me->setFaction(1802);
                 events.Reset();
                 map = me->GetMap();
@@ -855,6 +855,14 @@ class npc_muradin_gunship : public CreatureScript
                     for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
                         if (Player* player = itr->GetSource())
                             player->GetSession()->SendPacket(data);
+            }
+
+            bool CanAIAttack(Unit const* target) const
+            {
+                if (target->GetEntry() == NPC_GB_KORKRON_SERGANTE || target->GetEntry() == NPC_GB_KORKRON_REAVERS)
+                    return true;
+
+                return false;
             }
 
             void DoAction(int32 action)
@@ -888,8 +896,7 @@ class npc_muradin_gunship : public CreatureScript
                              pAllianceBoss->AddThreat(pHordeBoss, 0.0f);
                              pHordeBoss->AddThreat(pAllianceBoss, 0.0f);
                              _instance->SetBossState(DATA_GUNSHIP_EVENT, IN_PROGRESS);
-							 if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != DONE)
-								events.ScheduleEvent(EVENT_SUMMON_PORTAL, 30000);
+                             events.ScheduleEvent(EVENT_SUMMON_PORTAL, 30000);
                              RelocateTransport(skybreaker);
                              RelocateTransport(CheckUnfriendlyShip(me,_instance, DATA_GB_HIGH_OVERLORD_SAURFANG));
                         }
@@ -941,27 +948,32 @@ class npc_muradin_gunship : public CreatureScript
                         break;
                     case ACTION_ROCK_DIE:
                         ++RocketerDieCount; 
-						if (RocketerDieCount == RocketerCount)
-							if (_instance->GetBossState(DATA_GUNSHIP_EVENT) != DONE)
-								events.ScheduleEvent(EVENT_RESPAWN_ROCKETEER, 60000);
+                        if(RocketerDieCount == RocketerCount)
+							if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != DONE)
+                            events.ScheduleEvent(EVENT_RESPAWN_ROCKETEER, 45000);
                         break;
                     case ACTION_AXES_RIFL_DIE:
                         ++RiflDieCount;
-						if (RiflDieCount == RiflCount)
-							if (_instance->GetBossState(DATA_GUNSHIP_EVENT) != DONE)
-								events.ScheduleEvent(EVENT_RESPAWN_AXES_RIFLEMEN, 60000);
+                        if(RiflDieCount == RiflCount)
+							if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != DONE)
+                            events.ScheduleEvent(EVENT_RESPAWN_AXES_RIFLEMEN, 45000);
                         break;
                 }
             }
 
-            void DamageTaken(Unit* /*attacker*/, uint32& /*damage*/)
-            {    
-                if (me && _instance && _instance->GetData(DATA_TEAM_IN_INSTANCE) == HORDE && me->GetHealthPct() < 5.0f)
-                    me->AI()->DoAction(ACTION_FAIL);
-				else if (me && _instance && _instance->GetData(DATA_TEAM_IN_INSTANCE) == ALLIANCE && me->GetHealthPct() < 5.0f)
-				    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+            void DamageTaken(Unit* /*attacker*/, uint32& damage)
+            {
+                if (_instance->GetData(DATA_TEAM_IN_INSTANCE) == HORDE && me->GetHealthPct() < 2.0f )
+                {
+                   damage = 0;
+                }
+                
+                if (_instance->GetData(DATA_TEAM_IN_INSTANCE) == ALLIANCE && me->GetHealthPct() < 2.0f )
+                {
+                   damage = 0;
+                   me->AI()->DoAction(ACTION_FAIL);
+                }
             }
-        
 
             void MovementInform(uint32 type, uint32 pointId)
             {
@@ -976,9 +988,6 @@ class npc_muradin_gunship : public CreatureScript
             {
                 if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
-					
-				//if (me && me->GetVictim() && (me->GetDistance(me->GetVictim()) > 15.0f || me->GetPositionY() > 2024.1f || me->GetVictim()->GetPositionY() > 2024.1f))
-				//    EnterEvadeMode();
                 
                 if (!HealthAbovePct(75))
                 {
@@ -1038,8 +1047,10 @@ class npc_muradin_gunship : public CreatureScript
                             if (Creature* pSaurfang = ObjectAccessor::GetCreature(*me, _instance->GetData64(DATA_HIGH_OVERLORD_SAURFANG_NOT_VISUAL)))
                             {
                                 pSaurfang->AI()->Talk(SAY_HIGH_OVERLORD_SAURFANG_NOT_VISUAL);
+								/*
                                 pSaurfang->SetReactState(REACT_PASSIVE);
                                 pSaurfang->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
+								*/
                             }
                             break;
                         case EVENT_INTRO_ALLIANCE_8:
@@ -1079,11 +1090,8 @@ class npc_muradin_gunship : public CreatureScript
 								if (Creature* Sergante = skybreaker->AddNPCPassengerInInstance(NPC_GB_KORKRON_SERGANTE, -15.51547f, -0.160213f, 20.87252f, 1.56211f))
 									Sergante->CastSpell(Sergante, SPELL_TELEPORT_VISUAL, true);
 
-							    if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != DONE)
-								{
-									events.ScheduleEvent(EVENT_SUMMON_PORTAL, 90000);
-									events.ScheduleEvent(EVENT_BOARDING_REAVERS_MARINE, 3000);
-								}
+								events.ScheduleEvent(EVENT_SUMMON_PORTAL, 90000);
+								events.ScheduleEvent(EVENT_BOARDING_REAVERS_MARINE, 3000);
 								count = 0;
 							}
                             break;
@@ -1122,8 +1130,7 @@ class npc_muradin_gunship : public CreatureScript
                             _instance->SetBossState(DATA_GUNSHIP_EVENT, NOT_STARTED);
                             break;
                         case EVENT_RESTART_EVENT:
-							if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != DONE)
-							{
+							if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != DONE){
 								_instance->SetBossState(DATA_GUNSHIP_EVENT, FAIL);
 								RestartEvent(skybreaker, CheckUnfriendlyShip(me,_instance,DATA_GB_HIGH_OVERLORD_SAURFANG), map, ALLIANCE);
 							}
@@ -1140,15 +1147,15 @@ class npc_muradin_gunship : public CreatureScript
                             Talk(SAY_NEW_MORTAR_TEAM_SPAWNED);
                             if(RocketerCount == 2)
                             {
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -8.61003f, 15.483f, 22.4158f, 4.69854f);
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -27.9583f, 14.8875f, 22.4428f, 4.77865f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -8.61003f, 15.483f, 20.4158f, 4.69854f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -27.9583f, 14.8875f, 20.4428f, 4.77865f);
                             }
                             if(RocketerCount == 4)
                             {
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -8.61003f, 15.483f, 22.4158f, 4.69854f);
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -27.9583f, 14.8875f, 22.4428f, 4.77865f);
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -15.61003f, 15.483f, 22.4158f, 4.69854f);
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -20.9583f, 14.8875f, 22.4428f, 4.77865f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -8.61003f, 15.483f, 20.4158f, 4.69854f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -27.9583f, 14.8875f, 20.4428f, 4.77865f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -15.61003f, 15.483f, 20.4158f, 4.69854f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_MORTAR_SOLDIER, -20.9583f, 14.8875f, 20.4428f, 4.77865f);
                             }
 						}
                             break;
@@ -1158,19 +1165,19 @@ class npc_muradin_gunship : public CreatureScript
                             Talk(SAY_NEW_RIFLEMEN_SPAWNED);
                             if(RiflCount == 4)
                             {
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -28.0876f, -22.9462f, 23.659f, 4.72416f);
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -21.7406f, -22.9462f, 23.659f, 4.72416f);
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -14.9806f, -22.9462f, 23.659f, 4.72416f);
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -5.15231f, -22.9462f, 23.659f, 4.72416f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -28.0876f, -22.9462f, 21.659f, 4.72416f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -21.7406f, -22.9462f, 21.659f, 4.72416f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -14.9806f, -22.9462f, 21.659f, 4.72416f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -5.15231f, -22.9462f, 21.659f, 4.72416f);
                             }
                             if(RiflCount == 6)
                             {
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -33.0876f, -22.9462f, 23.659f, 4.72416f);
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -28.0876f, -22.9462f, 23.659f, 4.72416f);
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -21.7406f, -22.9462f, 23.659f, 4.72416f);
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -14.9806f, -22.9462f, 23.659f, 4.72416f);
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -5.15231f, -22.9462f, 23.659f, 4.72416f);
-                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, 0.15231f, -22.9462f, 23.659f, 4.72416f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -33.0876f, -22.9462f, 21.659f, 4.72416f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -28.0876f, -22.9462f, 21.659f, 4.72416f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -21.7406f, -22.9462f, 21.659f, 4.72416f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -14.9806f, -22.9462f, 21.659f, 4.72416f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, -5.15231f, -22.9462f, 21.659f, 4.72416f);
+                                skybreaker->AddNPCPassengerInInstance(NPC_GB_SKYBREAKER_RIFLEMAN, 0.15231f, -22.9462f, 21.659f, 4.72416f);
                             }
 						}
                             break;
@@ -1338,7 +1345,6 @@ class npc_korkron_axethrower_rifleman : public CreatureScript
                 me->RemoveAurasDueToSpell(SPELL_EXPERIENCED);
                 me->RemoveAurasDueToSpell(SPELL_ELITE);
                 me->RemoveAurasDueToSpell(SPELL_VETERAN);		
-				me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);	
                 events.ScheduleEvent(EVENT_EXPERIENCED, urand(19000, 21000)); // ~20 sec
                 events.ScheduleEvent(EVENT_VETERAN, urand(39000, 41000));     // ~40 sec
                 events.ScheduleEvent(EVENT_ELITE, urand(59000, 61000));       // ~60 sec
@@ -1381,9 +1387,10 @@ class npc_korkron_axethrower_rifleman : public CreatureScript
                 if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
 
-                //me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE); // Dodato
                 me->AI()->AttackStart(SelectRandomPlayerInTheMaps(me->GetMap()));
-				me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);	
+				/*
+				me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
+				*/
 
                 if (!UpdateVictim())
                     return;
@@ -1496,7 +1503,9 @@ class npc_sergeant : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_WALK_MOBS:
+							/*
                             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
+							*/
                             me->SetReactState(REACT_AGGRESSIVE);
                             switch (me->GetEntry())
                             {
@@ -1584,7 +1593,9 @@ class npc_marine_or_reaver : public CreatureScript
             {
                 ScriptedAI::Reset();
                 desperated = false;
+				/*
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
+				*/
                 me->SetReactState(REACT_PASSIVE);
                 events.ScheduleEvent(EVENT_WALK_MOBS, 1500);
                 me->RemoveAurasDueToSpell(SPELL_EXPERIENCED);
@@ -1632,7 +1643,9 @@ class npc_marine_or_reaver : public CreatureScript
                     switch (eventId)
                     {
                         case EVENT_WALK_MOBS:
+							/*
                             me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
+							*/
                             me->SetReactState(REACT_AGGRESSIVE);
                             switch (me->GetEntry())
                             {
@@ -1763,11 +1776,11 @@ class npc_gunship_mage : public CreatureScript
 
             void UpdateAI(uint32 diff)
             {
-			
-			    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
-				
-                if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != IN_PROGRESS)
-                    return;
+				/*
+				me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
+				*/
+				if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != IN_PROGRESS)
+					return;
 
 				me->SetReactState(REACT_DEFENSIVE); // Dodato
 
@@ -1809,16 +1822,11 @@ class npc_gunship_cannon : public CreatureScript
 
         struct npc_gunship_cannonAI : public ScriptedAI
         {
-            npc_gunship_cannonAI(Creature *creature) : ScriptedAI(creature),_instance(creature->GetInstanceScript())
-            {
-                Reset();
-            }
+            npc_gunship_cannonAI(Creature *creature) : ScriptedAI(creature) { }
 
             void Reset()
             {
-				me->AddExtraUnitMovementFlag(MOVEMENTFLAG2_NO_STRAFE);
-				me->AddExtraUnitMovementFlag(MOVEMENTFLAG_LEFT);
-				me->AddExtraUnitMovementFlag(MOVEMENTFLAG_RIGHT);
+	         me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
                 me->SetReactState(REACT_PASSIVE);
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
                 DoCast(me, SPELL_HEAT_DRAIN, true);
@@ -1857,6 +1865,7 @@ class npc_gunship_cannon : public CreatureScript
                 }
                 else
 				{
+                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
 					me->RemoveExtraUnitMovementFlag(MOVEMENTFLAG_STRAFE_LEFT);
 					me->RemoveExtraUnitMovementFlag(MOVEMENTFLAG_STRAFE_RIGHT);
 					me->RemoveExtraUnitMovementFlag(MOVEMENTFLAG2_INTERPOLATED_TURNING);
@@ -1868,8 +1877,6 @@ class npc_gunship_cannon : public CreatureScript
                 }
             }
 
-			private:
-			    InstanceScript* _instance;
         };
 
         CreatureAI* GetAI(Creature* pCreature) const
@@ -2035,7 +2042,7 @@ class npc_saurfang_gunship : public CreatureScript
             {
                 if ((!player->GetGroup() || !player->GetGroup()->IsLeader(player->GetGUID())) && !player->IsGameMaster())
                 {
-                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "I'm not the raid leader...", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
+                    player->ADD_GOSSIP_ITEM(GOSSIP_ICON_CHAT, "My companions are all accounted for, Saurfang. Let's go!", GOSSIP_SENDER_MAIN, GOSSIP_ACTION_INFO_DEF+2);
                     player->SEND_GOSSIP_MENU(DEFAULT_GOSSIP_MESSAGE, pCreature->GetGUID());
                     return true;
                 }
@@ -2074,7 +2081,7 @@ class npc_saurfang_gunship : public CreatureScript
             {
                 if (_instance->GetBossState(DATA_GUNSHIP_EVENT) == IN_PROGRESS)
                     return;
-                me->SetReactState(REACT_AGGRESSIVE);
+                me->SetReactState(REACT_PASSIVE);
                 me->setFaction(1801);
                 events.Reset();
                 map = me->GetMap();
@@ -2106,6 +2113,13 @@ class npc_saurfang_gunship : public CreatureScript
                             player->GetSession()->SendPacket(data);
             }
 
+            bool CanAIAttack(Unit const* target) const
+            {
+                if (target->GetEntry() == NPC_GB_SKYBREAKER_SERGANTE || target->GetEntry() == NPC_GB_SKYBREAKER_MARINE)
+                    return true;
+
+                return false;
+            }
 
             void DoAction(int32 action)
             {
@@ -2136,8 +2150,7 @@ class npc_saurfang_gunship : public CreatureScript
                              pAllianceBoss->AddThreat(pHordeBoss, 0.0f);
                              pHordeBoss->AddThreat(pAllianceBoss, 0.0f);
                              _instance->SetBossState(DATA_GUNSHIP_EVENT, IN_PROGRESS);
-							 if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != DONE)
-								events.ScheduleEvent(EVENT_SUMMON_PORTAL, 30000);
+                             events.ScheduleEvent(EVENT_SUMMON_PORTAL, 30000);
                              RelocateTransport(orgrimmar);
                              RelocateTransport(CheckUnfriendlyShip(me,_instance, DATA_GB_MURADIN_BRONZEBEARD));
                          }
@@ -2182,33 +2195,35 @@ class npc_saurfang_gunship : public CreatureScript
                          break;
                      case ACTION_MAGE_DIE:
 						 //Check, if there really is no mage
-						if(me->GetEntry() != NPC_GB_KORKRON_BATTLE_MAGE)
-						{
-							if (_instance->GetBossState(DATA_GUNSHIP_EVENT) == IN_PROGRESS)
-						        events.ScheduleEvent(EVENT_SPAWN_MAGE, 33000);
-						}
+						 if(me->GetEntry() != NPC_GB_KORKRON_BATTLE_MAGE){
+						  events.ScheduleEvent(EVENT_SPAWN_MAGE, 60000);
+						 }
                         break;
                      case ACTION_ROCK_DIE:
-                        ++RocketerDieCount;
-						if(RocketerDieCount == RocketerCount)
-							if (_instance->GetBossState(DATA_GUNSHIP_EVENT) == IN_PROGRESS)
-								events.ScheduleEvent(EVENT_RESPAWN_ROCKETEER, 60000);
+                         ++RocketerDieCount;
+                         if(RocketerDieCount == RocketerCount)
+                             events.ScheduleEvent(EVENT_RESPAWN_ROCKETEER, 60000);
                          break;
                      case ACTION_AXES_RIFL_DIE:
-                        ++AxesDieCount;
-						if(AxesDieCount == AxesCount)
-							if (_instance->GetBossState(DATA_GUNSHIP_EVENT) == IN_PROGRESS)
-								events.ScheduleEvent(EVENT_RESPAWN_AXES_RIFLEMEN, 60000);
+                         ++AxesDieCount;
+                         if(AxesDieCount == AxesCount)
+                             events.ScheduleEvent(EVENT_RESPAWN_AXES_RIFLEMEN, 60000);
                          break;
                  }
             }
 
-            void DamageTaken(Unit* attacker, uint32& /*damage*/)
-            {    
-                if (me && _instance && _instance->GetData(DATA_TEAM_IN_INSTANCE) == HORDE && me->GetHealthPct() < 5.0f)
+            void DamageTaken(Unit* /*attacker*/, uint32& damage)
+            {
+                if (_instance->GetData(DATA_TEAM_IN_INSTANCE) == ALLIANCE && me->GetHealthPct() < 2.0f )
+                {
+                    damage = 0;
+                }
+                
+                if (_instance->GetData(DATA_TEAM_IN_INSTANCE) == HORDE && me->GetHealthPct() < 2.0f )
+                {
+                    damage = 0;
                     me->AI()->DoAction(ACTION_FAIL);
-				else if (me && _instance && _instance->GetData(DATA_TEAM_IN_INSTANCE) == ALLIANCE && me->GetHealthPct() < 5.0f)
-				    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+                }
             }
 
             void MovementInform(uint32 type, uint32 pointId)
@@ -2219,23 +2234,12 @@ class npc_saurfang_gunship : public CreatureScript
                 if (pointId = 1)
                     me->DespawnOrUnsummon(1000);
             }
-			
 
             void UpdateAI(uint32 diff)
             {
                 if (me->HasUnitState(UNIT_STATE_CASTING))
                     return;
-					
-				if (me && me->GetVictim() && (me->GetDistance(me->GetVictim()) > 15.0f || me->GetPositionY() > 2124.1f || me->GetVictim()->GetPositionY() > 2124.1f))
-				{
-					me->AttackStop();
-					me->GetCharmInfo()->SetIsCommandAttack(false);
-					me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
-				}
-				else
-					if (me && me->GetVictim())
-						me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_DISABLE_MOVE);
-				    
+                    
                 if(_instance->GetBossState(DATA_GUNSHIP_EVENT) == IN_PROGRESS)
                 {
                     if (!HealthAbovePct(75))
@@ -2300,8 +2304,7 @@ class npc_saurfang_gunship : public CreatureScript
                             Talk(SAY_INTRO_HORDE_4);
                             break;
                         case EVENT_SUMMON_PORTAL:
-							if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != DONE)
-							{
+							if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != DONE){
 								orgrimmar->AddNPCPassengerInInstance(NPC_GB_PORTAL, 15.03016f, -7.00016f, 37.70952f, 1.55138f);
 								CheckUnfriendlyShip(me, _instance, DATA_MURADIN_BRONZEBEARD_NOT_VISUAL)->AddNPCPassengerInInstance(NPC_GB_PORTAL, 3.51547f, -0.160213f, 20.87252f, 3.05033f);
 								events.ScheduleEvent(EVENT_BOARDING_TALK, 10000);
@@ -2322,11 +2325,8 @@ class npc_saurfang_gunship : public CreatureScript
 								{
 									Sergante->CastSpell(Sergante, SPELL_TELEPORT_VISUAL, true);
 								}
-								if(_instance->GetBossState(DATA_GUNSHIP_EVENT) != DONE)
-                                {
-									events.ScheduleEvent(EVENT_BOARDING_REAVERS_MARINE, 3000);
-									events.ScheduleEvent(EVENT_SUMMON_PORTAL, 90000);
-								}
+								events.ScheduleEvent(EVENT_BOARDING_REAVERS_MARINE, 3000);
+								events.ScheduleEvent(EVENT_SUMMON_PORTAL, 90000);
 							}
                             break;
                         case EVENT_BOARDING_REAVERS_MARINE:
@@ -3182,7 +3182,8 @@ class spell_remove_rocket_pack : public SpellScriptLoader
                     return;
  
                 int32 itemId = GetEffectValue();
-                hitPlr->DestroyItemCount(itemId, -1, true, false);
+                uint32 itemCount = hitPlr->GetItemCount(itemId, false); // Should be 1, but just in case.
+                hitPlr->DestroyItemCount(itemId, itemCount, true, false);
             }
  
             void Register()
