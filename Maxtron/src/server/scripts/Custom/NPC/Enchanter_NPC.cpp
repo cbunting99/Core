@@ -71,8 +71,6 @@ enum Enchants
 	ENCHANT_LEG_ICESCALE				= 3823,
 	ENCHANT_LEG_BRILLIANT_SPELLTHREAD	= 3719,
 	ENCHANT_LEG_SAPPHIRE_SPELLTHREAD	= 3721,
-	ENCHANT_LEG_DRAGONSCALE				= 3331,
-	ENCHANT_LEG_WYRMSCALE				= 3332,
 
 	ENCHANT_GLOVES_GREATER_BLASTING		= 3249,
 	ENCHANT_GLOVES_ARMSMAN				= 3253,
@@ -111,13 +109,6 @@ enum Enchants
 	ENCHANT_BOOTS_ICEWALKER				= 3826,
 	ENCHANT_BOOTS_GREATER_FORTITUDE		= 1075,
 	ENCHANT_BOOTS_NITRO_BOOTS			= 3606,
-	ENCHANT_BOOTS_PYRO_ROCKET			= 3603,
-	ENCHANT_BOOTS_HYPERSPEED			= 3604,
-	ENCHANT_BOOTS_ARMOR_WEBBING			= 3860,
-
-	ENCHANT_RING_ASSULT					= 3839,
-	ENCHANT_RING_GREATER_SP				= 3840,
-	ENCHANT_RING_STAMINA				= 3791,
 };
 
 #include "ScriptPCH.h"
@@ -157,28 +148,24 @@ public:
 	bool OnGossipHello(Player* player, Creature* creature)
 	{
 		player->ADD_GOSSIP_ITEM(5, "Main-Hand Weapon.", GOSSIP_SENDER_MAIN, 1);
-		player->ADD_GOSSIP_ITEM(5, "Off-Hand Weapon.", GOSSIP_SENDER_MAIN, 13);
-		player->ADD_GOSSIP_ITEM(5, "Two-Handed Weapon.", GOSSIP_SENDER_MAIN, 2);
-		player->ADD_GOSSIP_ITEM(5, "Ranged Weapon.", GOSSIP_SENDER_MAIN, 15);
-		player->ADD_GOSSIP_ITEM(5, "Shield.", GOSSIP_SENDER_MAIN, 3);
-		player->ADD_GOSSIP_ITEM(5, "Head.", GOSSIP_SENDER_MAIN, 4);
-		player->ADD_GOSSIP_ITEM(5, "Shoulders.", GOSSIP_SENDER_MAIN, 5);
-		player->ADD_GOSSIP_ITEM(5, "Cloak.", GOSSIP_SENDER_MAIN, 6);
-		player->ADD_GOSSIP_ITEM(5, "Chest.", GOSSIP_SENDER_MAIN, 7);
-		player->ADD_GOSSIP_ITEM(5, "Bracers.", GOSSIP_SENDER_MAIN, 8);
+		player->ADD_GOSSIP_ITEM(5, "Off-Hand Weapon.", GOSSIP_SENDER_MAIN, 2);
+		player->ADD_GOSSIP_ITEM(5, "Two-Handed Weapon.", GOSSIP_SENDER_MAIN, 3);
+		player->ADD_GOSSIP_ITEM(5, "Ranged Weapon.", GOSSIP_SENDER_MAIN, 4);
+		player->ADD_GOSSIP_ITEM(5, "Shield.", GOSSIP_SENDER_MAIN, 5);
+		player->ADD_GOSSIP_ITEM(5, "Head.", GOSSIP_SENDER_MAIN, 6);
+		player->ADD_GOSSIP_ITEM(5, "Shoulders.", GOSSIP_SENDER_MAIN, 7);
+		player->ADD_GOSSIP_ITEM(5, "Cloak.", GOSSIP_SENDER_MAIN, 8);
+		player->ADD_GOSSIP_ITEM(5, "Chest.", GOSSIP_SENDER_MAIN, 9);
+		player->ADD_GOSSIP_ITEM(5, "Bracers.", GOSSIP_SENDER_MAIN, 10);
 		if (player->HasSkill(SKILL_ENGINEERING) && player->GetSkillValue(SKILL_ENGINEERING) == 450)
-		{
-			player->ADD_GOSSIP_ITEM(5, "Waist.", GOSSIP_SENDER_MAIN, 14);
-		}
-		player->ADD_GOSSIP_ITEM(5, "Gloves.", GOSSIP_SENDER_MAIN, 9);
-		player->ADD_GOSSIP_ITEM(5, "Legs.", GOSSIP_SENDER_MAIN, 10);
-		player->ADD_GOSSIP_ITEM(5, "Feet.", GOSSIP_SENDER_MAIN, 11);
+			player->ADD_GOSSIP_ITEM(5, "Waist.", GOSSIP_SENDER_MAIN, 12);
+		player->ADD_GOSSIP_ITEM(5, "Gloves.", GOSSIP_SENDER_MAIN, 13);
+		player->ADD_GOSSIP_ITEM(5, "Legs.", GOSSIP_SENDER_MAIN, 14);
+		player->ADD_GOSSIP_ITEM(5, "Feet.", GOSSIP_SENDER_MAIN, 15);
 		if (player->HasSkill(SKILL_ENCHANTING) && player->GetSkillValue(SKILL_ENCHANTING) == 450)
-		{
-			player->ADD_GOSSIP_ITEM(5, "Rings.", GOSSIP_SENDER_MAIN, 12);
-		}
-		player->ADD_GOSSIP_ITEM(5, "Eternal Belt Buckle.", GOSSIP_SENDER_MAIN, 308);
-		player->ADD_GOSSIP_ITEM(5, "Titanium Weapon Chain.", GOSSIP_SENDER_MAIN, 309);
+			player->ADD_GOSSIP_ITEM(5, "Rings.", GOSSIP_SENDER_MAIN, 16);
+		player->ADD_GOSSIP_ITEM(5, "Eternal Belt Buckle.", GOSSIP_SENDER_MAIN, 17);
+		player->ADD_GOSSIP_ITEM(5, "Titanium Weapon Chain.", GOSSIP_SENDER_MAIN, 18);
 		player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 		return true;
 	}
@@ -201,183 +188,269 @@ public:
 					player->PlayerTalkClass->SendCloseGossip();
 					return false;
 				}
-					player->ADD_GOSSIP_ITEM(5, "Blade Ward", GOSSIP_SENDER_MAIN, 102);
-					player->ADD_GOSSIP_ITEM(5, "Blood Draining", GOSSIP_SENDER_MAIN, 103);
-					player->ADD_GOSSIP_ITEM(5, "Exceptional Agility", GOSSIP_SENDER_MAIN, 100);
-					player->ADD_GOSSIP_ITEM(5, "Exceptional Spirit", GOSSIP_SENDER_MAIN, 101);
+				player->ADD_GOSSIP_ITEM(5, "Blade Ward", GOSSIP_SENDER_MAIN, 102);
+				player->ADD_GOSSIP_ITEM(5, "Blood Draining", GOSSIP_SENDER_MAIN, 103);
+				player->ADD_GOSSIP_ITEM(5, "Exceptional Agility", GOSSIP_SENDER_MAIN, 100);
+				player->ADD_GOSSIP_ITEM(5, "Exceptional Spirit", GOSSIP_SENDER_MAIN, 101);
+				player->ADD_GOSSIP_ITEM(5, "Berserking", GOSSIP_SENDER_MAIN, 104);
+				player->ADD_GOSSIP_ITEM(5, "Accuracy", GOSSIP_SENDER_MAIN, 105);
+				player->ADD_GOSSIP_ITEM(5, "Black Magic", GOSSIP_SENDER_MAIN, 106);
+				player->ADD_GOSSIP_ITEM(5, "Battlemaster", GOSSIP_SENDER_MAIN, 107);
+				player->ADD_GOSSIP_ITEM(5, "Icebreaker", GOSSIP_SENDER_MAIN, 108);
+				player->ADD_GOSSIP_ITEM(5, "Lifeward", GOSSIP_SENDER_MAIN, 109);
+				player->ADD_GOSSIP_ITEM(5, "Superior Potency", GOSSIP_SENDER_MAIN, 111);
+				player->ADD_GOSSIP_ITEM(5, "Mighty Spellpower", GOSSIP_SENDER_MAIN, 112);
+				player->ADD_GOSSIP_ITEM(5, "Mongoose", GOSSIP_SENDER_MAIN, 113);
+				player->ADD_GOSSIP_ITEM(5, "Executioner", GOSSIP_SENDER_MAIN, 114);
+				player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
+				player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
+				return true;
+				break;
+
+			case 2: // Off-Hand Weapon.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
+
+				if(!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
+
+				if (item->GetTemplate()->InventoryType == INVTYPE_WEAPON)
+				{
+					player->ADD_GOSSIP_ITEM(5, "Blade Ward", GOSSIP_SENDER_MAIN, 205);
+					player->ADD_GOSSIP_ITEM(5, "Blood Draining", GOSSIP_SENDER_MAIN, 219);
+					player->ADD_GOSSIP_ITEM(5, "Exceptional Agility", GOSSIP_SENDER_MAIN, 206);
+					player->ADD_GOSSIP_ITEM(5, "Exceptional Spirit", GOSSIP_SENDER_MAIN, 207);
+					player->ADD_GOSSIP_ITEM(5, "Berserking", GOSSIP_SENDER_MAIN, 208);
+					player->ADD_GOSSIP_ITEM(5, "Accuracy", GOSSIP_SENDER_MAIN, 209);
+					player->ADD_GOSSIP_ITEM(5, "Black Magic", GOSSIP_SENDER_MAIN, 210);
+					player->ADD_GOSSIP_ITEM(5, "Battlemaster", GOSSIP_SENDER_MAIN, 211);
+					player->ADD_GOSSIP_ITEM(5, "Icebreaker", GOSSIP_SENDER_MAIN, 212);
+					player->ADD_GOSSIP_ITEM(5, "Lifeward", GOSSIP_SENDER_MAIN, 213);
+					player->ADD_GOSSIP_ITEM(5, "Superior Potency", GOSSIP_SENDER_MAIN, 215);
+					player->ADD_GOSSIP_ITEM(5, "Mighty Spellpower", GOSSIP_SENDER_MAIN, 216);
+					player->ADD_GOSSIP_ITEM(5, "Mongoose", GOSSIP_SENDER_MAIN, 217);
+					player->ADD_GOSSIP_ITEM(5, "Executioner", GOSSIP_SENDER_MAIN, 218);
+					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
+					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
+					return true;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
+
+			case 3: // Two-Handed Weapon.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND);
+
+				if (!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
+
+				if (item->GetTemplate()->InventoryType == INVTYPE_2HWEAPON)
+				{
 					player->ADD_GOSSIP_ITEM(5, "Berserking", GOSSIP_SENDER_MAIN, 104);
-					player->ADD_GOSSIP_ITEM(5, "Accuracy", GOSSIP_SENDER_MAIN, 105);
-					player->ADD_GOSSIP_ITEM(5, "Black Magic", GOSSIP_SENDER_MAIN, 106);
-					player->ADD_GOSSIP_ITEM(5, "Battlemaster", GOSSIP_SENDER_MAIN, 107);
-					player->ADD_GOSSIP_ITEM(5, "Icebreaker", GOSSIP_SENDER_MAIN, 108);
-					player->ADD_GOSSIP_ITEM(5, "Lifeward", GOSSIP_SENDER_MAIN, 109);
-					player->ADD_GOSSIP_ITEM(5, "Superior Potency", GOSSIP_SENDER_MAIN, 111);
-					player->ADD_GOSSIP_ITEM(5, "Mighty Spellpower", GOSSIP_SENDER_MAIN, 112);
+					player->ADD_GOSSIP_ITEM(5, "Greater Spellpower", GOSSIP_SENDER_MAIN, 115);
+					player->ADD_GOSSIP_ITEM(5, "Major Agility", GOSSIP_SENDER_MAIN, 116);
+					player->ADD_GOSSIP_ITEM(5, "Massacre", GOSSIP_SENDER_MAIN, 117);
 					player->ADD_GOSSIP_ITEM(5, "Mongoose", GOSSIP_SENDER_MAIN, 113);
 					player->ADD_GOSSIP_ITEM(5, "Executioner", GOSSIP_SENDER_MAIN, 114);
 					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
-                    player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
+					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 					return true;
-					break;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
 
-                case 2: // Enchant 2H Weapon
-					{
-						item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND);
+			case 4: // Ranged Weapons.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_RANGED);
 
-						if (!item)
-						{
-							player->PlayerTalkClass->SendCloseGossip();
-							return false;
-						}
+				if (!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
 
-						if (item->GetTemplate()->InventoryType == INVTYPE_2HWEAPON)
-						{
-							player->ADD_GOSSIP_ITEM(5, "Berserking", GOSSIP_SENDER_MAIN, 104);
-							player->ADD_GOSSIP_ITEM(5, "Greater Spellpower", GOSSIP_SENDER_MAIN, 115);
-							player->ADD_GOSSIP_ITEM(5, "Major Agility", GOSSIP_SENDER_MAIN, 116);
-							player->ADD_GOSSIP_ITEM(5, "Massacre", GOSSIP_SENDER_MAIN, 117);
-							player->ADD_GOSSIP_ITEM(5, "Mongoose", GOSSIP_SENDER_MAIN, 113);
-							player->ADD_GOSSIP_ITEM(5, "Executioner", GOSSIP_SENDER_MAIN, 114);
-							player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
-							player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
-							return true;
-						}
-						else
-						{
-							player->PlayerTalkClass->SendCloseGossip();
-						}
-					}
-					break;
-
-                case 3: // Enchant Shield
-					{
-						item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
-
-						if (!item)
-						{
-							player->PlayerTalkClass->SendCloseGossip();
-							return false;
-						}
-
-						if (item->GetTemplate()->InventoryType == INVTYPE_SHIELD)
-						{
-							player->ADD_GOSSIP_ITEM(5, "Defense.", GOSSIP_SENDER_MAIN, 118);
-							player->ADD_GOSSIP_ITEM(5, "Greater Intellect.", GOSSIP_SENDER_MAIN, 119);
-							player->ADD_GOSSIP_ITEM(5, "Resilience.", GOSSIP_SENDER_MAIN, 120);
-							player->ADD_GOSSIP_ITEM(5, "Titanium Plating.", GOSSIP_SENDER_MAIN, 121);
-							player->ADD_GOSSIP_ITEM(5, "Major Stamina.", GOSSIP_SENDER_MAIN, 122);
-							player->ADD_GOSSIP_ITEM(5, "Tough Shield.", GOSSIP_SENDER_MAIN, 123);
-							player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
-							player->PlayerTalkClass->SendGossipMenu(100004, creature->GetGUID());
-							return true;
-						}
-						else
-						{
-							player->PlayerTalkClass->SendCloseGossip();
-						}
-					}
-					break;
-
-                case 4: // Enchant Head
-					if (player->HasSkill(SKILL_ENGINEERING) && player->GetSkillValue(SKILL_ENGINEERING) == 450)
-                    { 
-					player->ADD_GOSSIP_ITEM(5, "Mind Amplification Dish.", GOSSIP_SENDER_MAIN, 301);
-					
-					}
-                    player->ADD_GOSSIP_ITEM(5, "Arcanum of Blissful Mending", GOSSIP_SENDER_MAIN, 124);
-                    player->ADD_GOSSIP_ITEM(5, "Arcanum of Burning Mysteries", GOSSIP_SENDER_MAIN, 125);
-                    player->ADD_GOSSIP_ITEM(5, "Arcanum of Dominance", GOSSIP_SENDER_MAIN, 126);
-                    player->ADD_GOSSIP_ITEM(5, "Arcanum of The Savage Gladiator", GOSSIP_SENDER_MAIN, 127);
-                    player->ADD_GOSSIP_ITEM(5, "Arcanum of The Stalwart Protector", GOSSIP_SENDER_MAIN, 128);
-                    player->ADD_GOSSIP_ITEM(5, "Arcanum of Torment", GOSSIP_SENDER_MAIN, 129);
-                    player->ADD_GOSSIP_ITEM(5, "Arcanum of Triumph", GOSSIP_SENDER_MAIN, 130);
-					player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
-                    player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
-					return true;
-					break;
-
-				case 14: // Belt.
-					player->ADD_GOSSIP_ITEM(5, "Electromagnetic Pulse Generator.", GOSSIP_SENDER_MAIN, 303);
-                    player->ADD_GOSSIP_ITEM(5, "Frag Belt.", GOSSIP_SENDER_MAIN, 302);
-					player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
-                    player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
-					return true;
-					break;
-				case 15: // Ranged Weapons.
+				if (item->GetTemplate()->InventoryType == INVTYPE_RANGED)
+				{
 					player->ADD_GOSSIP_ITEM(5, "Biznicks 247x128 Accurascope.", GOSSIP_SENDER_MAIN, 304);
 					player->ADD_GOSSIP_ITEM(5, "Diamond-cut Refractor Scope.", GOSSIP_SENDER_MAIN, 305);
-                    player->ADD_GOSSIP_ITEM(5, "Heartseeker Scope.", GOSSIP_SENDER_MAIN, 306);
+					player->ADD_GOSSIP_ITEM(5, "Heartseeker Scope.", GOSSIP_SENDER_MAIN, 306);
 					player->ADD_GOSSIP_ITEM(5, "Sun Scope.", GOSSIP_SENDER_MAIN, 307);
-					player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
-                    player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
+					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
+					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 					return true;
-					break;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
 
-                case 5: // Enchant Shoulders
-                    if (player->HasSkill(SKILL_INSCRIPTION) && player->GetSkillValue(SKILL_INSCRIPTION) == 450)
-                    {
-                        player->ADD_GOSSIP_ITEM(5, "Master's Inscription of the Axe", GOSSIP_SENDER_MAIN, 136);
-                        player->ADD_GOSSIP_ITEM(5, "Master's Inscription of the Crag", GOSSIP_SENDER_MAIN, 137);
-                        player->ADD_GOSSIP_ITEM(5, "Master's Inscription of the Pinnacle", GOSSIP_SENDER_MAIN, 138);
-                        player->ADD_GOSSIP_ITEM(5, "Master's Inscription of the Storm", GOSSIP_SENDER_MAIN, 139);
-						
-                    }
-                    player->ADD_GOSSIP_ITEM(5, "Greater Inscription of the Axe", GOSSIP_SENDER_MAIN, 140);
-                    player->ADD_GOSSIP_ITEM(5, "Greater Inscription of the Crag", GOSSIP_SENDER_MAIN, 141);
-                    player->ADD_GOSSIP_ITEM(5, "Greater Inscription of the Pinnacle", GOSSIP_SENDER_MAIN, 142);
-                    player->ADD_GOSSIP_ITEM(5, "Greater Inscription of the Gladiator", GOSSIP_SENDER_MAIN, 143);
-                    player->ADD_GOSSIP_ITEM(5, "Greater Inscription of the Storm", GOSSIP_SENDER_MAIN, 144);
-                    player->ADD_GOSSIP_ITEM(5, "Inscription of Dominance", GOSSIP_SENDER_MAIN, 145);
-                    player->ADD_GOSSIP_ITEM(5, "Inscription of Triumph", GOSSIP_SENDER_MAIN, 146);
-					player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
-                    player->PlayerTalkClass->SendGossipMenu(100006, creature->GetGUID());
+			case 5: // Shield.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
+
+				if (!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
+
+				if (item->GetTemplate()->InventoryType == INVTYPE_SHIELD)
+				{
+					player->ADD_GOSSIP_ITEM(5, "Defense.", GOSSIP_SENDER_MAIN, 118);
+					player->ADD_GOSSIP_ITEM(5, "Greater Intellect.", GOSSIP_SENDER_MAIN, 119);
+					player->ADD_GOSSIP_ITEM(5, "Resilience.", GOSSIP_SENDER_MAIN, 120);
+					player->ADD_GOSSIP_ITEM(5, "Titanium Plating.", GOSSIP_SENDER_MAIN, 121);
+					player->ADD_GOSSIP_ITEM(5, "Major Stamina.", GOSSIP_SENDER_MAIN, 122);
+					player->ADD_GOSSIP_ITEM(5, "Tough Shield.", GOSSIP_SENDER_MAIN, 123);
+					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
+					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 					return true;
-					break;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
 
-                case 6: // Enchant Cloak
+			case 6: // Head.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD);
+
+				if (!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
+
+				if (item->GetTemplate()->InventoryType == INVTYPE_HEAD)
+				{
+					if (player->HasSkill(SKILL_ENGINEERING) && player->GetSkillValue(SKILL_ENGINEERING) == 450)
+						player->ADD_GOSSIP_ITEM(5, "Mind Amplification Dish.", GOSSIP_SENDER_MAIN, 301);
+					player->ADD_GOSSIP_ITEM(5, "Arcanum of Triumph", GOSSIP_SENDER_MAIN, 130);
+					player->ADD_GOSSIP_ITEM(5, "Arcanum of Dominance", GOSSIP_SENDER_MAIN, 126);
+					player->ADD_GOSSIP_ITEM(5, "Arcanum of Blissful Mending", GOSSIP_SENDER_MAIN, 124);
+					player->ADD_GOSSIP_ITEM(5, "Arcanum of Burning Mysteries", GOSSIP_SENDER_MAIN, 125);
+					player->ADD_GOSSIP_ITEM(5, "Arcanum of The Savage Gladiator", GOSSIP_SENDER_MAIN, 127);
+					player->ADD_GOSSIP_ITEM(5, "Arcanum of The Stalwart Protector", GOSSIP_SENDER_MAIN, 128);
+					player->ADD_GOSSIP_ITEM(5, "Arcanum of Torment", GOSSIP_SENDER_MAIN, 129);
+					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
+					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
+					return true;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
+
+			case 7: // Shoulders.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS);
+
+				if (!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
+
+				if (item->GetTemplate()->InventoryType == INVTYPE_SHOULDERS)
+				{
+					if (player->HasSkill(SKILL_INSCRIPTION) && player->GetSkillValue(SKILL_INSCRIPTION) == 450)
+					{
+						player->ADD_GOSSIP_ITEM(5, "Master's Inscription of the Axe", GOSSIP_SENDER_MAIN, 136);
+						player->ADD_GOSSIP_ITEM(5, "Master's Inscription of the Crag", GOSSIP_SENDER_MAIN, 137);
+						player->ADD_GOSSIP_ITEM(5, "Master's Inscription of the Pinnacle", GOSSIP_SENDER_MAIN, 138);
+						player->ADD_GOSSIP_ITEM(5, "Master's Inscription of the Storm", GOSSIP_SENDER_MAIN, 139);
+					}
+					player->ADD_GOSSIP_ITEM(5, "Inscription of Triumph", GOSSIP_SENDER_MAIN, 146);
+					player->ADD_GOSSIP_ITEM(5, "Inscription of Dominance", GOSSIP_SENDER_MAIN, 145);
+					player->ADD_GOSSIP_ITEM(5, "Greater Inscription of the Axe", GOSSIP_SENDER_MAIN, 140);
+					player->ADD_GOSSIP_ITEM(5, "Greater Inscription of the Crag", GOSSIP_SENDER_MAIN, 141);
+					player->ADD_GOSSIP_ITEM(5, "Greater Inscription of the Pinnacle", GOSSIP_SENDER_MAIN, 142);
+					player->ADD_GOSSIP_ITEM(5, "Greater Inscription of the Gladiator", GOSSIP_SENDER_MAIN, 143);
+					player->ADD_GOSSIP_ITEM(5, "Greater Inscription of the Storm", GOSSIP_SENDER_MAIN, 144);
+					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
+					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
+					return true;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
+
+			case 8: // Cloak.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK);
+
+				if (!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
+
+				if (item->GetTemplate()->InventoryType == INVTYPE_CLOAK)
+				{
 					if (player->HasSkill(SKILL_TAILORING) && player->GetSkillValue(SKILL_TAILORING) == 450)
-                    {                  
-                    player->ADD_GOSSIP_ITEM(5, "Darkglow Embroidery", GOSSIP_SENDER_MAIN, 149);
-                    player->ADD_GOSSIP_ITEM(5, "Lightweave Embroidery", GOSSIP_SENDER_MAIN, 150);
-                    player->ADD_GOSSIP_ITEM(5, "Swordguard Embroidery", GOSSIP_SENDER_MAIN, 151);
-					
+					{                  
+						player->ADD_GOSSIP_ITEM(5, "Darkglow Embroidery", GOSSIP_SENDER_MAIN, 149);
+						player->ADD_GOSSIP_ITEM(5, "Lightweave Embroidery", GOSSIP_SENDER_MAIN, 150);
+						player->ADD_GOSSIP_ITEM(5, "Swordguard Embroidery", GOSSIP_SENDER_MAIN, 151);
 					}
 					if (player->HasSkill(SKILL_ENGINEERING) && player->GetSkillValue(SKILL_ENGINEERING) == 450)
-                    { 
-					player->ADD_GOSSIP_ITEM(5, "Springy Arachnoweave", GOSSIP_SENDER_MAIN, 147);
-					player->ADD_GOSSIP_ITEM(5, "Flexweave Underlay", GOSSIP_SENDER_MAIN, 299);
-					
+					{ 
+						player->ADD_GOSSIP_ITEM(5, "Springy Arachnoweave", GOSSIP_SENDER_MAIN, 147);
+						player->ADD_GOSSIP_ITEM(5, "Flexweave Underlay", GOSSIP_SENDER_MAIN, 299);
 					}
 					player->ADD_GOSSIP_ITEM(5, "Shadow Armor", GOSSIP_SENDER_MAIN, 148);     
-                    player->ADD_GOSSIP_ITEM(5, "Wisdom", GOSSIP_SENDER_MAIN, 152);
-                    player->ADD_GOSSIP_ITEM(5, "Titanweave", GOSSIP_SENDER_MAIN, 153);
-                    player->ADD_GOSSIP_ITEM(5, "Spell Piercing", GOSSIP_SENDER_MAIN, 154);
-                    player->ADD_GOSSIP_ITEM(5, "Mighty Armor", GOSSIP_SENDER_MAIN, 155);
-                    player->ADD_GOSSIP_ITEM(5, "Major Agility", GOSSIP_SENDER_MAIN, 156);
-                    player->ADD_GOSSIP_ITEM(5, "Greater Speed", GOSSIP_SENDER_MAIN, 157);
-					player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
-                    player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
+					player->ADD_GOSSIP_ITEM(5, "Wisdom", GOSSIP_SENDER_MAIN, 152);
+					player->ADD_GOSSIP_ITEM(5, "Titanweave", GOSSIP_SENDER_MAIN, 153);
+					player->ADD_GOSSIP_ITEM(5, "Spell Piercing", GOSSIP_SENDER_MAIN, 154);
+					player->ADD_GOSSIP_ITEM(5, "Mighty Armor", GOSSIP_SENDER_MAIN, 155);
+					player->ADD_GOSSIP_ITEM(5, "Major Agility", GOSSIP_SENDER_MAIN, 156);
+					player->ADD_GOSSIP_ITEM(5, "Greater Speed", GOSSIP_SENDER_MAIN, 157);
+					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
+					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 					return true;
-					break;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
 
-				case 7: //Enchant chest
+			case 9: // Chest.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST);
+
+				if (!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
+
+				if (item->GetTemplate()->InventoryType == INVTYPE_CHEST)
+				{
 					player->ADD_GOSSIP_ITEM(5, "Powerful Stats", GOSSIP_SENDER_MAIN, 158);
 					player->ADD_GOSSIP_ITEM(5, "Super Health", GOSSIP_SENDER_MAIN, 159);
 					player->ADD_GOSSIP_ITEM(5, "Greater Mana Restoration", GOSSIP_SENDER_MAIN, 160);
 					player->ADD_GOSSIP_ITEM(5, "Exceptional Resilience", GOSSIP_SENDER_MAIN, 161);
 					player->ADD_GOSSIP_ITEM(5, "Greater Defense", GOSSIP_SENDER_MAIN, 162);
-					player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
+					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
 					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 					return true;
-					break;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
 
-				case 8: //Enchant Bracers
+			case 10: // Bracers.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS);
+
+				if (!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
+
+				if (item->GetTemplate()->InventoryType == INVTYPE_WRISTS)
+				{
 					if (player->HasSkill(SKILL_LEATHERWORKING) && player->GetSkillValue(SKILL_LEATHERWORKING) == 450)
-                    {
+					{
 						player->ADD_GOSSIP_ITEM(5, "Fur Lining - Attack power", GOSSIP_SENDER_MAIN, 175);
 						player->ADD_GOSSIP_ITEM(5, "Fur Lining - Stamina", GOSSIP_SENDER_MAIN, 176);
 						player->ADD_GOSSIP_ITEM(5, "Fur Lining - Spellpower", GOSSIP_SENDER_MAIN, 177);
-						
 					}
 					player->ADD_GOSSIP_ITEM(5, "Major Stamina", GOSSIP_SENDER_MAIN, 163);
 					player->ADD_GOSSIP_ITEM(5, "Superior Spell Power", GOSSIP_SENDER_MAIN, 164);
@@ -386,20 +459,52 @@ public:
 					player->ADD_GOSSIP_ITEM(5, "Expertise", GOSSIP_SENDER_MAIN, 167);
 					player->ADD_GOSSIP_ITEM(5, "Greater Stats", GOSSIP_SENDER_MAIN, 168);
 					player->ADD_GOSSIP_ITEM(5, "Exceptional Intellect", GOSSIP_SENDER_MAIN, 169);
-					player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
+					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
 					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 					return true;
-					break;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
 
-				case 9: //Enchant Gloves
+			case 12: // Waist.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST);
+
+				if (!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
+
+				if (item->GetTemplate()->InventoryType == INVTYPE_WAIST)
+				{
+					player->ADD_GOSSIP_ITEM(5, "Electromagnetic Pulse Generator.", GOSSIP_SENDER_MAIN, 303);
+					player->ADD_GOSSIP_ITEM(5, "Frag Belt.", GOSSIP_SENDER_MAIN, 302);
+					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
+					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
+					return true;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
+
+			case 13: // Gloves.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS);
+
+				if (!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
+
+				if (item->GetTemplate()->InventoryType == INVTYPE_HANDS)
+				{
 					if (player->HasSkill(SKILL_ENGINEERING) && player->GetSkillValue(SKILL_ENGINEERING) == 450)
-                    {
-					player->ADD_GOSSIP_ITEM(5, "Reticulated Armor Webbing.", GOSSIP_SENDER_MAIN, 201);
-					player->ADD_GOSSIP_ITEM(5, "Hyperspeed Accelerators.", GOSSIP_SENDER_MAIN, 200);
-					player->ADD_GOSSIP_ITEM(5, "Hand-Mounted Pyro Rocket.", GOSSIP_SENDER_MAIN, 199);
-					
+					{
+						player->ADD_GOSSIP_ITEM(5, "Reticulated Armor Webbing.", GOSSIP_SENDER_MAIN, 201);
+						player->ADD_GOSSIP_ITEM(5, "Hyperspeed Accelerators.", GOSSIP_SENDER_MAIN, 200);
+						player->ADD_GOSSIP_ITEM(5, "Hand-Mounted Pyro Rocket.", GOSSIP_SENDER_MAIN, 199);
 					}
-
 					player->ADD_GOSSIP_ITEM(5, "Exceptional Spellpower", GOSSIP_SENDER_MAIN, 298);
 					player->ADD_GOSSIP_ITEM(5, "Greater Blasting", GOSSIP_SENDER_MAIN, 178);
 					player->ADD_GOSSIP_ITEM(5, "Armsman", GOSSIP_SENDER_MAIN, 179);
@@ -407,27 +512,52 @@ public:
 					player->ADD_GOSSIP_ITEM(5, "Agility", GOSSIP_SENDER_MAIN, 181);
 					player->ADD_GOSSIP_ITEM(5, "Precision", GOSSIP_SENDER_MAIN, 182);
 					player->ADD_GOSSIP_ITEM(5, "Expertise", GOSSIP_SENDER_MAIN, 183);
-					player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
+					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
 					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 					return true;
-					break;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
 
-				case 10: //Enchant legs
+			case 14: // Legs.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS);
+
+				if (!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
+
+				if (item->GetTemplate()->InventoryType == INVTYPE_LEGS)
+				{
 					player->ADD_GOSSIP_ITEM(5, "Earthen Leg Armor", GOSSIP_SENDER_MAIN, 184);
 					player->ADD_GOSSIP_ITEM(5, "Frosthide Leg Armor", GOSSIP_SENDER_MAIN, 185);
 					player->ADD_GOSSIP_ITEM(5, "Icescale Leg Armor", GOSSIP_SENDER_MAIN, 186);
 					player->ADD_GOSSIP_ITEM(5, "Brilliant Spellthread", GOSSIP_SENDER_MAIN, 187);
 					player->ADD_GOSSIP_ITEM(5, "Sapphire Spellthread", GOSSIP_SENDER_MAIN, 188);
-					player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
+					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
 					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 					return true;
-					break;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
 
-				case 11: //Enchant feet
+			case 15: // Feet.
+				item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET);
+
+				if (!item)
+				{
+					player->PlayerTalkClass->SendCloseGossip();
+					return false;
+				}
+
+				if (item->GetTemplate()->InventoryType == INVTYPE_FEET)
+				{
 					if (player->HasSkill(SKILL_ENGINEERING) && player->GetSkillValue(SKILL_ENGINEERING) == 450)
-                    { 
-					player->ADD_GOSSIP_ITEM(5, "Nitro Boots", GOSSIP_SENDER_MAIN, 198);
-					
+					{ 
+						player->ADD_GOSSIP_ITEM(5, "Nitro Boots", GOSSIP_SENDER_MAIN, 198);
 					}
 					player->ADD_GOSSIP_ITEM(5, "Greater Assult", GOSSIP_SENDER_MAIN, 191);
 					player->ADD_GOSSIP_ITEM(5, "Tuskars Vitliaty", GOSSIP_SENDER_MAIN, 192);
@@ -436,56 +566,32 @@ public:
 					player->ADD_GOSSIP_ITEM(5, "Greater Vitality", GOSSIP_SENDER_MAIN, 195);
 					player->ADD_GOSSIP_ITEM(5, "Icewalker", GOSSIP_SENDER_MAIN, 196);
 					player->ADD_GOSSIP_ITEM(5, "Greater Fortitude", GOSSIP_SENDER_MAIN, 197);
-					player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
+					player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
 					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 					return true;
-					break;
+				}
+				else
+					player->PlayerTalkClass->SendCloseGossip();
+				break;
 
-				case 12: //Enchant rings
-					player->ADD_GOSSIP_ITEM(5, "Assult", GOSSIP_SENDER_MAIN, 202);
-					player->ADD_GOSSIP_ITEM(5, "Greater Spell Power", GOSSIP_SENDER_MAIN, 203);
-					player->ADD_GOSSIP_ITEM(5, "Stamina", GOSSIP_SENDER_MAIN, 204);
-					player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
-					player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
-					return true;
-					break;
+			case 16: //Enchant rings
+				player->ADD_GOSSIP_ITEM(5, "Assult", GOSSIP_SENDER_MAIN, 202);
+				player->ADD_GOSSIP_ITEM(5, "Greater Spell Power", GOSSIP_SENDER_MAIN, 203);
+				player->ADD_GOSSIP_ITEM(5, "Stamina", GOSSIP_SENDER_MAIN, 204);
+				player->ADD_GOSSIP_ITEM(7, "Back!", GOSSIP_SENDER_MAIN, 300);
+				player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
+				return true;
+				break;
+			
+			case 17: // Eternal Belt Buckle.
+				player->AddItem(41611, 1);
+				player->PlayerTalkClass->SendCloseGossip();
+				break;
 
-				case 13: //Enchant Off-Hand weapons
-					{
-						item = player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND);
-
-						if(!item)
-						{
-							player->PlayerTalkClass->SendCloseGossip();
-							return false;
-						}
-
-						if (item->GetTemplate()->InventoryType == INVTYPE_WEAPON)
-						{
-							player->ADD_GOSSIP_ITEM(5, "Blade Ward", GOSSIP_SENDER_MAIN, 205);
-							player->ADD_GOSSIP_ITEM(5, "Blood Draining", GOSSIP_SENDER_MAIN, 219);
-							player->ADD_GOSSIP_ITEM(5, "Exceptional Agility", GOSSIP_SENDER_MAIN, 206);
-							player->ADD_GOSSIP_ITEM(5, "Exceptional Spirit", GOSSIP_SENDER_MAIN, 207);
-							player->ADD_GOSSIP_ITEM(5, "Berserking", GOSSIP_SENDER_MAIN, 208);
-							player->ADD_GOSSIP_ITEM(5, "Accuracy", GOSSIP_SENDER_MAIN, 209);
-							player->ADD_GOSSIP_ITEM(5, "Black Magic", GOSSIP_SENDER_MAIN, 210);
-							player->ADD_GOSSIP_ITEM(5, "Battlemaster", GOSSIP_SENDER_MAIN, 211);
-							player->ADD_GOSSIP_ITEM(5, "Icebreaker", GOSSIP_SENDER_MAIN, 212);
-							player->ADD_GOSSIP_ITEM(5, "Lifeward", GOSSIP_SENDER_MAIN, 213);
-							player->ADD_GOSSIP_ITEM(5, "Superior Potency", GOSSIP_SENDER_MAIN, 215);
-							player->ADD_GOSSIP_ITEM(5, "Mighty Spellpower", GOSSIP_SENDER_MAIN, 216);
-							player->ADD_GOSSIP_ITEM(5, "Mongoose", GOSSIP_SENDER_MAIN, 217);
-							player->ADD_GOSSIP_ITEM(5, "Executioner", GOSSIP_SENDER_MAIN, 218);
-							player->ADD_GOSSIP_ITEM(5, "Back!", GOSSIP_SENDER_MAIN, 300);
-							player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
-							return true;
-						}
-						else
-						{
-							player->PlayerTalkClass->SendCloseGossip();
-						}
-					}
-					break;
+			case 18: // Titanium Weapon Chain.
+				player->AddItem(41976, 1);
+				player->PlayerTalkClass->SendCloseGossip();
+				break;
 
                 case 100:
                     Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND), ENCHANT_WEP_AGILITY_1H);
@@ -1155,7 +1261,7 @@ public:
                     player->PlayerTalkClass->SendCloseGossip();
                     break;
 
-					case 302: // Frag Belt
+					case 302: // Frag Belt.
 					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WAIST), 3601);
                     player->PlayerTalkClass->SendCloseGossip();
                     break;
@@ -1166,20 +1272,20 @@ public:
                     break;
 
 				case 202:
-					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), ENCHANT_RING_ASSULT);
-					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), ENCHANT_RING_ASSULT);
+					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), 3839);
+					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), 3839);
                     player->PlayerTalkClass->SendCloseGossip();
                     break;
 
 				case 203:
-					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), ENCHANT_RING_GREATER_SP);
-					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), ENCHANT_RING_GREATER_SP);
+					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), 3840);
+					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), 3840);
                     player->PlayerTalkClass->SendCloseGossip();
                     break;
 
 				case 204:
-					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), ENCHANT_RING_STAMINA);
-					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), ENCHANT_RING_STAMINA);
+					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1), 3791);
+					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2), 3791);
                     player->PlayerTalkClass->SendCloseGossip();
                     break;
 
@@ -1639,102 +1745,33 @@ public:
 						}
 					}
 					break;
-					case 308: // Eternal Belt Buckle.
-						player->AddItem(41611, 1);
-						player->PlayerTalkClass->SendCloseGossip();
-						break;
-					case 309: // Titanium Weapon Chain.
-						player->AddItem(41976, 1);
-						player->PlayerTalkClass->SendCloseGossip();
-						break;
 
 				case 300: //<-Back menu
 					{
 						player->ADD_GOSSIP_ITEM(5, "Main-Hand Weapon.", GOSSIP_SENDER_MAIN, 1);
-			player->ADD_GOSSIP_ITEM(5, "Off-Hand Weapon.", GOSSIP_SENDER_MAIN, 13);
-			player->ADD_GOSSIP_ITEM(5, "Two-Handed Weapon.", GOSSIP_SENDER_MAIN, 2);
-			player->ADD_GOSSIP_ITEM(5, "Ranged Weapons.", GOSSIP_SENDER_MAIN, 15);
-			player->ADD_GOSSIP_ITEM(5, "Shield.", GOSSIP_SENDER_MAIN, 3);
-            player->ADD_GOSSIP_ITEM(5, "Head.", GOSSIP_SENDER_MAIN, 4);
-            player->ADD_GOSSIP_ITEM(5, "Shoulders.", GOSSIP_SENDER_MAIN, 5);
-            player->ADD_GOSSIP_ITEM(5, "Cloak.", GOSSIP_SENDER_MAIN, 6);
-            player->ADD_GOSSIP_ITEM(5, "Chest.", GOSSIP_SENDER_MAIN, 7);
-			if (player->HasSkill(SKILL_ENGINEERING) && player->GetSkillValue(SKILL_ENGINEERING) == 450)
-                    { 
-			player->ADD_GOSSIP_ITEM(5, "Belt.", GOSSIP_SENDER_MAIN, 14);
-			}
-            player->ADD_GOSSIP_ITEM(5, "Bracers.", GOSSIP_SENDER_MAIN, 8);
-            player->ADD_GOSSIP_ITEM(5, "Gloves.", GOSSIP_SENDER_MAIN, 9);
-            player->ADD_GOSSIP_ITEM(5, "Legs.", GOSSIP_SENDER_MAIN, 10);
-            player->ADD_GOSSIP_ITEM(5, "Feet.", GOSSIP_SENDER_MAIN, 11);
-
-            if (player->HasSkill(SKILL_ENCHANTING) && player->GetSkillValue(SKILL_ENCHANTING) == 450)
-			{
-                player->ADD_GOSSIP_ITEM(5, "Rings.", GOSSIP_SENDER_MAIN, 12);
-			}
-			
-			player->ADD_GOSSIP_ITEM(5, "Eternal Belt Buckle.", GOSSIP_SENDER_MAIN, 308);
-			player->ADD_GOSSIP_ITEM(5, "Titanium Weapon Chain.", GOSSIP_SENDER_MAIN, 309);
+		player->ADD_GOSSIP_ITEM(5, "Off-Hand Weapon.", GOSSIP_SENDER_MAIN, 2);
+		player->ADD_GOSSIP_ITEM(5, "Two-Handed Weapon.", GOSSIP_SENDER_MAIN, 3);
+		player->ADD_GOSSIP_ITEM(5, "Ranged Weapon.", GOSSIP_SENDER_MAIN, 4);
+		player->ADD_GOSSIP_ITEM(5, "Shield.", GOSSIP_SENDER_MAIN, 5);
+		player->ADD_GOSSIP_ITEM(5, "Head.", GOSSIP_SENDER_MAIN, 6);
+		player->ADD_GOSSIP_ITEM(5, "Shoulders.", GOSSIP_SENDER_MAIN, 7);
+		player->ADD_GOSSIP_ITEM(5, "Cloak.", GOSSIP_SENDER_MAIN, 8);
+		player->ADD_GOSSIP_ITEM(5, "Chest.", GOSSIP_SENDER_MAIN, 9);
+		player->ADD_GOSSIP_ITEM(5, "Bracers.", GOSSIP_SENDER_MAIN, 10);
+		if (player->HasSkill(SKILL_ENGINEERING) && player->GetSkillValue(SKILL_ENGINEERING) == 450)
+			player->ADD_GOSSIP_ITEM(5, "Waist.", GOSSIP_SENDER_MAIN, 12);
+		player->ADD_GOSSIP_ITEM(5, "Gloves.", GOSSIP_SENDER_MAIN, 13);
+		player->ADD_GOSSIP_ITEM(5, "Legs.", GOSSIP_SENDER_MAIN, 14);
+		player->ADD_GOSSIP_ITEM(5, "Feet.", GOSSIP_SENDER_MAIN, 15);
+		if (player->HasSkill(SKILL_ENCHANTING) && player->GetSkillValue(SKILL_ENCHANTING) == 450)
+			player->ADD_GOSSIP_ITEM(5, "Rings.", GOSSIP_SENDER_MAIN, 16);
+		player->ADD_GOSSIP_ITEM(5, "Eternal Belt Buckle.", GOSSIP_SENDER_MAIN, 17);
+		player->ADD_GOSSIP_ITEM(5, "Titanium Weapon Chain.", GOSSIP_SENDER_MAIN, 18);
             player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 						return true;
 					}
 						break;
-
-				case 400: //Remove enchant for mainhand
-					RemoveEnchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_MAINHAND));
-					player->PlayerTalkClass->SendCloseGossip();
-					break;
-
-				case 401: //Remove enchant for offhand
-					RemoveEnchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_OFFHAND));
-					player->PlayerTalkClass->SendCloseGossip();
-					break;
-
-				case 402: //Remove enchant for head
-					RemoveEnchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HEAD));
-					player->PlayerTalkClass->SendCloseGossip();
-					break;
-
-				case 403: //Remove enchant for shoulders
-					RemoveEnchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_SHOULDERS));
-					player->PlayerTalkClass->SendCloseGossip();
-					break;
-
-				case 404: //remove enchant for cloak
-					RemoveEnchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_BACK));
-					player->PlayerTalkClass->SendCloseGossip();
-					break;
-
-				case 405: //remove enchant for chest
-					RemoveEnchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_CHEST));
-					player->PlayerTalkClass->SendCloseGossip();
-					break;
-
-				case 406: //remove enchant for bracers
-					RemoveEnchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_WRISTS));
-					player->PlayerTalkClass->SendCloseGossip();
-					break;
-
-				case 407: //remove enchant for gloves
-					RemoveEnchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_HANDS));
-					player->PlayerTalkClass->SendCloseGossip();
-					break;
-
-				case 408: //remove enchant for legs
-					RemoveEnchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS));
-					player->PlayerTalkClass->SendCloseGossip();
-					break;
-
-				case 409: //remove enchant for feet
-					RemoveEnchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET));
-					player->PlayerTalkClass->SendCloseGossip();
-					break;
-
-				case 410:
-					RemoveEnchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER1));
-					RemoveEnchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FINGER2));
-					player->PlayerTalkClass->SendCloseGossip();
-					break;
+						}
 
 			}
 			return true;
