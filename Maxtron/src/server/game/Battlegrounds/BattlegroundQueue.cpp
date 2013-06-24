@@ -219,7 +219,7 @@ GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group* grp, Battlegr
                     else
                     {
                         std::ostringstream ss;
-                        ss << "|cff9482C9[Maxtron Queue Announcer]:|r " << bgName << " - " << qPlayers << "/" << MinPlayers << ".";
+                        ss << "|cff9482C9[Queue Announcer]:|r " << bgName << " - " << qPlayers << "/" << MinPlayers << ".";
                         sWorld->SendGlobalText(ss.str().c_str(), NULL);
                     }
                 }

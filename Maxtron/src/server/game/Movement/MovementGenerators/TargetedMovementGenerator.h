@@ -29,7 +29,7 @@ class TargetedMovementGeneratorBase
 {
     public:
         TargetedMovementGeneratorBase(Unit* target) { i_target.link(target, this); }
-        void stopFollowing() { }
+        void StopFollowing() { }
     protected:
         FollowerReference i_target;
 };

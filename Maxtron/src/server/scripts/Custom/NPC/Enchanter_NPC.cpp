@@ -166,6 +166,7 @@ public:
 			player->ADD_GOSSIP_ITEM(5, "Rings.", GOSSIP_SENDER_MAIN, 16);
 		player->ADD_GOSSIP_ITEM(5, "Eternal Belt Buckle.", GOSSIP_SENDER_MAIN, 17);
 		player->ADD_GOSSIP_ITEM(5, "Titanium Weapon Chain.", GOSSIP_SENDER_MAIN, 18);
+		player->ADD_GOSSIP_ITEM(7, "Having Issues?", GOSSIP_SENDER_MAIN, 19);
 		player->PlayerTalkClass->SendGossipMenu(1, creature->GetGUID());
 		return true;
 	}
@@ -590,6 +591,11 @@ public:
 
 			case 18: // Titanium Weapon Chain.
 				player->AddItem(41976, 1);
+				player->PlayerTalkClass->SendCloseGossip();
+				break;
+
+			case 19: // Having Issues?
+				player->GetSession()->SendNotification("Relog before submitting a ticket.");
 				player->PlayerTalkClass->SendCloseGossip();
 				break;
 
