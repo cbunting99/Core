@@ -1191,16 +1191,6 @@ public:
                     player->PlayerTalkClass->SendCloseGossip();
                     break;
 
-				case 189:
-					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), ENCHANT_LEG_DRAGONSCALE);
-                    player->PlayerTalkClass->SendCloseGossip();
-                    break;
-
-				case 190:
-					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_LEGS), ENCHANT_LEG_WYRMSCALE);
-                    player->PlayerTalkClass->SendCloseGossip();
-                    break;
-
 				case 191:
 					Enchant(player, player->GetItemByPos(INVENTORY_SLOT_BAG_0, EQUIPMENT_SLOT_FEET), ENCHANT_BOOTS_GREATER_ASSULT);
                     player->PlayerTalkClass->SendCloseGossip();
