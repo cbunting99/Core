@@ -39,24 +39,13 @@ void TargetedMovementGeneratorMedium<T, D>::_setTargetLocation(T* owner, bool up
         return;
 
     float x, y, z;
-    float dist;
-	float size;
 
-      if (updateDestination || !i_path)
-      {
-        if (!i_offset && !updateDestination)
+    if (updateDestination || !i_path)
+    {
+        if (!i_offset)
         {
-		    if (owner->IsPet() && i_target->GetTypeId() == TYPEID_PLAYER)
-            {
-                dist = i_target->GetCombatReach();
-                size = i_target->GetCombatReach() - i_target->GetObjectSize() - 1.0f;
-				if (size < 0.0f)
-				    size = 0.5f;
-				
-				i_target->GetClosePoint(x, y, z, size, i_offset, i_angle);
-            }
-			else
-				i_target->GetContactPoint(owner, x, y, z); // to nearest contact position
+            // to nearest contact position
+            i_target->GetContactPoint(owner, x, y, z);
         }
         else
         {
@@ -72,9 +61,7 @@ void TargetedMovementGeneratorMedium<T, D>::_setTargetLocation(T* owner, bool up
             if (owner->IsPet() && i_target->GetTypeId() == TYPEID_PLAYER)
             {
                 dist = i_target->GetCombatReach();
-                size = i_target->GetCombatReach() - i_target->GetObjectSize() - 1.0f;
-				if (size < 0.0f)
-				    size = 0.5f;
+                size = i_target->GetCombatReach() - i_target->GetObjectSize();
             }
             else
             {
@@ -97,7 +84,7 @@ void TargetedMovementGeneratorMedium<T, D>::_setTargetLocation(T* owner, bool up
         y = end.y;
         z = end.z;
     }
-	
+
     if (!i_path)
         i_path = new PathGenerator(owner);
 
@@ -168,12 +155,6 @@ bool TargetedMovementGeneratorMedium<T, D>::DoUpdate(T* owner, uint32 time_diff)
         float allowed_dist = owner->GetCombatReach() + sWorld->getRate(RATE_TARGET_POS_RECALCULATION_RANGE);
         G3D::Vector3 dest = owner->movespline->FinalDestination();
 
-		if (owner->IsPet() && i_target->GetTypeId() == TYPEID_PLAYER)
-		{
-		    allowed_dist = (i_target->GetCombatReach() - i_target->GetObjectSize()) - 1.0f;
-			if (allowed_dist < 0)
-			    allowed_dist = 0.5f;
-		}
         if (owner->GetTypeId() == TYPEID_UNIT && owner->ToCreature()->CanFly())
             targetMoved = !i_target->IsWithinDist3d(dest.x, dest.y, dest.z, allowed_dist);
         else
