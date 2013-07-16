@@ -5009,7 +5009,7 @@ SpellCastResult Spell::CheckCast(bool strict)
 
     /* Custom Begin */
 
-    // Speed
+    // Speed.
     if (m_spellInfo->Id == 23451)
     {
         if (Unit* victim = m_caster->GetVictim())
@@ -5021,7 +5021,7 @@ SpellCastResult Spell::CheckCast(bool strict)
         }
     }
 
-    // Regeneration
+    // Regeneration.
     if (m_spellInfo->Id == 23493)
     {
         if (Unit* victim = m_caster->GetVictim())
@@ -5033,7 +5033,7 @@ SpellCastResult Spell::CheckCast(bool strict)
         }
     }
 
-    // Berserk
+    // Berserk.
     if (m_spellInfo->Id == 23505)
     {
         if (Unit* victim = m_caster->GetVictim())
@@ -5045,7 +5045,7 @@ SpellCastResult Spell::CheckCast(bool strict)
         }
     }
 
-    // Shadow Sight
+    // Shadow Sight.
     if (m_spellInfo->Id == 34709)
     {
         if (Unit* victim = m_caster->GetVictim())
@@ -5057,55 +5057,27 @@ SpellCastResult Spell::CheckCast(bool strict)
         }
     }
 
-    // Lichborne
+    // Lichborne.
     if (m_spellInfo->Id == 49039)
     {
-        if (m_caster->HasAura(51724)) // Sap
+        if (m_caster->HasAura(51724)) // Sap.
         {
             return SPELL_CAST_OK;
         }
     }
 
-	// Disable Mounts in mall
-    if (m_spellInfo->Mechanic == MECHANIC_MOUNT)
-    {
-        if (m_caster->GetAreaId() == 3738)
-        {
-            return SPELL_FAILED_NOT_HERE;
-        }
-    }
+    // Battered Storm Hammer.
+    // http://www.wowhead.com/item=42624.
 
-    // Stormhammer
     if (m_spellInfo->Id == 56448)
-    {
-        if (m_caster->GetZoneId() == 67)
-        {
-            return SPELL_CAST_OK;
-        }
-        else
-        {
-            return SPELL_FAILED_BAD_TARGETS;
-        }
-    }
-
-    /*
-    // Mocking Blow.
-    if (m_spellInfo->Id == 694)
     {
         if (Unit* victim = m_caster->GetVictim())
         {
-            if (m_caster->IsWithinMeleeRange(victim, 5))
-            {
-                if (victim->GetTypeId() == TYPEID_PLAYER)
-                    return SPELL_FAILED_BAD_TARGETS;
-                else
-                    return SPELL_CAST_OK;
-            }
-            else
-                return SPELL_FAILED_OUT_OF_RANGE;
-        }
-    }
-    */
+			if (victim->GetEntry() == 30142 ) // Iron Watcher.
+				return SPELL_CAST_OK;
+			else
+				return SPELL_FAILED_BAD_TARGETS;
+		}
 
     // Goblin Rocket Pack.
     if (m_spellInfo->Id == 68645)
@@ -5117,19 +5089,6 @@ SpellCastResult Spell::CheckCast(bool strict)
         else
         {
             return SPELL_FAILED_NOT_HERE;
-        }
-    }
-
-    // Request a duel
-    if (m_spellInfo->Id == 7266)
-    {
-        if (m_caster->GetZoneId() == 3520)
-        {
-            return SPELL_FAILED_DONT_REPORT;
-        }
-        else
-        {
-            return SPELL_CAST_OK;
         }
     }
 

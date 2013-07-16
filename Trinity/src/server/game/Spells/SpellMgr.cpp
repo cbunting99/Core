@@ -3243,7 +3243,9 @@ void SpellMgr::LoadDbcDataCorrections()
             case 63675: // Improved Devouring Plague
                 spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_DONE_BONUS;
                 break;
+
                 /* Custom Begin */
+
             case 32182: // Heroism.
             case 2825:  // Bloodlust.
             case 19185: // Entrapment.
@@ -3259,8 +3261,8 @@ void SpellMgr::LoadDbcDataCorrections()
             case 55361: // Living Bomb Explosion.
             case 57330: // Horn of Winter.
             case 57623: // Horn of Winter.
-            case 47436: // Battle Shout.
-            case 47440: // Commanding Shout.
+            case 47436: // Battle Shout - might be unblizzlike.
+            case 47440: // Commanding Shout - might be unblizzlike.
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS; // Need to clean this part.
                 break;
             case 33110: // Prayer of Mending.
@@ -3311,15 +3313,17 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->Attributes |= SPELL_ATTR0_DISABLED_WHILE_ACTIVE;
                 spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_SITTING;
                 break;
-            case 8145: // Tremor Totem.
+            case 8145: // Tremor Totem. clean these
             case 8172: // Cleansing Totem.
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
                 break;
-            case 6474: // Earthbind Totem.
+            case 6474: // Earthbind Totem. Clean this
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
                 break;
+
             /* Custom End */
+
             case 52109: // Flametongue Totem rank 1 (Aura)
             case 52110: // Flametongue Totem rank 2 (Aura)
             case 52111: // Flametongue Totem rank 3 (Aura)
