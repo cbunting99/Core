@@ -1,0 +1,18 @@
+
+--- DEBUG: --- START
+
+[Thread debugging using libthread_db enabled]
+
+Program exited with code 01.
+
+--- DEBUG: BACKTRACE FULL
+
+No stack.
+
+--- DEBUG: INFO REGISTERS
+
+/home/catac/server/builds/20120720/bin/crashreport.gdb:11: Error in sourced command file:
+The program has no registers now.
+Hangup detected on fd 0
+Error detected on fd 0
+error detected on stdin
