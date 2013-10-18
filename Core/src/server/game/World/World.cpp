@@ -971,7 +971,7 @@ void World::LoadConfigSettings(bool reload)
     {
         uint32 val = ConfigMgr::GetIntDefault("Expansion", 1);
         if (val != m_int_configs[CONFIG_EXPANSION])
-            sLog->outError(LOG_FILTER_SERVER_LOADING, "Expansion option can't be changed at worldserver.conf reload, using current value (%u).", m_int_configs[CONFIG_EXPANSION]);
+            sLog->outError(LOG_FILTER_SERVER_LOADING, "Expansion option can't be changed with a worldserver.conf reload, will use the old value (%u).", m_int_configs[CONFIG_EXPANSION]);
     }
     else
         m_int_configs[CONFIG_EXPANSION] = ConfigMgr::GetIntDefault("Expansion", 1);
@@ -1073,7 +1073,7 @@ void World::LoadConfigSettings(bool reload)
         if (clientCacheId > 0)
         {
             m_int_configs[CONFIG_CLIENTCACHE_VERSION] = clientCacheId;
-            sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Client cache version set to: %u", clientCacheId);
+            sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Client Cache Version: %u.", clientCacheId);
         }
         else
             sLog->outError(LOG_FILTER_SERVER_LOADING, "ClientCacheVersion can't be negative %d, ignored.", clientCacheId);
@@ -1159,11 +1159,10 @@ void World::LoadConfigSettings(bool reload)
     else
     {
         m_dataPath = dataPath;
-        sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Using DataDir %s", m_dataPath.c_str());
     }
 
     m_bool_configs[CONFIG_ENABLE_MMAPS] = ConfigMgr::GetBoolDefault("mmap.enablePathFinding", false);
-    sLog->outInfo(LOG_FILTER_SERVER_LOADING, "WORLD: MMap data directory is: %smmaps", m_dataPath.c_str());
+    sLog->outInfo(LOG_FILTER_SERVER_LOADING, "WORLD: Movement Maps Directory: %smmaps.", m_dataPath.c_str());
 
     m_bool_configs[CONFIG_VMAP_INDOOR_CHECK] = ConfigMgr::GetBoolDefault("vmap.enableIndoorCheck", 0);
     bool enableIndoor = ConfigMgr::GetBoolDefault("vmap.enableIndoorCheck", true);
@@ -1335,9 +1334,11 @@ void World::SetInitialWorldSettings()
     CharacterDatabase.Execute(stmt);
 
     ///- Load the DBC files
-    sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Initialize data stores...");
+    sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Initializing DBC.");
+    uint32 oldMSTime = getMSTime();
     LoadDBCStores(m_dataPath);
     LoadDB2Stores(m_dataPath);
+    sLog->outInfo(LOG_FILTER_SERVER_LOADING, " - Initialized DBC In %u MS.", GetMSTimeDiffToNow(oldMSTime));
 
     sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Loading SpellInfo store...");
     sSpellMgr->LoadSpellInfoStore();
@@ -1364,7 +1365,7 @@ void World::SetInitialWorldSettings()
     sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Loading instances...");
     sInstanceSaveMgr->LoadInstances();
 
-    sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Loading Localization strings...");
+    sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Initializing Localization Strings.");
     uint32 oldMSTime = getMSTime();
     sObjectMgr->LoadCreatureLocales();
     sObjectMgr->LoadGameObjectLocales();
@@ -1376,7 +1377,7 @@ void World::SetInitialWorldSettings()
     sObjectMgr->LoadPointOfInterestLocales();
 
     sObjectMgr->SetDBCLocaleIndex(GetDefaultDbcLocale());        // Get once for all the locale index of DBC language (console/broadcasts)
-    sLog->outInfo(LOG_FILTER_SERVER_LOADING, ">> Localization strings loaded in %u ms", GetMSTimeDiffToNow(oldMSTime));
+    sLog->outInfo(LOG_FILTER_SERVER_LOADING, " - Initialized Localization Strings In %u MS.", GetMSTimeDiffToNow(oldMSTime));
 
     sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Loading Account Roles and Permissions...");
     sAccountMgr->LoadRBAC();
