@@ -1335,10 +1335,9 @@ void World::SetInitialWorldSettings()
 
     ///- Load the DBC files
     sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Initializing DBC.");
-    uint32 oldMSTime = getMSTime();
     LoadDBCStores(m_dataPath);
     LoadDB2Stores(m_dataPath);
-    sLog->outInfo(LOG_FILTER_SERVER_LOADING, " - Initialized DBC In %u MS.", GetMSTimeDiffToNow(oldMSTime));
+    sLog->outInfo(LOG_FILTER_SERVER_LOADING, " - Initialized DBC.");
 
     sLog->outInfo(LOG_FILTER_SERVER_LOADING, "Loading SpellInfo store...");
     sSpellMgr->LoadSpellInfoStore();
