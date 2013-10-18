@@ -5686,99 +5686,85 @@ SpellCastResult Spell::CheckPetCast(Unit* target)
 
 uint32 Spell::GetCCDelay(SpellInfo const* _spell)
 {
-    //Saqirmdev -- Fixes
     AuraType auraWithCCD[] = {
-		SPELL_AURA_MOD_STUN,
-		SPELL_AURA_MOD_CONFUSE,
-		SPELL_AURA_MOD_FEAR,
-		SPELL_AURA_MOD_ROOT,
-		SPELL_AURA_MOD_DISARM,
-		SPELL_AURA_MOD_POSSESS
-	};
-	uint8 CCDArraySize = 6;
-
-    const uint32 delayForInstantSpells = 132;
-
-	    for (uint8 i = 0; i < CCDArraySize; ++i)
-        if (_spell->HasAura(auraWithCCD[i]))
-            return delayForInstantSpells;
-
+        SPELL_AURA_MOD_CONFUSE, // Polymorph & Hex.
+        SPELL_AURA_MOD_FEAR, // Psychic Scream & Warlock Fear(s).
+        SPELL_AURA_MOD_ROOT // Earthgrab, Frost Nova & (All Roots).
+    };
+    uint8 CCDArraySize = 6;
+    
+    const uint32 CCDELAY = 126;
+    
     switch(_spell->SpellFamilyName)
     {
-        case SPELLFAMILY_HUNTER:
-            // Traps
-            if (_spell->SpellFamilyFlags[0] & 0x8 ||      // Frozen trap
-				_spell->Id == 57879 ||                    // Snake Trap
-                _spell->SpellFamilyFlags[2] & 0x00024000) // Explosive and Immolation Trap
-                return 0;
+    case SPELLFAMILY_HUNTER:
+        if (_spell->Id == 19184) // Entrapment Rank 1.
+            return 0;
+        break;
+        if (_spell->Id == 19387) // Entrapment Rank 2.
+            return 0;
+        break;
+        if (_spell->Id == 19388) // Entrapment Rank 3.
+            return 0;
+        break;
+        if (_spell->Id == 1543) // Flare.
+            return CCDELAY;
+        break;
 
-            // Entrapment
-            if (_spell->SpellIconID == 20)
-                return 0;
-            break;
-        case SPELLFAMILY_DEATHKNIGHT:
-            // Death Grip
-            if (_spell->Id == 49576)
-                return 0;
-				break;
-        case SPELLFAMILY_PRIEST:
-         //Psychic Scream
-          if (_spell->Id == 8122)
-              return delayForInstantSpells;
-		break;
-        case SPELLFAMILY_ROGUE:
-            // Blind
-            if (_spell->Id == 2094)
-                return delayForInstantSpells;
-            // CheapShot
-            if (_spell->Id == 1833)
-                return 0;
-            // Kidney Shot
-            if (_spell->Id == 408)
-                return delayForInstantSpells;
-            break;
-        case SPELLFAMILY_SHAMAN:
-            // HEX
-            if (_spell->Id == 51514)
-                return delayForInstantSpells;
-			break;
-        case SPELLFAMILY_MAGE:
-            // Polymorph
-            if (_spell->Id == 118)
-                return delayForInstantSpells;
-            // Deep Freeze
-            if (_spell->Id == 44572)
-                return delayForInstantSpells;
-            // Dragon Breath
-            if (_spell->Id == 31661)
-                return delayForInstantSpells;
-            break;
-        case SPELLFAMILY_WARRIOR:
-            // Intercept
-            if (_spell->Id == 20253)
-                return delayForInstantSpells;
-            // Charge trig.
-            if (_spell->Id == 65929)
-                return 0;
-            break;
-        case SPELLFAMILY_WARLOCK:
-            //DeathCoil
-            if (_spell->Id == 6781)
-                return delayForInstantSpells;
-	     //Spell Lock - Debuff
-	     if (_spell->Id == 24259)
-	         return delayForInstantSpells;
-           break;
-        case SPELLFAMILY_DRUID:
-            // Cyclone
-            if (_spell->Id == 33786)
-                return delayForInstantSpells;
-            // Pounce
-            if (_spell->Id == 9005)
-                return 0;
-            break;
+    case SPELLFAMILY_WARRIOR:
+        if (_spell->Mechanic == MECHANIC_STUN)
+            return 63;
+        break;
+
+    case SPELLFAMILY_PRIEST:
+        if (_spell->Mechanic == MECHANIC_STUN)
+            return CCDELAY;
+        break;
+        if (_spell->Mechanic == MECHANIC_CHARM)
+            return CCDELAY;
+        break;
+
+    case SPELLFAMILY_DEATHKNIGHT:
+        if (_spell->Mechanic == MECHANIC_STUN)
+            return CCDELAY;
+        break;
+
+    case SPELLFAMILY_SHAMAN:
+        if (_spell->Mechanic == MECHANIC_STUN)
+            return CCDELAY;
+        break;
+
+    case SPELLFAMILY_WARLOCK:
+        if (_spell->Mechanic == MECHANIC_STUN)
+            return CCDELAY;
+        break;
+
+    case SPELLFAMILY_DRUID:
+        if (_spell->Mechanic == MECHANIC_STUN)
+            return CCDELAY;
+        break;
+    
+    case SPELLFAMILY_PALADIN:
+        if (_spell->Mechanic == MECHANIC_STUN)
+            return CCDELAY;
+        break;
+
+    case SPELLFAMILY_ROGUE:
+        if (_spell->Mechanic == MECHANIC_STUN)
+            return CCDELAY;
+        if (_spell->Mechanic == MECHANIC_SAPPED)
+            return CCDELAY;
+        break;
+
+    case SPELLFAMILY_MAGE:
+        if (_spell->Mechanic == MECHANIC_STUN)
+            return CCDELAY;
+        break;
     }
-
+    
+    for (uint8 i = 0; i < CCDArraySize; ++i)
+        if (_spell->HasAura(auraWithCCD[i]))
+            return CCDELAY;
     return 0;
 }
 
