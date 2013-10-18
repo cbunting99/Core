@@ -723,7 +723,6 @@ namespace MMAP
         rcVcopy(params.bmax, bmax);
         params.cs = config.cs;
         params.ch = config.ch;
-        params.tileSize = VERTEX_PER_MAP;
 
         // will hold final navmesh
         unsigned char* navData = NULL;
