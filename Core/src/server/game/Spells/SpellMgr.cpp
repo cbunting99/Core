@@ -3768,6 +3768,14 @@ void SpellMgr::LoadSpellInfoCorrections()
             case 88819: // Daybreak (proc)
                 spellInfo->ProcCharges = 1;
                 break;
+            case 1337: // Spell Warding.
+                spellInfo->EffectApplyAuraName[0] = SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN;
+                spellInfo->Attributes |= SPELL_ATTR0_CANT_CANCEL;
+                spellInfo->Attributes |= SPELL_ATTR0_NOT_SHAPESHIFT;
+                spellInfo->Attributes |= SPELL_ATTR1_NO_THREAT;
+                spellInfo->AttributesEx2 |=   SPELL_ATTR2_NOT_NEED_SHAPESHIFT;
+                spellInfo->AttributesEx8 |=   SPELL_ATTR8_AURA_SEND_AMOUNT
+                break;
             default:
                 break;
         }

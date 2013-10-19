@@ -6075,6 +6075,52 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
 						}
 						break;
 					}
+                // Train of Thought
+                case 92295:
+                case 92297:
+                    if (procSpell->Id == 585)
+                    {
+                        if (Player* caster = triggeredByAura->GetCaster()->ToPlayer())
+                        {
+                            if (caster->HasSpellCooldown(47540))
+                            {
+                                uint32 newCooldownDelay = caster->GetSpellCooldownDelay(47540);
+                                if (newCooldownDelay <= 0.5)
+                                    newCooldownDelay = 0;
+                                else
+                                    newCooldownDelay -= 0.5;
+
+                                caster->AddSpellCooldown(47540, 0, uint32(time(NULL) + newCooldownDelay));
+                                WorldPacket data(SMSG_MODIFY_COOLDOWN, 4 + 8 + 4);
+                                data << uint32(47540);
+                                data << uint64(caster->GetGUID());
+                                data << int32(-500);
+                                caster->GetSession()->SendPacket(&data);
+                            }
+                        }
+                    }
+                    if (procSpell->Id == 2060)
+                    {
+                        if (Player* caster = triggeredByAura->GetCaster()->ToPlayer())
+                        {
+                            if (caster->HasSpellCooldown(89485))
+                            {
+                                uint32 newCooldownDelay = caster->GetSpellCooldownDelay(89485);
+                                if (newCooldownDelay <= 5)
+                                    newCooldownDelay = 0;
+                                else 
+                                    newCooldownDelay -= 5;
+
+                                caster->AddSpellCooldown(89485, 0, uint32(time(NULL) + newCooldownDelay));
+                                WorldPacket data(SMSG_MODIFY_COOLDOWN, 4 + 8 + 4);
+                                data << uint32(89485); // Spell ID
+                                data << uint64(caster->GetGUID()); // Player GUID
+                                data << int32(-5000); // Cooldown mod in milliseconds
+                                caster->GetSession()->SendPacket(&data);
+								return true;
+							}
+						}
+					}
                 // Priest Tier 6 Trinket (Ashtongue Talisman of Acumen)
                 case 40438:
                 {
@@ -6138,30 +6184,6 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
                     triggered_spell_id = 39373;
                     break;
                 }
-	        // Train of Thought
-                case 92295:
-                case 92297:
-                    if (procSpell->Id == 585)
-                    {
-                        if (Player* caster = triggeredByAura->GetCaster()->ToPlayer())
-                        {
-                            if (caster->HasSpellCooldown(47540))
-                            {
-                                uint32 newCooldownDelay = caster->GetSpellCooldownDelay(47540);
-                                if (newCooldownDelay <= 0.5)
-                                    newCooldownDelay = 0;
-                                else
-                                    newCooldownDelay -= 0.5;
-
-                                caster->AddSpellCooldown(47540, 0, uint32(time(NULL) + newCooldownDelay));
-                                WorldPacket data(SMSG_MODIFY_COOLDOWN, 4 + 8 + 4);
-                                data << uint32(47540);
-                                data << uint64(caster->GetGUID());
-                                data << int32(-500);
-                                caster->GetSession()->SendPacket(&data);
-                            }
-                        }
-                    }                // Greater Heal (Vestments of Faith (Priest Tier 3) - 4 pieces bonus)
                 case 28809:
                 {
                     triggered_spell_id = 28810;

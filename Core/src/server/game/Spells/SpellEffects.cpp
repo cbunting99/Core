@@ -671,6 +671,7 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
 						// Smite | Holy Fire
 						if (m_caster->HasAura(81659))
 						{
+                            m_caster->CastSpell(m_caster, 87154, true); // Used to activate Archangel.
 							m_caster->CastSpell(m_caster, 81660, true);
 							m_caster->RemoveAurasDueToSpell(87118);
 							m_caster->RemoveAurasDueToSpell(87117);
@@ -682,6 +683,7 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
 						// Smite | Holy Fire
 						if (m_caster->HasAura(81662))
 						{
+                            m_caster->CastSpell(m_caster, 87154, true); // Used to activate Archangel.
 							m_caster->CastSpell(m_caster, 81661, true);
 							m_caster->RemoveAurasDueToSpell(87118);
 							m_caster->RemoveAurasDueToSpell(87117);
@@ -2586,6 +2588,15 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
         }
         case SPELLFAMILY_PRIEST: 
         {
+            if (m_spellInfo->Id == 588: // Inner Fire.
+            {
+                if (m_caster->HasAura(14747) // Inner Sanctum.
+                    m_caster->CastSpell(m_caster, 91724, true); // Spell Warding.
+                if (m_caster->HasAura(14770) // Inner Sanctum.
+                    m_caster->CastSpell(m_caster, 91724, true); // Spell Warding.
+                if (m_caster->HasAura(14771) // Inner Sanctum.
+                    m_caster->CastSpell(m_caster, 91724, true); // Spell Warding.
+            }
 			// Chakra
 			// Solves the problem that a player has more than one chakra buff active at the same time
 			if(m_spellInfo->Id == 14751 /*Chakra*/) 
