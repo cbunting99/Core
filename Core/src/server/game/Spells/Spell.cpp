@@ -3804,23 +3804,25 @@ void Spell::finish(bool ok)
     case 32546: // Binding Heal.
     case 2060: // Greater Heal.
     case 596: // Prayer of Healing.
-        if (m_caster->HasAura(89485) // Inner Focus.
+        if (m_caster->HasAura(89485)) // Inner Focus.
             m_caster->RemoveAura(89485);
         break;
     case 588: // Inner Fire.
-        if (m_caster->HasAura(73413) // Inner Will.
+        if (m_caster->HasAura(73413)) // Inner Will.
             m_caster->RemoveAura(73413);
         break;
     case 73413: // Inner Will.
-        if (m_caster->HasAura(588) // Inner Fire.
+        if (m_caster->HasAura(588)) // Inner Fire.
             m_caster->RemoveAura(588);
         break;
     case 17: // Power Word: Shield.
-        target = m_caster->getVictim();
-        if (target == m_caster)
-            if (m_caster->HasAura(33333) // Holy Walk.
-                m_caster->CastSpell(m_caster, 96219, true);
-	 }
+		if (unitTarget == m_caster)
+		{
+			if (m_caster->HasAura(33333)) // Holy Walk.
+				m_caster->CastSpell(m_caster, 96219, true);
+		}
+		break;
+	}
 }
 
 void Spell::SendCastResult(SpellCastResult result)

@@ -2588,13 +2588,13 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
         }
         case SPELLFAMILY_PRIEST: 
         {
-            if (m_spellInfo->Id == 588: // Inner Fire.
+            if (m_spellInfo->Id == 588) // Inner Fire.
             {
-                if (m_caster->HasAura(14747) // Inner Sanctum.
+                if (m_caster->HasAura(14747)) // Inner Sanctum.
                     m_caster->CastSpell(m_caster, 91724, true); // Spell Warding.
-                if (m_caster->HasAura(14770) // Inner Sanctum.
+                if (m_caster->HasAura(14770)) // Inner Sanctum.
                     m_caster->CastSpell(m_caster, 91724, true); // Spell Warding.
-                if (m_caster->HasAura(14771) // Inner Sanctum.
+                if (m_caster->HasAura(14771)) // Inner Sanctum.
                     m_caster->CastSpell(m_caster, 91724, true); // Spell Warding.
             }
 			// Chakra
