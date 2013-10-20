@@ -3016,7 +3016,7 @@ public:
 			}
 		}
 
-		void UpdateAI(const uint32 diff) {
+		void UpdateAI(uint32 diff) {
 			if (cron <= diff) {
 				if (!checker) {
 					checker = true;
@@ -3067,8 +3067,8 @@ public:
             o = me->GetOrientation();
             me->NearTeleportTo(x, y, z, o, true);
             angle = me->GetOwner()->GetAngle(me);
-            newx = me->GetPositionX() + FLAME_ORB_DISTANCE/2 * cos(angle);
-            newy = me->GetPositionY() + FLAME_ORB_DISTANCE/2 * sin(angle);
+            newx = me->GetPositionX() + FLAME_ORB_DISTANCE/1.5 * cos(angle);
+            newy = me->GetPositionY() + FLAME_ORB_DISTANCE/1.5 * sin(angle);
             CombatCheck = false;
         }
 
@@ -3155,8 +3155,8 @@ public:
             o = me->GetOrientation();
             me->NearTeleportTo(x, y, z, o, true);
             angle = me->GetOwner()->GetAngle(me);
-            newx = me->GetPositionX() + FROSTFIRE_ORB_DISTANCE/2 * cos(angle);
-            newy = me->GetPositionY() + FROSTFIRE_ORB_DISTANCE/2 * sin(angle);
+            newx = me->GetPositionX() + FROSTFIRE_ORB_DISTANCE/1.5 * cos(angle);
+            newy = me->GetPositionY() + FROSTFIRE_ORB_DISTANCE/1.5 * sin(angle);
             CombatCheck = false;
         }
 
