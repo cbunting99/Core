@@ -3822,36 +3822,6 @@ void Spell::finish(bool ok)
 				m_caster->CastSpell(m_caster, 96219, true);
 		}
 		break;
-	case 1715: // Hamstring.
-		if (m_caster->HasAura(12289)) // Improved Hamstring.
-		{
-			if (!m_caster->ToPlayer()->HasSpellCooldown(23694))
-            {
-                m_caster->AddAura(23694, unitTarget);
-
-				m_caster->ToPlayer()->AddSpellCooldown(23694, 0, uint32(time(NULL) + 60));
-				WorldPacket data(SMSG_MODIFY_COOLDOWN, 4 + 8 + 4);
-				data << uint32(23694);                  // Spell ID
-				data << uint64(m_caster->GetGUID());              // Player GUID
-				data << int32(+60000);                // Cooldown mod in milliseconds
-				m_caster->ToPlayer()->GetSession()->SendPacket(&data);
-            }
-        }
-        if (m_caster->HasAura(12668)) // Improved Hamstring.
-        {
-			if (!m_caster->ToPlayer()->HasSpellCooldown(23694))
-            {
-				m_caster->AddAura(23694, unitTarget);
-
-				m_caster->ToPlayer()->AddSpellCooldown(23694, 0, uint32(time(NULL) + 30));
-				WorldPacket data(SMSG_MODIFY_COOLDOWN, 4 + 8 + 4);
-				data << uint32(23694);                  // Spell ID
-				data << uint64(m_caster->GetGUID());              // Player GUID
-				data << int32(+30000);                // Cooldown mod in milliseconds
-				m_caster->ToPlayer()->GetSession()->SendPacket(&data);
-            }
-        }
-        break;
     }
 }
 
