@@ -498,43 +498,6 @@ class spell_warl_everlasting_affliction : public SpellScriptLoader
         }
 };
 
-// 77799 - Fel Flame - Updated to 4.3.4
-class spell_warl_fel_flame : public SpellScriptLoader
-{
-    public:
-        spell_warl_fel_flame() : SpellScriptLoader("spell_warl_fel_flame") { }
-
-        class spell_warl_fel_flame_SpellScript : public SpellScript
-        {
-            PrepareSpellScript(spell_warl_fel_flame_SpellScript);
-
-            void OnHitTarget(SpellEffIndex /*effIndex*/)
-            {
-                Unit* caster = GetCaster();
-                Unit* target = GetHitUnit();
-                Aura* aura = target->GetAura(SPELL_WARLOCK_UNSTABLE_AFFLICTION, caster->GetGUID());
-                if (!aura)
-                    aura = target->GetAura(SPELL_WARLOCK_IMMOLATE, caster->GetGUID());
-
-                if (!aura)
-                    return;
-
-                int32 newDuration = aura->GetDuration() + GetSpellInfo()->Effects[EFFECT_1].CalcValue() * 1000;
-                aura->SetDuration(std::min(newDuration, aura->GetMaxDuration()));
-            }
-
-            void Register()
-            {
-                OnEffectHitTarget += SpellEffectFn(spell_warl_fel_flame_SpellScript::OnHitTarget, EFFECT_1, SPELL_EFFECT_SCRIPT_EFFECT);
-            }
-        };
-
-        SpellScript* GetSpellScript() const
-        {
-            return new spell_warl_fel_flame_SpellScript;
-        }
-};
-
 // -47230 - Fel Synergy
 class spell_warl_fel_synergy : public SpellScriptLoader
 {
@@ -1160,7 +1123,6 @@ void AddSC_warlock_spell_scripts()
     new spell_warl_demonic_empowerment();
     new spell_warl_demon_soul();
     new spell_warl_everlasting_affliction();
-    new spell_warl_fel_flame();
     new spell_warl_fel_synergy();
     new spell_warl_haunt();
     new spell_warl_health_funnel();

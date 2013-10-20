@@ -523,33 +523,50 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
                         }
                         break;
 					}
-                    case 3110: // Firebolt (Warlock Imp).
                     case 61189: // Soul Fire.
                     case 6353: // Soul Fire.
                     {
                         int32 bp0 = 0;
                         if (m_caster->HasAura(91986)) // Burning Embers.
                         {
-                            bp0 = CalculatePct(int32(damage), 15) /7;
+							bp0 = (damage) / 7;
                             m_caster->CastCustomSpell(unitTarget, 85421, &bp0, NULL, NULL, true);
                         }
-                        if (m_caster->HasAura(85112))
+						if (m_caster->HasAura(85112)) // Burning Embers.
                         {
-                            bp0 = CalculatePct(int32(damage), 30) /7;
+							bp0 = (damage) / 7;
                             m_caster->CastCustomSpell(unitTarget, 85421, &bp0, NULL, NULL, true);
                         }
-                        if(m_caster->HasAura(18120)) // Improved soul fire rank 2
+                        if(m_caster->HasAura(18120)) // Improved Soul Fire.
                         {
                             bp0 = 8;
                             m_caster->CastCustomSpell(m_caster,85383,&bp0,NULL,NULL,true);
                         }
-                        if(m_caster->HasAura(18119)) // Improved soul fire rank 1
+                        if(m_caster->HasAura(18119)) // Improved Soul Fire.
                         {
                             bp0 = 4;
                             m_caster->CastCustomSpell(m_caster,85383,&bp0,NULL,NULL,true);
                         }
                         break;
                     }
+					case 3110: // Firebolt (Warlock Imp).
+					{
+								   int32 bp0 = 0;
+								   if (m_caster->isPet())
+								   {
+									   if (m_caster->GetOwner()->HasAura(91986)) // Burning Embers.
+									   {
+										   bp0 = (damage) / 7;
+										   m_caster->CastCustomSpell(unitTarget, 85421, &bp0, NULL, NULL, true);
+									   }
+									   if (m_caster->GetOwner()->HasAura(85112)) // Burning Embers.
+									   {
+										   bp0 = (damage) / 7;
+										   m_caster->CastCustomSpell(unitTarget, 85421, &bp0, NULL, NULL, true);
+									   }
+								   }
+					}
+						break;
    		            case 86121: // Soul Swap
                     {
                         m_caster->CastSpell(m_caster,86211,true); //This is the buff that overrides Soul Swap with Soul Swap: Exhale
@@ -2594,17 +2611,27 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
                 return;
             }
         }
-        case SPELLFAMILY_PRIEST: 
-        {
-            if (m_spellInfo->Id == 588) // Inner Fire.
-            {
-                if (m_caster->HasAura(14747)) // Inner Sanctum.
-                    m_caster->CastSpell(m_caster, 91724, true); // Spell Warding.
-                if (m_caster->HasAura(14770)) // Inner Sanctum.
-                    m_caster->CastSpell(m_caster, 91724, true); // Spell Warding.
-                if (m_caster->HasAura(14771)) // Inner Sanctum.
-                    m_caster->CastSpell(m_caster, 91724, true); // Spell Warding.
-            }
+		case SPELLFAMILY_PRIEST:
+		{
+								   if (m_spellInfo->Id == 588) // Inner Fire.
+								   {
+									   int32 amount = 0;
+									   if (m_caster->HasAura(14747)) // Inner Sanctum.
+									   {
+										   amount = 2;
+										   m_caster->CastCustomSpell(m_caster, 91724, &amount, NULL, NULL, true); // Spell Warding.
+									   }
+									   if (m_caster->HasAura(14770)) // Inner Sanctum.
+									   {
+										   amount = 4;
+										   m_caster->CastCustomSpell(m_caster, 91724, &amount, NULL, NULL, true); // Spell Warding.
+									   }
+									   if (m_caster->HasAura(14771)) // Inner Sanctum.
+									   {
+										   amount = 6;
+										   m_caster->CastCustomSpell(m_caster, 91724, &amount, NULL, NULL, true); // Spell Warding.
+									   }
+								  }
 			// Chakra
 			// Solves the problem that a player has more than one chakra buff active at the same time
 			if(m_spellInfo->Id == 14751 /*Chakra*/) 
