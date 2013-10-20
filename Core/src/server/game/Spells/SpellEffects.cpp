@@ -476,6 +476,13 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
             }
             case SPELLFAMILY_WARLOCK:
             {
+                if (m_spellInfo->Id == 77799) // Fel Flame.
+                {
+                    if (unitTarget->GetAura(348)) // Immolate.
+                        unitTarget->GetAura(348)->SetDuration((unitTarget->GetAura(348)->GetDuration() + 6000), true);
+                    if (unitTarget->GetAura(30108)) // Unstable Affliction.
+                        unitTarget->GetAura(30108)->SetDuration((unitTarget->GetAura(30108)->GetDuration() + 6000), true);
+                }
 		        // Soulburn Healthstone
                 if (m_spellInfo->Id == 6262)
                 {
@@ -516,11 +523,12 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
                         }
                         break;
 					}
-                    case 61189:
-                    case 6353: // Soul Fire
+                    case 3110: // Firebolt (Warlock Imp).
+                    case 61189: // Soul Fire.
+                    case 6353: // Soul Fire.
                     {
                         int32 bp0 = 0;
-                        if (m_caster->HasAura(91986)) // Burning Embers
+                        if (m_caster->HasAura(91986)) // Burning Embers.
                         {
                             bp0 = CalculatePct(int32(damage), 15) /7;
                             m_caster->CastCustomSpell(unitTarget, 85421, &bp0, NULL, NULL, true);
