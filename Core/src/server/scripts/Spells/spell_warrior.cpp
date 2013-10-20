@@ -217,7 +217,10 @@ public:
 
 		bool Validate(SpellInfo const* /*spellInfo*/)
 		{
-			if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_1) || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_2) || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_3))
+			if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_1)
+                || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_2)
+                || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_3))
+                || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_PERIODIC))
 				return false;
 			return true;
 		}
@@ -441,7 +444,7 @@ public:
 	}
 };
 
-// -772 - Rend
+// 94009 - Rend
 class spell_warr_rend : public SpellScriptLoader
 {
 public:
@@ -462,7 +465,7 @@ public:
 				int32 mws = caster->GetAttackTime(BASE_ATTACK);
 				float mwbMin = caster->GetWeaponDamageRange(BASE_ATTACK, MINDAMAGE);
 				float mwbMax = caster->GetWeaponDamageRange(BASE_ATTACK, MAXDAMAGE);
-				float mwb = ((mwbMin + mwbMax) / 2 + ap * mws / 14000);
+				float mwb = ((mwbMin + mwbMax) / 2 + ap * mws / 14000) * 0.25f;
 				amount += int32(caster->ApplyEffectModifiers(GetSpellInfo(), aurEff->GetEffIndex(), mwb * 0.25));
 			}
 		}
@@ -1140,8 +1143,83 @@ class spell_warr_second_wind_trigger : public SpellScriptLoader
         }
 };
 
+// -84583 Lambs to the Slaughter
+class spell_warr_lambs_to_the_slaughter : public SpellScriptLoader
+{
+    public:
+        spell_warr_lambs_to_the_slaughter() : SpellScriptLoader("spell_warr_lambs_to_the_slaughter") { }
+
+        class spell_warr_lambs_to_the_slaughter_AuraScript : public AuraScript
+        {
+            PrepareAuraScript(spell_warr_lambs_to_the_slaughter_AuraScript);
+
+            bool Validate(SpellInfo const* /*spellInfo*/) OVERRIDE
+            {
+                if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_MORTAL_STRIKE) ||
+                    !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_REND))
+                    return false;
+                return true;
+            }
+
+            void OnProc(AuraEffect const* /*aurEff*/, ProcEventInfo& eventInfo)
+            {
+                if (Aura* aur = eventInfo.GetProcTarget()->GetAura(SPELL_WARRIOR_REND, GetTarget()->GetGUID()))
+                    aur->SetDuration(aur->GetSpellInfo()->GetMaxDuration(), true);
+
+            }
+
+            void Register() OVERRIDE
+            {
+                OnEffectProc += AuraEffectProcFn(spell_warr_lambs_to_the_slaughter_AuraScript::OnProc, EFFECT_0, SPELL_AURA_PROC_TRIGGER_SPELL);
+            }
+        };
+
+        AuraScript* GetAuraScript() const OVERRIDE
+        {
+            return new spell_warr_lambs_to_the_slaughter_AuraScript();
+        }
+};
+
+// 52437 - Sudden Death
+class spell_warr_sudden_death : public SpellScriptLoader
+{
+    public:
+        spell_warr_sudden_death() : SpellScriptLoader("spell_warr_sudden_death") { }
+
+        class spell_warr_sudden_death_AuraScript : public AuraScript
+        {
+            PrepareAuraScript(spell_warr_sudden_death_AuraScript);
+
+            bool Validate(SpellInfo const* /*spellInfo*/) OVERRIDE
+            {
+                if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_COLOSSUS_SMASH))
+                    return false;
+                return true;
+            }
+
+            void HandleApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
+            {
+                // Remove cooldown on Colossus Smash
+                if (Player* player = GetTarget()->ToPlayer())
+                    player->RemoveSpellCooldown(SPELL_WARRIOR_COLOSSUS_SMASH, true);
+            }
+
+            void Register()
+            {
+                AfterEffectApply += AuraEffectRemoveFn(spell_warr_sudden_death_AuraScript::HandleApply, EFFECT_0, SPELL_AURA_DUMMY, AURA_EFFECT_HANDLE_REAL); // correct?
+            }
+        };
+
+        AuraScript* GetAuraScript() const OVERRIDE
+        {
+            return new spell_warr_sudden_death_AuraScript();
+        }
+};
+
 void AddSC_warrior_spell_scripts()
 {
+    new spell_warr_sudden_death();
+    new spell_warr_lambs_to_the_slaughter();
     new spell_warr_second_wind_proc();
     new spell_warr_second_wind_trigger();
 	new spell_warr_bloodthirst();
