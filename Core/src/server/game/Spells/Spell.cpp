@@ -3822,7 +3822,25 @@ void Spell::finish(bool ok)
 				m_caster->CastSpell(m_caster, 96219, true);
 		}
 		break;
-	}
+    case 1715: // Hamstring.
+        if (m_caster->HasAura(12289) // Improved Hamstring.
+        {
+            if (!m_caster->HasSpellCooldown(23694))
+            {
+                m_caster->CastSpell(unitTarget, 23694, true);
+                m_caster->AddSpellCooldown(23694, 0, time(NULL) + 60);
+            }
+        }
+        if (m_caster->HasAura(12668) // Improved Hamstring.
+        {
+            if (!m_caster->HasSpellCooldown(23694))
+            {
+                m_caster->CastSpell(unitTarget, 23694, true);
+                m_caster->AddSpellCooldown(23694, 0, time(NULL) + 30);
+            }
+        }
+        break;
+    }
 }
 
 void Spell::SendCastResult(SpellCastResult result)
