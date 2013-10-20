@@ -3789,57 +3789,39 @@ void Spell::finish(bool ok)
 			m_caster->RemoveMovementImpairingAuras();
 		break;
 	case 33395: // Improved Freeze
-		{
-			if (Unit* owner = m_caster->GetOwner()) {
-				if (owner->HasAura(86259) && roll_chance_i(33)
-					|| (owner->HasAura(86260) && roll_chance_i(67))
-					|| (owner->HasAura(86314))) {
-						//Gives your Water Elemental's Freeze spell a % chance to grant 2 charges of Fingers of Frost.
-						owner->SetAuraStack(44544, owner, 2);
-				}
-			}
+	{
+					if (Unit* owner = m_caster->GetOwner()) {
+						if (owner->HasAura(86259) && roll_chance_i(33)
+							|| (owner->HasAura(86260) && roll_chance_i(67))
+							|| (owner->HasAura(86314))) {
+							//Gives your Water Elemental's Freeze spell a % chance to grant 2 charges of Fingers of Frost.
+							owner->SetAuraStack(44544, owner, 2);
+						}
+					}
+					break;
+	}
+	case 2061: // Flash Heal.
+	case 32546: // Binding Heal.
+	case 2060: // Greater Heal.
+	case 596: // Prayer of Healing.
+		if (m_caster->HasAura(89485)) // Inner Focus.
+			m_caster->RemoveAura(89485);
 		break;
-		}
-    case 2061: // Flash Heal.
-    case 32546: // Binding Heal.
-    case 2060: // Greater Heal.
-    case 596: // Prayer of Healing.
-        if (m_caster->HasAura(89485)) // Inner Focus.
-            m_caster->RemoveAura(89485);
-        break;
-    case 588: // Inner Fire.
-        if (m_caster->HasAura(73413)) // Inner Will.
-            m_caster->RemoveAura(73413);
-        break;
-    case 73413: // Inner Will.
-        if (m_caster->HasAura(588)) // Inner Fire.
-            m_caster->RemoveAura(588);
-        break;
-    case 17: // Power Word: Shield.
+	case 588: // Inner Fire.
+		if (m_caster->HasAura(73413)) // Inner Will.
+			m_caster->RemoveAura(73413);
+		break;
+	case 73413: // Inner Will.
+		if (m_caster->HasAura(588)) // Inner Fire.
+			m_caster->RemoveAura(588);
+		break;
+	case 17: // Power Word: Shield.
 		if (unitTarget == m_caster)
 		{
 			if (m_caster->HasAura(33333)) // Holy Walk.
 				m_caster->CastSpell(m_caster, 96219, true);
 		}
 		break;
-    case 1715: // Hamstring.
-        if (m_caster->HasAura(12289) // Improved Hamstring.
-        {
-            if (!m_caster->HasSpellCooldown(23694))
-            {
-                m_caster->CastSpell(unitTarget, 23694, true);
-                m_caster->AddSpellCooldown(23694, 0, time(NULL) + 60);
-            }
-        }
-        if (m_caster->HasAura(12668) // Improved Hamstring.
-        {
-            if (!m_caster->HasSpellCooldown(23694))
-            {
-                m_caster->CastSpell(unitTarget, 23694, true);
-                m_caster->AddSpellCooldown(23694, 0, time(NULL) + 30);
-            }
-        }
-        break;
     }
 }
 

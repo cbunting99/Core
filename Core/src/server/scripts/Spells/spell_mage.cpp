@@ -65,6 +65,9 @@ enum MageSpells
     SPELL_MAGE_SLOW                              = 31589,
     SPELL_MAGE_NETHER_VORTEX_R1                  = 86181,
     SPELL_MAGE_NETHER_VORTEX_R2                  = 86209,
+	SPELL_MAGE_IMPROVED_POLYMORPH_RANK_1         = 11210,
+	SPELL_MAGE_IMPROVED_POLYMORPH_STUN_RANK_1    = 83046,
+	SPELL_MAGE_IMPROVED_POLYMORPH_MARKER         = 87515,
 
     SPELL_MAGE_GLYPH_OF_MIRROR_IMAGE             = 63093,
     SPELL_MAGE_SUMMON_IMAGES_FROST               = 58832,
@@ -157,51 +160,6 @@ class spell_mage_blast_wave : public SpellScriptLoader
         SpellScript* GetSpellScript() const
         {
             return new spell_mage_blast_wave_SpellScript();
-        }
-};
-
-// -44449 - Burnout
-class spell_mage_burnout : public SpellScriptLoader
-{
-    public:
-        spell_mage_burnout() : SpellScriptLoader("spell_mage_burnout") { }
-
-        class spell_mage_burnout_AuraScript : public AuraScript
-        {
-            PrepareAuraScript(spell_mage_burnout_AuraScript);
-
-            bool Validate(SpellInfo const* /*spellInfo*/)
-            {
-                if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_BURNOUT))
-                    return false;
-                return true;
-            }
-
-            bool CheckProc(ProcEventInfo& eventInfo)
-            {
-                return eventInfo.GetDamageInfo()->GetSpellInfo(); // eventInfo.GetSpellInfo()
-            }
-
-            void HandleProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
-            {
-                PreventDefaultAction();
-
-                int32 mana = int32(eventInfo.GetDamageInfo()->GetSpellInfo()->CalcPowerCost(GetTarget(), eventInfo.GetDamageInfo()->GetSchoolMask()));
-                mana = CalculatePct(mana, aurEff->GetAmount());
-
-                GetTarget()->CastCustomSpell(SPELL_MAGE_BURNOUT, SPELLVALUE_BASE_POINT0, mana, GetTarget(), true, NULL, aurEff);
-            }
-
-            void Register()
-            {
-                DoCheckProc += AuraCheckProcFn(spell_mage_burnout_AuraScript::CheckProc);
-                OnEffectProc += AuraEffectProcFn(spell_mage_burnout_AuraScript::HandleProc, EFFECT_1, SPELL_AURA_DUMMY);
-            }
-        };
-
-        AuraScript* GetAuraScript() const
-        {
-            return new spell_mage_burnout_AuraScript();
         }
 };
 
@@ -830,6 +788,67 @@ class spell_mage_master_of_elements : public SpellScriptLoader
         }
 };
 
+// 118 - Polymorph
+class spell_mage_polymorph : public SpellScriptLoader
+{
+public:
+	spell_mage_polymorph() : SpellScriptLoader("spell_mage_polymorph") { }
+
+	class spell_mage_polymorph_AuraScript : public AuraScript
+	{
+		PrepareAuraScript(spell_mage_polymorph_AuraScript);
+
+		bool Validate(SpellInfo const* /*spellInfo*/)
+		{
+			if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_IMPROVED_POLYMORPH_RANK_1) ||
+			!sSpellMgr->GetSpellInfo(SPELL_MAGE_IMPROVED_POLYMORPH_STUN_RANK_1) ||
+			!sSpellMgr->GetSpellInfo(SPELL_MAGE_IMPROVED_POLYMORPH_MARKER))
+			return false;
+			return true;
+		}
+
+		bool Load()
+		{
+			_caster = NULL;
+			return true;
+		}
+
+		bool DoCheck(ProcEventInfo& eventInfo)
+		{
+			_caster = GetCaster();
+			return _caster && eventInfo.GetDamageInfo();
+		}
+
+		void HandleEffectProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
+		{
+			PreventDefaultAction();
+			// Improved Polymorph
+			if (AuraEffect const* improvedPolymorph = _caster->GetAuraEffectOfRankedSpell(SPELL_MAGE_IMPROVED_POLYMORPH_RANK_1, EFFECT_0))
+			{
+				if (_caster->HasAura(SPELL_MAGE_IMPROVED_POLYMORPH_MARKER))
+					return;
+
+				GetTarget()->CastSpell(GetTarget(), sSpellMgr->GetSpellWithRank(SPELL_MAGE_IMPROVED_POLYMORPH_STUN_RANK_1, improvedPolymorph->GetSpellInfo()->GetRank()), true, NULL, aurEff);
+				_caster->CastSpell(_caster, SPELL_MAGE_IMPROVED_POLYMORPH_MARKER, true, NULL, aurEff);
+			}
+		}
+
+		void Register()
+		{
+			DoCheckProc += AuraCheckProcFn(spell_mage_polymorph_AuraScript::DoCheck);
+			OnEffectProc += AuraEffectProcFn(spell_mage_polymorph_AuraScript::HandleEffectProc, EFFECT_0, SPELL_AURA_MOD_CONFUSE);
+		}
+
+	private:
+		Unit* _caster;
+	};
+
+	AuraScript* GetAuraScript() const
+	{
+		return new spell_mage_polymorph_AuraScript();
+	}
+};
+
 enum SilvermoonPolymorph
 {
     NPC_AUROSALIA       = 18744
@@ -1070,54 +1089,6 @@ class spell_mage_ring_of_frost_freeze : public SpellScriptLoader
         AuraScript* GetAuraScript() const
         {
             return new spell_mage_ring_of_frost_freeze_AuraScript();
-        }
-};
-
-// 31687 - Summon Water Elemental
-class spell_mage_summon_water_elemental : public SpellScriptLoader
-{
-    public:
-        spell_mage_summon_water_elemental() : SpellScriptLoader("spell_mage_summon_water_elemental") { }
-
-        class spell_mage_summon_water_elemental_SpellScript : public SpellScript
-        {
-            PrepareSpellScript(spell_mage_summon_water_elemental_SpellScript);
-
-            bool Validate(SpellInfo const* /*spellInfo*/)
-            {
-                if (!sSpellMgr->GetSpellInfo(SPELL_MAGE_GLYPH_OF_ETERNAL_WATER) || !sSpellMgr->GetSpellInfo(SPELL_MAGE_SUMMON_WATER_ELEMENTAL_TEMPORARY) || !sSpellMgr->GetSpellInfo(SPELL_MAGE_SUMMON_WATER_ELEMENTAL_PERMANENT))
-                    return false;
-                return true;
-            }
-
-            void HandleDummy(SpellEffIndex /*effIndex*/)
-            {
-                Unit* caster = GetCaster();
-
-                if (Player* player = caster->ToPlayer())
-                    if (Guardian* elemental = player->GetGuardianPet())
-                        // Check if the pet we are going to unsummon is the mage's water elemental
-                        if (elemental->GetEntry() == uint32(sSpellMgr->GetSpellInfo(SPELL_MAGE_SUMMON_WATER_ELEMENTAL_TEMPORARY)->Effects[EFFECT_0].MiscValue) ||
-                            elemental->GetEntry() == uint32(sSpellMgr->GetSpellInfo(SPELL_MAGE_SUMMON_WATER_ELEMENTAL_PERMANENT)->Effects[EFFECT_0].MiscValue))
-                            elemental->UnSummon();
-
-                // Glyph of Eternal Water
-                if (caster->HasAura(SPELL_MAGE_GLYPH_OF_ETERNAL_WATER))
-                    caster->CastSpell(caster, SPELL_MAGE_SUMMON_WATER_ELEMENTAL_PERMANENT, true);
-                else
-                    caster->CastSpell(caster, SPELL_MAGE_SUMMON_WATER_ELEMENTAL_TEMPORARY, true);
-            }
-
-            void Register()
-            {
-                // add dummy effect spell handler to Summon Water Elemental
-                OnEffectHit += SpellEffectFn(spell_mage_summon_water_elemental_SpellScript::HandleDummy, EFFECT_0, SPELL_EFFECT_DUMMY);
-            }
-        };
-
-        SpellScript* GetSpellScript() const
-        {
-            return new spell_mage_summon_water_elemental_SpellScript();
         }
 };
 
@@ -1430,7 +1401,6 @@ void AddSC_mage_spell_scripts()
 {
     new spell_mage_blast_wave();
     new spell_mage_blizzard();
-    new spell_mage_burnout();
     new spell_mage_cold_snap();
     new spell_mage_cone_of_cold();
     new spell_mage_conjure_refreshment();
@@ -1447,10 +1417,10 @@ void AddSC_mage_spell_scripts()
     new spell_mage_replenish_mana();
     new spell_mage_ring_of_frost();
     new spell_mage_ring_of_frost_freeze();
-    new spell_mage_summon_water_elemental();
     new spell_mage_water_elemental_freeze();
     new spell_mage_combustion();
     new spell_mage_cauterize();
     new spell_mage_arcane_blast();
     new spell_mage_mirror_image();
+	new spell_mage_polymorph();
 }
