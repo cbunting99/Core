@@ -5626,9 +5626,6 @@ void Spell::EffectAddComboPoints(SpellEffIndex /*effIndex*/)
     if (!m_caster->m_movedPlayer)
         return;
 
-    if (damage <= 0)
-        return;
-
    Player* player = m_caster->m_movedPlayer;
 
     if (damage > 0)
