@@ -1065,7 +1065,7 @@ class spell_warr_second_wind_proc : public SpellScriptLoader
         {
             PrepareAuraScript(spell_warr_second_wind_proc_AuraScript);
 
-            bool Validate(SpellInfo const* /*spellInfo*/) OVERRIDE
+            bool Validate(SpellInfo const* /*spellInfo*/)
             {
                 if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_SECOUND_WIND_PROC_RANK_1) ||
                     !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_SECOUND_WIND_PROC_RANK_2) ||
@@ -1100,7 +1100,7 @@ class spell_warr_second_wind_proc : public SpellScriptLoader
 
             }
 
-            void Register() OVERRIDE
+            void Register()
             {
                 DoCheckProc += AuraCheckProcFn(spell_warr_second_wind_proc_AuraScript::CheckProc);
                 OnEffectProc += AuraEffectProcFn(spell_warr_second_wind_proc_AuraScript::HandleProc, EFFECT_0, SPELL_AURA_DUMMY);
@@ -1108,7 +1108,7 @@ class spell_warr_second_wind_proc : public SpellScriptLoader
 
         };
 
-        AuraScript* GetAuraScript() const OVERRIDE
+        AuraScript* GetAuraScript() const
         {
             return new spell_warr_second_wind_proc_AuraScript();
         }
@@ -1128,13 +1128,13 @@ class spell_warr_second_wind_trigger : public SpellScriptLoader
                 amount = int32(GetUnitOwner()->CountPctFromMaxHealth(amount));
             }
 
-            void Register() OVERRIDE
+            void Register()
             {
                 DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_warr_second_wind_trigger_AuraScript::CalculateAmount, EFFECT_1, SPELL_AURA_PERIODIC_HEAL);
             }
         };
 
-        AuraScript* GetAuraScript() const OVERRIDE
+        AuraScript* GetAuraScript() const
         {
             return new spell_warr_second_wind_trigger_AuraScript();
         }
