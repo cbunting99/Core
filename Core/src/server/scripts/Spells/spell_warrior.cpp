@@ -28,6 +28,9 @@
 
 enum WarriorSpells
 {
+	SPELL_WARRIOR_MORTAL_STRIKE                     = 12294,
+	SPELL_WARRIOR_COLOSSUS_SMASH                    = 86346,
+	SPELL_WARRIOR_REND                              = 94009,
 	SPELL_WARRIOR_BLOODTHIRST                       = 23885,
 	SPELL_WARRIOR_BLOODTHIRST_DAMAGE                = 23881,
 	SPELL_WARRIOR_CHARGE                            = 34846,
@@ -217,10 +220,10 @@ public:
 
 		bool Validate(SpellInfo const* /*spellInfo*/)
 		{
-			if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_1)
-                || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_2)
-                || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_3))
-                || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_PERIODIC))
+			if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_1) || 
+				!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_2) || 
+				!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_3) || 
+				!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_DEEP_WOUNDS_RANK_PERIODIC))
 				return false;
 			return true;
 		}
@@ -1153,7 +1156,7 @@ class spell_warr_lambs_to_the_slaughter : public SpellScriptLoader
         {
             PrepareAuraScript(spell_warr_lambs_to_the_slaughter_AuraScript);
 
-            bool Validate(SpellInfo const* /*spellInfo*/) OVERRIDE
+            bool Validate(SpellInfo const* /*spellInfo*/)
             {
                 if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_MORTAL_STRIKE) ||
                     !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_REND))
@@ -1168,13 +1171,13 @@ class spell_warr_lambs_to_the_slaughter : public SpellScriptLoader
 
             }
 
-            void Register() OVERRIDE
+            void Register()
             {
                 OnEffectProc += AuraEffectProcFn(spell_warr_lambs_to_the_slaughter_AuraScript::OnProc, EFFECT_0, SPELL_AURA_PROC_TRIGGER_SPELL);
             }
         };
 
-        AuraScript* GetAuraScript() const OVERRIDE
+        AuraScript* GetAuraScript() const
         {
             return new spell_warr_lambs_to_the_slaughter_AuraScript();
         }
@@ -1190,7 +1193,7 @@ class spell_warr_sudden_death : public SpellScriptLoader
         {
             PrepareAuraScript(spell_warr_sudden_death_AuraScript);
 
-            bool Validate(SpellInfo const* /*spellInfo*/) OVERRIDE
+            bool Validate(SpellInfo const* /*spellInfo*/)
             {
                 if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_COLOSSUS_SMASH))
                     return false;
@@ -1210,7 +1213,7 @@ class spell_warr_sudden_death : public SpellScriptLoader
             }
         };
 
-        AuraScript* GetAuraScript() const OVERRIDE
+        AuraScript* GetAuraScript() const
         {
             return new spell_warr_sudden_death_AuraScript();
         }
