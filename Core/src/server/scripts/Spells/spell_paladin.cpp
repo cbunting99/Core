@@ -30,6 +30,13 @@
 
 enum PaladinSpells
 {
+    SPELL_PALADIN_AVENGERS_SHIELD                = 31935,
+
+    SPELL_PALADIN_JUDGEMENT_DAMAGE               = 54158,
+
+    SPELL_PALADIN_SEAL_OF_INSIGHT                = 20165,
+    SPELL_PALADIN_SEAL_OF_JUSTICE                = 20164,
+
     SPELL_PALADIN_DIVINE_PLEA                    = 54428,
     SPELL_PALADIN_BLESSING_OF_SANCTUARY_BUFF     = 67480,
     SPELL_PALADIN_BLESSING_OF_SANCTUARY_ENERGIZE = 57319,
@@ -1855,9 +1862,161 @@ class spell_pal_speed_of_light : public SpellScriptLoader
         }
 };
 
+// 20271 - Judgement
+class spell_pal_judgement : public SpellScriptLoader
+{
+    public:
+        spell_pal_judgement() : SpellScriptLoader("spell_pal_judgement") { }
+
+        class spell_pal_judgement_SpellScript : public SpellScript
+        {
+            PrepareSpellScript(spell_pal_judgement_SpellScript);
+
+            bool Validate(SpellInfo const* /*spellEntry*/) OVERRIDE
+            {
+                if (!sSpellMgr->GetSpellInfo(SPELL_PALADIN_SEAL_OF_INSIGHT) || 
+                    !sSpellMgr->GetSpellInfo(SPELL_PALADIN_SEAL_OF_JUSTICE))
+                    return false;
+
+                return true;
+            }
+            
+            void SwitchSpell()
+            {
+                if(Unit* target = GetExplTargetUnit())
+                {
+                    Unit* caster = GetCaster();
+                    uint32 spellId = 0;
+
+                    // Seal of Truth and Seal of Righteousness have a dummy aura on effect 2
+                    Unit::AuraApplicationMap & sealAuras = caster->GetAppliedAuras();
+                    for (Unit::AuraApplicationMap::iterator iter = sealAuras.begin(); iter != sealAuras.end();)
+                    {
+                        Aura* aura = iter->second->GetBase();
+                        if (aura->GetSpellInfo()->GetSpellSpecific() == SPELL_SPECIFIC_SEAL)
+                        {
+                            if (AuraEffect* aureff = aura->GetEffect(2))
+                            {
+                                if (aureff->GetAuraType() == SPELL_AURA_DUMMY)
+                                {
+                                    if (sSpellMgr->GetSpellInfo(aureff->GetAmount()))
+                                        spellId = aureff->GetAmount();
+                                    break;
+                                }
+                            }
+                            if (!spellId)
+                            {
+                                switch (iter->first)
+                                {
+                                    // Seal of Insight, Seal of Justice
+                                    case SPELL_PALADIN_SEAL_OF_JUSTICE:
+                                    case SPELL_PALADIN_SEAL_OF_INSIGHT:
+                                        spellId = SPELL_PALADIN_JUDGEMENT_DAMAGE;
+                                }
+                            }
+                            break;
+                        }
+                        else
+                            ++iter;
+                    }
+                    // Cast Judgement
+                    if (spellId)
+                        caster->CastSpell(target, spellId, true);
+                }
+            }
+
+            void Register() OVERRIDE
+            {
+                OnCast += SpellCastFn(spell_pal_judgement_SpellScript::SwitchSpell);
+            }
+        };
+
+        SpellScript* GetSpellScript() const OVERRIDE
+        {
+            return new spell_pal_judgement_SpellScript();
+        }
+};
+
+// -75806 - Grand Crusader
+class spell_pal_grand_crusader : public SpellScriptLoader
+{
+    public:
+        spell_pal_grand_crusader() : SpellScriptLoader("spell_pal_grand_crusader") { }
+
+        class spell_pal_grand_crusader_AuraScript : public AuraScript
+        {
+            PrepareAuraScript(spell_pal_grand_crusader_AuraScript);
+
+            bool Validate(SpellInfo const* /*spellInfo*/) OVERRIDE
+            {
+                if (!sSpellMgr->GetSpellInfo(SPELL_PALADIN_AVENGERS_SHIELD))
+                    return false;
+                return true;
+            }
+
+            bool CheckProc(ProcEventInfo& /*eventInfo*/)
+            {
+                return GetTarget()->GetTypeId() == TYPEID_PLAYER;
+            }
+
+            void HandleEffectProc(AuraEffect const* /*aurEff*/, ProcEventInfo& /*eventInfo*/)
+            {
+                GetTarget()->ToPlayer()->RemoveSpellCooldown(SPELL_PALADIN_AVENGERS_SHIELD, true);
+            }
+
+            void Register() OVERRIDE
+            {
+                DoCheckProc += AuraCheckProcFn(spell_pal_grand_crusader_AuraScript::CheckProc);
+                OnEffectProc += AuraEffectProcFn(spell_pal_grand_crusader_AuraScript::HandleEffectProc, EFFECT_0, SPELL_AURA_PROC_TRIGGER_SPELL);
+            }
+        };
+
+        AuraScript* GetAuraScript() const OVERRIDE
+        {
+            return new spell_pal_grand_crusader_AuraScript();
+        }
+};
+
+// -9799 - Eye for an Eye
+class spell_pal_eye_for_an_eye : public SpellScriptLoader
+{
+    public:
+        spell_pal_eye_for_an_eye() : SpellScriptLoader("spell_pal_eye_for_an_eye") { }
+
+        class spell_pal_eye_for_an_eye_AuraScript : public AuraScript
+        {
+            PrepareAuraScript(spell_pal_eye_for_an_eye_AuraScript);
+
+            bool Validate(SpellInfo const* /*spellInfo*/) OVERRIDE
+            {
+                if (!sSpellMgr->GetSpellInfo(SPELL_PALADIN_EYE_FOR_AN_EYE_DAMAGE))
+                    return false;
+                return true;
+            }
+
+            void HandleEffectProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
+            {
+                PreventDefaultAction();
+                int32 damage = CalculatePct(eventInfo.GetDamageInfo()->GetDamage(), aurEff->GetAmount());
+                GetTarget()->CastCustomSpell(SPELL_PALADIN_EYE_FOR_AN_EYE_DAMAGE, SPELLVALUE_BASE_POINT0, damage, eventInfo.GetProcTarget(), true, NULL, aurEff);
+            }
+
+            void Register() OVERRIDE
+            {
+                OnEffectProc += AuraEffectProcFn(spell_pal_eye_for_an_eye_AuraScript::HandleEffectProc, EFFECT_0, m_scriptSpellId == SPELL_PALADIN_EYE_FOR_AN_EYE_RANK_1 ? SPELL_AURA_DUMMY : SPELL_AURA_PROC_TRIGGER_SPELL);
+            }
+        };
+
+        AuraScript* GetAuraScript() const OVERRIDE
+        {
+            return new spell_pal_eye_for_an_eye_AuraScript();
+        }
+};
+
 
 void AddSC_paladin_spell_scripts()
 {
+    new spell_pal_grand_crusader();
     //new spell_pal_ardent_defender();
     new spell_pal_blessing_of_faith();
     new spell_pal_blessing_of_sanctuary();
@@ -1889,4 +2048,5 @@ void AddSC_paladin_spell_scripts()
     new spell_pal_hammer_of_wrath();
     new spell_pal_exorcism(); 
 	new spell_pal_speed_of_light();
+    new spell_pal_judgement();
 }
