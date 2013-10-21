@@ -8614,6 +8614,33 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
 				return false;
 			break;
 		}
+		case 82921: // Bombardment.
+		case 35104: // Bombardment.
+		case 35110: // Bombardment.
+		{
+			if (procSpell->Id == 2643) // Multi-Shot.
+				return true;
+			else
+				return false;
+			break;
+		}
+		case 83340: // Sic 'Em!.
+		case 83356: // Sic 'Em!.
+		case 83359: // Sic 'Em!.
+		case 89388: // Sic 'Em!.
+		{
+			if (procSpell->Id == 3044) // Arcane Shot.
+				return true;
+			if (procSpell->Id == 82928) // Aimed Shot!.
+				return true;
+			if (procSpell->Id == 19434) // Aimed Shot.
+				return true;
+			if (procSpell->Id == 53301) // Explosive Shot.
+				return true;
+			else
+				return false;
+			break;
+		}
         // Deep Wounds
         case 12834:
         case 12849:
