@@ -1772,35 +1772,6 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
 		if (m_spellInfo->SpellFamilyFlags[2] & 0x20)
 			m_caster->CastSpell(m_caster,51755,true);
 		break;
-	case SPELLFAMILY_WARRIOR:
-		// Charge
-            if (m_spellInfo->SpellVisual[0] == 867)
-            {
-                /*int32 chargeBasePoints0 = damage;
-                m_caster->CastCustomSpell(m_caster, 34846, &chargeBasePoints0, NULL, NULL, true); */
-
-              	 //Juggernaut Cooldown
-                	if (m_caster->HasAura(64976))
-                	{
-                        m_caster->ToPlayer()->AddSpellCooldown(20252, 0, time(NULL) + 30);
-                 	   m_caster->CastSpell(m_caster, 96216, true); // Spell Maker CDs
-                 	   m_caster->CastSpell(m_caster, 65156, true); // Buff Triggered by Juggernaut
-               	 }	
-                return;
-            }
-			// Intercept
-			if (m_spellInfo->Id == 20252)
-			{
-				// Juggernaut CD part
-				if (m_caster->HasAura(64976))
-				{
-					m_caster->ToPlayer()->AddSpellCooldown(100, 0, time(NULL) + 13);
-					m_caster->CastSpell(m_caster, 65156, true); // Buff Triggered by Juggernaut
-					m_caster->CastSpell(m_caster, 96215, true); // Spell Maker CDs
-				}
-				return;
-			}
-            break;
 	case SPELLFAMILY_DRUID:
 		{
 			if(m_spellInfo->Id == 80964)  // Skull Bash (bear) 
