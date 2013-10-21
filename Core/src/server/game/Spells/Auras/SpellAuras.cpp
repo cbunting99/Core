@@ -1577,6 +1577,17 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                     }
                 }
                 break;
+			case SPELLFAMILY_WARRIOR:
+			{
+										if (m_spellInfo->Id == 46857) // Trauma.
+										{
+											if (caster->HasAura(30070)) // Blood Frenzy.
+												caster->RemoveAura(30070);
+											if (caster->HasAura(30069)) // Blood Frenzy.
+												caster->RemoveAura(30069);
+										}
+			}
+				break;
             case SPELLFAMILY_ROGUE:
                // Blackjack/Groggy on sap removal
                 if(GetId() == 6770)

@@ -8584,9 +8584,34 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
 		case 84587:
 		case 84588:
 		{
-			if(procSpell->Id == 12294) // mortal strike
-				if (victim->HasAura(94009, GetGUID()))
-					victim->GetAura(94009, GetGUID())->RefreshDuration();
+		    if (procSpell->Id == 12294) // Mortal Strike.
+			{
+				if (victim->HasAura(94009, GetGUID())) // Rend.
+					victim->GetAura(94009, GetGUID())->RefreshDuration(); // Rend.
+			}
+			else
+				return false;
+			break;
+		}
+		case 84584: // Slaughter.
+		case 84585: // Slaughter.
+		case 84586: // Slaughter.
+		{
+		    if (procSpell->Id == 12294) // Mortal Strike.
+				return true;
+			else
+				return false;
+			break;
+		}
+		case 46867: // Wrecking Crew.
+		case 56611: // Wrecking Crew.
+		case 57518: // Enrage.
+		case 57519: // Enrage.
+		{
+			if (procSpell->Id == 12294) // Mortal Strike.
+				return true;
+			else
+				return false;
 			break;
 		}
         // Deep Wounds

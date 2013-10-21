@@ -153,8 +153,10 @@ public:
 
 		bool Validate(SpellInfo const* /*spellInfo*/)
 		{
-			if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_JUGGERNAUT_CRIT_BONUS_TALENT) || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_JUGGERNAUT_CRIT_BONUS_BUFF) || !sSpellMgr->GetSpellInfo(SPELL_WARRIOR_CHARGE))
-				return false;
+			if (!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_JUGGERNAUT_CRIT_BONUS_TALENT) ||
+			!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_JUGGERNAUT_CRIT_BONUS_BUFF) ||
+			!sSpellMgr->GetSpellInfo(SPELL_WARRIOR_CHARGE))
+			return false;
 			return true;
 		}
 
