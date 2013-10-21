@@ -1533,6 +1533,18 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
 					if (caster->HasAura(91724)) // Spell Warding.
 						caster->RemoveAura(91724);
 				}
+				if (m_spellInfo->Id == 47753) // Divine Aegis.
+				{
+					caster->ResetHealingDoneInPastSecs(60);
+				}
+				if (m_spellInfo->Id == 77489) // Echo of Light.
+				{
+					caster->ResetHealingDoneInPastSecs(60);
+				}
+				if (m_spellInfo->Id == 86273) // Echo of Light.
+				{
+					caster->ResetHealingDoneInPastSecs(60);
+				}
 				
 
                 // Power word: shield
@@ -1623,6 +1635,10 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                       }
 			break;
             case SPELLFAMILY_PALADIN:
+				if (m_spellInfo->Id == 86273) // Illuminated Healing.
+				{
+					caster->ResetHealingDoneInPastSecs(60);
+				}
                 // Remove the immunity shield marker on Forbearance removal if AW marker is not present
                 if (GetId() == 25771 && target->HasAura(61988) && !target->HasAura(61987))
                     target->RemoveAura(61988);

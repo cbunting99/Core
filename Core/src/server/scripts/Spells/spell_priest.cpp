@@ -29,6 +29,12 @@
 
 enum PriestSpells
 {
+	SPELL_PRIEST_ABSOLUTION                         = 33167,
+	SPELL_PRIEST_DISPEL_MAGIC_FRIENDLY              = 97690,
+	SPELL_PRIEST_DISPEL_MAGIC_HOSTILE               = 97691,
+	SPELL_PRIEST_GLYPH_OF_DISPEL_MAGIC              = 55677,
+	SPELL_PRIEST_GLYPH_OF_DISPEL_MAGIC_HEAL         = 56131,
+	SPELL_PRIEST_TWIN_DISCIPLINES_RANK_1            = 47586,
     SPELL_PRIEST_DIVINE_AEGIS                       = 47753,
     SPELL_PRIEST_EMPOWERED_RENEW                    = 63544,
     SPELL_PRIEST_GLYPH_OF_LIGHTWELL                 = 55673,
@@ -543,7 +549,7 @@ class spell_pri_power_word_shield : public SpellScriptLoader
                     amount += int32(bonus);
 
                     // Twin Disciplines
-                    if (AuraEffect const* twinDisciplines = caster->GetAuraEffect(SPELL_AURA_ADD_PCT_MODIFIER, SPELLFAMILY_PRIEST, 0x400000, 0, 0, GetCasterGUID()))
+					if (AuraEffect* twinDisciplines = caster->GetAuraEffectOfRankedSpell(SPELL_PRIEST_TWIN_DISCIPLINES_RANK_1, EFFECT_1))
                         AddPct(amount, twinDisciplines->GetAmount());
 
                     // Focused Power
@@ -557,12 +563,11 @@ class spell_pri_power_word_shield : public SpellScriptLoader
                 if (dmgInfo.GetAttacker() == target)
                     return;
 
-                if (Unit* caster = GetCaster())
-                    if (AuraEffect* talentAurEff = caster->GetAuraEffectOfRankedSpell(SPELL_PRIEST_REFLECTIVE_SHIELD_R1, EFFECT_0))
-                    {
-                        int32 bp = CalculatePct(absorbAmount, talentAurEff->GetAmount());
-                        target->CastCustomSpell(dmgInfo.GetAttacker(), SPELL_PRIEST_REFLECTIVE_SHIELD_TRIGGERED, &bp, NULL, NULL, true, NULL, aurEff);
-                    }
+				if (AuraEffect* talentAurEff = target->GetAuraEffectOfRankedSpell(SPELL_PRIEST_REFLECTIVE_SHIELD_R1, EFFECT_0))
+				{
+					int32 bp = CalculatePct(absorbAmount, talentAurEff->GetAmount());
+					target->CastCustomSpell(dmgInfo.GetAttacker(), SPELL_PRIEST_REFLECTIVE_SHIELD_TRIGGERED, &bp, NULL, NULL, true, NULL, aurEff);
+				}
             }
 
             void Register()
@@ -970,6 +975,65 @@ public:
     }
 };
 
+// 527 - Dispel magic
+class spell_pri_dispel_magic : public SpellScriptLoader
+{
+public:
+	spell_pri_dispel_magic() : SpellScriptLoader("spell_pri_dispel_magic") { }
+
+	class spell_pri_dispel_magic_SpellScript : public SpellScript
+	{
+		PrepareSpellScript(spell_pri_dispel_magic_SpellScript);
+
+		bool Validate(SpellInfo const* /*spellInfo*/)
+		{
+			if (!sSpellMgr->GetSpellInfo(SPELL_PRIEST_ABSOLUTION))
+				return false;
+			if (!sSpellMgr->GetSpellInfo(SPELL_PRIEST_GLYPH_OF_DISPEL_MAGIC_HEAL))
+				return false;
+			if (!sSpellMgr->GetSpellInfo(SPELL_PRIEST_GLYPH_OF_DISPEL_MAGIC))
+				return false;
+			return true;
+		}
+
+		SpellCastResult CheckCast()
+		{
+			Unit* caster = GetCaster();
+			Unit* target = GetExplTargetUnit();
+
+			if (!target || (!caster->HasAura(SPELL_PRIEST_ABSOLUTION) && caster != target && target->IsFriendlyTo(caster)))
+				return SPELL_FAILED_BAD_TARGETS;
+			return SPELL_CAST_OK;
+		}
+
+		void AfterEffectHit(SpellEffIndex /*effIndex*/)
+		{
+			if (GetHitUnit()->IsFriendlyTo(GetCaster()))
+			{
+				GetCaster()->CastSpell(GetHitUnit(), SPELL_PRIEST_DISPEL_MAGIC_FRIENDLY, true);
+				if (GetCaster()->HasAura(SPELL_PRIEST_GLYPH_OF_DISPEL_MAGIC))
+				{
+					int32 healAmount = CalculatePct(GetHitUnit()->GetMaxHealth(), sSpellMgr->GetSpellInfo(SPELL_PRIEST_GLYPH_OF_DISPEL_MAGIC_HEAL)->Effects[EFFECT_0].CalcValue());
+					GetCaster()->CastCustomSpell(SPELL_PRIEST_GLYPH_OF_DISPEL_MAGIC_HEAL, SPELLVALUE_BASE_POINT0, healAmount, GetHitUnit());
+				}
+			}
+			else
+				GetCaster()->CastSpell(GetHitUnit(), SPELL_PRIEST_DISPEL_MAGIC_HOSTILE, true);
+		}
+
+		void Register()
+		{
+			OnCheckCast += SpellCheckCastFn(spell_pri_dispel_magic_SpellScript::CheckCast);
+			OnEffectHitTarget += SpellEffectFn(spell_pri_dispel_magic_SpellScript::AfterEffectHit, EFFECT_0, SPELL_EFFECT_DUMMY);
+		}
+	};
+
+	SpellScript* GetSpellScript() const
+	{
+		return new spell_pri_dispel_magic_SpellScript();
+	}
+};
+
 void AddSC_priest_spell_scripts()
 {
     new spell_pri_divine_aegis();
@@ -992,4 +1056,5 @@ void AddSC_priest_spell_scripts()
     new spell_pri_chakra_swap_supressor();
     new spell_pri_chakra_serenity_proc();
     new spell_pri_chakra_sanctuary_heal();
+	new spell_pri_dispel_magic();
 }
