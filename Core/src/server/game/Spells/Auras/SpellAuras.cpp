@@ -1170,68 +1170,49 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                         break;
                 }
                 break;
-			case SPELLFAMILY_WARRIOR:
-				{
-					if (!caster)
-						break;
-					if(GetId() == 1715) // Hamstring
-					{
-						if(caster->HasAura(12668)) // Improved Hamstring rank 2
-						{
-							if(target->HasAura(1715)) // If he already has hamstring
-							{
-								caster->CastSpell(target,23694,false); // Not triggered
-								if(!caster->ToPlayer()->HasSpellCooldown(23694))
-									caster->ToPlayer()->AddSpellCooldown(23694,0,uint32(time(NULL) + 30000)); // Add 30 seconds cooldown
-							}
-						}
-						if(caster->HasAura(12289)) // Improved Hamstring rank 1
-						{
-							if(target->HasAura(1715)) // If he already has hamstring
-							{
-								caster->CastSpell(target,23694,false); // Not triggered
-								if(!caster->ToPlayer()->HasSpellCooldown(23694))
-									caster->ToPlayer()->AddSpellCooldown(23694,0,uint32(time(NULL) + 60000)); // Add 60 seconds cooldown
-							}
-						}
-					}
-					if(GetId() == 2565) //shield block
-					{
-						int32 bp0 = 0;
-						if(caster->HasAura(84608))
-						{
-							bp0 = -20;
-							caster->CastCustomSpell(caster, 97954, &bp0, NULL, NULL, true);
-						}
-						else if(caster->HasAura(84607))
-						{
-							bp0 = -14;
-							caster->CastCustomSpell(caster, 97954, &bp0, NULL, NULL, true);
-						}
-						else if(caster->HasAura(29598)) // shield mastery
-						{
-							bp0 = -7;
-							caster->CastCustomSpell(caster, 97954, &bp0, NULL, NULL, true);
-						}
-					}
+            case SPELLFAMILY_WARRIOR:
+                {
+                    if (!caster)
+                        break;
+                    if(GetId() == 2565) //shield block
+                    {
+                        int32 bp0 = 0;
+                        if(caster->HasAura(84608))
+                        {
+                            bp0 = -20;
+                            caster->CastCustomSpell(caster, 97954, &bp0, NULL, NULL, true);
+                        }
+                        else if(caster->HasAura(84607))
+                        {
+                            bp0 = -14;
+                            caster->CastCustomSpell(caster, 97954, &bp0, NULL, NULL, true);
+                        }
+                        else if(caster->HasAura(29598)) // shield mastery
+                        {
+                            bp0 = -7;
+                            caster->CastCustomSpell(caster, 97954, &bp0, NULL, NULL, true);
+                        }
+                    }
 
-					switch (GetId())
-					{
-					case 50227: // Warrior - Sword and Board
-						{
-							// Reset cooldown on shield slam if needed
-							caster->ToPlayer()->RemoveSpellCooldown(23922, true);
-							break;
-						}
-					}
-					break;
-				}
+                    switch (GetId())
+                    {
+                    case 50227: // Warrior - Sword and Board
+                        {
+                            // Reset cooldown on shield slam if needed
+                            caster->ToPlayer()->RemoveSpellCooldown(23922, true);
+                            break;
+                        }
+                    }
+            }
+                break;
+
+            
             case SPELLFAMILY_DRUID:
                 if (!caster)
                     break;
-	     if (GetId() == 48517) // Sunfire Swapper
-		if (caster->HasAura(94338))
-		   	GetEffect(2)->SetAmount(93402);
+         if (GetId() == 48517) // Sunfire Swapper
+        if (caster->HasAura(94338))
+               GetEffect(2)->SetAmount(93402);
                 // Rejuvenation
                 if (GetSpellInfo()->SpellFamilyFlags[0] & 0x10 && GetEffect(EFFECT_0))
                 {
@@ -1315,24 +1296,24 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                 break;
             case SPELLFAMILY_WARLOCK:
              switch (GetId())
- 		{
-			case 6358: // Seduction
- 				if (!caster)
- 					break;
- 				if (Unit *owner = caster->GetOwner())
- 					if (owner->HasAura(56250)) // Glyph of Succubus
- 					{
- 						target->RemoveAurasByType(SPELL_AURA_PERIODIC_DAMAGE, 0, target->GetAura(32409)); // SW:D shall not be removed.
- 						target->RemoveAurasByType(SPELL_AURA_PERIODIC_DAMAGE_PERCENT);
- 						target->RemoveAurasByType(SPELL_AURA_PERIODIC_LEECH);
- 					}
- 					break;
-			case 89603: // Cremation - refresh immolate
-				if (target->HasAura(348))
-					target->GetAura(348)->RefreshDuration();
+         {
+            case 6358: // Seduction
+                 if (!caster)
+                     break;
+                 if (Unit *owner = caster->GetOwner())
+                     if (owner->HasAura(56250)) // Glyph of Succubus
+                     {
+                         target->RemoveAurasByType(SPELL_AURA_PERIODIC_DAMAGE, 0, target->GetAura(32409)); // SW:D shall not be removed.
+                         target->RemoveAurasByType(SPELL_AURA_PERIODIC_DAMAGE_PERCENT);
+                         target->RemoveAurasByType(SPELL_AURA_PERIODIC_LEECH);
+                     }
+                     break;
+            case 89603: // Cremation - refresh immolate
+                if (target->HasAura(348))
+                    target->GetAura(348)->RefreshDuration();
                     break;
- 			}
-	   if(GetId() == 1120) // Drain soul
+             }
+       if(GetId() == 1120) // Drain soul
         {
             if(caster->HasAura(85099)) // Pandemic rank 1
             {
@@ -1348,92 +1329,92 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                         uaff->RefreshDuration();
             }
         }
-			if(GetId() == 17877 || GetId() == 6353 || GetId() == 50796) // Shadowburn, Soul Fire, Chaos Bolt
-			{
-				if(caster->HasAura(30293)) // Soul Leech 1
-				{
-					caster->CastSpell(caster,57669,true);
-				caster->CastSpell(caster,59117,true);
-					caster->CastSpell(caster,59118,true);
-				}
-				if(caster->HasAura(30295)) // Soul Leech 2
-				{
-					int32 bp0 = 4;
-					caster->CastSpell(caster,57669,true);
-					caster->CastCustomSpell(caster, 59117, &bp0, NULL, NULL, true);
-					caster->CastCustomSpell(caster, 59118, &bp0, NULL, NULL, true);
-				}
-			}
-			if(GetId() == 1490) // Curse of elements
-			{
-				if(caster->HasAura(18179)) // Jinx rank 1
-					caster->CastSpell(target,85547,true);
-				if(caster->HasAura(85479)) // Jinxs rank 2
-					caster->CastSpell(target,86105,true);
-			}
-			if(GetId() == 80240) // Bane of Havoc
-			{
-				if(apply)
-					caster->SetHavocTarget(target);
-				else
-					caster->SetHavocTarget(NULL);
-			}
- 			if(GetId() == 702) // Curse of weakness
- 			{
- 				if(apply)
- 				{
- 					if(caster->HasAura(18179)) // Jinx rank 1
- 					{
- 						int32 bp = 5;
- 						uint32 spellid = 0;
- 						switch(target->getClass())
- 						{
- 						case CLASS_DEATH_KNIGHT:
- 							spellid = 85541;
- 							break;
- 						case CLASS_HUNTER:
- 							spellid = 85542;
- 							break;
- 						case CLASS_ROGUE:
- 							spellid = 85540;
- 							break;
- 						case CLASS_WARRIOR:
- 							spellid = 85539;
- 							break;
- 						}
- 						if(spellid)
- 							caster->CastCustomSpell(target,spellid,&bp,NULL,NULL,true);
- 					}
- 					if(caster->HasAura(85479)) // Jinx rank 2
- 					{
- 						int32 bp = 10;
- 						uint32 spellid = 0;
- 						switch(target->getClass())
- 						{
- 						case CLASS_DEATH_KNIGHT:
- 							spellid = 85541;
- 							break;
- 						case CLASS_HUNTER:
- 							spellid = 85542;
- 							break;
- 						case CLASS_ROGUE:
- 							spellid = 85540;
- 							break;
- 						case CLASS_WARRIOR:
- 							spellid = 85539;
- 							break;
- 						}
- 						if(spellid)
- 							caster->CastCustomSpell(target,spellid,&bp,NULL,NULL,true);
- 					}
- 					else
- 					{
- 						target->RemoveAurasDueToSpell(85541);
- 						target->RemoveAurasDueToSpell(85542);
- 						target->RemoveAurasDueToSpell(85540);
- 						target->RemoveAurasDueToSpell(85539);
- 					}
- 				}
+            if(GetId() == 17877 || GetId() == 6353 || GetId() == 50796) // Shadowburn, Soul Fire, Chaos Bolt
+            {
+                if(caster->HasAura(30293)) // Soul Leech 1
+                {
+                    caster->CastSpell(caster,57669,true);
+                caster->CastSpell(caster,59117,true);
+                    caster->CastSpell(caster,59118,true);
+                }
+                if(caster->HasAura(30295)) // Soul Leech 2
+                {
+                    int32 bp0 = 4;
+                    caster->CastSpell(caster,57669,true);
+                    caster->CastCustomSpell(caster, 59117, &bp0, NULL, NULL, true);
+                    caster->CastCustomSpell(caster, 59118, &bp0, NULL, NULL, true);
+                }
+            }
+            if(GetId() == 1490) // Curse of elements
+            {
+                if(caster->HasAura(18179)) // Jinx rank 1
+                    caster->CastSpell(target,85547,true);
+                if(caster->HasAura(85479)) // Jinxs rank 2
+                    caster->CastSpell(target,86105,true);
+            }
+            if(GetId() == 80240) // Bane of Havoc
+            {
+                if(apply)
+                    caster->SetHavocTarget(target);
+                else
+                    caster->SetHavocTarget(NULL);
+            }
+             if(GetId() == 702) // Curse of weakness
+             {
+                 if(apply)
+                 {
+                     if(caster->HasAura(18179)) // Jinx rank 1
+                     {
+                         int32 bp = 5;
+                         uint32 spellid = 0;
+                         switch(target->getClass())
+                         {
+                         case CLASS_DEATH_KNIGHT:
+                             spellid = 85541;
+                             break;
+                         case CLASS_HUNTER:
+                             spellid = 85542;
+                             break;
+                         case CLASS_ROGUE:
+                             spellid = 85540;
+                             break;
+                         case CLASS_WARRIOR:
+                             spellid = 85539;
+                             break;
+                         }
+                         if(spellid)
+                             caster->CastCustomSpell(target,spellid,&bp,NULL,NULL,true);
+                     }
+                     if(caster->HasAura(85479)) // Jinx rank 2
+                     {
+                         int32 bp = 10;
+                         uint32 spellid = 0;
+                         switch(target->getClass())
+                         {
+                         case CLASS_DEATH_KNIGHT:
+                             spellid = 85541;
+                             break;
+                         case CLASS_HUNTER:
+                             spellid = 85542;
+                             break;
+                         case CLASS_ROGUE:
+                             spellid = 85540;
+                             break;
+                         case CLASS_WARRIOR:
+                             spellid = 85539;
+                             break;
+                         }
+                         if(spellid)
+                             caster->CastCustomSpell(target,spellid,&bp,NULL,NULL,true);
+                     }
+                     else
+                     {
+                         target->RemoveAurasDueToSpell(85541);
+                         target->RemoveAurasDueToSpell(85542);
+                         target->RemoveAurasDueToSpell(85540);
+                         target->RemoveAurasDueToSpell(85539);
+                     }
+                 }
 
                 }
               break;
@@ -1528,24 +1509,24 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
             case SPELLFAMILY_PRIEST:
                 if (!caster)
                     break;
-				if (m_spellInfo->Id == 588) // Inner Fire.
-				{
-					if (caster->HasAura(91724)) // Spell Warding.
-						caster->RemoveAura(91724);
-				}
-				if (m_spellInfo->Id == 47753) // Divine Aegis.
-				{
-					caster->ResetHealingDoneInPastSecs(60);
-				}
-				if (m_spellInfo->Id == 77489) // Echo of Light.
-				{
-					caster->ResetHealingDoneInPastSecs(60);
-				}
-				if (m_spellInfo->Id == 86273) // Echo of Light.
-				{
-					caster->ResetHealingDoneInPastSecs(60);
-				}
-				
+                if (m_spellInfo->Id == 588) // Inner Fire.
+                {
+                    if (caster->HasAura(91724)) // Spell Warding.
+                        caster->RemoveAura(91724);
+                }
+                if (m_spellInfo->Id == 47753) // Divine Aegis.
+                {
+                    caster->ResetHealingDoneInPastSecs(60);
+                }
+                if (m_spellInfo->Id == 77489) // Echo of Light.
+                {
+                    caster->ResetHealingDoneInPastSecs(60);
+                }
+                if (m_spellInfo->Id == 86273) // Echo of Light.
+                {
+                    caster->ResetHealingDoneInPastSecs(60);
+                }
+                
 
                 // Power word: shield
                 if (removeMode == AURA_REMOVE_BY_ENEMY_SPELL && GetSpellInfo()->SpellFamilyFlags[0] & 0x00000001)
@@ -1577,17 +1558,17 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                     }
                 }
                 break;
-			case SPELLFAMILY_WARRIOR:
-			{
-										if (m_spellInfo->Id == 46857) // Trauma.
-										{
-											if (caster->HasAura(30070)) // Blood Frenzy.
-												caster->RemoveAura(30070);
-											if (caster->HasAura(30069)) // Blood Frenzy.
-												caster->RemoveAura(30069);
-										}
-			}
-				break;
+            case SPELLFAMILY_WARRIOR:
+            {
+                                        if (m_spellInfo->Id == 46857) // Trauma.
+                                        {
+                                            if (caster->HasAura(30070)) // Blood Frenzy.
+                                                caster->RemoveAura(30070);
+                                            if (caster->HasAura(30069)) // Blood Frenzy.
+                                                caster->RemoveAura(30069);
+                                        }
+            }
+                break;
             case SPELLFAMILY_ROGUE:
                // Blackjack/Groggy on sap removal
                 if(GetId() == 6770)
@@ -1636,12 +1617,12 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                         caster->EnergizeBySpell(caster, talentId, energy, POWER_ENERGY);        // Hacky too, isn't it ?
                          }
                       }
-			break;
+            break;
             case SPELLFAMILY_PALADIN:
-				if (m_spellInfo->Id == 86273) // Illuminated Healing.
-				{
-					caster->ResetHealingDoneInPastSecs(60);
-				}
+                if (m_spellInfo->Id == 86273) // Illuminated Healing.
+                {
+                    caster->ResetHealingDoneInPastSecs(60);
+                }
                 // Remove the immunity shield marker on Forbearance removal if AW marker is not present
                 if (GetId() == 25771 && target->HasAura(61988) && !target->HasAura(61987))
                     target->RemoveAura(61988);
@@ -1663,41 +1644,41 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                     target->ToPlayer()->RemoveRunesByAuraEffect(GetEffect(0));
                 }
                 break;
-			case SPELLFAMILY_HUNTER:
-				{
-					// Glyph of Freezing Trap
-					if (GetSpellInfo()->SpellFamilyFlags[0] & 0x00000008)
-						if (caster && caster->HasAura(56845))
-							target->CastSpell(target, 61394, true);
-					
-					if(GetId() == 82925) //Master marksman
-					{
-						if(GetStackAmount() >= 5)
-						{
-							caster->CastSpell(caster,82926,true); // Fire!
-							caster->RemoveAurasDueToSpell(82925);
-						}
-					}
-				}
-				break;
-		}
-	}
+            case SPELLFAMILY_HUNTER:
+                {
+                    // Glyph of Freezing Trap
+                    if (GetSpellInfo()->SpellFamilyFlags[0] & 0x00000008)
+                        if (caster && caster->HasAura(56845))
+                            target->CastSpell(target, 61394, true);
+                    
+                    if(GetId() == 82925) //Master marksman
+                    {
+                        if(GetStackAmount() >= 5)
+                        {
+                            caster->CastSpell(caster,82926,true); // Fire!
+                            caster->RemoveAurasDueToSpell(82925);
+                        }
+                    }
+                }
+                break;
+        }
+    }
 
     // mods at aura apply or remove
     switch (GetSpellInfo()->SpellFamilyName)
     {
         case SPELLFAMILY_DRUID:
-		// Solar Eclipse Sunfire check
-		if (GetSpellInfo()->Id == 48517)
-		{
-			if (!caster)
-				return;
-			// Sunfire talent
-			if (apply && caster->HasAura(93401))
-				caster->CastSpell(caster,94338,true); // Moonfire swapper
-			else
-				caster->RemoveAurasDueToSpell(94338);
-		}
+        // Solar Eclipse Sunfire check
+        if (GetSpellInfo()->Id == 48517)
+        {
+            if (!caster)
+                return;
+            // Sunfire talent
+            if (apply && caster->HasAura(93401))
+                caster->CastSpell(caster,94338,true); // Moonfire swapper
+            else
+                caster->RemoveAurasDueToSpell(94338);
+        }
             // Enrage
             if ((GetSpellInfo()->SpellFamilyFlags[0] & 0x80000) && GetSpellInfo()->SpellIconID == 961)
             {
@@ -1706,40 +1687,40 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                         target->CastSpell(target, 70725, true);
                 break;
             }
-				// Faerie Fire (Feral)
-				else if (m_spellInfo->Id == 16857)
-				{
-					// Causes damage and threat in bear form or dire bear form only
-					if (caster->GetShapeshiftForm() != FORM_CAT)
-						caster->CastSpell(target, 60089, true);
-				}
+                // Faerie Fire (Feral)
+                else if (m_spellInfo->Id == 16857)
+                {
+                    // Causes damage and threat in bear form or dire bear form only
+                    if (caster->GetShapeshiftForm() != FORM_CAT)
+                        caster->CastSpell(target, 60089, true);
+                }
             break;
         case SPELLFAMILY_ROGUE:
             // Stealth
             if (GetSpellInfo()->SpellFamilyFlags[0] & 0x00400000)
-			{
-				// Master of subtlety
-				if (AuraEffect const * aurEff = target->GetAuraEffect(31223, 0))
-				{
-					if (!apply)
-						target->CastSpell(target, 31666, true);
-					else
-					{
-						int32 basepoints0 = aurEff->GetAmount();
-						target->CastCustomSpell(target, 31665, &basepoints0, NULL, NULL, true);
-					}
-				}
-				// Overkill
-				if (target->HasAura(58426))
-				{
-					if (!apply)
-						target->CastSpell(target, 58428, true);
-					else
-						target->CastSpell(target, 58427, true);
-				}
-				break;
-			}
-			break;
+            {
+                // Master of subtlety
+                if (AuraEffect const * aurEff = target->GetAuraEffect(31223, 0))
+                {
+                    if (!apply)
+                        target->CastSpell(target, 31666, true);
+                    else
+                    {
+                        int32 basepoints0 = aurEff->GetAmount();
+                        target->CastCustomSpell(target, 31665, &basepoints0, NULL, NULL, true);
+                    }
+                }
+                // Overkill
+                if (target->HasAura(58426))
+                {
+                    if (!apply)
+                        target->CastSpell(target, 58428, true);
+                    else
+                        target->CastSpell(target, 58427, true);
+                }
+                break;
+            }
+            break;
         case SPELLFAMILY_HUNTER:
             switch (GetId())
             {
@@ -1756,6 +1737,34 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                                 owner->RemoveAurasDueToSpell(34471);
                         }
                     }
+                    break;
+                case 35098: // Rapid Killing.
+                {
+                    if (caster->HasAura(53228)) // Rapid Recuperation.
+                    {
+                        int32 amount = 25;
+                        caster->CastCustomSpell(caster, 58883, &amount, NULL, NULL, true);
+                    }
+                    if (caster->HasAura(53232)) // Rapid Recuperation.
+                    {
+                        int32 amount = 50;
+                        caster->CastCustomSpell(caster, 58883, &amount, NULL, NULL, true);
+                    }
+                }
+                    break;
+                case 35099:
+                {
+                    if (caster->HasAura(53228)) // Rapid Recuperation.
+                    {
+                        int32 amount = 25;
+                        caster->CastCustomSpell(caster, 58883, &amount, NULL, NULL, true);
+                    }
+                    if (caster->HasAura(53232)) // Rapid Recuperation.
+                    {
+                        int32 amount = 50;
+                        caster->CastCustomSpell(caster, 58883, &amount, NULL, NULL, true);
+                    }
+                }
                     break;
             }
             break;

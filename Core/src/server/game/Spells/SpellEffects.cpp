@@ -4679,6 +4679,89 @@ void Spell::EffectWeaponDmg(SpellEffIndex effIndex)
 						break;
 					}
 				}
+				case 53209: // Chimera Shot.
+				{
+						m_caster->CastSpell(m_caster, 53353, true);
+						if (unitTarget->GetAura(1978)) // Serpent Sting.
+							unitTarget->GetAura(1978)->RefreshDuration(); // Serpent Sting.
+						
+						if (m_caster->HasAura(53241)) // Marked for Death.
+						{
+
+							if (roll_chance_i(50))
+							{
+								m_caster->CastSpell(unitTarget, 88691, true);
+							}
+						}
+						if (m_caster->HasAura(53243)) // Marked for Death.
+							m_caster->CastSpell(unitTarget, 88691, true);
+					}
+					break;
+				case 3044: // Arcane Shot.
+				{
+							   if (m_caster->HasAura(53241)) // Marked for Death.
+							   {
+
+								   if (roll_chance_i(50))
+								   {
+									   m_caster->CastSpell(unitTarget, 88691, true);
+								   }
+							   }
+							   if (m_caster->HasAura(53243)) // Marked for Death.
+								   m_caster->CastSpell(unitTarget, 88691, true);
+
+							   uint32 chance = 0;
+							   if (m_caster->HasAura(34497)) // Thrill of the Hunt.
+								   chance = 5;
+							   if (m_caster->HasAura(34498)) // Thrill of the Hunt.
+								   chance = 10;
+							   if (m_caster->HasAura(34499)) // Thrill of the Hunt.
+								   chance = 15;
+
+							   if (roll_chance_i(chance))
+							   {
+
+								   int32 amount = 10;
+								   m_caster->CastCustomSpell(m_caster, 34720, &amount, NULL, NULL, true);
+							   }
+				}
+					break;
+				case 53301: // Explosive Shot.
+				{
+							  uint32 chance = 0;
+							  if (m_caster->HasAura(34497)) // Thrill of the Hunt.
+								  chance = 5;
+							  if (m_caster->HasAura(34498)) // Thrill of the Hunt.
+								  chance = 10;
+							  if (m_caster->HasAura(34499)) // Thrill of the Hunt.
+								  chance = 15;
+
+							  if (roll_chance_i(chance))
+							  {
+
+								  int32 amount = 20;
+								  m_caster->CastCustomSpell(m_caster, 34720, &amount, NULL, NULL, true);
+							  }
+				}
+					break;
+				case 3674: // Black Arrow.
+				{
+							 uint32 chance = 0;
+							 if (m_caster->HasAura(34497)) // Thrill of the Hunt.
+								 chance = 5;
+							 if (m_caster->HasAura(34498)) // Thrill of the Hunt.
+								 chance = 10;
+							 if (m_caster->HasAura(34499)) // Thrill of the Hunt.
+								 chance = 15;
+
+							 if (roll_chance_i(chance))
+							 {
+
+								 int32 amount = 14;
+								 m_caster->CastCustomSpell(m_caster, 34720, &amount, NULL, NULL, true);
+							 }
+				}
+					break;
 				case 53351: // Kill Shot.
 				{
 					spell_bonus += int32(0.45f * m_caster->GetTotalAttackPowerValue(RANGED_ATTACK));
@@ -6407,8 +6490,22 @@ void Spell::EffectLeapBack(SpellEffIndex effIndex)
 
     float speedxy = float(m_spellInfo->Effects[effIndex].MiscValue)/10;
     float speedz = float(damage/10);
-    //1891: Disengage
+
     m_caster->JumpTo(speedxy, speedz, m_spellInfo->SpellIconID != 1891);
+	
+	if (m_spellInfo->Id == 781) // Disengage.
+	{
+		if (m_caster->HasAura(83558)) // Posthaste.
+		{
+			int32 speed_increase = 15;
+			m_caster->CastCustomSpell(m_caster, 83559, &speed_increase, NULL, NULL, true);
+		}
+		if (m_caster->HasAura(83560)) // Posthaste.
+		{
+			int32 speed_increase = 30;
+			m_caster->CastCustomSpell(m_caster, 83559, &speed_increase, NULL, NULL, true);
+		}
+	}
 }
 
 void Spell::EffectQuestClear(SpellEffIndex effIndex)

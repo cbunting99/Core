@@ -3826,7 +3826,13 @@ void Spell::finish(bool ok)
 		if (m_caster->HasAura(81340)) // Sudden Doom.
 			m_caster->RemoveAura(81340);
 		break;
-    }
+	case 3045: // Rapid Fire.
+		if (m_caster->HasAura(53228)) // Rapid Recuperation.
+			m_caster->CastSpell(m_caster, 53230, true);
+		if (m_caster->HasAura(53232)) // Rapid Recuperation.
+			m_caster->CastSpell(m_caster, 54227, true);
+		break;
+	}
 }
 
 void Spell::SendCastResult(SpellCastResult result)
