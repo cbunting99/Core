@@ -1717,21 +1717,29 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
         case SPELLFAMILY_ROGUE:
             // Stealth
             if (GetSpellInfo()->SpellFamilyFlags[0] & 0x00400000)
-            {
-                // Master of subtlety
-                if (AuraEffect const* aurEff = target->GetAuraEffect(31223, 0))
-                {
-                    if (!apply)
-                        target->CastSpell(target, 31666, true);
-                    else
-                    {
-                        int32 basepoints0 = aurEff->GetAmount();
-                        target->CastCustomSpell(target, 31665, &basepoints0, NULL, NULL, true);
-                    }
-                }
-                break;
-            }
-            break;
+			{
+				// Master of subtlety
+				if (AuraEffect const * aurEff = target->GetAuraEffect(31223, 0))
+				{
+					if (!apply)
+						target->CastSpell(target, 31666, true);
+					else
+					{
+						int32 basepoints0 = aurEff->GetAmount();
+						target->CastCustomSpell(target, 31665, &basepoints0, NULL, NULL, true);
+					}
+				}
+				// Overkill
+				if (target->HasAura(58426))
+				{
+					if (!apply)
+						target->CastSpell(target, 58428, true);
+					else
+						target->CastSpell(target, 58427, true);
+				}
+				break;
+			}
+			break;
         case SPELLFAMILY_HUNTER:
             switch (GetId())
             {

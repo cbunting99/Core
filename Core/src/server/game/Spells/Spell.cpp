@@ -3822,6 +3822,10 @@ void Spell::finish(bool ok)
 				m_caster->CastSpell(m_caster, 96219, true);
 		}
 		break;
+	case 47541: // Death Coil.
+		if (m_caster->HasAura(81340)) // Sudden Doom.
+			m_caster->RemoveAura(81340);
+		break;
     }
 }
 
