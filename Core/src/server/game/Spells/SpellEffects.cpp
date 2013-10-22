@@ -4726,42 +4726,6 @@ void Spell::EffectWeaponDmg(SpellEffIndex effIndex)
 							   }
 				}
 					break;
-				case 53301: // Explosive Shot.
-				{
-							  uint32 chance = 0;
-							  if (m_caster->HasAura(34497)) // Thrill of the Hunt.
-								  chance = 5;
-							  if (m_caster->HasAura(34498)) // Thrill of the Hunt.
-								  chance = 10;
-							  if (m_caster->HasAura(34499)) // Thrill of the Hunt.
-								  chance = 15;
-
-							  if (roll_chance_i(chance))
-							  {
-
-								  int32 amount = 20;
-								  m_caster->CastCustomSpell(m_caster, 34720, &amount, NULL, NULL, true);
-							  }
-				}
-					break;
-				case 3674: // Black Arrow.
-				{
-							 uint32 chance = 0;
-							 if (m_caster->HasAura(34497)) // Thrill of the Hunt.
-								 chance = 5;
-							 if (m_caster->HasAura(34498)) // Thrill of the Hunt.
-								 chance = 10;
-							 if (m_caster->HasAura(34499)) // Thrill of the Hunt.
-								 chance = 15;
-
-							 if (roll_chance_i(chance))
-							 {
-
-								 int32 amount = 14;
-								 m_caster->CastCustomSpell(m_caster, 34720, &amount, NULL, NULL, true);
-							 }
-				}
-					break;
 				case 53351: // Kill Shot.
 				{
 					spell_bonus += int32(0.45f * m_caster->GetTotalAttackPowerValue(RANGED_ATTACK));

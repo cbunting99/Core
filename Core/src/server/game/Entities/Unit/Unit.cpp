@@ -6650,22 +6650,6 @@ bool Unit::HandleDummyAuraProc(Unit* victim, uint32 damage, AuraEffect* triggere
                     target = this;
                     break;
                 }
-            case 5094: // Posthaste
-               {
-                   triggered_spell_id = 83559;
-                   basepoints0 = triggerAmount;
-                   target = this;
-                   break;
-               }
-                 case 3524: // Marked for Death
-                {
-                    if (!roll_chance_i(triggerAmount))
-                        return false;
-
-                    triggered_spell_id = 88691;
-                    target = victim;
-                    break;
-                }
                 case 3560: // Rapid Recuperation
                 {
                     // This effect only from Rapid Killing (focus regen)
