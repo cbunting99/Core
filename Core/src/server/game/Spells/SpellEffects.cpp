@@ -4598,8 +4598,50 @@ void Spell::EffectWeaponDmg(SpellEffIndex effIndex)
 			switch (m_spellInfo->Id)
 			{
 		    	case 56641: // Steady Shot.
+				{
+
+								if (m_caster->HasAura(83489)) // Termination.
+								{
+									if (unitTarget->HealthBelowPct(25))
+									{
+										int32 bp = 9 + 3;
+										m_caster->CastCustomSpell(m_caster, 77443, &bp, NULL, NULL, true);
+										break;
+									}
+									else
+									{
+										int32 bp = 9;
+										m_caster->CastCustomSpell(m_caster, 77443, &bp, NULL, NULL, true);
+										break;
+									}
+								}
+								if (m_caster->HasAura(83490)) // Termination.
+								{
+									if (unitTarget->HealthBelowPct(25))
+									{
+										int32 bp = 9 + 6;
+										m_caster->CastCustomSpell(m_caster, 77443, &bp, NULL, NULL, true);
+										break;
+									}
+									else
+									{
+										int32 bp = 9;
+										m_caster->CastCustomSpell(m_caster, 77443, &bp, NULL, NULL, true);
+										break;
+									}
+								}
+								else
+								{
+									int32 bp = 9;
+									m_caster->CastCustomSpell(m_caster, 77443, &bp, NULL, NULL, true);
+									break;
+								}
+				}
 		    	case 77767: // Cobra Shot.
 				{
+					if (unitTarget->GetAura(1978)) // Serpent Sting.
+						unitTarget->GetAura(1978)->SetDuration((unitTarget->GetAura(1978)->GetDuration() + 6000), true);
+
 					if (m_caster->HasAura(83489)) // Termination.
 					{
 						if (unitTarget->HealthBelowPct(25))
