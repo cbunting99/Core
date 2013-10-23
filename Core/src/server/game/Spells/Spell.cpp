@@ -3832,6 +3832,11 @@ void Spell::finish(bool ok)
 		if (m_caster->HasAura(53232)) // Rapid Recuperation.
 			m_caster->CastSpell(m_caster, 54227, true);
 		break;
+	case 45477: // Icy Touch.
+	case 49184: // Howling Blast.
+		if (m_caster->HasAura(59052)) // Freezing Fog.
+			m_caster->RemoveAura(59052);
+		break;
 	}
 }
 
