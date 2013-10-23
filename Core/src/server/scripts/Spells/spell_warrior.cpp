@@ -411,44 +411,6 @@ public:
 	}
 };
 
-// 7384, 7887, 11584, 11585 - Overpower
-class spell_warr_overpower : public SpellScriptLoader
-{
-public:
-	spell_warr_overpower() : SpellScriptLoader("spell_warr_overpower") { }
-
-	class spell_warr_overpower_SpellScript : public SpellScript
-	{
-		PrepareSpellScript(spell_warr_overpower_SpellScript);
-
-		void HandleEffect(SpellEffIndex /*effIndex*/)
-		{
-			uint32 spellId = 0;
-			if (GetCaster()->HasAura(SPELL_WARRIOR_UNRELENTING_ASSAULT_RANK_1))
-				spellId = SPELL_WARRIOR_UNRELENTING_ASSAULT_TRIGGER_1;
-			else if (GetCaster()->HasAura(SPELL_WARRIOR_UNRELENTING_ASSAULT_RANK_2))
-				spellId = SPELL_WARRIOR_UNRELENTING_ASSAULT_TRIGGER_2;
-
-			if (!spellId)
-				return;
-
-			if (Player* target = GetHitPlayer())
-				if (target->HasUnitState(UNIT_STATE_CASTING))
-					target->CastSpell(target, spellId, true);
-		}
-
-		void Register()
-		{
-			OnEffectHitTarget += SpellEffectFn(spell_warr_overpower_SpellScript::HandleEffect, EFFECT_0, SPELL_EFFECT_ANY);
-		}
-	};
-
-	SpellScript* GetSpellScript() const
-	{
-		return new spell_warr_overpower_SpellScript();
-	}
-};
-
 // 94009 - Rend
 class spell_warr_rend : public SpellScriptLoader
 {
@@ -464,13 +426,12 @@ public:
 			if (Unit* caster = GetCaster())
 			{
 				canBeRecalculated = false;
-
-				// $0.2 * (($MWB + $mwb) / 2 + $AP / 14 * $MWS) bonus per tick
+				// 0.25*6*((MWB+mwb)/2+AP/14*MWS)
 				float ap = caster->GetTotalAttackPowerValue(BASE_ATTACK);
-				int32 mws = caster->GetAttackTime(BASE_ATTACK);
+				int32 mws = caster->GetAttackTime(BASE_ATTACK) / 1000.0f;
 				float mwbMin = caster->GetWeaponDamageRange(BASE_ATTACK, MINDAMAGE);
 				float mwbMax = caster->GetWeaponDamageRange(BASE_ATTACK, MAXDAMAGE);
-				float mwb = ((mwbMin + mwbMax) / 2 + ap * mws / 14000) * 0.25f;
+				float mwb = 0.25 * 6 * ((mwbMin + mwbMax) / 2 + ap / 14 * mws);
 				amount += int32(caster->ApplyEffectModifiers(GetSpellInfo(), aurEff->GetEffIndex(), mwb * 0.25));
 			}
 		}
@@ -1236,7 +1197,6 @@ void AddSC_warrior_spell_scripts()
 	new spell_warr_improved_spell_reflection();
 	new spell_warr_intimidating_shout();
 	new spell_warr_last_stand();
-	new spell_warr_overpower();
 	new spell_warr_rend();
 	new spell_warr_shattering_throw();
 	new spell_warr_slam();
