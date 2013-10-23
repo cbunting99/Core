@@ -5847,19 +5847,19 @@ void Player::GetDodgeFromAgility(float &diminishing, float &nondiminishing)
 
 float Player::GetSpellCritFromIntellect()
 {
-    uint8 level = getLevel();
-    uint32 pclass = getClass();
+	uint8 level = getLevel();
+	uint32 pclass = getClass();
 
-    if (level > GT_MAX_LEVEL)
-        level = GT_MAX_LEVEL;
+	if (level > GT_MAX_LEVEL)
+		level = GT_MAX_LEVEL;
 
-    GtChanceToSpellCritBaseEntry const* critBase = sGtChanceToSpellCritBaseStore.LookupEntry(pclass - 1);
-    GtChanceToSpellCritEntry const* critRatio = sGtChanceToSpellCritStore.LookupEntry((pclass - 1) * GT_MAX_LEVEL + level - 1);
-    if (critBase == NULL || critRatio == NULL)
-        return 0.0f;
+	GtChanceToSpellCritBaseEntry const* critBase = sGtChanceToSpellCritBaseStore.LookupEntry(pclass - 1);
+	GtChanceToSpellCritEntry const* critRatio = sGtChanceToSpellCritStore.LookupEntry((pclass - 1) * GT_MAX_LEVEL + level - 1);
+	if (critBase == NULL || critRatio == NULL)
+		return 0.0f;
 
-	float spell_critical_hit_chance_from_intellect = critBase->base + GetStat(STAT_INTELLECT) * critRatio->ratio;
-	return spell_critical_hit_chance_from_intellect;
+	float crit = critBase->base + GetStat(STAT_INTELLECT) * critRatio->ratio;
+	return crit * 100.0f;
 }
 
 float Player::GetRatingMultiplier(CombatRating cr) const
