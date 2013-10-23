@@ -8548,10 +8548,9 @@ bool Unit::HandleProcTriggerSpell(Unit* victim, uint32 damage, AuraEffect* trigg
                 return false;
             break;
         }
-        //Lambs to the Slaughter
-        case 84583:
-        case 84587:
-        case 84588:
+        case 84583: // Lambs to the Slaughter.
+        case 84587: // Lambs to the Slaughter.
+        case 84588: // Lambs to the Slaughter.
         {
             if (procSpell->Id == 12294) // Mortal Strike.
             {
