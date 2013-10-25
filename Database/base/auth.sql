@@ -39,8 +39,8 @@ CREATE TABLE IF NOT EXISTS `account` (
 -- Dumping data for table auth.account: ~2 rows (approximately)
 /*!40000 ALTER TABLE `account` DISABLE KEYS */;
 INSERT INTO `account` (`id`, `username`, `sha_pass_hash`, `sessionkey`, `v`, `s`, `email`, `joindate`, `last_ip`, `failed_logins`, `locked`, `last_login`, `online`, `expansion`, `mutetime`, `mutereason`, `muteby`, `locale`, `os`, `recruiter`) VALUES
-	(1, 'J0SK3M', '1352DB2A8EF7CB1F29771041A4B1CD7AD15B09C0', 'A7AAD7DBBFF2EA510706298FB5ED5AB297493BEF20F1A5F4C0B2B69E140E83B1EEA40A2EE308C1D4', '5397E5F02618DE5E75FD7C72172882ADFBCA84DEA903BE58508A7C2F53E5201D', 'DDCC0F5B7E636B21AA7D1D1FAD14FFA39FC18E42B8E06266B688A011726CDC2D', '', '2013-10-19 19:39:41', '80.220.223.232', 0, 0, '2013-10-22 23:41:20', 1, 3, 0, '', '', 0, 'Win', 0),
-	(2, 'RAFIKI', 'E2EC9AF3BC4AD9459885F76E7B7F264BF08EFB46', 'AD775B65DC03214682E8A11EF2268974F445582F33DD06EBF3D8152967284F91C4D7BA2BDA899625', '1D2EE8FDE9A50F8626F1C58D1E36076E8D6F0E32DAE57EF522ABB324EF810585', 'B61E351D96C2699E0D5759099AE9F9C226A844A36A6AB58BBB9D1ACD3A72A529', '', '2013-10-20 00:37:58', '80.220.223.232', 0, 0, '2013-10-22 23:41:24', 1, 3, 0, '', '', 0, 'Win', 0);
+	(1, 'J0SK3M', '1352DB2A8EF7CB1F29771041A4B1CD7AD15B09C0', 'E1E283901F788E73641D90303E517182564C2134C30F7D9B1BFCB0DFE437979DA34DAAD538F28360', '5397E5F02618DE5E75FD7C72172882ADFBCA84DEA903BE58508A7C2F53E5201D', 'DDCC0F5B7E636B21AA7D1D1FAD14FFA39FC18E42B8E06266B688A011726CDC2D', '', '2013-10-19 19:39:41', '80.220.223.232', 0, 0, '2013-10-23 20:36:18', 0, 3, 0, '', '', 0, 'Win', 0),
+	(2, 'RAFIKI', 'E2EC9AF3BC4AD9459885F76E7B7F264BF08EFB46', 'AD775B65DC03214682E8A11EF2268974F445582F33DD06EBF3D8152967284F91C4D7BA2BDA899625', '1D2EE8FDE9A50F8626F1C58D1E36076E8D6F0E32DAE57EF522ABB324EF810585', 'B61E351D96C2699E0D5759099AE9F9C226A844A36A6AB58BBB9D1ACD3A72A529', '', '2013-10-20 00:37:58', '80.220.223.232', 0, 0, '2013-10-22 23:41:24', 0, 3, 0, '', '', 0, 'Win', 0);
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 
@@ -498,7 +498,7 @@ CREATE TABLE IF NOT EXISTS `realmcharacters` (
 -- Dumping data for table auth.realmcharacters: ~2 rows (approximately)
 /*!40000 ALTER TABLE `realmcharacters` DISABLE KEYS */;
 INSERT INTO `realmcharacters` (`realmid`, `acctid`, `numchars`) VALUES
-	(1, 1, 8),
+	(1, 1, 9),
 	(1, 2, 1);
 /*!40000 ALTER TABLE `realmcharacters` ENABLE KEYS */;
 
@@ -524,7 +524,7 @@ CREATE TABLE IF NOT EXISTS `realmlist` (
 -- Dumping data for table auth.realmlist: ~1 rows (approximately)
 /*!40000 ALTER TABLE `realmlist` DISABLE KEYS */;
 INSERT INTO `realmlist` (`id`, `name`, `address`, `localAddress`, `localSubnetMask`, `port`, `icon`, `flag`, `timezone`, `allowedSecurityLevel`, `population`, `gamebuild`) VALUES
-	(1, 'Trinity', 'orion2666.server4you.net', '127.0.0.1', '255.255.255.0', 8085, 1, 0, 8, 0, 0, 15595);
+	(1, 'Trinity', 'orion2666.server4you.net', '127.0.0.1', '255.255.255.0', 8085, 1, 2, 8, 0, 0, 15595);
 /*!40000 ALTER TABLE `realmlist` ENABLE KEYS */;
 
 
@@ -538,7 +538,7 @@ CREATE TABLE IF NOT EXISTS `uptime` (
   PRIMARY KEY (`realmid`,`starttime`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Uptime system';
 
--- Dumping data for table auth.uptime: ~58 rows (approximately)
+-- Dumping data for table auth.uptime: ~69 rows (approximately)
 /*!40000 ALTER TABLE `uptime` DISABLE KEYS */;
 INSERT INTO `uptime` (`realmid`, `starttime`, `uptime`, `maxplayers`, `revision`) VALUES
 	(1, 1382200255, 0, 0, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
@@ -598,7 +598,18 @@ INSERT INTO `uptime` (`realmid`, `starttime`, `uptime`, `maxplayers`, `revision`
 	(1, 1382471804, 0, 0, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
 	(1, 1382472412, 0, 0, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
 	(1, 1382472844, 1200, 2, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
-	(1, 1382474492, 0, 0, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)');
+	(1, 1382474492, 0, 0, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
+	(1, 1382521932, 7200, 1, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
+	(1, 1382529691, 0, 0, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
+	(1, 1382530269, 600, 1, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
+	(1, 1382531213, 0, 0, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
+	(1, 1382531674, 0, 0, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
+	(1, 1382531782, 0, 0, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
+	(1, 1382531924, 1800, 1, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
+	(1, 1382534344, 1800, 1, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
+	(1, 1382536513, 1800, 1, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
+	(1, 1382539158, 10201, 1, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)'),
+	(1, 1382549710, 187801, 1, 'TrinityCore rev. Hezekiah Custom Core Branch 4.3.4 (Win32, Release)');
 /*!40000 ALTER TABLE `uptime` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
