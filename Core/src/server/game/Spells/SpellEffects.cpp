@@ -2534,7 +2534,7 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
     
     if (!m_spellAura || !unitTarget)
         return;
-    
+
     switch (m_spellInfo->SpellFamilyName)
     {
     case SPELLFAMILY_ROGUE:
@@ -2600,6 +2600,48 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
             if (m_caster->HasAura(105876)) // Item - Shaman T13 Restoration 4P Bonus (Spiritwalker's Grace).
                 m_caster->CastSpell(m_caster, 105877, true); // Timewalker.
         }
+    }
+        break;
+    case SPELLFAMILY_DRUID:
+    {
+                              if (m_spellInfo->Id == 1850) // Dash.
+                              {
+                                  if (m_caster->HasAura(17002)) // Feral Swiftness.
+                                  {
+                                      if (roll_chance_i(50))
+                                          m_caster->CastSpell(m_caster, 97985, true);
+                                  }
+                                  if (m_caster->HasAura(24866)) // Feral Swiftness.
+                                  {
+                                      m_caster->CastSpell(m_caster, 97985, true);
+                                  }
+                              }
+
+                              if (m_spellInfo->Id == 77761) // Stampeding Roar.
+                              {
+                                  if (m_caster->HasAura(17002)) // Feral Swiftness.
+                                  {
+                                      if (roll_chance_i(50))
+                                          m_caster->CastSpell(m_caster, 97985, true);
+                                  }
+                                  if (m_caster->HasAura(24866)) // Feral Swiftness.
+                                  {
+                                      m_caster->CastSpell(m_caster, 97985, true);
+                                  }
+                              }
+
+                              if (m_spellInfo->Id == 77764) // Stampeding Roar.
+                              {
+                                  if (m_caster->HasAura(17002)) // Feral Swiftness.
+                                  {
+                                      if (roll_chance_i(50))
+                                          m_caster->CastSpell(m_caster, 97985, true);
+                                  }
+                                  if (m_caster->HasAura(24866)) // Feral Swiftness.
+                                  {
+                                      m_caster->CastSpell(m_caster, 97985, true);
+                                  }
+                              }
     }
         break;
     }

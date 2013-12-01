@@ -1210,17 +1210,28 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
             case SPELLFAMILY_DRUID:
                 if (!caster)
                     break;
-         if (GetId() == 48517) // Sunfire Swapper
-        if (caster->HasAura(94338))
-               GetEffect(2)->SetAmount(93402);
-                // Rejuvenation
-                if (GetSpellInfo()->SpellFamilyFlags[0] & 0x10 && GetEffect(EFFECT_0))
+                if (GetId() == 48517) // Sunfire Swapper
+                {
+                    if (caster->HasAura(94338))
+                        GetEffect(2)->SetAmount(93402);
+                }
+                if (GetSpellInfo()->SpellFamilyFlags[0] & 0x10 && GetEffect(EFFECT_0)) // Rejuvenation.
                 {
                     // Druid T8 Restoration 4P Bonus
                     if (caster->HasAura(64760))
                     {
                         int32 heal = GetEffect(EFFECT_0)->GetAmount();
                         caster->CastCustomSpell(target, 64801, &heal, NULL, NULL, true, NULL, GetEffect(EFFECT_0));
+                    }
+                }
+                if (GetId() == 91565) // Faerie Fire.
+                {
+                    if (caster->m_lastSpellCasted == 16857) // Faerie Fire (Feral).
+                    {
+                        if (caster->HasAura(16858)) // Feral Aggression.
+                            SetCharges(2);
+                        if (caster->HasAura(16859)) // Feral Aggression.
+                            SetCharges(3);
                     }
                 }
                 break;
