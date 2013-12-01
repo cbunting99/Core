@@ -2531,75 +2531,90 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
 {
     if (effectHandleMode != SPELL_EFFECT_HANDLE_HIT_TARGET)
         return;
-
+    
     if (!m_spellAura || !unitTarget)
         return;
+    
+    switch (m_spellInfo->SpellFamilyName)
+    {
+    case SPELLFAMILY_ROGUE:
+        if (m_spellInfo->SpellFamilyFlags[0] == 0x8)    //Gouge
+            m_caster->CastSpell(unitTarget, 1776, true);
+        return;
 
-  switch (m_spellInfo->SpellFamilyName) 
+    case SPELLFAMILY_PRIEST:
     {
-        case SPELLFAMILY_ROGUE:
-        {
-            if (m_spellInfo->SpellFamilyFlags[0] == 0x8)    //Gouge
-            {
-                m_caster->CastSpell(unitTarget, 1776, true);
-                return;
-            }
-        }
-		case SPELLFAMILY_PRIEST:
-		{
-								   if (m_spellInfo->Id == 588) // Inner Fire.
-								   {
-									   int32 amount = 0;
-									   if (m_caster->HasAura(14747)) // Inner Sanctum.
-									   {
-										   amount = 2;
-										   m_caster->CastCustomSpell(m_caster, 91724, &amount, NULL, NULL, true); // Spell Warding.
-									   }
-									   if (m_caster->HasAura(14770)) // Inner Sanctum.
-									   {
-										   amount = 4;
-										   m_caster->CastCustomSpell(m_caster, 91724, &amount, NULL, NULL, true); // Spell Warding.
-									   }
-									   if (m_caster->HasAura(14771)) // Inner Sanctum.
-									   {
-										   amount = 6;
-										   m_caster->CastCustomSpell(m_caster, 91724, &amount, NULL, NULL, true); // Spell Warding.
-									   }
-								  }
-			// Chakra
-			// Solves the problem that a player has more than one chakra buff active at the same time
-			if(m_spellInfo->Id == 14751 /*Chakra*/) 
-                      {
-				if(m_caster->HasAura(81208 /*Chakra: Serenity*/))
-					m_caster->RemoveAura(81208);
-				else if(m_caster->HasAura(81206 /*Chakra: Sanctuary*/))
-					m_caster->RemoveAura(81206);
-				else if(m_caster->HasAura(81209 /*Chakra: Chastise*/))
-					m_caster->RemoveAura(81209);
-			}
-	     // Chakra: Sanctuary is now applied on caster if he casts Prayer of Mending and has Aura Chakra
-            if (m_caster->HasAura(14751 /*Chakra*/) && m_spellInfo->Id == 41635 /*Prayer of Mending */)
-			m_caster->CastSpell(m_caster, 81206, true); // Chakra: Sanctuary   
-     	    // Priest: Handles the refresh of renew if the caster casts a direct Heal and has Chakra: Serenity    
-    	   if (m_caster->HasAura(81208) /*Chakra: Serenity*/)    
-    	   {    
-     		  if(unitTarget->HasAura(139 /*(Renew)*/) && (m_spellInfo->Id == 2050 /*(Heal)*/ || m_spellInfo->Id == 2060 /*(Greater Heal)*/ ||     
-      			   m_spellInfo->Id == 2061 /*(Flash Heal)*/ || m_spellInfo->Id == 32546 /*(Binding Heal)*/))    
-      		  unitTarget->GetAura(139)->RefreshDuration(); // Refresh Renew on Target        
-     	   }      
-       }    
-       break;
+                               if (m_spellInfo->Id == 588) // Inner Fire.
+                               {
+                                   int32 amount = 0;
+                                   if (m_caster->HasAura(14747)) // Inner Sanctum.
+                                   {
+                                       amount = 2;
+                                       m_caster->CastCustomSpell(m_caster, 91724, &amount, NULL, NULL, true); // Spell Warding.
+                                   }
+                                   if (m_caster->HasAura(14770)) // Inner Sanctum.
+                                   {
+                                       amount = 4;
+                                       m_caster->CastCustomSpell(m_caster, 91724, &amount, NULL, NULL, true); // Spell Warding.
+                                   }
+                                   if (m_caster->HasAura(14771)) // Inner Sanctum.
+                                   {
+                                       amount = 6;
+                                       m_caster->CastCustomSpell(m_caster, 91724, &amount, NULL, NULL, true); // Spell Warding.
+                                   }
+                               }
+                               if (m_spellInfo->Id == 14751) // Chakra.
+                               {
+                                   if (m_caster->HasAura(81208)) // Chakra: Serenity.
+                                       m_caster->RemoveAura(81208);
+                                   if (m_caster->HasAura(81206)) // Chakra: Sanctuary.
+                                       m_caster->RemoveAura(81206);
+                                   if (m_caster->HasAura(81209)) // Chakra: Chastise.
+                                       m_caster->RemoveAura(81209);
+                               }
+                               if (m_spellInfo->Id == 41635) // Prayer of Mending.
+                               {
+                                   if (m_caster->HasAura(14751)) // Chakra.
+                                       m_caster->CastSpell(m_caster, 81206, true); // Chakra: Sanctuary   
+                               }
+                               if (m_caster->HasAura(81208)) // Chakra: Serenity.
+                               {
+                                   if (unitTarget->HasAura(139)) // Renew.
+                                       unitTarget->GetAura(139)->RefreshDuration();
+                                   if (m_spellInfo->Id == 2050) // Heal.
+                                       unitTarget->GetAura(139)->RefreshDuration();
+                                   if (m_spellInfo->Id == 2060) // Greater Heal.
+                                       unitTarget->GetAura(139)->RefreshDuration();
+                                   if (m_spellInfo->Id == 2061) // Flash Heal.
+                                       unitTarget->GetAura(139)->RefreshDuration();
+                                   if (m_spellInfo->Id == 32546) // Binding Heal.
+                                       unitTarget->GetAura(139)->RefreshDuration();
+                               }
     }
-    switch (m_spellAura->GetId()) 
+        break;
+
+    case SPELLFAMILY_SHAMAN:
     {
+        if (m_spellInfo->Id == 79206)  // Spiritwalker's Grace
+        {
+            if (m_caster->HasAura(105876)) // Item - Shaman T13 Restoration 4P Bonus (Spiritwalker's Grace).
+                m_caster->CastSpell(m_caster, 105877, true); // Timewalker.
+        }
+    }
+        break;
+    }
+
+        switch (m_spellAura->GetId())
+        {
         case 38177: // Blackwhelp Net
             if (unitTarget->GetEntry() != 21387) //Wyrmcult Blackwhelp
-            return;
+                return;
         case 85673: // Word of Glory
             if (!m_caster->HasAura(93466)) return;
-    }
-    ASSERT(unitTarget == m_spellAura->GetOwner());
-    m_spellAura->_ApplyEffectForTargets(effIndex);
+        }
+
+        ASSERT(unitTarget == m_spellAura->GetOwner());
+        m_spellAura->_ApplyEffectForTargets(effIndex);
 }
 
 void Spell::EffectApplyAreaAura(SpellEffIndex effIndex)
