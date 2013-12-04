@@ -2609,11 +2609,11 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
                                   if (m_caster->HasAura(17002)) // Feral Swiftness.
                                   {
                                       if (roll_chance_i(50))
-                                          m_caster->CastSpell(m_caster, 97985, true);
+                                          m_caster->RemoveMovementImpairingAuras();
                                   }
                                   if (m_caster->HasAura(24866)) // Feral Swiftness.
                                   {
-                                      m_caster->CastSpell(m_caster, 97985, true);
+                                      m_caster->RemoveMovementImpairingAuras();
                                   }
                               }
 
@@ -2622,11 +2622,11 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
                                   if (m_caster->HasAura(17002)) // Feral Swiftness.
                                   {
                                       if (roll_chance_i(50))
-                                          m_caster->CastSpell(m_caster, 97985, true);
+                                          m_caster->RemoveMovementImpairingAuras();
                                   }
                                   if (m_caster->HasAura(24866)) // Feral Swiftness.
                                   {
-                                      m_caster->CastSpell(m_caster, 97985, true);
+                                      m_caster->RemoveMovementImpairingAuras();
                                   }
                               }
 
@@ -2635,11 +2635,11 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
                                   if (m_caster->HasAura(17002)) // Feral Swiftness.
                                   {
                                       if (roll_chance_i(50))
-                                          m_caster->CastSpell(m_caster, 97985, true);
+                                          m_caster->RemoveMovementImpairingAuras();
                                   }
                                   if (m_caster->HasAura(24866)) // Feral Swiftness.
                                   {
-                                      m_caster->CastSpell(m_caster, 97985, true);
+                                      m_caster->RemoveMovementImpairingAuras();
                                   }
                               }
     }
@@ -2653,6 +2653,14 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
                 return;
         case 85673: // Word of Glory
             if (!m_caster->HasAura(93466)) return;
+        case 91565: // Faerie Fire.
+            if (m_caster->m_lastSpellCasted == 16857) // Faerie Fire (Feral).
+            {
+                if (m_caster->HasAura(16858)) // Feral Aggression.
+                    unitTarget->GetAura(91565)->SetCharges(2);
+                if (m_caster->HasAura(16859)) // Feral Aggression.
+                    unitTarget->GetAura(91565)->SetCharges(3);
+            }
         }
 
         ASSERT(unitTarget == m_spellAura->GetOwner());
@@ -2837,7 +2845,7 @@ void Spell::EffectHeal(SpellEffIndex /*effIndex*/)
             if (caster->GetTypeId() == TYPEID_PLAYER)
             {
                 float mastery = caster->ToPlayer()->GetFloatValue(PLAYER_MASTERY);
-                int32 bp = int32(addhealth * ((1.25f * mastery) / 100)) / 6;
+                int32 bp = int32(addhealth * 0.1f) + ((1.25f * mastery) / 100) / 6;
                 if (AuraEffect const* eol = unitTarget->GetAuraEffect(77489, 0))
                     bp += eol->GetAmount() / 6;
                 if (uint32(bp * 6) >= unitTarget->CountPctFromMaxHealth(10))
@@ -2878,39 +2886,34 @@ void Spell::EffectHeal(SpellEffIndex /*effIndex*/)
         
         if (caster->HasAura(47509)) // Divine Aegis.
         {
-            if (!m_spellInfo->Id == 596) // Prayer of Healing.
-            {
-                int32 bp = (addhealth * 0.1f);
+                            int32 bp = (addhealth * 0.1f);
                 if (AuraEffect const* eol = unitTarget->GetAuraEffect(47753, 0)) // Divine Aegis.
                     bp += eol->GetAmount();
                 if (bp >= ((caster->GetMaxHealth() / 10) * 4)) // Greater or equal.
                     bp = ((caster->GetMaxHealth() / 10) * 4); // 40% of maxinium health is the maxinium absord amount.
                 caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
-            }
+            
         }
         if (caster->HasAura(47511)) // Divine Aegis.
         {
-            if (!m_spellInfo->Id == 596) // Prayer of Healing.
-            {
                 int32 bp = (addhealth * 0.2f);
                 if (AuraEffect const* eol = unitTarget->GetAuraEffect(47753, 0)) // Divine Aegis.
                     bp += eol->GetAmount();
                 if (bp >= ((caster->GetMaxHealth() / 10) * 4)) // Greater or equal.
                     bp = ((caster->GetMaxHealth() / 10) * 4); // 40% of maxinium health is the maxinium absord amount.
                 caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
-            }
+            
         }
         if (caster->HasAura(47515)) // Divine Aegis.
         {
-            if (!m_spellInfo->Id == 596) // Prayer of Healing.
-            {
+        
                 int32 bp = (addhealth * 0.3f);
                 if (AuraEffect const* eol = unitTarget->GetAuraEffect(47753, 0)) // Divine Aegis.
                     bp += eol->GetAmount();
                 if (bp >= ((caster->GetMaxHealth() / 10) * 4)) // Greater or equal.
                     bp = ((caster->GetMaxHealth() / 10) * 4); // 40% of maxinium health is the maxinium absord amount.
                 caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
-            }
+            
         }
         
 
@@ -2919,12 +2922,12 @@ void Spell::EffectHeal(SpellEffIndex /*effIndex*/)
 			if (caster->GetTypeId() == TYPEID_PLAYER)
 			{
                 float mastery = caster->ToPlayer()->GetFloatValue(PLAYER_MASTERY);
-                int32 bp = int32(addhealth * ((1.25f * mastery) / 100)) / 6;
-                if (AuraEffect const* eol = unitTarget->GetAuraEffect(77489, 0))
-                    bp += eol->GetAmount() / 6;
+                int32 bp = int32(addhealth * 0.12f) + ((1.5f * mastery) / 100);
+                if (AuraEffect const* eol = unitTarget->GetAuraEffect(86273, 0))
+                    bp += eol->GetAmount();
                 if (bp >= (caster->GetMaxHealth() / 3))
                     bp = (caster->GetMaxHealth() / 3);
-                caster->CastCustomSpell(unitTarget, 77489, &bp, NULL, NULL, true);
+                caster->CastCustomSpell(unitTarget, 86273, &bp, NULL, NULL, true);
 			}
 		}
 

@@ -1224,16 +1224,6 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                         caster->CastCustomSpell(target, 64801, &heal, NULL, NULL, true, NULL, GetEffect(EFFECT_0));
                     }
                 }
-                if (GetId() == 91565) // Faerie Fire.
-                {
-                    if (caster->m_lastSpellCasted == 16857) // Faerie Fire (Feral).
-                    {
-                        if (caster->HasAura(16858)) // Feral Aggression.
-                            SetCharges(2);
-                        if (caster->HasAura(16859)) // Feral Aggression.
-                            SetCharges(3);
-                    }
-                }
                 break;
             case SPELLFAMILY_MAGE:
                 if (!caster)
