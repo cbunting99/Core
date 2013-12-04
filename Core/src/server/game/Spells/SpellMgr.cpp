@@ -3775,6 +3775,16 @@ void SpellMgr::LoadSpellInfoCorrections()
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_NOT_NEED_SHAPESHIFT;
 				spellInfo->AttributesEx8 |= SPELL_ATTR8_AURA_SEND_AMOUNT;
                 break;
+            case 109849: // Cleansing Flames
+                spellInfo->Effects[EFFECT_0].TargetA = SpellImplicitTargetInfo(TARGET_UNIT_CONE_ALLY);
+                spellInfo->Effects[EFFECT_0].TargetB = SpellImplicitTargetInfo();
+                spellInfo->Attributes |= SPELL_ATTR0_ABILITY;
+                spellInfo->Attributes |= SPELL_ATTR0_NOT_SHAPESHIFT;
+                spellInfo->Attributes |= SPELL_ATTR1_CANT_BE_REDIRECTED;
+                spellInfo->Attributes |= SPELL_ATTR1_CANT_BE_REFLECTED;
+                spellInfo->AttributesEx4 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                spellInfo->Effects[EFFECT_0].RadiusEntry = sSpellRadiusStore.LookupEntry(EFFECT_RADIUS_12_YARDS);
+                break;
             default:
                 break;
         }
