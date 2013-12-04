@@ -2657,9 +2657,9 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
             if (m_caster->m_lastSpellCasted == 16857) // Faerie Fire (Feral).
             {
                 if (m_caster->HasAura(16858)) // Feral Aggression.
-                    unitTarget->GetAura(91565)->SetCharges(2);
+                    unitTarget->GetAura(91565)->SetStackAmount(2);
                 if (m_caster->HasAura(16859)) // Feral Aggression.
-                    unitTarget->GetAura(91565)->SetCharges(3);
+                    unitTarget->GetAura(91565)->SetStackAmount(3);
             }
         }
 
@@ -2883,46 +2883,14 @@ void Spell::EffectHeal(SpellEffIndex /*effIndex*/)
                 caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
 			}
 		}
-        
-        if (caster->HasAura(47509)) // Divine Aegis.
-        {
-                            int32 bp = (addhealth * 0.1f);
-                if (AuraEffect const* eol = unitTarget->GetAuraEffect(47753, 0)) // Divine Aegis.
-                    bp += eol->GetAmount();
-                if (bp >= ((caster->GetMaxHealth() / 10) * 4)) // Greater or equal.
-                    bp = ((caster->GetMaxHealth() / 10) * 4); // 40% of maxinium health is the maxinium absord amount.
-                caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
-            
-        }
-        if (caster->HasAura(47511)) // Divine Aegis.
-        {
-                int32 bp = (addhealth * 0.2f);
-                if (AuraEffect const* eol = unitTarget->GetAuraEffect(47753, 0)) // Divine Aegis.
-                    bp += eol->GetAmount();
-                if (bp >= ((caster->GetMaxHealth() / 10) * 4)) // Greater or equal.
-                    bp = ((caster->GetMaxHealth() / 10) * 4); // 40% of maxinium health is the maxinium absord amount.
-                caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
-            
-        }
-        if (caster->HasAura(47515)) // Divine Aegis.
-        {
-        
-                int32 bp = (addhealth * 0.3f);
-                if (AuraEffect const* eol = unitTarget->GetAuraEffect(47753, 0)) // Divine Aegis.
-                    bp += eol->GetAmount();
-                if (bp >= ((caster->GetMaxHealth() / 10) * 4)) // Greater or equal.
-                    bp = ((caster->GetMaxHealth() / 10) * 4); // 40% of maxinium health is the maxinium absord amount.
-                caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
-            
-        }
-        
 
 		if (caster->HasAura(76669)) // Illuminated Healing.
 		{
 			if (caster->GetTypeId() == TYPEID_PLAYER)
 			{
                 float mastery = caster->ToPlayer()->GetFloatValue(PLAYER_MASTERY);
-                int32 bp = int32(addhealth * 0.12f) + ((1.5f * mastery) / 100);
+                int32 mastery_amount = (1.5f * mastery) / 100;
+                int32 bp = int32(addhealth * 0.12f) + mastery_amount;
                 if (AuraEffect const* eol = unitTarget->GetAuraEffect(86273, 0))
                     bp += eol->GetAmount();
                 if (bp >= (caster->GetMaxHealth() / 3))
