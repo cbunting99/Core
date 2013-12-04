@@ -1303,6 +1303,19 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                         int32 heal = glyph->GetAmount() * GetEffect(0)->GetAmount()/100;
                         caster->CastCustomSpell(GetUnitOwner(), 56160, &heal, NULL, NULL, true, 0, GetEffect(0));
                     }
+                    if (caster->HasAura(77484)) // Shield Discipline.
+                    {
+                        float mastery = caster->GetFloatValue(PLAYER_MASTERY);
+                        GetEffect(0)->SetAmount(GetEffect(0)->GetAmount() + int32(GetEffect(0)->GetAmount() * (float(mastery * 2.5f) / 100)));
+                    }
+                }
+                else if (m_spellInfo->Id == 47753) // Divine Aegis.
+                {
+                    if (caster->HasAura(77484)) // Shield Discipline.
+                    {
+                        float mastery = caster->GetFloatValue(PLAYER_MASTERY);
+                        GetEffect(0)->SetAmount(GetEffect(0)->GetAmount() + int32(GetEffect(0)->GetAmount() * (float(mastery * 2.5f) / 100)));
+                    }
                 }
                 break;
             case SPELLFAMILY_WARLOCK:
@@ -1525,19 +1538,6 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                     if (caster->HasAura(91724)) // Spell Warding.
                         caster->RemoveAura(91724);
                 }
-                if (m_spellInfo->Id == 47753) // Divine Aegis.
-                {
-                    caster->ResetHealingDoneInPastSecs(60);
-                }
-                if (m_spellInfo->Id == 77489) // Echo of Light.
-                {
-                    caster->ResetHealingDoneInPastSecs(60);
-                }
-                if (m_spellInfo->Id == 86273) // Echo of Light.
-                {
-                    caster->ResetHealingDoneInPastSecs(60);
-                }
-                
 
                 // Power word: shield
                 if (removeMode == AURA_REMOVE_BY_ENEMY_SPELL && GetSpellInfo()->SpellFamilyFlags[0] & 0x00000001)

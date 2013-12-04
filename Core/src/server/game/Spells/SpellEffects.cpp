@@ -2823,65 +2823,122 @@ void Spell::EffectHeal(SpellEffIndex /*effIndex*/)
 
 			addhealth += damageAmount;
 		}
-		if (m_caster->HasAura(77485)) // Echo of Light.
-		{
-			if (m_caster->GetTypeId() == TYPEID_PLAYER)
-			{
-				
-					float mastery = m_caster->ToPlayer()->GetFloatValue(PLAYER_MASTERY);
-					int32 mastery_amount = ((1.25f * mastery) / 100);
-					int32 direct_amount = ((addhealth * 0.10f) + (addhealth * mastery_amount)) + ((m_caster->ToPlayer()->GetHealingDoneInPastSecs(15) * 0.10f) + (m_caster->ToPlayer()->GetHealingDoneInPastSecs(15) * mastery_amount));
-					int32 total_amount = direct_amount;
-					caster->CastCustomSpell(unitTarget, 77489, &total_amount, NULL, NULL, true);
-				
-			}
-		}
+        if (caster->HasAura(77226)) // Deep Healing.
+        {
+            if (caster->GetTypeId() == TYPEID_PLAYER)
+            {
+                float mastery = caster->ToPlayer()->GetFloatValue(PLAYER_MASTERY);
+                float healthPct = unitTarget->GetHealthPct();
+                addhealth += int32(addhealth * (((100 - (healthPct - 1)) / 100) * (mastery * 0.03f)));
+            }
+        }
+        if (caster->HasAura(77485)) // Echo of Light.
+        {
+            if (caster->GetTypeId() == TYPEID_PLAYER)
+            {
+                float mastery = caster->ToPlayer()->GetFloatValue(PLAYER_MASTERY);
+                int32 bp = int32(addhealth * ((1.25f * mastery) / 100)) / 6;
+                if (AuraEffect const* eol = unitTarget->GetAuraEffect(77489, 0))
+                    bp += eol->GetAmount() / 6;
+                if (uint32(bp * 6) >= unitTarget->CountPctFromMaxHealth(10))
+                    bp = unitTarget->CountPctFromMaxHealth(10) / 6;
+                caster->CastCustomSpell(unitTarget, 77489, &bp, NULL, NULL, true);
+            }
+        }
 		if (m_spellInfo->Id == 596) // Prayer of Healing.
 		{
 			if (caster->HasAura(47509)) // Divine Aegis.
 			{
-				int32 maxinum_amount = ((caster->GetMaxHealth() / 10) * 4);
-				int32 direct_amount = ((addhealth * 0.1f) + (m_caster->ToPlayer()->GetHealingDoneInPastSecs(60) * 0.1f));
-				int32 total_amount = direct_amount;
-				if (total_amount >= maxinum_amount) // Greater or equal.
-					total_amount = maxinum_amount; // 40% of maxinium health is the maxinium absord amount.
-				caster->CastCustomSpell(caster, 47753, &total_amount, NULL, NULL, true);
+                int32 bp = (addhealth * 0.1f);
+                if (AuraEffect const* eol = unitTarget->GetAuraEffect(47753, 0)) // Divine Aegis.
+                    bp += eol->GetAmount();
+                if (bp >= ((caster->GetMaxHealth() / 10) * 4)) // Greater or equal.
+                    bp = ((caster->GetMaxHealth() / 10) * 4); // 40% of maxinium health is the maxinium absord amount.
+				caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
 			}
 			if (caster->HasAura(47511)) // Divine Aegis.
 			{
-				int32 maxinum_amount = ((caster->GetMaxHealth() / 10) * 4);
-				int32 direct_amount = ((addhealth * 0.2f) + (m_caster->ToPlayer()->GetHealingDoneInPastSecs(60) * 0.2f));
-				int32 total_amount = direct_amount;
-				if (total_amount >= maxinum_amount) // Greater or equal.
-					total_amount = maxinum_amount; // 40% of maxinium health is the maxinium absord amount.
-				caster->CastCustomSpell(caster, 47753, &total_amount, NULL, NULL, true);
+                int32 bp = (addhealth * 0.2f);
+                if (AuraEffect const* eol = unitTarget->GetAuraEffect(47753, 0)) // Divine Aegis.
+                    bp += eol->GetAmount();
+                if (bp >= ((caster->GetMaxHealth() / 10) * 4)) // Greater or equal.
+                    bp = ((caster->GetMaxHealth() / 10) * 4); // 40% of maxinium health is the maxinium absord amount.
+                caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
 			}
 			if (caster->HasAura(47515)) // Divine Aegis.
 			{
-				int32 maxinum_amount = ((caster->GetMaxHealth() / 10) * 4);
-				int32 direct_amount = ((addhealth * 0.3f) + (m_caster->ToPlayer()->GetHealingDoneInPastSecs(60) * 0.3f));
-				int32 total_amount = direct_amount;
-				if (total_amount >= maxinum_amount) // Greater or equal.
-					total_amount = maxinum_amount; // 40% of maxinium health is the maxinium absord amount.
-				caster->CastCustomSpell(caster, 47753, &total_amount, NULL, NULL, true);
+                int32 bp = (addhealth * 0.3f);
+                if (AuraEffect const* eol = unitTarget->GetAuraEffect(47753, 0)) // Divine Aegis.
+                    bp += eol->GetAmount();
+                if (bp >= ((caster->GetMaxHealth() / 10) * 4)) // Greater or equal.
+                    bp = ((caster->GetMaxHealth() / 10) * 4); // 40% of maxinium health is the maxinium absord amount.
+                caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
 			}
 		}
+        
+        if (caster->HasAura(47509)) // Divine Aegis.
+        {
+            if (!m_spellInfo->Id == 596) // Prayer of Healing.
+            {
+                int32 bp = (addhealth * 0.1f);
+                if (AuraEffect const* eol = unitTarget->GetAuraEffect(47753, 0)) // Divine Aegis.
+                    bp += eol->GetAmount();
+                if (bp >= ((caster->GetMaxHealth() / 10) * 4)) // Greater or equal.
+                    bp = ((caster->GetMaxHealth() / 10) * 4); // 40% of maxinium health is the maxinium absord amount.
+                caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
+            }
+        }
+        if (caster->HasAura(47511)) // Divine Aegis.
+        {
+            if (!m_spellInfo->Id == 596) // Prayer of Healing.
+            {
+                int32 bp = (addhealth * 0.2f);
+                if (AuraEffect const* eol = unitTarget->GetAuraEffect(47753, 0)) // Divine Aegis.
+                    bp += eol->GetAmount();
+                if (bp >= ((caster->GetMaxHealth() / 10) * 4)) // Greater or equal.
+                    bp = ((caster->GetMaxHealth() / 10) * 4); // 40% of maxinium health is the maxinium absord amount.
+                caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
+            }
+        }
+        if (caster->HasAura(47515)) // Divine Aegis.
+        {
+            if (!m_spellInfo->Id == 596) // Prayer of Healing.
+            {
+                int32 bp = (addhealth * 0.3f);
+                if (AuraEffect const* eol = unitTarget->GetAuraEffect(47753, 0)) // Divine Aegis.
+                    bp += eol->GetAmount();
+                if (bp >= ((caster->GetMaxHealth() / 10) * 4)) // Greater or equal.
+                    bp = ((caster->GetMaxHealth() / 10) * 4); // 40% of maxinium health is the maxinium absord amount.
+                caster->CastCustomSpell(caster, 47753, &bp, NULL, NULL, true);
+            }
+        }
+        
 
 		if (caster->HasAura(76669)) // Illuminated Healing.
 		{
 			if (caster->GetTypeId() == TYPEID_PLAYER)
 			{
-				float mastery = m_caster->ToPlayer()->GetFloatValue(PLAYER_MASTERY);
-				int32 maxinum_amount = (caster->GetMaxHealth() / 3);
-				int32 mastery_amount = ((1.5f * mastery) / 100);
-				int32 direct_amount = ((addhealth * 0.12f) + (addhealth * mastery_amount)) + ((m_caster->ToPlayer()->GetHealingDoneInPastSecs(60) * 0.12f) + (m_caster->ToPlayer()->GetHealingDoneInPastSecs(15) * mastery_amount));
-				int32 total_amount = direct_amount;
-				if (total_amount >= maxinum_amount)
-					total_amount = maxinum_amount;
-				caster->CastCustomSpell(unitTarget, 86273, &total_amount, NULL, NULL, true);
+                float mastery = caster->ToPlayer()->GetFloatValue(PLAYER_MASTERY);
+                int32 bp = int32(addhealth * ((1.25f * mastery) / 100)) / 6;
+                if (AuraEffect const* eol = unitTarget->GetAuraEffect(77489, 0))
+                    bp += eol->GetAmount() / 6;
+                if (bp >= (caster->GetMaxHealth() / 3))
+                    bp = (caster->GetMaxHealth() / 3);
+                caster->CastCustomSpell(unitTarget, 77489, &bp, NULL, NULL, true);
 			}
 		}
 
+        if (m_caster->HasAura(76613)) // Frostburn.
+        {
+            if (unitTarget->isFrozen())
+            {
+                if (m_caster->GetTypeId() == TYPEID_PLAYER)
+                {
+                    float mastery = m_caster->ToPlayer()->GetFloatValue(PLAYER_MASTERY);
+                    damage += int32(damage * (mastery * 2.5f) / 100);
+                }
+            }
+        }
         m_damage -= addhealth;
         // Runic Healing Injector (heal increased by 25% for engineers - 3.2.0 patch change)
         if (m_spellInfo->Id == 67489)
