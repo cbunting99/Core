@@ -45,14 +45,14 @@ enum ShamanSpells
     SPELL_SHAMAN_LAVA_FLOWS_R1                  = 51480,
     SPELL_SHAMAN_LAVA_FLOWS_TRIGGERED_R1        = 65264,
     SPELL_SHAMAN_SATED                          = 57724,
-	SPELL_SHAMAN_EARTH_GRASP                    = 51483,
+    SPELL_SHAMAN_EARTH_GRASP                    = 51483,
     SPELL_SHAMAN_TOTEM_EARTHBIND_EARTHGRAB      = 64695,
     SPELL_SHAMAN_TOTEM_EARTHBIND_TOTEM          = 6474,
     SPELL_SHAMAN_TOTEM_EARTHEN_POWER            = 59566,
     SPELL_SHAMAN_TOTEM_MANA_TIDE                = 16191,
     SPELL_SHAMAN_TOTEM_HEALING_STREAM_HEAL      = 52042,
 
-    SPELL_SHAMAN_EARTH_SHOCK		            = 8042,
+    SPELL_SHAMAN_EARTH_SHOCK                    = 8042,
     SPELL_SHAMAN_FULMINATION                    = 88766,
     SPELL_SHAMAN_FULMINATION_TRIGGERED          = 88767,
     SPELL_SHAMAN_FULMINATION_INFO               = 95774,
@@ -256,23 +256,29 @@ class spell_sha_earth_shield : public SpellScriptLoader
                 }
             }
 
+            bool CheckProc(ProcEventInfo& /*eventInfo*/)
+            {
+                if (Player* player = GetTarget()->ToPlayer())
+                {
+                    if (player->HasSpellCooldown(SPELL_SHAMAN_EARTH_SHIELD_HEAL))
+                        return false;
+                }
+                return true;
+            }
+            
             void HandleProc(AuraEffect const* aurEff, ProcEventInfo& /*eventInfo*/)
             {
                 PreventDefaultAction();
-
-                //! HACK due to currenct proc system implementation
-                if (Player* player = GetTarget()->ToPlayer())
-                    if (player->HasSpellCooldown(SPELL_SHAMAN_EARTH_SHIELD_HEAL))
-                        return;
-
+                
                 GetTarget()->CastCustomSpell(SPELL_SHAMAN_EARTH_SHIELD_HEAL, SPELLVALUE_BASE_POINT0, aurEff->GetAmount(), GetTarget(), true, NULL, aurEff, GetCasterGUID());
-
+                
                 if (Player* player = GetTarget()->ToPlayer())
                     player->AddSpellCooldown(SPELL_SHAMAN_EARTH_SHIELD_HEAL, 0, time(NULL) + 3);
             }
 
             void Register()
             {
+                DoCheckProc += AuraCheckProcFn(spell_sha_earth_shield_AuraScript::CheckProc);
                 DoEffectCalcAmount += AuraEffectCalcAmountFn(spell_sha_earth_shield_AuraScript::CalculateAmount, EFFECT_0, SPELL_AURA_DUMMY);
                 OnEffectProc += AuraEffectProcFn(spell_sha_earth_shield_AuraScript::HandleProc, EFFECT_0, SPELL_AURA_DUMMY);
             }
@@ -320,10 +326,10 @@ class spell_sha_earthbind_totem : public SpellScriptLoader
                 if (!owner)
                     return;
                 // Earth's Grasp
-				if (AuraEffect* aurEff = owner->GetAuraEffectOfRankedSpell(SPELL_SHAMAN_EARTH_GRASP, EFFECT_1))
+                if (AuraEffect* aurEff = owner->GetAuraEffectOfRankedSpell(SPELL_SHAMAN_EARTH_GRASP, EFFECT_1))
                 {
                     if (roll_chance_i(aurEff->GetAmount()))
-						GetCaster()->CastSpell(GetCaster(), SPELL_SHAMAN_TOTEM_EARTHBIND_EARTHGRAB, false);
+                        GetCaster()->CastSpell(GetCaster(), SPELL_SHAMAN_TOTEM_EARTHBIND_EARTHGRAB, false);
                 }
             }
 
@@ -627,10 +633,10 @@ class spell_sha_mana_tide : public SpellScriptLoader
 
             void CalculateAmount(AuraEffect const* /*aurEff*/, int32 &amount, bool & /*canBeRecalculated*/)
             {
-                // 400% of caster's spirit
+                // 200% of caster's spirit
                 // Caster is totem, we need owner
                 if (Unit* owner = GetCaster()->GetOwner())
-                    amount = int32(owner->GetStat(STAT_SPIRIT) * 4.0f);
+                    amount = int32(owner->GetStat(STAT_SPIRIT) * 2.0f);
             }
 
             void Register()
@@ -812,8 +818,8 @@ public:
         {
             if (!sSpellStore.LookupEntry(SPELL_SHAMAN_EARTHQUAKE_KNOCKDOWN))
                 return false;
-	        if (!sSpellStore.LookupEntry(SPELL_SHAMAN_EARTHQUAKE_DAMAGE))
-		        return false;
+            if (!sSpellStore.LookupEntry(SPELL_SHAMAN_EARTHQUAKE_DAMAGE))
+                return false;
             return true;
         }
 
@@ -823,11 +829,11 @@ public:
                     return;
 
                 if (DynamicObject* dynObj = GetCaster()->GetDynObject(61882))
-	            {
+                {
                     GetCaster()->CastSpell(dynObj->GetPositionX(), dynObj->GetPositionY(), dynObj->GetPositionZ(), SPELL_SHAMAN_EARTHQUAKE_DAMAGE, true);
-		            if (roll_chance_i(10))
+                    if (roll_chance_i(10))
                         GetCaster()->CastSpell(dynObj->GetPositionX(), dynObj->GetPositionY(), dynObj->GetPositionZ(), SPELL_SHAMAN_EARTHQUAKE_KNOCKDOWN, true);
-	            }
+                }
         }
 
         void Register()
@@ -888,7 +894,7 @@ public:
     spell_sha_fulmination() : SpellScriptLoader ("spell_sha_fulmination") {}
 
     class spell_sha_fulmination_SpellScript: public SpellScript 
-	{
+    {
         PrepareSpellScript(spell_sha_fulmination_SpellScript)
 
         void HandleFulmination(SpellEffIndex effIndex) 
@@ -929,7 +935,7 @@ public:
     };
 
     SpellScript *GetSpellScript() const 
-	{
+    {
         return new spell_sha_fulmination_SpellScript();
     }
 };
@@ -977,7 +983,7 @@ class spell_sha_frozen_power : public SpellScriptLoader
                 Unit* caster = GetCaster();
 
                 if (Unit* target = GetHitUnit())
-		        {
+                {
                     if (caster->HasAura(63373))
                         if (roll_chance_i(50))
                             if (caster->GetDistance(target) > 15.0f || !caster->IsWithinDistInMap(target, 15.0f))
@@ -986,7 +992,7 @@ class spell_sha_frozen_power : public SpellScriptLoader
                     if (caster->HasAura(63374))
                         if (caster->GetDistance(target) > 15.0f || !caster->IsWithinDistInMap(target, 15.0f))
                             caster->CastSpell(target, SPELL_SHAMAN_FROZEN_POWER_TRIGGER, true);
-		        }
+                }
             }
 
             void Register()

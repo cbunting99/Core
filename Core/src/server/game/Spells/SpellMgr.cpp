@@ -3785,6 +3785,9 @@ void SpellMgr::LoadSpellInfoCorrections()
                 spellInfo->AttributesEx4 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
                 spellInfo->Effects[EFFECT_0].RadiusEntry = sSpellRadiusStore.LookupEntry(EFFECT_RADIUS_12_YARDS);
                 break;
+			case 76577: // Smoke Bomb.
+				spellInfo->Attributes |= SPELL_ATTR0_NEGATIVE_1;
+				break;
             default:
                 break;
         }

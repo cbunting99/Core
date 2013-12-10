@@ -4848,6 +4848,12 @@ void Spell::HandleEffects(Unit* pUnitTarget, Item* pItemTarget, GameObject* pGOT
 
 SpellCastResult Spell::CheckCast(bool strict)
 {
+	if (m_caster->HasAura(76577) && !m_caster->getVictim()->HasAura(76577))
+		return SPELL_FAILED_VISION_OBSCURED;
+
+	if (m_caster->getVictim()->HasAura(76577) && !m_caster->HasAura(76577))
+		return SPELL_FAILED_VISION_OBSCURED;
+
     // check death state
     if (!m_caster->isAlive() && !(m_spellInfo->Attributes & SPELL_ATTR0_PASSIVE) && !((m_spellInfo->Attributes & SPELL_ATTR0_CASTABLE_WHILE_DEAD) || (IsTriggered() && !m_triggeredByAuraSpell)))
         return SPELL_FAILED_CASTER_DEAD;
