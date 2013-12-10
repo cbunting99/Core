@@ -3794,16 +3794,29 @@ void SpellMgr::LoadSpellInfoCorrections()
 
         switch (spellInfo->SpellFamilyName)
         {
-            case SPELLFAMILY_PALADIN:
-                // Seals of the Pure should affect Seal of Righteousness
-                if (spellInfo->SpellIconID == 25 && spellInfo->Attributes & SPELL_ATTR0_PASSIVE)
-                    spellInfo->Effects[EFFECT_0].SpellClassMask[1] |= 0x20000000;
-                break;
-            case SPELLFAMILY_DEATHKNIGHT:
-                // Icy Touch - extend FamilyFlags (unused value) for Sigil of the Frozen Conscience to use
-                if (spellInfo->SpellIconID == 2721 && spellInfo->SpellFamilyFlags[0] & 0x2)
-                    spellInfo->SpellFamilyFlags[0] |= 0x40;
-                break;
+		case SPELLFAMILY_WARRIOR:
+			// Shout
+			if (spellInfo->SpellFamilyFlags[0] & 0x20000 || spellInfo->SpellFamilyFlags[1] & 0x20)
+				spellInfo->AttributesCu |= SPELL_ATTR0_CU_AURA_CC;
+			break;
+		case SPELLFAMILY_DRUID:
+			// Starfall Target Selection
+			if (spellInfo->SpellFamilyFlags[2] & 0x100)
+				spellInfo->MaxAffectedTargets = 2;
+			// Roar
+			else if (spellInfo->SpellFamilyFlags[0] & 0x8)
+				spellInfo->AttributesCu |= SPELL_ATTR0_CU_AURA_CC;
+			break;
+		case SPELLFAMILY_PALADIN:
+			// Seals of the Pure should affect Seal of Righteousness
+			if (spellInfo->SpellIconID == 25 && spellInfo->Attributes & SPELL_ATTR0_PASSIVE)
+				spellInfo->Effects[0].SpellClassMask[1] |= 0x20000000;
+			break;
+		case SPELLFAMILY_DEATHKNIGHT:
+			// Icy Touch - extend FamilyFlags (unused value) for Sigil of the Frozen Conscience to use
+			if (spellInfo->SpellIconID == 2721 && spellInfo->SpellFamilyFlags[0] & 0x2)
+				spellInfo->SpellFamilyFlags[0] |= 0x40;
+			break;
         }
     }
 

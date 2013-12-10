@@ -1599,36 +1599,52 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
             }
            break;
         }
-       
         case SPELLFAMILY_PRIEST:
         {
-            if(m_spellInfo->Id == 21562) // Power Word : Fortitude
-            {
-                if (m_caster->GetTypeId() == TYPEID_PLAYER)
-                {
-                    std::list<Unit*> PartyMembers;
-                    m_caster->GetPartyMembers(PartyMembers);
-                    if(PartyMembers.size() > 1)
-                        m_caster->CastSpell(unitTarget, 79105, true); // Power Word : Fortitude (Raid)
-                    else
-                        m_caster->CastSpell(unitTarget, 79104, true); // Power Word : Fortitude (Caster)
-                }
+		    if(m_spellInfo->Id == 21562) // Power Word: Fortitude.
+			{
+				if (m_caster->GetTypeId() == TYPEID_PLAYER)
+				{
+					std::list<Unit*> PartyMembers;
+					m_caster->GetPartyMembers(PartyMembers);
+					bool Continue = false;
+					uint32 player = 0;
+					for (std::list<Unit*>::iterator itr = PartyMembers.begin(); itr != PartyMembers.end(); ++itr)
+					{
+						++player;
+						if (Continue == false && player > 1)
+							Continue = true;
+					}
+					if (Continue == true)
+						m_caster->CastSpell(unitTarget, 79105, true); // Power Word: Fortitude.
+					else
+						m_caster->CastSpell(unitTarget, 79104, true); // Power Word: Fortitude.
+				}
                 break;
             }
-            if(m_spellInfo->Id == 27683) // Shadow Protection
+            if(m_spellInfo->Id == 27683) // Shadow Protection.
             {
-                if (m_caster->GetTypeId() == TYPEID_PLAYER)
-                {
-                    std::list<Unit*> PartyMembers;
-                    m_caster->GetPartyMembers(PartyMembers);
-                    if(PartyMembers.size() > 1)
-                        m_caster->CastSpell(unitTarget, 79107, true); // Shadow Protection (For all)
-                    else
-                        m_caster->CastSpell(unitTarget, 79106, true); // Shadow Protection (Only for caster)
-                }
-            }
-          break;
-        }
+				if (m_caster->GetTypeId() == TYPEID_PLAYER)
+				{
+					std::list<Unit*> PartyMembers;
+					m_caster->GetPartyMembers(PartyMembers);
+					bool Continue = false;
+					uint32 player = 0;
+					for (std::list<Unit*>::iterator itr = PartyMembers.begin(); itr != PartyMembers.end(); ++itr)
+					{
+						++player;
+						if (Continue == false && player > 1)
+							Continue = true;
+					}
+					if (Continue == true)
+						m_caster->CastSpell(unitTarget, 79107, true); // Shadow Protection.
+					else
+						m_caster->CastSpell(unitTarget, 79106, true); // Shadow Protection.
+				}
+				break;
+			}
+			break;
+		}
 		case SPELLFAMILY_MAGE:
 		{
 								 switch (m_spellInfo->Id)
@@ -1865,28 +1881,6 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
                 // Cleansing Totem Effect
                 if (unitTarget)
                     m_caster->CastCustomSpell(unitTarget, 52025, NULL, &bp1, NULL, true, NULL, NULL, m_originalCasterGUID);
-                return;
-            }
-			// Healing Stream Totem
-            if (m_spellInfo->SpellFamilyFlags[0] & SPELLFAMILYFLAG_SHAMAN_HEALING_STREAM)
-            {
-                if (!unitTarget)
-                    return;
- 
-                if (Unit* owner = m_caster->GetOwner())
-                {
-                    if (m_triggeredByAuraSpell)
-                        damage = int32(owner->SpellHealingBonusDone(unitTarget, m_triggeredByAuraSpell, damage, HEAL));
- 
-                    // Restorative Totems
-                    if (AuraEffect* dummy = owner->GetAuraEffect(SPELL_AURA_DUMMY, SPELLFAMILY_SHAMAN, 338, 1))
-                        AddPct(damage, dummy->GetAmount());
- 
-                    // Glyph of Healing Stream Totem
-                    if (AuraEffect const* aurEff = owner->GetAuraEffect(55456, EFFECT_0))
-                        AddPct(damage, aurEff->GetAmount());
-                }
-                m_caster->CastCustomSpell(unitTarget, 52042, &damage, 0, 0, true, 0, 0, m_originalCasterGUID);
                 return;
             }
             // Mana Spring Totem
