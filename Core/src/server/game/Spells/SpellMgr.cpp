@@ -3765,6 +3765,9 @@ void SpellMgr::LoadSpellInfoCorrections()
             case 5420: // Tree of Life (Passive)
                 spellInfo->Stances = 1 << (FORM_TREE - 1);
                 break;
+			case 49376: // Feral Charge (Cat Form)
+				spellInfo->AttributesEx3 &= ~SPELL_ATTR3_CANT_TRIGGER_PROC;
+				break;
             case 88819: // Daybreak (proc)
                 spellInfo->ProcCharges = 1;
                 break;

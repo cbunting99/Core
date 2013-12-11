@@ -29,39 +29,45 @@
 
 enum DruidSpells
 {
-    SPELL_DRUID_WRATH                       = 5176,
-    SPELL_DRUID_STARFIRE                    = 2912,
-    SPELL_DRUID_STARSURGE                   = 78674,
-    SPELL_DRUID_ECLIPSE_GENERAL_ENERGIZE    = 89265,
-    SPELL_DRUID_STARSURGE_ENERGIZE          = 86605,
-    SPELL_DRUID_LUNAR_ECLIPSE_MARKER        = 67484, // Will make the yellow arrow on eclipse bar point to the blue side (lunar)
-    SPELL_DRUID_SOLAR_ECLIPSE_MARKER        = 67483, // Will make the yellow arrow on eclipse bar point to the yellow side (solar)
-    SPELL_DRUID_SOLAR_ECLIPSE               = 48517,
-    SPELL_DRUID_LUNAR_ECLIPSE               = 48518,
-    SPELL_DRUID_ENRAGE_MOD_DAMAGE           = 51185,
-    SPELL_DRUID_GLYPH_OF_TYPHOON            = 62135,
-    SPELL_DRUID_IDOL_OF_FERAL_SHADOWS       = 34241,
-    SPELL_DRUID_IDOL_OF_WORSHIP             = 60774,
-    SPELL_DRUID_INCREASED_MOONFIRE_DURATION = 38414,
-    SPELL_DRUID_KING_OF_THE_JUNGLE          = 48492,
-    SPELL_DRUID_LIFEBLOOM_ENERGIZE          = 64372,
-    SPELL_DRUID_LIFEBLOOM_FINAL_HEAL        = 33778,
-    SPELL_DRUID_LIVING_SEED_HEAL            = 48503,
-    SPELL_DRUID_LIVING_SEED_PROC            = 48504,
-    SPELL_DRUID_NATURES_SPLENDOR            = 57865,
-    SPELL_DRUID_SURVIVAL_INSTINCTS          = 50322,
-    SPELL_DRUID_SAVAGE_ROAR                 = 62071,
-    SPELL_DRUID_TIGER_S_FURY_ENERGIZE       = 51178,
-    SPELL_DRUID_ITEM_T8_BALANCE_RELIC       = 64950,
-    SPELL_DRUID_NPC_WILD_MUSHROOM           = 47649,
-    SPELL_DRUID_NPC_FUNGAL_GROWTH_1         = 43497,
-    SPELL_DRUID_NPC_FUNGAL_GROWTH_2         = 43484,
-    SPELL_DRUID_TALENT_FUNGAL_GROWTH_1      = 78788,
-    SPELL_DRUID_TALENT_FUNGAL_GROWTH_2      = 78789,
-    SPELL_DRUID_SPELL_FUNGAL_GROWTH_1       = 81291,
-    SPELL_DRUID_SPELL_FUNGAL_GROWTH_2       = 81283,
-    SPELL_DRUID_SPELL_WILD_MUSHROOM_SUICIDE = 92853,
-    SPELL_DRUID_SPELL_WILD_MUSHROOM_DAMAGE  = 78777
+	SPELL_DRUID_WRATH = 5176,
+	SPELL_DRUID_STARFIRE = 2912,
+	SPELL_DRUID_STARSURGE = 78674,
+	SPELL_DRUID_ECLIPSE_GENERAL_ENERGIZE = 89265,
+	SPELL_DRUID_STARSURGE_ENERGIZE = 86605,
+	SPELL_DRUID_LUNAR_ECLIPSE_MARKER = 67484, // Will make the yellow arrow on eclipse bar point to the blue side (lunar)
+	SPELL_DRUID_SOLAR_ECLIPSE_MARKER = 67483, // Will make the yellow arrow on eclipse bar point to the yellow side (solar)
+	SPELL_DRUID_SOLAR_ECLIPSE = 48517,
+	SPELL_DRUID_LUNAR_ECLIPSE = 48518,
+	SPELL_DRUID_ENRAGE_MOD_DAMAGE = 51185,
+	SPELL_DRUID_FERAL_CHARGE_BEAR = 16979,
+	SPELL_DRUID_FERAL_CHARGE_CAT = 49376,
+	SPELL_DRUID_GLYPH_OF_INNERVATE = 54833,
+	SPELL_DRUID_GLYPH_OF_STARFIRE = 54846,
+	SPELL_DRUID_GLYPH_OF_TYPHOON = 62135,
+	SPELL_DRUID_IDOL_OF_FERAL_SHADOWS = 34241,
+	SPELL_DRUID_IDOL_OF_WORSHIP = 60774,
+	SPELL_DRUID_INCREASED_MOONFIRE_DURATION = 38414,
+	SPELL_DRUID_ITEM_T8_BALANCE_RELIC = 64950,
+	SPELL_DRUID_KING_OF_THE_JUNGLE = 48492,
+	SPELL_DRUID_LIFEBLOOM_ENERGIZE = 64372,
+	SPELL_DRUID_LIFEBLOOM_FINAL_HEAL = 33778,
+	SPELL_DRUID_LIVING_SEED_HEAL = 48503,
+	SPELL_DRUID_LIVING_SEED_PROC = 48504,
+	SPELL_DRUID_SURVIVAL_INSTINCTS = 50322,
+	SPELL_DRUID_SAVAGE_ROAR = 62071,
+	SPELL_DRUID_STAMPEDE_BAER_RANK_1 = 81016,
+	SPELL_DRUID_STAMPEDE_CAT_RANK_1 = 81021,
+	SPELL_DRUID_STAMPEDE_CAT_STATE = 109881,
+	SPELL_DRUID_TIGER_S_FURY_ENERGIZE = 51178,
+	SPELL_DRUID_NPC_WILD_MUSHROOM = 47649,
+	SPELL_DRUID_NPC_FUNGAL_GROWTH_1 = 43497,
+	SPELL_DRUID_NPC_FUNGAL_GROWTH_2 = 43484,
+	SPELL_DRUID_TALENT_FUNGAL_GROWTH_1 = 78788,
+	SPELL_DRUID_TALENT_FUNGAL_GROWTH_2 = 78789,
+	SPELL_DRUID_SPELL_FUNGAL_GROWTH_1 = 81291,
+	SPELL_DRUID_SPELL_FUNGAL_GROWTH_2 = 81283,
+	SPELL_DRUID_SPELL_WILD_MUSHROOM_SUICIDE = 92853,
+	SPELL_DRUID_SPELL_WILD_MUSHROOM_DAMAGE = 78777
 };
 
 // 2912, 5176, 78674 - Starfire, Wrath, and Starsurge
@@ -243,7 +249,7 @@ class spell_dru_glyph_of_starfire : public SpellScriptLoader
 
             bool Validate(SpellInfo const* /*spellInfo*/)
             {
-                if (!sSpellMgr->GetSpellInfo(SPELL_DRUID_INCREASED_MOONFIRE_DURATION) || !sSpellMgr->GetSpellInfo(SPELL_DRUID_NATURES_SPLENDOR))
+                if (!sSpellMgr->GetSpellInfo(SPELL_DRUID_INCREASED_MOONFIRE_DURATION))
                     return false;
                 return true;
             }
@@ -259,8 +265,6 @@ class spell_dru_glyph_of_starfire : public SpellScriptLoader
                         uint32 countMin = aura->GetMaxDuration();
                         uint32 countMax = aura->GetSpellInfo()->GetMaxDuration() + 9000;
                         if (caster->HasAura(SPELL_DRUID_INCREASED_MOONFIRE_DURATION))
-                            countMax += 3000;
-                        if (caster->HasAura(SPELL_DRUID_NATURES_SPLENDOR))
                             countMax += 3000;
 
                         if (countMin < countMax)
@@ -901,6 +905,65 @@ class spell_dru_starfall_dummy : public SpellScriptLoader
         }
 };
 
+// -78892 - Stampede
+class spell_dru_stampede : public SpellScriptLoader
+{
+public:
+	spell_dru_stampede() : SpellScriptLoader("spell_dru_stampede") { }
+
+	class spell_dru_stampede_AuraScript : public AuraScript
+	{
+		PrepareAuraScript(spell_dru_stampede_AuraScript);
+
+		bool Validate(SpellInfo const* /*spellInfo*/)
+		{
+			if (!sSpellMgr->GetSpellInfo(SPELL_DRUID_STAMPEDE_BAER_RANK_1) ||
+			!sSpellMgr->GetSpellInfo(SPELL_DRUID_STAMPEDE_CAT_RANK_1) ||
+			!sSpellMgr->GetSpellInfo(SPELL_DRUID_STAMPEDE_CAT_STATE) ||
+			!sSpellMgr->GetSpellInfo(SPELL_DRUID_FERAL_CHARGE_CAT) ||
+			!sSpellMgr->GetSpellInfo(SPELL_DRUID_FERAL_CHARGE_BEAR))
+			return false;
+			return true;
+		}
+
+		bool CheckProc(ProcEventInfo& eventInfo)
+		{
+			return true;
+		}
+
+		void HandleEffectCatProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
+		{
+			PreventDefaultAction();
+			if (GetTarget()->GetShapeshiftForm() != FORM_CAT || eventInfo.GetDamageInfo()->GetSpellInfo()->Id != SPELL_DRUID_FERAL_CHARGE_CAT)
+				return;
+
+			GetTarget()->CastSpell(GetTarget(), sSpellMgr->GetSpellWithRank(SPELL_DRUID_STAMPEDE_CAT_RANK_1, GetSpellInfo()->GetRank()), true, NULL, aurEff);
+			GetTarget()->CastSpell(GetTarget(), SPELL_DRUID_STAMPEDE_CAT_STATE, true, NULL, aurEff);
+		}
+
+		void HandleEffectBearProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
+		{
+			PreventDefaultAction();
+			if (GetTarget()->GetShapeshiftForm() != FORM_BEAR || eventInfo.GetDamageInfo()->GetSpellInfo()->Id != SPELL_DRUID_FERAL_CHARGE_BEAR)
+				return;
+
+			GetTarget()->CastSpell(GetTarget(), sSpellMgr->GetSpellWithRank(SPELL_DRUID_STAMPEDE_BAER_RANK_1, GetSpellInfo()->GetRank()), true, NULL, aurEff);
+		}
+
+		void Register()
+		{
+			DoCheckProc += AuraCheckProcFn(spell_dru_stampede_AuraScript::CheckProc);
+			OnEffectProc += AuraEffectProcFn(spell_dru_stampede_AuraScript::HandleEffectCatProc, EFFECT_0, SPELL_AURA_DUMMY);
+			OnEffectProc += AuraEffectProcFn(spell_dru_stampede_AuraScript::HandleEffectBearProc, EFFECT_1, SPELL_AURA_DUMMY);
+		}
+	};
+
+	AuraScript* GetAuraScript() const
+	{
+		return new spell_dru_stampede_AuraScript();
+	}
+};
+
 // 61336 - Survival Instincts
 class spell_dru_survival_instincts : public SpellScriptLoader
 {
@@ -1410,4 +1473,5 @@ void AddSC_druid_spell_scripts()
     new spell_dru_t10_restoration_4p_bonus();
     new spell_dru_wild_mushroom();
     new spell_dru_wild_mushroom_detonate();
+	new spell_dru_stampede();
 }
