@@ -1662,6 +1662,16 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                     }
                 }
                 break;
+            case SPELLFAMILY_DRUID:
+                if (GetId() == 5217)
+                {
+                    if (caster)
+                    {
+                        caster->RemoveAura(80886); // Primal Madness.
+                        caster->RemoveAura(80879); // Primal Madness.
+                    }
+                }
+                break;
         }
     }
 
@@ -1767,47 +1777,47 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                     }
                 }
                     break;
-				case 53301: // Explosive Shot.
-				{ 
-					uint32 chance = 0;
-					if (caster->HasAura(34497)) // Thrill of the Hunt.
-						chance = 5;
-					if (caster->HasAura(34498)) // Thrill of the Hunt.
-						chance = 10;
-					if (caster->HasAura(34499)) // Thrill of the Hunt.
-						chance = 15;
+                case 53301: // Explosive Shot.
+                { 
+                    uint32 chance = 0;
+                    if (caster->HasAura(34497)) // Thrill of the Hunt.
+                        chance = 5;
+                    if (caster->HasAura(34498)) // Thrill of the Hunt.
+                        chance = 10;
+                    if (caster->HasAura(34499)) // Thrill of the Hunt.
+                        chance = 15;
 
-									if (roll_chance_i(chance))
-									{
+                                    if (roll_chance_i(chance))
+                                    {
 
-										int32 amount = 20;
-										caster->CastCustomSpell(caster, 34720, &amount, NULL, NULL, true);
-									}
-								}
-								
-				
-					break;
-				case 3674: // Black Arrow.
-				{
+                                        int32 amount = 20;
+                                        caster->CastCustomSpell(caster, 34720, &amount, NULL, NULL, true);
+                                    }
+                                }
+                                
+                
+                    break;
+                case 3674: // Black Arrow.
+                {
 
-							   uint32 chance = 0;
-							   if (caster->HasAura(34497)) // Thrill of the Hunt.
-								   chance = 5;
-							   if (caster->HasAura(34498)) // Thrill of the Hunt.
-								   chance = 10;
-							   if (caster->HasAura(34499)) // Thrill of the Hunt.
-								   chance = 15;
+                               uint32 chance = 0;
+                               if (caster->HasAura(34497)) // Thrill of the Hunt.
+                                   chance = 5;
+                               if (caster->HasAura(34498)) // Thrill of the Hunt.
+                                   chance = 10;
+                               if (caster->HasAura(34499)) // Thrill of the Hunt.
+                                   chance = 15;
 
-							   if (roll_chance_i(chance))
-							   {
+                               if (roll_chance_i(chance))
+                               {
 
-								   int32 amount = 14;
-								   caster->CastCustomSpell(caster, 34720, &amount, NULL, NULL, true);
-							   }
-				}
-							   
-				
-					break;
+                                   int32 amount = 14;
+                                   caster->CastCustomSpell(caster, 34720, &amount, NULL, NULL, true);
+                               }
+                }
+                               
+                
+                    break;
             }
             break;
         case SPELLFAMILY_PALADIN:

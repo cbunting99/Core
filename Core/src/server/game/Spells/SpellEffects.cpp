@@ -2649,7 +2649,7 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
 								  }
 							  }
 
-							  if (m_spellInfo->Id == 50259) // Feral Charge.
+							  if (m_spellInfo->Id == 49376) // Feral Charge.
 							  {
 								  if (m_caster->HasAura(78892)) // Stampede.
 								  {
