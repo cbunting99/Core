@@ -2636,6 +2636,70 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
                                       m_caster->RemoveMovementImpairingAuras();
                                   }
                               }
+
+							  if (m_spellInfo->Id == 16979) // Feral Charge.
+							  {
+								  if (m_caster->HasAura(78892)) // Stampede.
+								  {
+									  m_caster->CastSpell(m_caster, 81016, true);
+								  }
+								  if (m_caster->HasAura(78893)) // Stampede.
+								  {
+									  m_caster->CastSpell(m_caster, 81017, true);
+								  }
+							  }
+
+							  if (m_spellInfo->Id == 49376) // Feral Charge.
+							  {
+								  if (m_caster->HasAura(78892)) // Stampede.
+								  {
+									  m_caster->CastSpell(m_caster, 81021, true);
+								  }
+								  if (m_caster->HasAura(78893)) // Stampede.
+								  {
+									  m_caster->CastSpell(m_caster, 81022, true);
+								  }
+							  }
+							  if (m_spellInfo->Id == 5217) // Tiger's Fury.
+							  {
+								  if (m_caster->HasAura(80317)) // Primal Madness.
+									  m_caster->CastSpell(m_caster, 80886, true);
+								  if (m_caster->HasAura(80316)) // Primal Madness.
+									  m_caster->CastSpell(m_caster, 80879, true);
+								  if (m_caster->HasAura(48492)) // King of the Jungle.
+								  {
+									  int32 bp = 20;
+									  m_caster->CastCustomSpell(m_caster, 51178, &bp, NULL, NULL, true);
+								  }
+								  if (m_caster->HasAura(48494)) // King of the Jungle.
+								  {
+									  int32 bp = 40;
+									  m_caster->CastCustomSpell(m_caster, 51178, &bp, NULL, NULL, true);
+								  }
+								  if (m_caster->HasAura(48495)) // King of the Jungle.
+								  {
+									  int32 bp = 60;
+									  m_caster->CastCustomSpell(m_caster, 51178, &bp, NULL, NULL, true);
+								  }
+							  }
+							  if (m_spellInfo->Id == 5229) // Enrage.
+							  {
+								  if (m_caster->HasAura(48492)) // King of the Jungle.
+								  {
+									  int32 bp = 5;
+									  m_caster->CastCustomSpell(m_caster, 51185, &bp, NULL, NULL, true);
+								  }
+								  if (m_caster->HasAura(48494)) // King of the Jungle.
+								  {
+									  int32 bp = 10;
+									  m_caster->CastCustomSpell(m_caster, 51185, &bp, NULL, NULL, true);
+								  }
+								  if (m_caster->HasAura(48495)) // King of the Jungle.
+								  {
+									  int32 bp = 15;
+									  m_caster->CastCustomSpell(m_caster, 51185, &bp, NULL, NULL, true);
+								  }
+
     }
         break;
     }
