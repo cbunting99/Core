@@ -1343,6 +1343,19 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                         uaff->RefreshDuration();
             }
         }
+	   if (GetId() == 50259) // Feral charge, cat form
+	   {
+		   if (caster->HasAura(78892)) // Stampede rank 1
+		   {
+			   caster->CastSpell(caster, 89140, true); // lol
+			   caster->CastSpell(caster, 81021, true);
+		   }
+		   if (caster->HasAura(78893)) // Stampede rank 2
+		   {
+			   caster->CastSpell(caster, 81022, true);
+			   caster->CastSpell(caster, 89140, true); // lol
+		   }
+	   }
             if(GetId() == 17877 || GetId() == 6353 || GetId() == 50796) // Shadowburn, Soul Fire, Chaos Bolt
             {
                 if(caster->HasAura(30293)) // Soul Leech 1

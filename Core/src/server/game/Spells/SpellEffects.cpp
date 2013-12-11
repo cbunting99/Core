@@ -2648,20 +2648,6 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
 									  m_caster->CastSpell(m_caster, 81017, true);
 								  }
 							  }
-
-							  if (m_spellInfo->Id == 49376) // Feral Charge.
-							  {
-								  if (m_caster->HasAura(78892)) // Stampede.
-								  {
-									  m_caster->CastSpell(m_caster, 81021, true);
-									  m_caster->CastSpell(m_caster,89140,true);
-								  }
-								  if (m_caster->HasAura(78893)) // Stampede.
-								  {
-									  m_caster->CastSpell(m_caster, 81022, true);
-									  m_caster->CastSpell(m_caster,89140,true);
-								  }
-							  }
 							  if (m_spellInfo->Id == 5217) // Tiger's Fury.
 							  {
 								  if (m_caster->HasAura(80317)) // Primal Madness.
