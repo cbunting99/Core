@@ -2637,7 +2637,7 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
                                   }
                               }
 
-							  if (m_spellInfo->Id == 16979) // Feral Charge.
+							  if (m_spellInfo->Id == 45334) // Feral Charge.
 							  {
 								  if (m_caster->HasAura(78892)) // Stampede.
 								  {
@@ -2649,15 +2649,17 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
 								  }
 							  }
 
-							  if (m_spellInfo->Id == 49376) // Feral Charge.
+							  if (m_spellInfo->Id == 50259) // Feral Charge.
 							  {
 								  if (m_caster->HasAura(78892)) // Stampede.
 								  {
 									  m_caster->CastSpell(m_caster, 81021, true);
+									  m_caster->CastSpell(m_caster,89140,true);
 								  }
 								  if (m_caster->HasAura(78893)) // Stampede.
 								  {
 									  m_caster->CastSpell(m_caster, 81022, true);
+									  m_caster->CastSpell(m_caster,89140,true);
 								  }
 							  }
 							  if (m_spellInfo->Id == 5217) // Tiger's Fury.
@@ -2699,6 +2701,7 @@ void Spell::EffectApplyAura(SpellEffIndex effIndex)
 									  int32 bp = 15;
 									  m_caster->CastCustomSpell(m_caster, 51185, &bp, NULL, NULL, true);
 								  }
+							  }
 
     }
         break;
