@@ -4842,428 +4842,415 @@ void AuraEffect::HandleAuraRetainComboPoints(AuraApplication const* aurApp, uint
 
 void AuraEffect::HandleAuraDummy(AuraApplication const* aurApp, uint8 mode, bool apply) const
 {
-	if (!(mode & (AURA_EFFECT_HANDLE_CHANGE_AMOUNT_MASK | AURA_EFFECT_HANDLE_REAPPLY)))
-		return;
+    if (!(mode & (AURA_EFFECT_HANDLE_CHANGE_AMOUNT_MASK | AURA_EFFECT_HANDLE_REAPPLY)))
+        return;
 
-	Unit* target = aurApp->GetTarget();
+    Unit* target = aurApp->GetTarget();
 
-	Unit* caster = GetCaster();
+    Unit* caster = GetCaster();
 
-	if (mode & AURA_EFFECT_HANDLE_REAL)
-	{
-		// pet auras
-		if (PetAura const* petSpell = sSpellMgr->GetPetAura(GetId(), m_effIndex))
-		{
-			if (apply)
-				target->AddPetAura(petSpell);
-			else
-				target->RemovePetAura(petSpell);
-		}
-	}
+    if (mode & AURA_EFFECT_HANDLE_REAL)
+    {
+        // pet auras
+        if (PetAura const* petSpell = sSpellMgr->GetPetAura(GetId(), m_effIndex))
+        {
+            if (apply)
+                target->AddPetAura(petSpell);
+            else
+                target->RemovePetAura(petSpell);
+        }
+    }
 
-	if (mode & (AURA_EFFECT_HANDLE_REAL | AURA_EFFECT_HANDLE_REAPPLY))
-	{
-		// AT APPLY
-		if (apply)
-		{
-			switch (GetId())
-			{
-			case 1515:                                      // Tame beast
-				// FIX_ME: this is 2.0.12 threat effect replaced in 2.1.x by dummy aura, must be checked for correctness
-				if (caster && target->CanHaveThreatList())
-					target->AddThreat(caster, 10.0f);
-				break;
-			case 13139:                                     // net-o-matic
-				// root to self part of (root_target->charge->root_self sequence
-				if (caster)
-					caster->CastSpell(caster, 13138, true, NULL, this);
-				break;
-			case 34026:   // kill command
-			{
-							  Unit* pet = target->GetGuardianPet();
-							  if (!pet)
-								  break;
+    if (mode & (AURA_EFFECT_HANDLE_REAL | AURA_EFFECT_HANDLE_REAPPLY))
+    {
+        // AT APPLY
+        if (apply)
+        {
+            switch (GetId())
+            {
+                case 1515:                                      // Tame beast
+                    // FIX_ME: this is 2.0.12 threat effect replaced in 2.1.x by dummy aura, must be checked for correctness
+                    if (caster && target->CanHaveThreatList())
+                        target->AddThreat(caster, 10.0f);
+                    break;
+                case 13139:                                     // net-o-matic
+                    // root to self part of (root_target->charge->root_self sequence
+                    if (caster)
+                        caster->CastSpell(caster, 13138, true, NULL, this);
+                    break;
+                case 34026:   // kill command
+                {
+                    Unit* pet = target->GetGuardianPet();
+                    if (!pet)
+                        break;
 
-							  target->CastSpell(target, 34027, true, NULL, this);
+                    target->CastSpell(target, 34027, true, NULL, this);
 
-							  // set 3 stacks and 3 charges (to make all auras not disappear at once)
-							  Aura* owner_aura = target->GetAura(34027, GetCasterGUID());
-							  Aura* pet_aura = pet->GetAura(58914, GetCasterGUID());
-							  if (owner_aura)
-							  {
-								  owner_aura->SetStackAmount(owner_aura->GetSpellInfo()->StackAmount);
-								  if (pet_aura)
-								  {
-									  pet_aura->SetCharges(0);
-									  pet_aura->SetStackAmount(owner_aura->GetSpellInfo()->StackAmount);
-								  }
-							  }
-							  break;
-			}
-				// Guardian of Ancient Kings - Retribution
-			case 86698:
-			{
-						  caster->CastSpell(caster, 86701, true);
-						  break;
-			}
-				// Guardian of Ancient Kings - Holy
-			case 86669:
-			{
-						  caster->CastSpell(caster, 86674, true);
-						  break;
-			}
-			case 37096:                                     // Blood Elf Illusion
-			{
-																if (caster)
-																{
-																	switch (caster->getGender())
-																	{
-																	case GENDER_FEMALE:
-																		caster->CastSpell(target, 37095, true, NULL, this); // Blood Elf Disguise
-																		break;
-																	case GENDER_MALE:
-																		caster->CastSpell(target, 37093, true, NULL, this);
-																		break;
-																	default:
-																		break;
-																	}
-																}
-																break;
-			}
-			case 39850:                                     // Rocket Blast
-				if (roll_chance_i(20))                       // backfire stun
-					target->CastSpell(target, 51581, true, NULL, this);
-				break;
-			case 43873:                                     // Headless Horseman Laugh
-				target->PlayDistanceSound(11965);
-				break;
-			case 46354:                                     // Blood Elf Illusion
-				if (caster)
-				{
-					switch (caster->getGender())
+                    // set 3 stacks and 3 charges (to make all auras not disappear at once)
+                    Aura* owner_aura = target->GetAura(34027, GetCasterGUID());
+                    Aura* pet_aura  = pet->GetAura(58914, GetCasterGUID());
+                    if (owner_aura)
+                    {
+                        owner_aura->SetStackAmount(owner_aura->GetSpellInfo()->StackAmount);
+                        if (pet_aura)
+                        {
+                            pet_aura->SetCharges(0);
+                            pet_aura->SetStackAmount(owner_aura->GetSpellInfo()->StackAmount);
+                        }
+                    }
+                    break;
+                }
+                    // Guardian of Ancient Kings - Retribution
+                case 86698:
+                {
+                    caster->CastSpell(caster,86701,true);
+                    break;
+                }
+                    // Guardian of Ancient Kings - Holy
+                case 86669:
+                {
+                    caster->CastSpell(caster,86674,true);
+                    break;
+                }
+                case 37096:                                     // Blood Elf Illusion
+                {
+                    if (caster)
+                    {
+                        switch (caster->getGender())
+                        {
+                            case GENDER_FEMALE:
+                                caster->CastSpell(target, 37095, true, NULL, this); // Blood Elf Disguise
+                                break;
+                            case GENDER_MALE:
+                                caster->CastSpell(target, 37093, true, NULL, this);
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    break;
+                }
+                case 39850:                                     // Rocket Blast
+                    if (roll_chance_i(20))                       // backfire stun
+                        target->CastSpell(target, 51581, true, NULL, this);
+                    break;
+                case 43873:                                     // Headless Horseman Laugh
+                    target->PlayDistanceSound(11965);
+                    break;
+                case 46354:                                     // Blood Elf Illusion
+                    if (caster)
+                    {
+                        switch (caster->getGender())
+                        {
+                            case GENDER_FEMALE:
+                                caster->CastSpell(target, 46356, true, NULL, this);
+                                break;
+                            case GENDER_MALE:
+                                caster->CastSpell(target, 46355, true, NULL, this);
+                                break;
+                        }
+                    }
+                    break;
+                case 46361:                                     // Reinforced Net
+                    if (caster)
+                        target->GetMotionMaster()->MoveFall();
+                    break;
+                case 52916: // Honor Among Thieves
+                    if (target->GetTypeId() == TYPEID_PLAYER)
+                        if (Unit* spellTarget = ObjectAccessor::GetUnit(*target, target->ToPlayer()->GetComboTarget()))
+                            target->CastSpell(spellTarget, 51699, true);
+                   break;
+                case 71563:
+                    if (Aura* newAura = target->AddAura(71564, target))
+                        newAura->SetStackAmount(newAura->GetSpellInfo()->StackAmount);
+                        break;
+            }
+        }
+        // AT REMOVE
+        else
+        {
+            if ((GetSpellInfo()->IsQuestTame()) && caster && caster->isAlive() && target->isAlive())
+            {
+                uint32 finalSpelId = 0;
+                switch (GetId())
+                {
+                    case 19548: finalSpelId = 19597; break;
+                    case 19674: finalSpelId = 19677; break;
+                    case 19687: finalSpelId = 19676; break;
+                    case 19688: finalSpelId = 19678; break;
+                    case 19689: finalSpelId = 19679; break;
+                    case 19692: finalSpelId = 19680; break;
+                    case 19693: finalSpelId = 19684; break;
+                    case 19694: finalSpelId = 19681; break;
+                    case 19696: finalSpelId = 19682; break;
+                    case 19697: finalSpelId = 19683; break;
+                    case 19699: finalSpelId = 19685; break;
+                    case 19700: finalSpelId = 19686; break;
+                    case 30646: finalSpelId = 30647; break;
+                    case 30653: finalSpelId = 30648; break;
+                    case 30654: finalSpelId = 30652; break;
+                    case 30099: finalSpelId = 30100; break;
+                    case 30102: finalSpelId = 30103; break;
+                    case 30105: finalSpelId = 30104; break;
+                }
+
+                if (finalSpelId)
+                    caster->CastSpell(target, finalSpelId, true, NULL, this);
+            }
+
+            switch (m_spellInfo->SpellFamilyName)
+            {
+                case SPELLFAMILY_GENERIC:
+                    switch (GetId())
+                    {
+                        case 2584: // Waiting to Resurrect
+                            // Waiting to resurrect spell cancel, we must remove player from resurrect queue
+                            if (target->GetTypeId() == TYPEID_PLAYER)
+                            {
+                                if (Battleground* bg = target->ToPlayer()->GetBattleground())
+                                    bg->RemovePlayerFromResurrectQueue(target->GetGUID());
+                                if (Battlefield* bf = sBattlefieldMgr->GetBattlefieldToZoneId(target->GetZoneId()))
+                                    bf->RemovePlayerFromResurrectQueue(target->GetGUID());
+                            }
+                            break;
+                        case 36730:                                     // Flame Strike
+                        {
+                            target->CastSpell(target, 36731, true, NULL, this);
+                            break;
+                        }
+                        case 44191:                                     // Flame Strike
+                        {
+                            if (target->GetMap()->IsDungeon())
+                            {
+                                uint32 spellId = target->GetMap()->IsHeroic() ? 46163 : 44190;
+
+                                target->CastSpell(target, spellId, true, NULL, this);
+                            }
+                            break;
+                        }
+                        case 43681: // Inactive
+                        {
+                            if (target->GetTypeId() != TYPEID_PLAYER || aurApp->GetRemoveMode() != AURA_REMOVE_BY_EXPIRE)
+                                return;
+
+                            if (target->GetMap()->IsBattleground())
+                                target->ToPlayer()->LeaveBattleground();
+                            break;
+                        }
+                        case 42783: // Wrath of the Astromancer
+                            target->CastSpell(target, GetAmount(), true, NULL, this);
+                            break;
+                        case 46308: // Burning Winds casted only at creatures at spawn
+                            target->CastSpell(target, 47287, true, NULL, this);
+                            break;
+                        case 52172:  // Coyote Spirit Despawn Aura
+                        case 60244:  // Blood Parrot Despawn Aura
+                            target->CastSpell((Unit*)NULL, GetAmount(), true, NULL, this);
+                            break;
+                        case 91604: // Restricted Flight Area
+                            if (aurApp->GetRemoveMode() == AURA_REMOVE_BY_EXPIRE)
+                                target->CastSpell(target, 58601, true);
+                            break;
+                    }
+                    break;
+                case SPELLFAMILY_DEATHKNIGHT:
+                    // Summon Gargoyle (Dismiss Gargoyle at remove)
+                    if (GetId() == 61777)
+                        target->CastSpell(target, GetAmount(), true);
+                    break;
+                case SPELLFAMILY_PALADIN:
+                {
+                    switch (GetId())
+                    {
+                        // Guardian of Ancient Kings - Retribution
+                        case 86698:
+                        {
+                            if (aurApp->GetBase()->GetOwner()->ToUnit()->HasAura(86700))
+                            {
+                                caster->CastSpell((Unit*)NULL,86704,true);
+                                caster->RemoveAura(86701);
+                                caster->RemoveAura(86700);
+                            }
+                            break;
+                        }
+                    }
+                }
+                default:
+                    break;
+            }
+        }
+    }
+
+    // AT APPLY & REMOVE
+
+    switch (m_spellInfo->SpellFamilyName)
+    {
+        case SPELLFAMILY_GENERIC:
+        {
+            if (!(mode & AURA_EFFECT_HANDLE_REAL))
+                break;
+            switch (GetId())
+            {
+                // Recently Bandaged
+                case 11196:
+                    target->ApplySpellImmune(GetId(), IMMUNITY_MECHANIC, GetMiscValue(), apply);
+                    break;
+                // Unstable Power
+                case 24658:
+                {
+                    uint32 spellId = 24659;
+                    if (apply && caster)
+                    {
+                        SpellInfo const* spell = sSpellMgr->GetSpellInfo(spellId);
+
+                        for (uint32 i = 0; i < spell->StackAmount; ++i)
+                            caster->CastSpell(target, spell->Id, true, NULL, NULL, GetCasterGUID());
+                        break;
+                    }
+                    target->RemoveAurasDueToSpell(spellId);
+                    break;
+                }
+				case 61336:                                 // Survival Instincts
 					{
-					case GENDER_FEMALE:
-						caster->CastSpell(target, 46356, true, NULL, this);
-						break;
-					case GENDER_MALE:
-						caster->CastSpell(target, 46355, true, NULL, this);
+						if (!(mode & AURA_EFFECT_HANDLE_REAL))
+							break;
+
+						if (apply)
+							target->CastSpell(target, 50322, true);
+						else
+							target-> RemoveAurasDueToSpell(50322);
 						break;
 					}
-				}
-				break;
-			case 46361:                                     // Reinforced Net
-				if (caster)
-					target->GetMotionMaster()->MoveFall();
-				break;
-			case 52916: // Honor Among Thieves
-				if (target->GetTypeId() == TYPEID_PLAYER)
-				if (Unit* spellTarget = ObjectAccessor::GetUnit(*target, target->ToPlayer()->GetComboTarget()))
-					target->CastSpell(spellTarget, 51699, true);
-				break;
-			case 71563:
-				if (Aura* newAura = target->AddAura(71564, target))
-					newAura->SetStackAmount(newAura->GetSpellInfo()->StackAmount);
-				break;
-			}
-		}
-		// AT REMOVE
-		else
-		{
-			if ((GetSpellInfo()->IsQuestTame()) && caster && caster->isAlive() && target->isAlive())
-			{
-				uint32 finalSpelId = 0;
-				switch (GetId())
-				{
-				case 19548: finalSpelId = 19597; break;
-				case 19674: finalSpelId = 19677; break;
-				case 19687: finalSpelId = 19676; break;
-				case 19688: finalSpelId = 19678; break;
-				case 19689: finalSpelId = 19679; break;
-				case 19692: finalSpelId = 19680; break;
-				case 19693: finalSpelId = 19684; break;
-				case 19694: finalSpelId = 19681; break;
-				case 19696: finalSpelId = 19682; break;
-				case 19697: finalSpelId = 19683; break;
-				case 19699: finalSpelId = 19685; break;
-				case 19700: finalSpelId = 19686; break;
-				case 30646: finalSpelId = 30647; break;
-				case 30653: finalSpelId = 30648; break;
-				case 30654: finalSpelId = 30652; break;
-				case 30099: finalSpelId = 30100; break;
-				case 30102: finalSpelId = 30103; break;
-				case 30105: finalSpelId = 30104; break;
-				}
+                // Restless Strength
+                case 24661:
+                {
+                    uint32 spellId = 24662;
+                    if (apply && caster)
+                    {
+                        SpellInfo const* spell = sSpellMgr->GetSpellInfo(spellId);
+                        for (uint32 i = 0; i < spell->StackAmount; ++i)
+                            caster->CastSpell(target, spell->Id, true, NULL, NULL, GetCasterGUID());
+                        break;
+                    }
+                    target->RemoveAurasDueToSpell(spellId);
+                    break;
+                }
+                // Tag Murloc
+                case 30877:
+                {
+                    // Tag/untag Blacksilt Scout
+                    target->SetEntry(apply ? 17654 : 17326);
+                    break;
+                }
+                case 57819: // Argent Champion
+                case 57820: // Ebon Champion
+                case 57821: // Champion of the Kirin Tor
+                case 57822: // Wyrmrest Champion
+                {
+                    if (!caster || caster->GetTypeId() != TYPEID_PLAYER)
+                        break;
 
-				if (finalSpelId)
-					caster->CastSpell(target, finalSpelId, true, NULL, this);
-			}
+                    uint32 FactionID = 0;
 
-			switch (m_spellInfo->SpellFamilyName)
-			{
-			case SPELLFAMILY_GENERIC:
-				switch (GetId())
-				{
-				case 2584: // Waiting to Resurrect
-					// Waiting to resurrect spell cancel, we must remove player from resurrect queue
-					if (target->GetTypeId() == TYPEID_PLAYER)
-					{
-						if (Battleground* bg = target->ToPlayer()->GetBattleground())
-							bg->RemovePlayerFromResurrectQueue(target->GetGUID());
-						if (Battlefield* bf = sBattlefieldMgr->GetBattlefieldToZoneId(target->GetZoneId()))
-							bf->RemovePlayerFromResurrectQueue(target->GetGUID());
-					}
-					break;
-				case 36730:                                     // Flame Strike
-				{
-																	target->CastSpell(target, 36731, true, NULL, this);
-																	break;
-				}
-				case 44191:                                     // Flame Strike
-				{
-																	if (target->GetMap()->IsDungeon())
-																	{
-																		uint32 spellId = target->GetMap()->IsHeroic() ? 46163 : 44190;
+                    if (apply)
+                    {
+                        switch (m_spellInfo->Id)
+                        {
+                            case 57819: FactionID = 1106; break; // Argent Crusade
+                            case 57820: FactionID = 1098; break; // Knights of the Ebon Blade
+                            case 57821: FactionID = 1090; break; // Kirin Tor
+                            case 57822: FactionID = 1091; break; // The Wyrmrest Accord
+                        }
+                    }
+                    caster->ToPlayer()->SetChampioningFaction(FactionID);
+                    break;
+                }
+                // LK Intro VO (1)
+                case 58204:
+                    if (target->GetTypeId() == TYPEID_PLAYER)
+                    {
+                        // Play part 1
+                        if (apply)
+                            target->PlayDirectSound(14970, target->ToPlayer());
+                        // continue in 58205
+                        else
+                            target->CastSpell(target, 58205, true);
+                    }
+                    break;
+                // LK Intro VO (2)
+                case 58205:
+                    if (target->GetTypeId() == TYPEID_PLAYER)
+                    {
+                        // Play part 2
+                        if (apply)
+                            target->PlayDirectSound(14971, target->ToPlayer());
+                        // Play part 3
+                        else
+                            target->PlayDirectSound(14972, target->ToPlayer());
+                    }
+                    break;
+                case 62061: // Festive Holiday Mount
+                    if (target->HasAuraType(SPELL_AURA_MOUNTED))
+                    {
+                        uint32 creatureEntry = 0;
+                        if (apply)
+                        {
+                            if (target->HasAuraType(SPELL_AURA_MOD_INCREASE_MOUNTED_FLIGHT_SPEED))
+                                creatureEntry = 24906;
+                            else
+                                creatureEntry = 15665;
+                        }
+                        else
+                            creatureEntry = target->GetAuraEffectsByType(SPELL_AURA_MOUNTED).front()->GetMiscValue();
 
-																		target->CastSpell(target, spellId, true, NULL, this);
-																	}
-																	break;
-				}
-				case 43681: // Inactive
-				{
-								if (target->GetTypeId() != TYPEID_PLAYER || aurApp->GetRemoveMode() != AURA_REMOVE_BY_EXPIRE)
-									return;
+                        if (CreatureTemplate const* creatureInfo = sObjectMgr->GetCreatureTemplate(creatureEntry))
+                        {
+                            uint32 displayID = ObjectMgr::ChooseDisplayId(creatureInfo);
+                            sObjectMgr->GetCreatureModelRandomGender(&displayID);
 
-								if (target->GetMap()->IsBattleground())
-									target->ToPlayer()->LeaveBattleground();
-								break;
-				}
-				case 42783: // Wrath of the Astromancer
-					target->CastSpell(target, GetAmount(), true, NULL, this);
-					break;
-				case 46308: // Burning Winds casted only at creatures at spawn
-					target->CastSpell(target, 47287, true, NULL, this);
-					break;
-				case 52172:  // Coyote Spirit Despawn Aura
-				case 60244:  // Blood Parrot Despawn Aura
-					target->CastSpell((Unit*)NULL, GetAmount(), true, NULL, this);
-					break;
-				case 91604: // Restricted Flight Area
-					if (aurApp->GetRemoveMode() == AURA_REMOVE_BY_EXPIRE)
-						target->CastSpell(target, 58601, true);
-					break;
-				}
-				break;
-			case SPELLFAMILY_DEATHKNIGHT:
-				// Summon Gargoyle (Dismiss Gargoyle at remove)
-				if (GetId() == 61777)
-					target->CastSpell(target, GetAmount(), true);
-				break;
-			case SPELLFAMILY_PALADIN:
-			{
-										switch (GetId())
-										{
-											// Guardian of Ancient Kings - Retribution
-										case 86698:
-										{
-													  if (aurApp->GetBase()->GetOwner()->ToUnit()->HasAura(86700))
-													  {
-														  caster->CastSpell((Unit*)NULL, 86704, true);
-														  caster->RemoveAura(86701);
-														  caster->RemoveAura(86700);
-													  }
-													  break;
-										}
-										}
-			}
-			default:
-				break;
-			}
-		}
-	}
+                            target->SetUInt32Value(UNIT_FIELD_MOUNTDISPLAYID, displayID);
+                        }
+                    }
+                    break;
+            }
 
-	// AT APPLY & REMOVE
-
-	switch (m_spellInfo->SpellFamilyName)
-	{
-	case SPELLFAMILY_GENERIC:
-	{
-								if (!(mode & AURA_EFFECT_HANDLE_REAL))
-									break;
-								switch (GetId())
-								{
-									// Recently Bandaged
-								case 11196:
-									target->ApplySpellImmune(GetId(), IMMUNITY_MECHANIC, GetMiscValue(), apply);
-									break;
-									// Unstable Power
-								case 24658:
-								{
-											  uint32 spellId = 24659;
-											  if (apply && caster)
-											  {
-												  SpellInfo const* spell = sSpellMgr->GetSpellInfo(spellId);
-
-												  for (uint32 i = 0; i < spell->StackAmount; ++i)
-													  caster->CastSpell(target, spell->Id, true, NULL, NULL, GetCasterGUID());
-												  break;
-											  }
-											  target->RemoveAurasDueToSpell(spellId);
-											  break;
-								}
-								case 61336:                                 // Survival Instincts
-								{
-																				if (!(mode & AURA_EFFECT_HANDLE_REAL))
-																					break;
-
-																				if (apply)
-																					target->CastSpell(target, 50322, true);
-																				else
-																					target->RemoveAurasDueToSpell(50322);
-																				break;
-								}
-									// Restless Strength
-								case 24661:
-								{
-											  uint32 spellId = 24662;
-											  if (apply && caster)
-											  {
-												  SpellInfo const* spell = sSpellMgr->GetSpellInfo(spellId);
-												  for (uint32 i = 0; i < spell->StackAmount; ++i)
-													  caster->CastSpell(target, spell->Id, true, NULL, NULL, GetCasterGUID());
-												  break;
-											  }
-											  target->RemoveAurasDueToSpell(spellId);
-											  break;
-								}
-									// Tag Murloc
-								case 30877:
-								{
-											  // Tag/untag Blacksilt Scout
-											  target->SetEntry(apply ? 17654 : 17326);
-											  break;
-								}
-								case 57819: // Argent Champion
-								case 57820: // Ebon Champion
-								case 57821: // Champion of the Kirin Tor
-								case 57822: // Wyrmrest Champion
-								{
-												if (!caster || caster->GetTypeId() != TYPEID_PLAYER)
-													break;
-
-												uint32 FactionID = 0;
-
-												if (apply)
-												{
-													switch (m_spellInfo->Id)
-													{
-													case 57819: FactionID = 1106; break; // Argent Crusade
-													case 57820: FactionID = 1098; break; // Knights of the Ebon Blade
-													case 57821: FactionID = 1090; break; // Kirin Tor
-													case 57822: FactionID = 1091; break; // The Wyrmrest Accord
-													}
-												}
-												caster->ToPlayer()->SetChampioningFaction(FactionID);
-												break;
-								}
-									// LK Intro VO (1)
-								case 58204:
-									if (target->GetTypeId() == TYPEID_PLAYER)
-									{
-										// Play part 1
-										if (apply)
-											target->PlayDirectSound(14970, target->ToPlayer());
-										// continue in 58205
-										else
-											target->CastSpell(target, 58205, true);
-									}
-									break;
-									// LK Intro VO (2)
-								case 58205:
-									if (target->GetTypeId() == TYPEID_PLAYER)
-									{
-										// Play part 2
-										if (apply)
-											target->PlayDirectSound(14971, target->ToPlayer());
-										// Play part 3
-										else
-											target->PlayDirectSound(14972, target->ToPlayer());
-									}
-									break;
-								case 62061: // Festive Holiday Mount
-									if (target->HasAuraType(SPELL_AURA_MOUNTED))
-									{
-										uint32 creatureEntry = 0;
-										if (apply)
-										{
-											if (target->HasAuraType(SPELL_AURA_MOD_INCREASE_MOUNTED_FLIGHT_SPEED))
-												creatureEntry = 24906;
-											else
-												creatureEntry = 15665;
-										}
-										else
-											creatureEntry = target->GetAuraEffectsByType(SPELL_AURA_MOUNTED).front()->GetMiscValue();
-
-										if (CreatureTemplate const* creatureInfo = sObjectMgr->GetCreatureTemplate(creatureEntry))
-										{
-											uint32 displayID = ObjectMgr::ChooseDisplayId(creatureInfo);
-											sObjectMgr->GetCreatureModelRandomGender(&displayID);
-
-											target->SetUInt32Value(UNIT_FIELD_MOUNTDISPLAYID, displayID);
-										}
-									}
-									break;
-								}
-
-								break;
-	}
-	case SPELLFAMILY_MAGE:
-	{
-							 //if (!(mode & AURA_EFFECT_HANDLE_REAL))
-							 //break;
-							 break;
-	}
-	case SPELLFAMILY_PRIEST:
-	{
-							   //if (!(mode & AURA_EFFECT_HANDLE_REAL))
-							   //break;
-							   break;
-	}
-	case SPELLFAMILY_DRUID:
-	{
-							  //if (!(mode & AURA_EFFECT_HANDLE_REAL))
-							  //break;
-							  break;
-	}
-	case SPELLFAMILY_SHAMAN:
-	{
-							   //if (!(mode & AURA_EFFECT_HANDLE_REAL))
-							   //break;
-							   break;
-	}
-	case SPELLFAMILY_PALADIN:
-		// if (!(mode & AURA_EFFECT_HANDLE_REAL))
-		//    break;
-		break;
-	case SPELLFAMILY_DEATHKNIGHT:
-	{
-									//if (!(mode & AURA_EFFECT_HANDLE_REAL))
-									//    break;
-									break;
-	}
-	case SPELLFAMILY_ROGUE:
-	{
-							  switch (GetId())
-							  {
-							  case 76577: // Smoke Bomb.
-								  if (apply)
-									  target->AddAura(88611, target);
-								  else
-									  target->RemoveAura(88611);
-								  break;
-							  }
-							  break;
-	}
-	}
+            break;
+        }
+        case SPELLFAMILY_MAGE:
+        {
+            //if (!(mode & AURA_EFFECT_HANDLE_REAL))
+                //break;
+            break;
+        }
+        case SPELLFAMILY_PRIEST:
+        {
+            //if (!(mode & AURA_EFFECT_HANDLE_REAL))
+                //break;
+            break;
+        }
+        case SPELLFAMILY_DRUID:
+        {
+            //if (!(mode & AURA_EFFECT_HANDLE_REAL))
+                //break;
+            break;
+        }
+        case SPELLFAMILY_SHAMAN:
+        {
+            //if (!(mode & AURA_EFFECT_HANDLE_REAL))
+                //break;
+            break;
+        }
+        case SPELLFAMILY_PALADIN:
+            // if (!(mode & AURA_EFFECT_HANDLE_REAL))
+            //    break;
+            break;
+        case SPELLFAMILY_DEATHKNIGHT:
+        {
+            //if (!(mode & AURA_EFFECT_HANDLE_REAL))
+            //    break;
+            break;
+        }
+    }
 }
 
 void AuraEffect::HandleChannelDeathItem(AuraApplication const* aurApp, uint8 mode, bool apply) const
