@@ -1090,6 +1090,12 @@ void Spell::EffectSchoolDMG(SpellEffIndex effIndex)
             damage = m_originalCaster->SpellDamageBonusDone(unitTarget, m_spellInfo, (uint32)damage, SPELL_DIRECT_DAMAGE);
             damage = unitTarget->SpellDamageBonusTaken(m_originalCaster, m_spellInfo, (uint32)damage, SPELL_DIRECT_DAMAGE);
         }
+		
+		if (m_spellInfo->SpellFamilyName == SPELLFAMILY_MAGE && !m_caster->HasAura(44445)) // Arcane Missiles.
+		{
+			if (roll_chance_i(30))
+				m_caster->CastSpell(m_caster, 79683, true);
+		}
 
         m_damage += damage;
     }
@@ -1659,15 +1665,6 @@ void Spell::EffectDummy(SpellEffIndex effIndex)
 											   if (m_caster->HasAura(12489)) // Improved Cone of Cold.
 												   m_caster->CastCustomSpell(unitTarget, 83302, &bp, NULL, NULL, true, 0);
 											   break;
-								 }
-								 case 79683: // Arcane Missiles!
-								 {
-												 if (m_caster->HasAura(44445) || // Hot Streak.
-													 m_caster->HasAura(44546) || m_caster->HasAura(44548) || m_caster->HasAura(44549)) // Brain Freeze.
-												 {
-													 m_caster->RemoveAurasDueToSpell(79683);
-													 break;
-												 }
 								 }
 								 case 30455: // Ice lance.
 									 if (Aura* fof = m_caster->GetAura(44544))

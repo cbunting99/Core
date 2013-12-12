@@ -72,7 +72,11 @@ enum MageSpells
     SPELL_MAGE_GLYPH_OF_MIRROR_IMAGE             = 63093,
     SPELL_MAGE_SUMMON_IMAGES_FROST               = 58832,
     SPELL_MAGE_SUMMON_IMAGES_FIRE                = 88092,
-    SPELL_MAGE_SUMMON_IMAGES_ARCANE              = 88091
+    SPELL_MAGE_SUMMON_IMAGES_ARCANE              = 88091,
+
+	SPELL_HUNTER_INSANITY                        = 95809,
+	SPELL_MAGE_TEMPORAL_DISPLACEMENT             = 80354,
+	SPELL_SHAMAN_EXHAUSTION                      = 57723
 };
 
 enum MageIcons
@@ -82,6 +86,50 @@ enum MageIcons
     ICON_MAGE_IMPROVED_FREEZE                    = 94,
     ICON_MAGE_INCANTER_S_ABSORPTION              = 2941,
     ICON_MAGE_IMPROVED_MANA_GEM                  = 1036
+};
+
+class spell_mage_time_warp : public SpellScriptLoader
+{
+public:
+	spell_mage_time_warp() : SpellScriptLoader("spell_mage_time_warp") { }
+
+	class spell_mage_time_warp_SpellScript : public SpellScript
+	{
+		PrepareSpellScript(spell_mage_time_warp_SpellScript);
+
+		bool Validate(SpellInfo const* /*spellInfo*/)
+		{
+			if (!sSpellMgr->GetSpellInfo(SPELL_SHAMAN_EXHAUSTION))
+				return false;
+			return true;
+		}
+
+		void RemoveInvalidTargets(std::list<WorldObject*>& targets)
+		{
+			targets.remove_if(Trinity::UnitAuraCheck(true, SPELL_SHAMAN_EXHAUSTION));
+			targets.remove_if(Trinity::UnitAuraCheck(true, SPELL_HUNTER_INSANITY));
+			targets.remove_if(Trinity::UnitAuraCheck(true, SPELL_MAGE_TEMPORAL_DISPLACEMENT));
+		}
+
+		void ApplyDebuff()
+		{
+			if (Unit* target = GetHitUnit())
+				target->CastSpell(target, SPELL_MAGE_TEMPORAL_DISPLACEMENT, true);
+		}
+
+		void Register()
+		{
+			OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_mage_time_warp_SpellScript::RemoveInvalidTargets, EFFECT_0, TARGET_UNIT_CASTER_AREA_RAID);
+			OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_mage_time_warp_SpellScript::RemoveInvalidTargets, EFFECT_1, TARGET_UNIT_CASTER_AREA_RAID);
+			OnObjectAreaTargetSelect += SpellObjectAreaTargetSelectFn(spell_mage_time_warp_SpellScript::RemoveInvalidTargets, EFFECT_2, TARGET_UNIT_CASTER_AREA_RAID);
+			AfterHit += SpellHitFn(spell_mage_time_warp_SpellScript::ApplyDebuff);
+		}
+	};
+
+	SpellScript* GetSpellScript() const
+	{
+		return new spell_mage_time_warp_SpellScript();
+	}
 };
 
 // Incanter's Absorbtion
@@ -1423,4 +1471,6 @@ void AddSC_mage_spell_scripts()
     new spell_mage_arcane_blast();
     new spell_mage_mirror_image();
 	new spell_mage_polymorph();
+
+	new spell_mage_time_warp();
 }
