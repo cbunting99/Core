@@ -1608,7 +1608,7 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
 
 				case 76577: // Smoke Bomb.
 					target->RemoveAura(88611);
-					caster->RemoveAura(88611);
+					target->GetAura(76577)->GetCaster->RemoveAura(88611);
 					break;
 				}
             break;
