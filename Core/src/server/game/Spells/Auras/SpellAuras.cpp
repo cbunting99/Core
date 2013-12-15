@@ -1843,6 +1843,15 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                             target->RemoveAurasDueToSpell(71166);
                     }
                     break;
+				case 76671: // Divine Bulwark
+				{
+								if (caster->GetTypeId() == TYPEID_PLAYER)
+								{
+									float mastery = caster->ToPlayer()->GetFloatValue(PLAYER_MASTERY);
+									GetEffect(0)->SetAmount(float(mastery*2.25f));
+								}
+								break;
+				}
             }
             break;
         case SPELLFAMILY_WARLOCK:

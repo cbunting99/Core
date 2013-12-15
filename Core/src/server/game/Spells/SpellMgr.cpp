@@ -3778,6 +3778,20 @@ void SpellMgr::LoadSpellInfoCorrections()
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_NOT_NEED_SHAPESHIFT;
 				spellInfo->AttributesEx8 |= SPELL_ATTR8_AURA_SEND_AMOUNT;
                 break;
+			case 79638:          // Enhanced Strength
+			case 76547:          // Mana Adept
+			case 77226:          // Deep Healing
+			case 76613:          // Frostburn
+				spellInfo->Effects[0].ApplyAuraName = SPELL_AURA_ADD_PCT_MODIFIER;
+				spellInfo->Effects[0].MiscValue = 0;
+				break;
+			case 76671:          // Mastery: Divine Bulwark
+				spellInfo->Effects[0].BasePoints = 18;
+				break;
+			case 79683:          // Arcane Missiles!
+				spellInfo->ProcChance = 40;
+				break;
+
             case 109849: // Cleansing Flames
                 spellInfo->Effects[EFFECT_0].TargetA = SpellImplicitTargetInfo(TARGET_UNIT_CONE_ALLY);
                 spellInfo->Effects[EFFECT_0].TargetB = SpellImplicitTargetInfo();
