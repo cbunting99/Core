@@ -1583,10 +1583,12 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
 						caster->CastSpell(target, 79126, true);
 					if (caster->HasAura(79123)) // Blackjack.
 						caster->CastSpell(target, 79124, true);
-				
+					break;
+
 				case 11327: // Vanish.
 					if (removeMode == AURA_REMOVE_BY_EXPIRE)
 						caster->CastSpell(caster, 1784, true); // Stealth.
+					break;
 				
 				case 1943: // Rupture.
 					if (removeMode == AURA_REMOVE_BY_DEATH)
@@ -1602,14 +1604,11 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
 							caster->CastCustomSpell(caster, 51637, &amount, NULL, NULL, true);
 						}
 					}
+					break;
 
 				case 76577: // Smoke Bomb.
 					target->RemoveAura(88611);
-					target->RemoveAura(76577);
-
-				case 88611:
-					target->RemoveAura(88611);
-					target->RemoveAura(76577);
+					caster->RemoveAura(88611);
 					break;
 				}
             break;
