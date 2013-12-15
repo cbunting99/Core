@@ -1439,7 +1439,10 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                     if (target->HasAura(58039)) // Glyph of Blurred Speed
                         target->CastSpell(target, 61922, true); // Sprint (waterwalk)
 					if (GetId() == 76577)
+					{
 						target->AddAura(88611, target);
+						target->GetAura(88611)->SetDuration(target->GetAura(76577)->GetDuration);
+					}
                 break;
         }
     }
