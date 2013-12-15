@@ -1438,6 +1438,8 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                     // in official maybe there is only one icon?
                     if (target->HasAura(58039)) // Glyph of Blurred Speed
                         target->CastSpell(target, 61922, true); // Sprint (waterwalk)
+					if (GetId() == 76577)
+						target->AddAura(88611, target);
                 break;
         }
     }
@@ -1618,6 +1620,8 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                         caster->EnergizeBySpell(caster, talentId, energy, POWER_ENERGY);        // Hacky too, isn't it ?
                          }
                       }
+					   if (GetId() == 76577)
+						   target->RemoveAura(88611);
             break;
             case SPELLFAMILY_PALADIN:
                 if (m_spellInfo->Id == 86273) // Illuminated Healing.
