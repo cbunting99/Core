@@ -1441,7 +1441,7 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
 					if (GetId() == 76577)
 					{
 						target->AddAura(88611, target);
-						target->GetAura(88611)->SetDuration(target->GetAura(76577)->GetDuration);
+						target->GetAura(88611)->SetDuration(target->GetAura(76577)->GetDuration());
 					}
                 break;
         }
@@ -1564,67 +1564,54 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                     }
                 }
                 break;
-            case SPELLFAMILY_WARRIOR:
-            {
-                                        if (m_spellInfo->Id == 46857) // Trauma.
-                                        {
-                                            if (caster->HasAura(30070)) // Blood Frenzy.
-                                                caster->RemoveAura(30070);
-                                            if (caster->HasAura(30069)) // Blood Frenzy.
-                                                caster->RemoveAura(30069);
-                                        }
-            }
-                break;
+			case SPELLFAMILY_WARRIOR:
+				switch (GetId())
+				{
+				case 46857: // Trauma.
+					if (target->HasAura(30070)) // Blood Frenzy.
+						target->RemoveAura(30070);
+					if (caster->HasAura(30069)) // Blood Frenzy.
+						target->RemoveAura(30069);
+				}
+				break;
+
             case SPELLFAMILY_ROGUE:
-               // Blackjack/Groggy on sap removal
-                if(GetId() == 6770)
-                {
-                    if(caster->HasAura(79125)) // Rank 2
-                        caster->CastSpell(target, 79126, true);
-                    else if(caster->HasAura(79123)) // Rank 1
-                        caster->CastSpell(target, 79124, true);
-                }
-                // Cast stealth at vanish 3 seconds end
-                if (GetId() == 11327 && removeMode == AURA_REMOVE_BY_EXPIRE)
-                    caster->AddAura(1784 /* == stealth */, caster);
-                // Rupture & venomeous wounds energy regain at target's death
-                else if(GetId() == 1943 && removeMode == AURA_REMOVE_BY_DEATH &&        // If rupture's target dies
-                    (caster->HasSpell(79133) || caster->HasSpell(79134)))               // Only if has talent
-                {
-                    int32 basepoints0 = GetDuration() / 200;
-                    // for each remaining 0.2 second, give 1 energy
-                    caster->CastCustomSpell(caster, 51637, &basepoints0, NULL, NULL, true);
-                }
+				switch (GetId())
+				{
+				case 6770: // Sap.
+					if (caster->HasAura(79125)) // Blackjack.
+						caster->CastSpell(target, 79126, true);
+					if (caster->HasAura(79123)) // Blackjack.
+						caster->CastSpell(target, 79124, true);
+				
+				case 11327: // Vanish.
+					if (removeMode == AURA_REMOVE_BY_EXPIRE)
+						caster->CastSpell(caster, 1784, true); // Stealth.
+				
+				case 1943: // Rupture.
+					if (removeMode == AURA_REMOVE_BY_DEATH)
+					{
+						if (caster->HasSpell(79133)) // Venomous Wounds.
+						{
+							int32 amount = GetDuration() / 200;
+							caster->CastCustomSpell(caster, 51637, &amount, NULL, NULL, true);
+						}
+						if (caster->HasSpell(79134)) // Venomous Wounds.
+						{
+							int32 amount = GetDuration() / 200;
+							caster->CastCustomSpell(caster, 51637, &amount, NULL, NULL, true);
+						}
+					}
 
-                        // Rupture & venomeous wounds energy regain at target's death
-                       if(GetId() == 1943 && removeMode == AURA_REMOVE_BY_DEATH &&    // If rupture's target dies
-                         (caster->HasSpell(79133) || caster->HasSpell(79134)))            // Only if has talent
-                        {
-                            float chance;
-                            uint32 energy = 0, talentId = 79134, remainingTicks;
-                            if (AuraEffect* aurEff = GetEffect(0))
-                            {
-                                remainingTicks = aurEff->GetTotalTicks() - aurEff->GetTickNumber();
+				case 76577: // Smoke Bomb.
+					target->RemoveAura(88611);
+					target->RemoveAura(76577);
 
-                                if(caster->HasSpell(79133))
-                                {
-                                    chance = 30.0f;
-                                    talentId = 79133;
-                                }
-                                else
-                                    chance = 60.0f;
-                        
-                                // for each remaining tick, calculate chances
-                                for(remainingTicks; remainingTicks > 0; remainingTicks--)
-                                    if(roll_chance_f(chance))
-                                        energy += 10;
-
-                        // Give energy
-                        caster->EnergizeBySpell(caster, talentId, energy, POWER_ENERGY);        // Hacky too, isn't it ?
-                         }
-                      }
-					   if (GetId() == 76577)
-						   target->RemoveAura(88611);
+				case 88611:
+					target->RemoveAura(88611);
+					target->RemoveAura(76577);
+					break;
+				}
             break;
             case SPELLFAMILY_PALADIN:
                 if (m_spellInfo->Id == 86273) // Illuminated Healing.
