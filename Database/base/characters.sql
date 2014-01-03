@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.5.32 - MySQL Community Server (GPL)
--- Server OS:                    Win32
--- HeidiSQL Version:             8.0.0.4396
+-- Verkkotietokone:              127.0.0.1
+-- Server version:               5.6.15 - MySQL Community Server (GPL)
+-- Server OS:                    Win64
+-- HeidiSQL Versio:              8.2.0.4675
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,12 +10,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping database structure for characters
-CREATE DATABASE IF NOT EXISTS `characters` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `characters`;
-
-
--- Dumping structure for table characters.account_data
+-- Dumping structure for taulu characters.account_data
 CREATE TABLE IF NOT EXISTS `account_data` (
   `accountId` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Account Identifier',
   `type` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -29,7 +24,7 @@ CREATE TABLE IF NOT EXISTS `account_data` (
 /*!40000 ALTER TABLE `account_data` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.account_instance_times
+-- Dumping structure for taulu characters.account_instance_times
 CREATE TABLE IF NOT EXISTS `account_instance_times` (
   `accountId` int(10) unsigned NOT NULL,
   `instanceId` int(10) unsigned NOT NULL DEFAULT '0',
@@ -42,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `account_instance_times` (
 /*!40000 ALTER TABLE `account_instance_times` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.account_tutorial
+-- Dumping structure for taulu characters.account_tutorial
 CREATE TABLE IF NOT EXISTS `account_tutorial` (
   `accountId` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Account Identifier',
   `tut0` int(10) unsigned NOT NULL DEFAULT '0',
@@ -61,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `account_tutorial` (
 /*!40000 ALTER TABLE `account_tutorial` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.addons
+-- Dumping structure for taulu characters.addons
 CREATE TABLE IF NOT EXISTS `addons` (
   `name` varchar(120) NOT NULL DEFAULT '',
   `crc` int(10) unsigned NOT NULL DEFAULT '0',
@@ -73,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `addons` (
 /*!40000 ALTER TABLE `addons` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.arena_team
+-- Dumping structure for taulu characters.arena_team
 CREATE TABLE IF NOT EXISTS `arena_team` (
   `arenaTeamId` int(10) unsigned NOT NULL DEFAULT '0',
   `name` varchar(24) NOT NULL,
@@ -98,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `arena_team` (
 /*!40000 ALTER TABLE `arena_team` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.arena_team_member
+-- Dumping structure for taulu characters.arena_team_member
 CREATE TABLE IF NOT EXISTS `arena_team_member` (
   `arenaTeamId` int(10) unsigned NOT NULL DEFAULT '0',
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -115,7 +110,7 @@ CREATE TABLE IF NOT EXISTS `arena_team_member` (
 /*!40000 ALTER TABLE `arena_team_member` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.auctionhouse
+-- Dumping structure for taulu characters.auctionhouse
 CREATE TABLE IF NOT EXISTS `auctionhouse` (
   `id` int(10) unsigned NOT NULL DEFAULT '0',
   `auctioneerguid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -136,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `auctionhouse` (
 /*!40000 ALTER TABLE `auctionhouse` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.banned_addons
+-- Dumping structure for taulu characters.banned_addons
 CREATE TABLE IF NOT EXISTS `banned_addons` (
   `Id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Name` varchar(255) NOT NULL,
@@ -151,7 +146,7 @@ CREATE TABLE IF NOT EXISTS `banned_addons` (
 /*!40000 ALTER TABLE `banned_addons` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.bugreport
+-- Dumping structure for taulu characters.bugreport
 CREATE TABLE IF NOT EXISTS `bugreport` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Identifier',
   `type` longtext NOT NULL,
@@ -164,7 +159,7 @@ CREATE TABLE IF NOT EXISTS `bugreport` (
 /*!40000 ALTER TABLE `bugreport` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.calendar_events
+-- Dumping structure for taulu characters.calendar_events
 CREATE TABLE IF NOT EXISTS `calendar_events` (
   `id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `creator` int(10) unsigned NOT NULL DEFAULT '0',
@@ -183,7 +178,7 @@ CREATE TABLE IF NOT EXISTS `calendar_events` (
 /*!40000 ALTER TABLE `calendar_events` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.calendar_invites
+-- Dumping structure for taulu characters.calendar_invites
 CREATE TABLE IF NOT EXISTS `calendar_invites` (
   `id` bigint(20) unsigned NOT NULL DEFAULT '0',
   `event` bigint(20) unsigned NOT NULL DEFAULT '0',
@@ -201,7 +196,7 @@ CREATE TABLE IF NOT EXISTS `calendar_invites` (
 /*!40000 ALTER TABLE `calendar_invites` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.channels
+-- Dumping structure for taulu characters.channels
 CREATE TABLE IF NOT EXISTS `channels` (
   `name` varchar(128) NOT NULL,
   `team` int(10) unsigned NOT NULL,
@@ -218,7 +213,7 @@ CREATE TABLE IF NOT EXISTS `channels` (
 /*!40000 ALTER TABLE `channels` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.characters
+-- Dumping structure for taulu characters.characters
 CREATE TABLE IF NOT EXISTS `characters` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `account` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Account Identifier',
@@ -302,7 +297,7 @@ CREATE TABLE IF NOT EXISTS `characters` (
 /*!40000 ALTER TABLE `characters` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_account_data
+-- Dumping structure for taulu characters.character_account_data
 CREATE TABLE IF NOT EXISTS `character_account_data` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
   `type` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -316,7 +311,7 @@ CREATE TABLE IF NOT EXISTS `character_account_data` (
 /*!40000 ALTER TABLE `character_account_data` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_achievement
+-- Dumping structure for taulu characters.character_achievement
 CREATE TABLE IF NOT EXISTS `character_achievement` (
   `guid` int(10) unsigned NOT NULL,
   `achievement` smallint(5) unsigned NOT NULL,
@@ -329,7 +324,7 @@ CREATE TABLE IF NOT EXISTS `character_achievement` (
 /*!40000 ALTER TABLE `character_achievement` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_achievement_progress
+-- Dumping structure for taulu characters.character_achievement_progress
 CREATE TABLE IF NOT EXISTS `character_achievement_progress` (
   `guid` int(10) unsigned NOT NULL,
   `criteria` smallint(5) unsigned NOT NULL,
@@ -343,7 +338,7 @@ CREATE TABLE IF NOT EXISTS `character_achievement_progress` (
 /*!40000 ALTER TABLE `character_achievement_progress` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_action
+-- Dumping structure for taulu characters.character_action
 CREATE TABLE IF NOT EXISTS `character_action` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
   `spec` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -358,7 +353,7 @@ CREATE TABLE IF NOT EXISTS `character_action` (
 /*!40000 ALTER TABLE `character_action` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_arena_stats
+-- Dumping structure for taulu characters.character_arena_stats
 CREATE TABLE IF NOT EXISTS `character_arena_stats` (
   `guid` int(10) NOT NULL,
   `slot` tinyint(3) NOT NULL,
@@ -371,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `character_arena_stats` (
 /*!40000 ALTER TABLE `character_arena_stats` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_aura
+-- Dumping structure for taulu characters.character_aura
 CREATE TABLE IF NOT EXISTS `character_aura` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `caster_guid` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT 'Full Global Unique Identifier',
@@ -397,7 +392,7 @@ CREATE TABLE IF NOT EXISTS `character_aura` (
 /*!40000 ALTER TABLE `character_aura` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_banned
+-- Dumping structure for taulu characters.character_banned
 CREATE TABLE IF NOT EXISTS `character_banned` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `bandate` int(10) unsigned NOT NULL DEFAULT '0',
@@ -413,7 +408,7 @@ CREATE TABLE IF NOT EXISTS `character_banned` (
 /*!40000 ALTER TABLE `character_banned` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_battleground_data
+-- Dumping structure for taulu characters.character_battleground_data
 CREATE TABLE IF NOT EXISTS `character_battleground_data` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `instanceId` int(10) unsigned NOT NULL COMMENT 'Instance Identifier',
@@ -434,7 +429,7 @@ CREATE TABLE IF NOT EXISTS `character_battleground_data` (
 /*!40000 ALTER TABLE `character_battleground_data` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_battleground_random
+-- Dumping structure for taulu characters.character_battleground_random
 CREATE TABLE IF NOT EXISTS `character_battleground_random` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`guid`)
@@ -445,7 +440,7 @@ CREATE TABLE IF NOT EXISTS `character_battleground_random` (
 /*!40000 ALTER TABLE `character_battleground_random` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_declinedname
+-- Dumping structure for taulu characters.character_declinedname
 CREATE TABLE IF NOT EXISTS `character_declinedname` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `genitive` varchar(15) NOT NULL DEFAULT '',
@@ -461,7 +456,7 @@ CREATE TABLE IF NOT EXISTS `character_declinedname` (
 /*!40000 ALTER TABLE `character_declinedname` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_equipmentsets
+-- Dumping structure for taulu characters.character_equipmentsets
 CREATE TABLE IF NOT EXISTS `character_equipmentsets` (
   `guid` int(10) NOT NULL DEFAULT '0',
   `setguid` bigint(20) NOT NULL AUTO_INCREMENT,
@@ -498,7 +493,7 @@ CREATE TABLE IF NOT EXISTS `character_equipmentsets` (
 /*!40000 ALTER TABLE `character_equipmentsets` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_gifts
+-- Dumping structure for taulu characters.character_gifts
 CREATE TABLE IF NOT EXISTS `character_gifts` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
   `item_guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -513,7 +508,7 @@ CREATE TABLE IF NOT EXISTS `character_gifts` (
 /*!40000 ALTER TABLE `character_gifts` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_glyphs
+-- Dumping structure for taulu characters.character_glyphs
 CREATE TABLE IF NOT EXISTS `character_glyphs` (
   `guid` int(10) unsigned NOT NULL,
   `spec` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -531,7 +526,7 @@ CREATE TABLE IF NOT EXISTS `character_glyphs` (
 /*!40000 ALTER TABLE `character_glyphs` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_homebind
+-- Dumping structure for taulu characters.character_homebind
 CREATE TABLE IF NOT EXISTS `character_homebind` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `mapId` smallint(5) unsigned NOT NULL DEFAULT '0' COMMENT 'Map Identifier',
@@ -547,7 +542,7 @@ CREATE TABLE IF NOT EXISTS `character_homebind` (
 /*!40000 ALTER TABLE `character_homebind` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_instance
+-- Dumping structure for taulu characters.character_instance
 CREATE TABLE IF NOT EXISTS `character_instance` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
   `instance` int(10) unsigned NOT NULL DEFAULT '0',
@@ -561,7 +556,7 @@ CREATE TABLE IF NOT EXISTS `character_instance` (
 /*!40000 ALTER TABLE `character_instance` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_inventory
+-- Dumping structure for taulu characters.character_inventory
 CREATE TABLE IF NOT EXISTS `character_inventory` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `bag` int(10) unsigned NOT NULL DEFAULT '0',
@@ -577,7 +572,7 @@ CREATE TABLE IF NOT EXISTS `character_inventory` (
 /*!40000 ALTER TABLE `character_inventory` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_pet
+-- Dumping structure for taulu characters.character_pet
 CREATE TABLE IF NOT EXISTS `character_pet` (
   `id` int(10) unsigned NOT NULL DEFAULT '0',
   `entry` int(10) unsigned NOT NULL DEFAULT '0',
@@ -606,7 +601,7 @@ CREATE TABLE IF NOT EXISTS `character_pet` (
 /*!40000 ALTER TABLE `character_pet` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_pet_declinedname
+-- Dumping structure for taulu characters.character_pet_declinedname
 CREATE TABLE IF NOT EXISTS `character_pet_declinedname` (
   `id` int(10) unsigned NOT NULL DEFAULT '0',
   `owner` int(10) unsigned NOT NULL DEFAULT '0',
@@ -624,7 +619,7 @@ CREATE TABLE IF NOT EXISTS `character_pet_declinedname` (
 /*!40000 ALTER TABLE `character_pet_declinedname` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_queststatus
+-- Dumping structure for taulu characters.character_queststatus
 CREATE TABLE IF NOT EXISTS `character_queststatus` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `quest` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Quest Identifier',
@@ -648,7 +643,7 @@ CREATE TABLE IF NOT EXISTS `character_queststatus` (
 /*!40000 ALTER TABLE `character_queststatus` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_queststatus_daily
+-- Dumping structure for taulu characters.character_queststatus_daily
 CREATE TABLE IF NOT EXISTS `character_queststatus_daily` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `quest` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Quest Identifier',
@@ -662,7 +657,7 @@ CREATE TABLE IF NOT EXISTS `character_queststatus_daily` (
 /*!40000 ALTER TABLE `character_queststatus_daily` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_queststatus_monthly
+-- Dumping structure for taulu characters.character_queststatus_monthly
 CREATE TABLE IF NOT EXISTS `character_queststatus_monthly` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `quest` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Quest Identifier',
@@ -675,7 +670,7 @@ CREATE TABLE IF NOT EXISTS `character_queststatus_monthly` (
 /*!40000 ALTER TABLE `character_queststatus_monthly` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_queststatus_rewarded
+-- Dumping structure for taulu characters.character_queststatus_rewarded
 CREATE TABLE IF NOT EXISTS `character_queststatus_rewarded` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `quest` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Quest Identifier',
@@ -688,7 +683,7 @@ CREATE TABLE IF NOT EXISTS `character_queststatus_rewarded` (
 /*!40000 ALTER TABLE `character_queststatus_rewarded` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_queststatus_seasonal
+-- Dumping structure for taulu characters.character_queststatus_seasonal
 CREATE TABLE IF NOT EXISTS `character_queststatus_seasonal` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `quest` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Quest Identifier',
@@ -702,7 +697,7 @@ CREATE TABLE IF NOT EXISTS `character_queststatus_seasonal` (
 /*!40000 ALTER TABLE `character_queststatus_seasonal` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_queststatus_weekly
+-- Dumping structure for taulu characters.character_queststatus_weekly
 CREATE TABLE IF NOT EXISTS `character_queststatus_weekly` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `quest` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Quest Identifier',
@@ -715,7 +710,7 @@ CREATE TABLE IF NOT EXISTS `character_queststatus_weekly` (
 /*!40000 ALTER TABLE `character_queststatus_weekly` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_reputation
+-- Dumping structure for taulu characters.character_reputation
 CREATE TABLE IF NOT EXISTS `character_reputation` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `faction` smallint(5) unsigned NOT NULL DEFAULT '0',
@@ -729,7 +724,7 @@ CREATE TABLE IF NOT EXISTS `character_reputation` (
 /*!40000 ALTER TABLE `character_reputation` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_skills
+-- Dumping structure for taulu characters.character_skills
 CREATE TABLE IF NOT EXISTS `character_skills` (
   `guid` int(10) unsigned NOT NULL COMMENT 'Global Unique Identifier',
   `skill` smallint(5) unsigned NOT NULL,
@@ -743,7 +738,7 @@ CREATE TABLE IF NOT EXISTS `character_skills` (
 /*!40000 ALTER TABLE `character_skills` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_social
+-- Dumping structure for taulu characters.character_social
 CREATE TABLE IF NOT EXISTS `character_social` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Character Global Unique Identifier',
   `friend` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Friend Global Unique Identifier',
@@ -758,7 +753,7 @@ CREATE TABLE IF NOT EXISTS `character_social` (
 /*!40000 ALTER TABLE `character_social` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_spell
+-- Dumping structure for taulu characters.character_spell
 CREATE TABLE IF NOT EXISTS `character_spell` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `spell` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT 'Spell Identifier',
@@ -772,7 +767,7 @@ CREATE TABLE IF NOT EXISTS `character_spell` (
 /*!40000 ALTER TABLE `character_spell` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_spell_cooldown
+-- Dumping structure for taulu characters.character_spell_cooldown
 CREATE TABLE IF NOT EXISTS `character_spell_cooldown` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier, Low part',
   `spell` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT 'Spell Identifier',
@@ -786,7 +781,7 @@ CREATE TABLE IF NOT EXISTS `character_spell_cooldown` (
 /*!40000 ALTER TABLE `character_spell_cooldown` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_stats
+-- Dumping structure for taulu characters.character_stats
 CREATE TABLE IF NOT EXISTS `character_stats` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier, Low part',
   `maxhealth` int(10) unsigned NOT NULL DEFAULT '0',
@@ -827,7 +822,7 @@ CREATE TABLE IF NOT EXISTS `character_stats` (
 /*!40000 ALTER TABLE `character_stats` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.character_talent
+-- Dumping structure for taulu characters.character_talent
 CREATE TABLE IF NOT EXISTS `character_talent` (
   `guid` int(10) unsigned NOT NULL,
   `spell` mediumint(8) unsigned NOT NULL,
@@ -840,7 +835,7 @@ CREATE TABLE IF NOT EXISTS `character_talent` (
 /*!40000 ALTER TABLE `character_talent` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.corpse
+-- Dumping structure for taulu characters.corpse
 CREATE TABLE IF NOT EXISTS `corpse` (
   `corpseGuid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Character Global Unique Identifier',
@@ -872,7 +867,7 @@ CREATE TABLE IF NOT EXISTS `corpse` (
 /*!40000 ALTER TABLE `corpse` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.creature_respawn
+-- Dumping structure for taulu characters.creature_respawn
 CREATE TABLE IF NOT EXISTS `creature_respawn` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `respawnTime` int(10) unsigned NOT NULL DEFAULT '0',
@@ -887,7 +882,7 @@ CREATE TABLE IF NOT EXISTS `creature_respawn` (
 /*!40000 ALTER TABLE `creature_respawn` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.custom_transmogrification
+-- Dumping structure for taulu characters.custom_transmogrification
 CREATE TABLE IF NOT EXISTS `custom_transmogrification` (
   `GUID` int(10) unsigned NOT NULL COMMENT 'Item guidLow',
   `FakeEntry` int(10) unsigned NOT NULL COMMENT 'Item entry',
@@ -900,7 +895,7 @@ CREATE TABLE IF NOT EXISTS `custom_transmogrification` (
 /*!40000 ALTER TABLE `custom_transmogrification` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.daily_players_reports
+-- Dumping structure for taulu characters.daily_players_reports
 CREATE TABLE IF NOT EXISTS `daily_players_reports` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
   `creation_time` int(10) unsigned NOT NULL DEFAULT '0',
@@ -920,7 +915,7 @@ CREATE TABLE IF NOT EXISTS `daily_players_reports` (
 /*!40000 ALTER TABLE `daily_players_reports` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.gameobject_respawn
+-- Dumping structure for taulu characters.gameobject_respawn
 CREATE TABLE IF NOT EXISTS `gameobject_respawn` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `respawnTime` int(10) unsigned NOT NULL DEFAULT '0',
@@ -935,7 +930,7 @@ CREATE TABLE IF NOT EXISTS `gameobject_respawn` (
 /*!40000 ALTER TABLE `gameobject_respawn` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.game_event_condition_save
+-- Dumping structure for taulu characters.game_event_condition_save
 CREATE TABLE IF NOT EXISTS `game_event_condition_save` (
   `eventEntry` tinyint(3) unsigned NOT NULL,
   `condition_id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -948,7 +943,7 @@ CREATE TABLE IF NOT EXISTS `game_event_condition_save` (
 /*!40000 ALTER TABLE `game_event_condition_save` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.game_event_save
+-- Dumping structure for taulu characters.game_event_save
 CREATE TABLE IF NOT EXISTS `game_event_save` (
   `eventEntry` tinyint(3) unsigned NOT NULL,
   `state` tinyint(3) unsigned NOT NULL DEFAULT '1',
@@ -961,7 +956,7 @@ CREATE TABLE IF NOT EXISTS `game_event_save` (
 /*!40000 ALTER TABLE `game_event_save` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.gm_subsurveys
+-- Dumping structure for taulu characters.gm_subsurveys
 CREATE TABLE IF NOT EXISTS `gm_subsurveys` (
   `surveyId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `subsurveyId` int(10) unsigned NOT NULL DEFAULT '0',
@@ -975,7 +970,7 @@ CREATE TABLE IF NOT EXISTS `gm_subsurveys` (
 /*!40000 ALTER TABLE `gm_subsurveys` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.gm_surveys
+-- Dumping structure for taulu characters.gm_surveys
 CREATE TABLE IF NOT EXISTS `gm_surveys` (
   `surveyId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -990,7 +985,7 @@ CREATE TABLE IF NOT EXISTS `gm_surveys` (
 /*!40000 ALTER TABLE `gm_surveys` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.gm_tickets
+-- Dumping structure for taulu characters.gm_tickets
 CREATE TABLE IF NOT EXISTS `gm_tickets` (
   `ticketId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier of ticket creator',
@@ -1018,7 +1013,7 @@ CREATE TABLE IF NOT EXISTS `gm_tickets` (
 /*!40000 ALTER TABLE `gm_tickets` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.groups
+-- Dumping structure for taulu characters.groups
 CREATE TABLE IF NOT EXISTS `groups` (
   `guid` int(10) unsigned NOT NULL,
   `leaderGuid` int(10) unsigned NOT NULL,
@@ -1045,7 +1040,7 @@ CREATE TABLE IF NOT EXISTS `groups` (
 /*!40000 ALTER TABLE `groups` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.group_instance
+-- Dumping structure for taulu characters.group_instance
 CREATE TABLE IF NOT EXISTS `group_instance` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
   `instance` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1059,7 +1054,7 @@ CREATE TABLE IF NOT EXISTS `group_instance` (
 /*!40000 ALTER TABLE `group_instance` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.group_member
+-- Dumping structure for taulu characters.group_member
 CREATE TABLE IF NOT EXISTS `group_member` (
   `guid` int(10) unsigned NOT NULL,
   `memberGuid` int(10) unsigned NOT NULL,
@@ -1074,7 +1069,7 @@ CREATE TABLE IF NOT EXISTS `group_member` (
 /*!40000 ALTER TABLE `group_member` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.guild
+-- Dumping structure for taulu characters.guild
 CREATE TABLE IF NOT EXISTS `guild` (
   `guildid` int(10) unsigned NOT NULL DEFAULT '0',
   `name` varchar(24) NOT NULL DEFAULT '',
@@ -1096,7 +1091,7 @@ CREATE TABLE IF NOT EXISTS `guild` (
 /*!40000 ALTER TABLE `guild` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.guild_bank_eventlog
+-- Dumping structure for taulu characters.guild_bank_eventlog
 CREATE TABLE IF NOT EXISTS `guild_bank_eventlog` (
   `guildid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Guild Identificator',
   `LogGuid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Log record identificator - auxiliary column',
@@ -1118,7 +1113,7 @@ CREATE TABLE IF NOT EXISTS `guild_bank_eventlog` (
 /*!40000 ALTER TABLE `guild_bank_eventlog` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.guild_bank_item
+-- Dumping structure for taulu characters.guild_bank_item
 CREATE TABLE IF NOT EXISTS `guild_bank_item` (
   `guildid` int(10) unsigned NOT NULL DEFAULT '0',
   `TabId` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -1134,7 +1129,7 @@ CREATE TABLE IF NOT EXISTS `guild_bank_item` (
 /*!40000 ALTER TABLE `guild_bank_item` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.guild_bank_right
+-- Dumping structure for taulu characters.guild_bank_right
 CREATE TABLE IF NOT EXISTS `guild_bank_right` (
   `guildid` int(10) unsigned NOT NULL DEFAULT '0',
   `TabId` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -1150,7 +1145,7 @@ CREATE TABLE IF NOT EXISTS `guild_bank_right` (
 /*!40000 ALTER TABLE `guild_bank_right` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.guild_bank_tab
+-- Dumping structure for taulu characters.guild_bank_tab
 CREATE TABLE IF NOT EXISTS `guild_bank_tab` (
   `guildid` int(10) unsigned NOT NULL DEFAULT '0',
   `TabId` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -1166,7 +1161,7 @@ CREATE TABLE IF NOT EXISTS `guild_bank_tab` (
 /*!40000 ALTER TABLE `guild_bank_tab` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.guild_eventlog
+-- Dumping structure for taulu characters.guild_eventlog
 CREATE TABLE IF NOT EXISTS `guild_eventlog` (
   `guildid` int(10) unsigned NOT NULL COMMENT 'Guild Identificator',
   `LogGuid` int(10) unsigned NOT NULL COMMENT 'Log record identificator - auxiliary column',
@@ -1186,7 +1181,7 @@ CREATE TABLE IF NOT EXISTS `guild_eventlog` (
 /*!40000 ALTER TABLE `guild_eventlog` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.guild_member
+-- Dumping structure for taulu characters.guild_member
 CREATE TABLE IF NOT EXISTS `guild_member` (
   `guildid` int(10) unsigned NOT NULL COMMENT 'Guild Identificator',
   `guid` int(10) unsigned NOT NULL,
@@ -1203,7 +1198,7 @@ CREATE TABLE IF NOT EXISTS `guild_member` (
 /*!40000 ALTER TABLE `guild_member` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.guild_member_withdraw
+-- Dumping structure for taulu characters.guild_member_withdraw
 CREATE TABLE IF NOT EXISTS `guild_member_withdraw` (
   `guid` int(10) unsigned NOT NULL,
   `tab0` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1221,7 +1216,7 @@ CREATE TABLE IF NOT EXISTS `guild_member_withdraw` (
 /*!40000 ALTER TABLE `guild_member_withdraw` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.guild_rank
+-- Dumping structure for taulu characters.guild_rank
 CREATE TABLE IF NOT EXISTS `guild_rank` (
   `guildid` int(10) unsigned NOT NULL DEFAULT '0',
   `rid` tinyint(3) unsigned NOT NULL,
@@ -1237,7 +1232,7 @@ CREATE TABLE IF NOT EXISTS `guild_rank` (
 /*!40000 ALTER TABLE `guild_rank` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.instance
+-- Dumping structure for taulu characters.instance
 CREATE TABLE IF NOT EXISTS `instance` (
   `id` int(10) unsigned NOT NULL DEFAULT '0',
   `map` smallint(5) unsigned NOT NULL DEFAULT '0',
@@ -1256,7 +1251,7 @@ CREATE TABLE IF NOT EXISTS `instance` (
 /*!40000 ALTER TABLE `instance` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.instance_reset
+-- Dumping structure for taulu characters.instance_reset
 CREATE TABLE IF NOT EXISTS `instance_reset` (
   `mapid` smallint(5) unsigned NOT NULL DEFAULT '0',
   `difficulty` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -1270,7 +1265,7 @@ CREATE TABLE IF NOT EXISTS `instance_reset` (
 /*!40000 ALTER TABLE `instance_reset` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.item_instance
+-- Dumping structure for taulu characters.item_instance
 CREATE TABLE IF NOT EXISTS `item_instance` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
   `itemEntry` mediumint(8) unsigned NOT NULL DEFAULT '0',
@@ -1295,7 +1290,7 @@ CREATE TABLE IF NOT EXISTS `item_instance` (
 /*!40000 ALTER TABLE `item_instance` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.item_loot_items
+-- Dumping structure for taulu characters.item_loot_items
 CREATE TABLE IF NOT EXISTS `item_loot_items` (
   `container_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'guid of container (item_instance.guid)',
   `item_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'loot item entry (item_instance.itemEntry)',
@@ -1315,7 +1310,7 @@ CREATE TABLE IF NOT EXISTS `item_loot_items` (
 /*!40000 ALTER TABLE `item_loot_items` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.item_loot_money
+-- Dumping structure for taulu characters.item_loot_money
 CREATE TABLE IF NOT EXISTS `item_loot_money` (
   `container_id` int(10) NOT NULL DEFAULT '0' COMMENT 'guid of container (item_instance.guid)',
   `money` int(10) NOT NULL DEFAULT '0' COMMENT 'money loot (in copper)'
@@ -1326,7 +1321,7 @@ CREATE TABLE IF NOT EXISTS `item_loot_money` (
 /*!40000 ALTER TABLE `item_loot_money` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.item_refund_instance
+-- Dumping structure for taulu characters.item_refund_instance
 CREATE TABLE IF NOT EXISTS `item_refund_instance` (
   `item_guid` int(10) unsigned NOT NULL COMMENT 'Item GUID',
   `player_guid` int(10) unsigned NOT NULL COMMENT 'Player GUID',
@@ -1340,7 +1335,7 @@ CREATE TABLE IF NOT EXISTS `item_refund_instance` (
 /*!40000 ALTER TABLE `item_refund_instance` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.item_soulbound_trade_data
+-- Dumping structure for taulu characters.item_soulbound_trade_data
 CREATE TABLE IF NOT EXISTS `item_soulbound_trade_data` (
   `itemGuid` int(10) unsigned NOT NULL COMMENT 'Item GUID',
   `allowedPlayers` text NOT NULL COMMENT 'Space separated GUID list of players who can receive this item in trade',
@@ -1352,7 +1347,7 @@ CREATE TABLE IF NOT EXISTS `item_soulbound_trade_data` (
 /*!40000 ALTER TABLE `item_soulbound_trade_data` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.lag_reports
+-- Dumping structure for taulu characters.lag_reports
 CREATE TABLE IF NOT EXISTS `lag_reports` (
   `reportId` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1371,7 +1366,7 @@ CREATE TABLE IF NOT EXISTS `lag_reports` (
 /*!40000 ALTER TABLE `lag_reports` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.lfg_data
+-- Dumping structure for taulu characters.lfg_data
 CREATE TABLE IF NOT EXISTS `lfg_data` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `dungeon` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1384,7 +1379,7 @@ CREATE TABLE IF NOT EXISTS `lfg_data` (
 /*!40000 ALTER TABLE `lfg_data` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.mail
+-- Dumping structure for taulu characters.mail
 CREATE TABLE IF NOT EXISTS `mail` (
   `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Identifier',
   `messageType` tinyint(3) unsigned NOT NULL DEFAULT '0',
@@ -1409,7 +1404,7 @@ CREATE TABLE IF NOT EXISTS `mail` (
 /*!40000 ALTER TABLE `mail` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.mail_items
+-- Dumping structure for taulu characters.mail_items
 CREATE TABLE IF NOT EXISTS `mail_items` (
   `mail_id` int(10) unsigned NOT NULL DEFAULT '0',
   `item_guid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1424,7 +1419,7 @@ CREATE TABLE IF NOT EXISTS `mail_items` (
 /*!40000 ALTER TABLE `mail_items` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.petition
+-- Dumping structure for taulu characters.petition
 CREATE TABLE IF NOT EXISTS `petition` (
   `ownerguid` int(10) unsigned NOT NULL,
   `petitionguid` int(10) unsigned DEFAULT '0',
@@ -1439,7 +1434,7 @@ CREATE TABLE IF NOT EXISTS `petition` (
 /*!40000 ALTER TABLE `petition` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.petition_sign
+-- Dumping structure for taulu characters.petition_sign
 CREATE TABLE IF NOT EXISTS `petition_sign` (
   `ownerguid` int(10) unsigned NOT NULL,
   `petitionguid` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1456,7 +1451,7 @@ CREATE TABLE IF NOT EXISTS `petition_sign` (
 /*!40000 ALTER TABLE `petition_sign` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.pet_aura
+-- Dumping structure for taulu characters.pet_aura
 CREATE TABLE IF NOT EXISTS `pet_aura` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `caster_guid` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT 'Full Global Unique Identifier',
@@ -1481,7 +1476,7 @@ CREATE TABLE IF NOT EXISTS `pet_aura` (
 /*!40000 ALTER TABLE `pet_aura` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.pet_spell
+-- Dumping structure for taulu characters.pet_spell
 CREATE TABLE IF NOT EXISTS `pet_spell` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier',
   `spell` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT 'Spell Identifier',
@@ -1494,7 +1489,7 @@ CREATE TABLE IF NOT EXISTS `pet_spell` (
 /*!40000 ALTER TABLE `pet_spell` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.pet_spell_cooldown
+-- Dumping structure for taulu characters.pet_spell_cooldown
 CREATE TABLE IF NOT EXISTS `pet_spell_cooldown` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Global Unique Identifier, Low part',
   `spell` mediumint(8) unsigned NOT NULL DEFAULT '0' COMMENT 'Spell Identifier',
@@ -1507,7 +1502,7 @@ CREATE TABLE IF NOT EXISTS `pet_spell_cooldown` (
 /*!40000 ALTER TABLE `pet_spell_cooldown` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.players_reports_status
+-- Dumping structure for taulu characters.players_reports_status
 CREATE TABLE IF NOT EXISTS `players_reports_status` (
   `guid` int(10) unsigned NOT NULL DEFAULT '0',
   `creation_time` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1527,7 +1522,7 @@ CREATE TABLE IF NOT EXISTS `players_reports_status` (
 /*!40000 ALTER TABLE `players_reports_status` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.pool_quest_save
+-- Dumping structure for taulu characters.pool_quest_save
 CREATE TABLE IF NOT EXISTS `pool_quest_save` (
   `pool_id` int(10) unsigned NOT NULL DEFAULT '0',
   `quest_id` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1539,7 +1534,7 @@ CREATE TABLE IF NOT EXISTS `pool_quest_save` (
 /*!40000 ALTER TABLE `pool_quest_save` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.reserved_name
+-- Dumping structure for taulu characters.reserved_name
 CREATE TABLE IF NOT EXISTS `reserved_name` (
   `name` varchar(12) NOT NULL DEFAULT '',
   PRIMARY KEY (`name`)
@@ -1550,7 +1545,7 @@ CREATE TABLE IF NOT EXISTS `reserved_name` (
 /*!40000 ALTER TABLE `reserved_name` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.warden_action
+-- Dumping structure for taulu characters.warden_action
 CREATE TABLE IF NOT EXISTS `warden_action` (
   `wardenId` smallint(5) unsigned NOT NULL,
   `action` tinyint(3) unsigned DEFAULT NULL,
@@ -1562,7 +1557,7 @@ CREATE TABLE IF NOT EXISTS `warden_action` (
 /*!40000 ALTER TABLE `warden_action` ENABLE KEYS */;
 
 
--- Dumping structure for table characters.worldstates
+-- Dumping structure for taulu characters.worldstates
 CREATE TABLE IF NOT EXISTS `worldstates` (
   `entry` int(10) unsigned NOT NULL DEFAULT '0',
   `value` int(10) unsigned NOT NULL DEFAULT '0',
@@ -1572,7 +1567,7 @@ CREATE TABLE IF NOT EXISTS `worldstates` (
 
 -- Dumping data for table characters.worldstates: ~4 rows (approximately)
 /*!40000 ALTER TABLE `worldstates` DISABLE KEYS */;
-INSERT IGNORE INTO `worldstates` (`entry`, `value`, `comment`) VALUES
+INSERT INTO `worldstates` (`entry`, `value`, `comment`) VALUES
 	(20001, 0, 'NextArenaPointDistributionTime'),
 	(20002, 0, 'NextWeeklyQuestResetTime'),
 	(20003, 0, 'NextBGRandomDailyResetTime'),

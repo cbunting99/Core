@@ -2947,11 +2947,6 @@ void SpellMgr::LoadDbcDataCorrections()
                     if (!spellInfo->speed && !spellInfo->SpellFamilyName)
                         spellInfo->speed = SPEED_CHARGE;
                     break;
-                case SPELL_EFFECT_JUMP:
-                case SPELL_EFFECT_JUMP_DEST:
-                case SPELL_EFFECT_LEAP_BACK:
-                    spellInfo->EffectMiscValueB[0] = 50;
-                    break;
             }
         }
 
@@ -3243,27 +3238,101 @@ void SpellMgr::LoadDbcDataCorrections()
             case 63675: // Improved Devouring Plague
                 spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_DONE_BONUS;
                 break;
-
-                /* Custom Begin */
-
             case 32182: // Heroism.
+                spellInfo->Attributes |= SPELL_ATTR0_NOT_SHAPESHIFT;
+                spellInfo->Attributes |= SPELL_ATTR0_DONT_AFFECT_SHEATH_STATE;
+                spellInfo->Attributes |= SPELL_ATTR1_UNAUTOCASTABLE_BY_PET;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                spellInfo->AttributesEx6 |= SPELL_ATTR6_UNK26;
+                spellInfo->AttributesEx7 |= SPELL_ATTR7_ALLIANCE_ONLY;
+                break;
             case 2825:  // Bloodlust.
+                spellInfo->Attributes |= SPELL_ATTR0_NOT_SHAPESHIFT;
+                spellInfo->Attributes |= SPELL_ATTR0_DONT_AFFECT_SHEATH_STATE;
+                spellInfo->Attributes |= SPELL_ATTR1_UNAUTOCASTABLE_BY_PET;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                spellInfo->AttributesEx6 |= SPELL_ATTR6_UNK26;
+                spellInfo->AttributesEx7 |= SPELL_ATTR7_HORDE_ONLY;
+                break;
             case 19185: // Entrapment.
             case 64803: // Entrapment.
             case 64804: // Entrapment.
+                spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_SITTING;
+                spellInfo->Attributes |= SPELL_ATTR1_CANT_BE_REDIRECTED;
+                spellInfo->Attributes |= SPELL_ATTR1_CANT_BE_REFLECTED;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_UNK28;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                break;
             case 19388: // Entrapment.
             case 19387: // Entrapment.
             case 19184: // Entrapment.
+                spellInfo->Attributes |= SPELL_ATTR0_ABILITY;
+                spellInfo->Attributes |= SPELL_ATTR0_PASSIVE;
+                spellInfo->Attributes |= SPELL_ATTR0_HIDDEN_CLIENTSIDE;
+                spellInfo->Attributes |= SPELL_ATTR0_HIDE_IN_COMBAT_LOG;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                break;
             case 64843: // Divine Hymn.
+                spellInfo->Attributes |= SPELL_ATTR0_NOT_SHAPESHIFT;
+                spellInfo->Attributes |= SPELL_ATTR1_CHANNELED_1;
+                spellInfo->Attributes |= SPELL_ATTR1_CHANNELED_2;
+                spellInfo->Attributes |= SPELL_ATTR1_CHANNEL_DISPLAY_SPELL_NAME;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_NOT_NEED_SHAPESHIFT;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_TRIGGERED_CAN_TRIGGER_PROC;
+                spellInfo->AttributesEx3 |= SPELL_ATTR3_DONT_DISPLAY_RANGE;
+                spellInfo->AttributesEx4 |= SPELL_ATTR4_NOT_STEALABLE;
+                spellInfo->AttributesEx6 |= SPELL_ATTR5_HASTE_AFFECT_DURATION;
+                break;
             case 64844: // Divine Hymn.
+                spellInfo->Attributes |= SPELL_ATTR1_CANT_BE_REDIRECTED;
+                spellInfo->Attributes |= SPELL_ATTR1_CANT_BE_REFLECTED;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_TRIGGERED_CAN_TRIGGER_PROC;
+                spellInfo->AttributesEx4 |= SPELL_ATTR4_TRIGGERED;
+                break;
             case 55362: // Living Bomb Explosion.
             case 44461: // Living Bomb Explosion.
             case 55361: // Living Bomb Explosion.
+                spellInfo->Attributes |= SPELL_ATTR0_NOT_SHAPESHIFT;
+                spellInfo->Attributes |= SPELL_ATTR0_DONT_AFFECT_SHEATH_STATE;
+                spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_DEAD;
+                spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_MOUNTED;
+                spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_SITTING;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_TRIGGERED_CAN_TRIGGER_PROC;
+                spellInfo->AttributesEx5 |= SPELL_ATTR5_UNK26;
+                break;
             case 57330: // Horn of Winter.
             case 57623: // Horn of Winter.
-            case 47436: // Battle Shout - might be unblizzlike.
-            case 47440: // Commanding Shout - might be unblizzlike.
-                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS; // Need to clean this part.
+                spellInfo->Attributes |= SPELL_ATTR0_ABILITY;
+                spellInfo->Attributes |= SPELL_ATTR0_NOT_SHAPESHIFT;
+                spellInfo->Attributes |= SPELL_ATTR0_DONT_AFFECT_SHEATH_STATE;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                spellInfo->AttributesEx6 |= SPELL_ATTR6_UNK26;
+                spellInfo->AttributesEx7 |= SPELL_ATTR7_CONSOLIDATED_RAID_BUFF;
+                break;
+            case 5242: // Battle Shout.
+            case 6192: // Battle Shout.
+            case 6673: // Battle Shout.
+            case 11549: // Battle Shout.
+            case 11550: // Battle Shout.
+            case 11551: // Battle Shout.
+            case 25289: // Battle Shout.
+            case 47436: // Battle Shout.
+                spellInfo->Attributes |= SPELL_ATTR0_ABILITY, SPELL_ATTR0_NOT_SHAPESHIFT;
+                spellInfo->Attributes |= SPELL_ATTR0_DONT_AFFECT_SHEATH_STATE;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;;
+                spellInfo->AttributesEx6 |= SPELL_ATTR6_UNK26;
+                spellInfo->AttributesEx7 |= SPELL_ATTR7_CONSOLIDATED_RAID_BUFF;
+                break;
+            case 45517: // Commanding Shout.
+            case 47439: // Commanding Shout.
+            case 47440: // Commanding Shout.
+                spellInfo->Attributes |= SPELL_ATTR0_ABILITY;
+                spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+                spellInfo->AttributesEx6 |= SPELL_ATTR6_UNK26;
+                spellInfo->AttributesEx7 |= SPELL_ATTR7_CONSOLIDATED_RAID_BUFF;
                 break;
             case 33110: // Prayer of Mending.
                 spellInfo->AttributesEx3 |= SPELL_ATTR3_DONT_DISPLAY_RANGE;
@@ -3313,17 +3382,20 @@ void SpellMgr::LoadDbcDataCorrections()
                 spellInfo->Attributes |= SPELL_ATTR0_DISABLED_WHILE_ACTIVE;
                 spellInfo->Attributes |= SPELL_ATTR0_CASTABLE_WHILE_SITTING;
                 break;
-            case 8145: // Tremor Totem. clean these
+            case 8145: // Tremor Totem.
             case 8172: // Cleansing Totem.
-                spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
+                spellInfo->Attributes |= SPELL_ATTR0_PASSIVE;
+                spellInfo->Attributes |= SPELL_ATTR0_HIDE_IN_COMBAT_LOG;
+                spellInfo->Attributes |= SPELL_ATTR0_UNK11;
+                spellInfo->Attributes |= SPELL_ATTR0_NOT_SHAPESHIFT;
                 spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
-                break;
-            case 6474: // Earthbind Totem. Clean this
                 spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
                 break;
-
-            /* Custom End */
-
+            case 6474: // Earthbind Totem.
+                spellInfo->Attributes |= SPELL_ATTR0_PASSIVE;
+                spellInfo->Attributes |= SPELL_ATTR0_HIDE_IN_COMBAT_LOG;
+                spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
+                break;
             case 52109: // Flametongue Totem rank 1 (Aura)
             case 52110: // Flametongue Totem rank 2 (Aura)
             case 52111: // Flametongue Totem rank 3 (Aura)
@@ -3777,8 +3849,28 @@ void SpellMgr::LoadDbcDataCorrections()
                 break;
             case 24314: // Threatening Gaze
                 spellInfo->AuraInterruptFlags |= AURA_INTERRUPT_FLAG_CAST | AURA_INTERRUPT_FLAG_MOVE | AURA_INTERRUPT_FLAG_JUMP;
+                break;
+            case 23451: // Speed.
+            case 23493: // Regeneration.
+            case 23505: // Berserk.
+            case 34709: // Shadow Sight.
+                spellInfo->Attributes |= SPELL_ATTR0_OBJECT_TAKEABLE_WHILE_STEALTHED;
+                break;
             default:
                 break;
+        }
+        
+        for (uint8 j = 0; j < MAX_SPELL_EFFECTS; ++j)
+        {
+            switch (spellInfo->Effect[j])
+            {
+            case SPELL_EFFECT_JUMP:
+            case SPELL_EFFECT_JUMP_DEST:
+            case SPELL_EFFECT_LEAP_BACK:
+                spellInfo->EffectMiscValue[0] = spellInfo->EffectMiscValue[i];
+                spellInfo->EffectMiscValueB[0] = spellInfo->EffectMiscValueB[i];
+                break;
+            }
         }
 
         switch (spellInfo->SpellFamilyName)

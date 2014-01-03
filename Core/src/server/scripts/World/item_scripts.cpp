@@ -35,6 +35,127 @@ EndContentData */
 #include "Spell.h"
 #include "Player.h"
 
+
+// Battered Storm Hammer
+class item_battered_storm_hammer : public ItemScript
+{
+public:
+    item_battered_storm_hammer() : ItemScript("item_battered_storm_hammer") { }
+    
+    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/)
+    {
+        if (Unit* victim = player->GetVictim())
+        {
+            if (victim->GetEntry() == 30142) // Iron Watcher.
+                return false;
+            else
+                return true;
+        }
+        else
+            return true;
+    }
+};
+
+// Blood Gem 36827
+class item_blood_gem : public ItemScript
+{
+public:
+    item_blood_gem() : ItemScript("item_blood_gem") { }
+
+    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/)
+    {
+        if (Unit* victim = player->GetVictim())
+        {
+            if (victim->GetEntry() == 26411) // Deranged Indu'le Villager.
+                return false;
+            else
+                return true;
+        }
+        else
+            return true;
+    }
+};
+// Unholy Gem 36835
+class item_unholy_gem : public ItemScript
+{
+public:
+    item_unholy_gem() : ItemScript("item_unholy_gem") { }
+
+    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/)
+    {
+        if (Unit* victim = player->GetVictim())
+        {
+            if (victim->GetEntry() == 26926) // Duke Vallenhal.
+                return false;
+            else
+                return true;
+        }
+        else
+            return true;
+    }
+};
+// Frost Gem 36847
+class item_frost_gem : public ItemScript
+{
+public:
+    item_frost_gem() : ItemScript("item_frost_gem") { }
+
+    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/)
+    {
+        if (Unit* victim = player->GetVictim())
+        {
+            if (victim->GetEntry() == 26283) // Ice Revenant.
+                return false;
+            else
+                return true;
+        }
+        else
+            return true;
+    }
+};
+
+// Dart Gun 44222
+class item_dart_gun : public ItemScript
+{
+public:
+    item_dart_gun() : ItemScript("item_dart_gun") { }
+
+    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/)
+    {
+        if (Unit* victim = player->GetVictim())
+        {
+            if (victim->GetEntry() == 32201) // Orgrim's Hammer Scout.
+                return false;
+            else
+                return true;
+        }
+        else
+            return true;
+    }
+};
+
+// Pouch of Crushed Bloodspore 34979
+class item_pouch_of_crushed_bloodspore : public ItemScript
+{
+public:
+    item_pouch_of_crushed_bloodspore() : ItemScript("item_pouch_of_crushed_bloodspore") { }
+
+    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/)
+    {
+        if (Unit* victim = player->GetVictim())
+        {
+            if (victim->GetEntry() == 25789) // Gammothra the Tormentor.
+                return false;
+            if (victim->GetEntry() == 24469) // Magnataur Huntress.
+                return false;
+            else
+                return true;
+        }
+        else
+            return true;
+    }
+};
+
 /*#####
 # item_only_for_flight
 #####*/
@@ -425,4 +546,10 @@ void AddSC_item_scripts()
     new item_dehta_trap_smasher();
     new item_trident_of_nazjan();
     new item_captured_frog();
+    new item_blood_gem();
+    new item_frost_gem();
+    new item_unholy_gem();
+    new item_battered_storm_hammer();
+    new item_dart_gun();
+    new item_pouch_of_crushed_bloodspore();
 }

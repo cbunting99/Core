@@ -298,7 +298,9 @@ enum SpellAttr0
     SPELL_ATTR0_CANT_USED_IN_COMBAT              = 0x10000000, // 28 Cannot be used in combat
     SPELL_ATTR0_UNAFFECTED_BY_INVULNERABILITY    = 0x20000000, // 29 unaffected by invulnerability (hmm possible not...)
     SPELL_ATTR0_HEARTBEAT_RESIST_CHECK           = 0x40000000, // 30 random chance the effect will end TODO: implement core support
-    SPELL_ATTR0_CANT_CANCEL                      = 0x80000000  // 31 positive aura can't be canceled
+    SPELL_ATTR0_CANT_CANCEL                      = 0x80000000, // 31 positive aura can't be canceled
+
+    SPELL_ATTR0_OBJECT_TAKEABLE_WHILE_STEALTHED  = 0x00000003
 };
 
 enum SpellAttr1

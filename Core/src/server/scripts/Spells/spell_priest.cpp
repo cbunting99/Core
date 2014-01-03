@@ -43,7 +43,6 @@ enum PriestSpells
     SPELL_PRIEST_SHADOW_WORD_DEATH                  = 32409,
     SPELL_PRIEST_T9_HEALING_2P                      = 67201,
     SPELL_PRIEST_VAMPIRIC_TOUCH_DISPEL              = 64085,
-	SPELL_PRIEST_SHADOW_AFFINITY_REGEN              = 64103,
 };
 
 enum PriestSpellIcons
@@ -665,50 +664,6 @@ class spell_pri_vampiric_touch : public SpellScriptLoader
         }
 };
 
-// Shadow Affinity : Triggered Spell Ids
-class spell_pri_shadow_affinity : public SpellScriptLoader
-{
-    public:
-        spell_pri_shadow_affinity() : SpellScriptLoader("spell_pri_shadow_affinity") { }
-
-        class spell_pri_shadow_affinity_AuraScript : public AuraScript
-        {
-            PrepareAuraScript(spell_pri_shadow_affinity_AuraScript);
-
-            void HandleDispel(DispelInfo* dispelInfo)
-            {
-                if (Unit* caster = GetCaster())
-				{
-                    if (caster->HasAura(15320)) // Rank 3 Shadow Affinity Talent
-                    {
-					    int32 baseregen = (caster->GetCreateMana() * 15) / 100; // 15%
-                        caster->CastCustomSpell(caster, SPELL_PRIEST_SHADOW_AFFINITY_REGEN, &baseregen, NULL, NULL, true, NULL, NULL);
-                    }
-                    if (caster->HasAura(15318)) // Rank 2 Shadow Affinity Talent
-                    {
-					    int32 baseregen = (caster->GetCreateMana() * 10) / 100; // 10 %
-                        caster->CastCustomSpell(caster, SPELL_PRIEST_SHADOW_AFFINITY_REGEN, &baseregen, NULL, NULL, true, NULL, NULL);
-                    }
-                    if (caster->HasAura(15272)) // Rank 1 Shadow Affinity Talent
-                    {
-					    int32 baseregen = (caster->GetCreateMana() * 5) / 100; // 5%
-                        caster->CastCustomSpell(caster, SPELL_PRIEST_SHADOW_AFFINITY_REGEN, &baseregen, NULL, NULL, true, NULL, NULL);
-                    }
-				}
-            }
-
-            void Register()
-            {
-                AfterDispel += AuraDispelFn(spell_pri_shadow_affinity_AuraScript::HandleDispel);
-            }
-        };
-
-        AuraScript* GetAuraScript() const
-        {
-            return new spell_pri_shadow_affinity_AuraScript();
-        }
-};
-
 void AddSC_priest_spell_scripts()
 {
     new spell_pri_divine_aegis();
@@ -725,5 +680,4 @@ void AddSC_priest_spell_scripts()
     new spell_pri_renew();
     new spell_pri_shadow_word_death();
     new spell_pri_vampiric_touch();
-	new spell_pri_shadow_affinity();
 }

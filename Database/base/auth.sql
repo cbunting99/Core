@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Host:                         127.0.0.1
--- Server version:               5.5.32 - MySQL Community Server (GPL)
--- Server OS:                    Win32
--- HeidiSQL Version:             8.0.0.4396
+-- Verkkotietokone:              127.0.0.1
+-- Server version:               5.6.15 - MySQL Community Server (GPL)
+-- Server OS:                    Win64
+-- HeidiSQL Versio:              8.2.0.4675
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -10,12 +10,7 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
--- Dumping database structure for auth
-CREATE DATABASE IF NOT EXISTS `auth` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `auth`;
-
-
--- Dumping structure for table auth.account
+-- Dumping structure for taulu auth.account
 CREATE TABLE IF NOT EXISTS `account` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT 'Identifier',
   `username` varchar(32) NOT NULL DEFAULT '',
@@ -47,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `account` (
 /*!40000 ALTER TABLE `account` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.account_access
+-- Dumping structure for taulu auth.account_access
 CREATE TABLE IF NOT EXISTS `account_access` (
   `id` int(10) unsigned NOT NULL,
   `gmlevel` tinyint(3) unsigned NOT NULL,
@@ -60,7 +55,7 @@ CREATE TABLE IF NOT EXISTS `account_access` (
 /*!40000 ALTER TABLE `account_access` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.account_banned
+-- Dumping structure for taulu auth.account_banned
 CREATE TABLE IF NOT EXISTS `account_banned` (
   `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Account id',
   `bandate` int(10) unsigned NOT NULL DEFAULT '0',
@@ -76,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `account_banned` (
 /*!40000 ALTER TABLE `account_banned` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.autobroadcast
+-- Dumping structure for taulu auth.autobroadcast
 CREATE TABLE IF NOT EXISTS `autobroadcast` (
   `realmid` int(11) NOT NULL DEFAULT '-1',
   `id` tinyint(3) unsigned NOT NULL AUTO_INCREMENT,
@@ -90,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `autobroadcast` (
 /*!40000 ALTER TABLE `autobroadcast` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.ip2nation
+-- Dumping structure for taulu auth.ip2nation
 CREATE TABLE IF NOT EXISTS `ip2nation` (
   `ip` int(11) unsigned NOT NULL DEFAULT '0',
   `country` char(2) NOT NULL DEFAULT '',
@@ -102,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `ip2nation` (
 /*!40000 ALTER TABLE `ip2nation` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.ip2nationcountries
+-- Dumping structure for taulu auth.ip2nationcountries
 CREATE TABLE IF NOT EXISTS `ip2nationcountries` (
   `code` varchar(4) NOT NULL DEFAULT '',
   `iso_code_2` varchar(2) NOT NULL DEFAULT '',
@@ -120,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `ip2nationcountries` (
 /*!40000 ALTER TABLE `ip2nationcountries` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.ip_banned
+-- Dumping structure for taulu auth.ip_banned
 CREATE TABLE IF NOT EXISTS `ip_banned` (
   `ip` varchar(15) NOT NULL DEFAULT '127.0.0.1',
   `bandate` int(10) unsigned NOT NULL,
@@ -135,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `ip_banned` (
 /*!40000 ALTER TABLE `ip_banned` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.logs
+-- Dumping structure for taulu auth.logs
 CREATE TABLE IF NOT EXISTS `logs` (
   `time` int(10) unsigned NOT NULL,
   `realm` int(10) unsigned NOT NULL,
@@ -149,7 +144,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
 /*!40000 ALTER TABLE `logs` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.rbac_account_groups
+-- Dumping structure for taulu auth.rbac_account_groups
 CREATE TABLE IF NOT EXISTS `rbac_account_groups` (
   `accountId` int(10) unsigned NOT NULL COMMENT 'Account id',
   `groupId` int(10) unsigned NOT NULL COMMENT 'Group id',
@@ -165,7 +160,7 @@ CREATE TABLE IF NOT EXISTS `rbac_account_groups` (
 /*!40000 ALTER TABLE `rbac_account_groups` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.rbac_account_permissions
+-- Dumping structure for taulu auth.rbac_account_permissions
 CREATE TABLE IF NOT EXISTS `rbac_account_permissions` (
   `accountId` int(10) unsigned NOT NULL COMMENT 'Account id',
   `permissionId` int(10) unsigned NOT NULL COMMENT 'Permission id',
@@ -182,7 +177,7 @@ CREATE TABLE IF NOT EXISTS `rbac_account_permissions` (
 /*!40000 ALTER TABLE `rbac_account_permissions` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.rbac_account_roles
+-- Dumping structure for taulu auth.rbac_account_roles
 CREATE TABLE IF NOT EXISTS `rbac_account_roles` (
   `accountId` int(10) unsigned NOT NULL COMMENT 'Account id',
   `roleId` int(10) unsigned NOT NULL COMMENT 'Role id',
@@ -199,7 +194,7 @@ CREATE TABLE IF NOT EXISTS `rbac_account_roles` (
 /*!40000 ALTER TABLE `rbac_account_roles` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.rbac_groups
+-- Dumping structure for taulu auth.rbac_groups
 CREATE TABLE IF NOT EXISTS `rbac_groups` (
   `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Group id',
   `name` varchar(100) NOT NULL COMMENT 'Group name',
@@ -208,7 +203,7 @@ CREATE TABLE IF NOT EXISTS `rbac_groups` (
 
 -- Dumping data for table auth.rbac_groups: ~4 rows (approximately)
 /*!40000 ALTER TABLE `rbac_groups` DISABLE KEYS */;
-INSERT IGNORE INTO `rbac_groups` (`id`, `name`) VALUES
+INSERT INTO `rbac_groups` (`id`, `name`) VALUES
 	(1, 'Player'),
 	(2, 'Moderator'),
 	(3, 'GameMaster'),
@@ -216,19 +211,19 @@ INSERT IGNORE INTO `rbac_groups` (`id`, `name`) VALUES
 /*!40000 ALTER TABLE `rbac_groups` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.rbac_group_roles
+-- Dumping structure for taulu auth.rbac_group_roles
 CREATE TABLE IF NOT EXISTS `rbac_group_roles` (
   `groupId` int(10) unsigned NOT NULL COMMENT 'group id',
   `roleId` int(10) unsigned NOT NULL COMMENT 'Role id',
   PRIMARY KEY (`groupId`,`roleId`),
   KEY `fk__rbac_group_roles__rbac_roles` (`roleId`),
-  CONSTRAINT `fk__rbac_group_roles__rbac_roles` FOREIGN KEY (`roleId`) REFERENCES `rbac_roles` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk__rbac_group_roles__rbac_groups` FOREIGN KEY (`groupId`) REFERENCES `rbac_groups` (`id`) ON DELETE CASCADE
+  CONSTRAINT `fk__rbac_group_roles__rbac_groups` FOREIGN KEY (`groupId`) REFERENCES `rbac_groups` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk__rbac_group_roles__rbac_roles` FOREIGN KEY (`roleId`) REFERENCES `rbac_roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Group Role relation';
 
 -- Dumping data for table auth.rbac_group_roles: ~93 rows (approximately)
 /*!40000 ALTER TABLE `rbac_group_roles` DISABLE KEYS */;
-INSERT IGNORE INTO `rbac_group_roles` (`groupId`, `roleId`) VALUES
+INSERT INTO `rbac_group_roles` (`groupId`, `roleId`) VALUES
 	(1, 1),
 	(2, 2),
 	(3, 3),
@@ -325,7 +320,7 @@ INSERT IGNORE INTO `rbac_group_roles` (`groupId`, `roleId`) VALUES
 /*!40000 ALTER TABLE `rbac_group_roles` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.rbac_permissions
+-- Dumping structure for taulu auth.rbac_permissions
 CREATE TABLE IF NOT EXISTS `rbac_permissions` (
   `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Permission id',
   `name` varchar(100) NOT NULL COMMENT 'Permission name',
@@ -334,7 +329,7 @@ CREATE TABLE IF NOT EXISTS `rbac_permissions` (
 
 -- Dumping data for table auth.rbac_permissions: ~47 rows (approximately)
 /*!40000 ALTER TABLE `rbac_permissions` DISABLE KEYS */;
-INSERT IGNORE INTO `rbac_permissions` (`id`, `name`) VALUES
+INSERT INTO `rbac_permissions` (`id`, `name`) VALUES
 	(1, 'Instant logout'),
 	(2, 'Skip Queue'),
 	(3, 'Join Normal Battleground'),
@@ -385,7 +380,7 @@ INSERT IGNORE INTO `rbac_permissions` (`id`, `name`) VALUES
 /*!40000 ALTER TABLE `rbac_permissions` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.rbac_roles
+-- Dumping structure for taulu auth.rbac_roles
 CREATE TABLE IF NOT EXISTS `rbac_roles` (
   `id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT 'Role id',
   `name` varchar(100) NOT NULL COMMENT 'Role name',
@@ -394,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `rbac_roles` (
 
 -- Dumping data for table auth.rbac_roles: ~39 rows (approximately)
 /*!40000 ALTER TABLE `rbac_roles` DISABLE KEYS */;
-INSERT IGNORE INTO `rbac_roles` (`id`, `name`) VALUES
+INSERT INTO `rbac_roles` (`id`, `name`) VALUES
 	(1, 'Player Commands'),
 	(2, 'Moderator Commands'),
 	(3, 'GameMaster Commands'),
@@ -437,19 +432,19 @@ INSERT IGNORE INTO `rbac_roles` (`id`, `name`) VALUES
 /*!40000 ALTER TABLE `rbac_roles` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.rbac_role_permissions
+-- Dumping structure for taulu auth.rbac_role_permissions
 CREATE TABLE IF NOT EXISTS `rbac_role_permissions` (
   `roleId` int(10) unsigned NOT NULL COMMENT 'Role id',
   `permissionId` int(10) unsigned NOT NULL COMMENT 'Permission id',
   PRIMARY KEY (`roleId`,`permissionId`),
   KEY `fk__role_permissions__rbac_permissions` (`permissionId`),
-  CONSTRAINT `fk__role_permissions__rbac_roles` FOREIGN KEY (`roleId`) REFERENCES `rbac_roles` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk__role_permissions__rbac_permissions` FOREIGN KEY (`permissionId`) REFERENCES `rbac_permissions` (`id`) ON DELETE CASCADE
+  CONSTRAINT `fk__role_permissions__rbac_permissions` FOREIGN KEY (`permissionId`) REFERENCES `rbac_permissions` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk__role_permissions__rbac_roles` FOREIGN KEY (`roleId`) REFERENCES `rbac_roles` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Role Permission relation';
 
 -- Dumping data for table auth.rbac_role_permissions: ~47 rows (approximately)
 /*!40000 ALTER TABLE `rbac_role_permissions` DISABLE KEYS */;
-INSERT IGNORE INTO `rbac_role_permissions` (`roleId`, `permissionId`) VALUES
+INSERT INTO `rbac_role_permissions` (`roleId`, `permissionId`) VALUES
 	(5, 1),
 	(5, 2),
 	(6, 3),
@@ -500,7 +495,7 @@ INSERT IGNORE INTO `rbac_role_permissions` (`roleId`, `permissionId`) VALUES
 /*!40000 ALTER TABLE `rbac_role_permissions` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.rbac_security_level_groups
+-- Dumping structure for taulu auth.rbac_security_level_groups
 CREATE TABLE IF NOT EXISTS `rbac_security_level_groups` (
   `secId` int(10) unsigned NOT NULL COMMENT 'Security Level id',
   `groupId` int(10) unsigned NOT NULL COMMENT 'group id',
@@ -511,7 +506,7 @@ CREATE TABLE IF NOT EXISTS `rbac_security_level_groups` (
 
 -- Dumping data for table auth.rbac_security_level_groups: ~10 rows (approximately)
 /*!40000 ALTER TABLE `rbac_security_level_groups` DISABLE KEYS */;
-INSERT IGNORE INTO `rbac_security_level_groups` (`secId`, `groupId`) VALUES
+INSERT INTO `rbac_security_level_groups` (`secId`, `groupId`) VALUES
 	(0, 1),
 	(1, 1),
 	(2, 1),
@@ -525,7 +520,7 @@ INSERT IGNORE INTO `rbac_security_level_groups` (`secId`, `groupId`) VALUES
 /*!40000 ALTER TABLE `rbac_security_level_groups` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.realmcharacters
+-- Dumping structure for taulu auth.realmcharacters
 CREATE TABLE IF NOT EXISTS `realmcharacters` (
   `realmid` int(10) unsigned NOT NULL DEFAULT '0',
   `acctid` int(10) unsigned NOT NULL,
@@ -539,7 +534,7 @@ CREATE TABLE IF NOT EXISTS `realmcharacters` (
 /*!40000 ALTER TABLE `realmcharacters` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.realmlist
+-- Dumping structure for taulu auth.realmlist
 CREATE TABLE IF NOT EXISTS `realmlist` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(32) NOT NULL DEFAULT '',
@@ -557,14 +552,14 @@ CREATE TABLE IF NOT EXISTS `realmlist` (
   UNIQUE KEY `idx_name` (`name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='Realm System';
 
--- Dumping data for table auth.realmlist: ~1 rows (approximately)
+-- Dumping data for table auth.realmlist: ~0 rows (approximately)
 /*!40000 ALTER TABLE `realmlist` DISABLE KEYS */;
-INSERT IGNORE INTO `realmlist` (`id`, `name`, `address`, `localAddress`, `localSubnetMask`, `port`, `icon`, `flag`, `timezone`, `allowedSecurityLevel`, `population`, `gamebuild`) VALUES
+INSERT INTO `realmlist` (`id`, `name`, `address`, `localAddress`, `localSubnetMask`, `port`, `icon`, `flag`, `timezone`, `allowedSecurityLevel`, `population`, `gamebuild`) VALUES
 	(1, 'Trinity', '127.0.0.1', '127.0.0.1', '255.255.255.0', 8085, 1, 0, 1, 0, 0, 12340);
 /*!40000 ALTER TABLE `realmlist` ENABLE KEYS */;
 
 
--- Dumping structure for table auth.uptime
+-- Dumping structure for taulu auth.uptime
 CREATE TABLE IF NOT EXISTS `uptime` (
   `realmid` int(10) unsigned NOT NULL,
   `starttime` int(10) unsigned NOT NULL DEFAULT '0',

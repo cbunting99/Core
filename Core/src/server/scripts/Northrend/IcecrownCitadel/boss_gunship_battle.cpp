@@ -3261,6 +3261,21 @@ class spell_gb_overheat_drain : public SpellScriptLoader
         }
 };
 
+// Goblin Rocket Pack.
+class item_icc_rocket_pack : public ItemScript
+{
+public:
+    item_icc_rocket_pack() : ItemScript("item_icc_rocket_pack") { }
+
+    bool OnUse(Player* player, Item* item, SpellCastTargets const& /*targets*/)
+    {
+        if (player->GetZoneId() == 4812)
+            return false;
+        else
+            return true;
+    }
+};
+
 /* spell 69402 Incinerating Blast */
 class spell_gb_incinerating_blast : public SpellScriptLoader
 {
@@ -3404,4 +3419,5 @@ void AddSC_boss_gunship_battle()
     new spell_gb_incinerating_blast();
     new spell_gb_burning_pitch();
     new spell_rocket_pack();
+    new item_icc_rocket_pack();
 }
